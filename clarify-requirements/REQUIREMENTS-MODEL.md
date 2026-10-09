@@ -4,7 +4,7 @@
 
 Produce a requirements and domain model that both a human reviewer and an implementing agent can use without reconstructing the original conversation. It defines what behavior is correct before deciding how to implement it.
 
-This is the delivery standard for the first stage of the lightweight workflow. It is also intended to apply when a future heavyweight workflow delegates a bounded question with existing decisions and constraints. Reuse applicable prior decisions; clarify only what is missing, ambiguous, or contradictory.
+This is the shared authoring and review standard for the first stage of the lightweight workflow. Apply it throughout clarification and model construction, not just at the delivery gate. Independent review uses these same criteria. It also applies when a future heavyweight workflow delegates a bounded question with existing decisions and constraints. Reuse applicable prior decisions; clarify only what is missing, ambiguous, or contradictory.
 
 The model covers one bounded requirement or change. Reference established project knowledge instead of redescribing the whole system. Domain modeling clarifies the requirement through concepts, relationships, rules, and examples; it is not limited to a glossary and does not require inventing a concept for every noun.
 

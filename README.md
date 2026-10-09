@@ -1,5 +1,13 @@
 # Custom Skills
 
+## Shared workflow principle
+
+Every stage uses one authoritative standard for both producing its work and reviewing it. This applies to requirements modeling, technical modeling, and subsequent planning, implementation, and change workflows. Authors apply the stage's standard throughout the work, not only before delivery; independent reviewers judge the result against those same criteria.
+
+Write criteria that can guide concrete decisions and be checked against observable content or evidence. A standard is neither a table of contents nor a collection of aspirations such as "use a reasonable architecture." Preserve the context and rationale needed to apply a criterion.
+
+Skills define the workflow; standards define the required quality; reviewer contracts define independent review inputs, responsibilities, and results. Reference the authoritative criteria rather than maintaining a separate, potentially conflicting author checklist or reviewer rulebook. Review summaries may index those criteria but must not add, weaken, or replace them.
+
 ## Clarify Requirements
 
 [clarify-requirements/SKILL.md](clarify-requirements/SKILL.md) is the entry point for the requirements stage of the lightweight workflow. It can also be called by a larger workflow with a bounded question and inherited constraints.
@@ -19,3 +27,13 @@ Then invoke `clarify-requirements` with a requirement, an existing model to resu
 > Use clarify-requirements to clarify employee withdrawal of pending expense claims. Read the existing claim behavior first. Save the model at docs/requirements/claim-withdrawal.md and stop for my approval before technical clarification.
 
 The skill follows a supplied document path or the project's existing convention; otherwise it uses `docs/requirements/<short-name>.md`. Review the actual model, not just the closing message. Interview answers and approval of proposed fixes do not approve the finished document. Findings, missing independent review, or incomplete mandatory verification keep it in `Draft`; an independent `Pass` for the current artifact permits `Awaiting approval`; explicit final approval of that reviewed model permits `Approved`. Content changes return to a fresh full review. Resuming an approved model never skips independent review, but an unchanged model can retain its established final approval after passing.
+
+## Clarify Technical Design
+
+[clarify-technical-design/SKILL.md](clarify-technical-design/SKILL.md) is the next-stage entry point after the current requirements model has passed independent review and received final human approval. The skill itself requires reading and applying [TECHNICAL-MODEL.md](clarify-technical-design/TECHNICAL-MODEL.md) throughout authoring and repair and using that same standard for independent review; this README is not the execution gate.
+
+Technical grilling and modeling form one loop: challenge candidate designs against concrete scenarios and inspected evidence, ask only consequential unresolved questions with grounded alternatives and a recommendation, wait for the necessary human choices, and integrate answers into the model. Macro choices precede dependent micro choices; contradictions found while modeling or reviewing return to the affected technical question. This is not an exhaustive decision-tree interview or a private design exercise followed by a request for approval.
+
+The technical deliverable includes a complete file-responsibility tree, macro and micro topology and sequence diagrams, explicit data-flow and concurrency semantics, complete data definitions, and complete interface contracts. It settles the scoped technical decisions rather than leaving structure, algorithms, coordination, or contract details to implementation. The [technical reviewer contract](clarify-technical-design/reviewer-prompt.md) governs fresh read-only reviews and the review-and-repair loop.
+
+Install the entire `clarify-technical-design` directory using the harness's skill mechanism; it has not been installed automatically. Invoke it with the approved requirements model and any existing technical model. It follows a supplied path or repository convention, otherwise using `docs/technical/<short-name>.md`. Independent `Pass` and final human approval are separate gates. Approval hands the model to a subsequent ticket-decomposition workflow; this skill neither splits tickets nor implements production code. The later post-implementation change-governance workflow remains outside this skill.

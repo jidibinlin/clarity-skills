@@ -7,7 +7,7 @@ description: Clarify a bounded requirement and maintain a reviewable requirement
 
 Turn a requirement into an understandable, durable model of the intended behavior, not a transcript of the interview. The work ends at the first human approval gate, before technical clarification.
 
-Before interviewing or writing, read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md). It defines the mandatory content, background and rationale requirements, Mermaid rules, and delivery checks. Apply the entire standard, not just its headings. This skill is self-contained; it does not require Matt Pocock's skills to be installed.
+Before interviewing or writing, read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md). It is the single authoritative standard for both producing the model and independently reviewing it. Apply its mandatory content, background and rationale requirements, Mermaid rules, and delivery checks throughout clarification, writing, and repair, not only at the final gate. Give the independent reviewer this same standard; do not substitute a separate or weaker checklist or introduce a second set of quality criteria. Apply the entire standard, not just its headings. This skill is self-contained; it does not require Matt Pocock's skills to be installed.
 
 ## 1. Establish the bounded change
 
