@@ -110,27 +110,39 @@ Whenever a requirement changes, update affected diagrams and prose together. Bef
 
 ## Maintain the model during clarification
 
-Update the model as conclusions emerge rather than reconstructing it from a long conversation at the end. Preserve the current, coherent understanding, not a transcript or an append-only stream of contradictory decisions.
+Update the model as conclusions emerge rather than reconstructing it from a long conversation at the end. The deliverable must remain one clean, integrated account of the current requirement.
 
-Keep proposals, assumptions, and unresolved questions distinct from confirmed conclusions. When a conclusion changes, revise affected rules, scenarios, references, and diagrams. Surface a change to an already approved material decision for renewed human confirmation; downstream work must not silently override it.
+**Hard rule: no document patches or change logs.** Never append or create patch files, changelog files or sections, revision histories, dated update notes, supplemental override documents, or addenda that repair or supersede the main text. A reader must not have to combine a base document with later corrections to discover the current rules. This applies during drafting as well as at final delivery. Keep revision history in version control, not in the requirements deliverable.
+
+Apply each change directly to the sections that own the affected concepts and rules. Update dependent scenarios, references, and diagrams in the same revision; remove obsolete or conflicting statements. If inherited material already contains patches or a change log, integrate the still-applicable decisions into the main text and remove the patch material. If their authority is unclear, ask about the specific conflict before choosing which rule to preserve.
+
+Keep current proposals, assumptions, and unresolved questions distinct from confirmed conclusions. Necessary rationale, meaningful rejected alternatives, and descriptions of current versus desired behavior belong beside the relevant decision; they are not a license to preserve a chronological discussion or revision log. Maintain only the current approval status and applicable approval note, not an accumulating approval history. Apply the review and approval gate below whenever reviewed content changes; downstream work must not silently override confirmed decisions.
+
+Keep editing instructions and cleanup commentary out of the model itself: no lists of patch files to delete, statements that a patch was folded in, descriptions of the rewrite, or narratives about invalidated approvals. Perform those maintenance actions and report them in the conversation, not as requirement content. Show the current approval status and remove obsolete approval notes. Mention previous behavior only when it is necessary to understand the requirement or a real migration constraint, not to recount document revisions.
 
 Essential knowledge for the next stage must not exist only in the current agent's context. At a handoff, the model and its explicit references must carry that knowledge.
 
 ## Delivery check and first approval gate
 
-Before asking for approval, check the model against the confirmed discussion, inherited constraints, and inspected evidence:
+Before asking for approval, an independent reviewer in a fresh context must check the complete current model against the confirmed discussion, inherited constraints, and inspected evidence. The author supplies evidence and repairs findings; author self-review cannot satisfy this gate. Use [reviewer-prompt.md](reviewer-prompt.md) for the review input and return contract. Apply these criteria:
 
 1. **Faithfulness:** important confirmed requirements are neither omitted, weakened, nor expanded without agreement. Pay particular attention to numbers, ordering, prohibitions, and exceptions.
 2. **Clarity and structure:** different implementers should not have to guess at material business choices or infer them from vague wording. The model makes the main flow and concept relationships understandable, with connected explanations rather than terminology piles or a chronological discussion log.
-3. **Consistency:** concepts, rules, scenarios, and diagrams agree. Current facts and desired changes are distinguishable.
+3. **Consistency and clean integration:** concepts, rules, scenarios, and diagrams agree. Current facts and desired changes are distinguishable. The canonical text incorporates every applicable correction; no patch, changelog, revision log, override addendum, or obsolete conflicting rule remains in the deliverable.
 4. **Verifiability:** concrete scenarios or observable conditions can establish whether the key rules hold.
 5. **Reviewability:** background-dependent points contain enough context and actual rationale for a human to assess them. Sources and inherited decisions are accessible where needed.
 6. **Handoff completeness:** an agent unfamiliar with the conversation can understand the requirement from the model and its explicit references.
 7. **Diagram verification:** Mermaid diagrams have been rendered and inspected, and their conditions, paths, terminology, and scope match the prose. Report any verification limitation.
 8. **Open questions:** no unresolved question or unverified assumption silently determines a material behavior. Questions that prevent technical modeling from proceeding must be resolved before this stage is complete.
 
-Fix omissions using existing discussion and evidence before asking new questions. Return to the human only for genuinely missing information or decisions.
+Fix findings in the canonical model, then dispatch a fresh independent reviewer to assess the revised model against all applicable checks again, including previous findings and regressions elsewhere. Repeat until the review passes. Recover omitted information from available discussion and evidence before asking new questions. Keep findings and repair reports in the conversation, not in the clean deliverable.
 
-Present the model for explicit human confirmation after the delivery check. Answering the interview questions, finishing the document, or the agent declaring it complete is not approval. Do not begin technical clarification until the human confirms this model. If a blocking gap remains, present the model as a draft and identify the gap instead of treating it as an approved handoff.
+A review passes only with an independent `Pass` for the current artifact: all applicable criteria are satisfied, no findings remain unresolved, and required verification has actually been completed. `Changes required` and `Blocked` do not permit approval. An unavailable independent reviewer, necessary evidence, or mandatory check is a blocker, not a waived criterion. Disclosing a limitation or receiving early human approval does not turn an incomplete review into a pass.
+
+Use `Draft` while clarifying, repairing, or blocked on review or verification. Use `Awaiting approval` only after the current model passes review. Use `Approved` only after the human explicitly approves that reviewed model. Agreement with interview answers or proposed fixes does not satisfy the final approval gate.
+
+An edit to requirement content, diagrams, or required references invalidates the previous review and final approval for that artifact. Return to `Draft`, review and repair until passing, and obtain approval of the resulting model. Approval-metadata updates alone do not invalidate a content review. A resumed document must be reviewed against this standard even if it already says `Approved`; an unchanged document may retain its established final approval after passing that review. Never infer review success from its status label.
+
+Do not begin technical clarification or present an approved handoff until both review and final human confirmation have succeeded for the current model. If blocked, report the draft and its specific blocker instead.
 
 The lightweight workflow has three separate human approval gates: this requirements/domain model, the technical model, and the implementation tickets. Approval at one gate authorizes the next stage only, not all later stages. This document defines the first gate; the technical-model and ticket delivery standards are separate decisions.
