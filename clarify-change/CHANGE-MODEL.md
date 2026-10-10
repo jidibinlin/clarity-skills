@@ -6,17 +6,24 @@ This standard belongs to the `clarify-change` skill. Load that skill by name in 
 
 Use this standard both to produce a change model and independently review it. A change model governs the transition from an evidenced existing system to a decided target, including changed requirements and technical decisions. It is an implementation contract, not a patch list, an interview transcript, or permission to finish design while coding. Small scope reduces the amount to describe, not the required precision.
 
-Load `clarify-technical-design` by name in reference-only mode under the shared resource-resolution and supplied-content reuse rules, then read and apply only these sections of its resolved companion `TECHNICAL-MODEL.md`: **Approved basis and decision rationale** for reuse, rationale and first-pass constraints; **File organization and responsibility tree**; **Macro runtime and collaboration model**; **Micro object and collaboration model**; **Complete data-structure definitions**; **Complete interface contracts**; **Overall workflow integration test plan**; and **Consistency, evidence, and clean integration** for cross-view coherence and verification. These are the shared design-content requirements, not a second weaker checklist. This standard governs change-specific inputs, baseline reconstruction, change assessment, synchronization, approval, and routing instead of importing the original workflow's requirement for a separately approved prior requirements document or mandatory subsequent tickets.
+Load `clarify-technical-design` by name in reference-only mode and read these complete applicable sections of its resolved `TECHNICAL-MODEL.md` under the shared loading rules:
+
+- **Approved basis and decision rationale**
+- **File organization and responsibility tree**
+- **Macro runtime and collaboration model**
+- **Micro object and collaboration model**
+- **Complete data-structure definitions**
+- **Complete interface contracts**
+- **Overall workflow integration test plan**
+- **Consistency, evidence, and clean integration**
+
+They own technical content, first-pass constraints, macro-flow test planning, and verification. This document adds change-specific baseline, assessment, and synchronization requirements; [SKILL.md](SKILL.md) owns execution eligibility and gates. Neither import starts the initial technical workflow or requires its separate historical approvals.
 
 No prior requirements or technical model is assumed to exist. The change's confirmed requirements and target design may be contained in this one document. An independently reviewed and explicitly human-approved change package is a valid current design basis; historical approval records must not be fabricated to make it fit an initial-project workflow.
 
-## Private location and persistent process records
+## Shared artifact contract
 
-Load `workflow-artifacts` by name through the Skill tool or the harness's equivalent registered resource mechanism and read its companion `WORKFLOW-ARTIFACTS.md` under its resource-resolution and supplied-content reuse rules before authoring, resuming, or reviewing. It governs private placement, exclusion, persistent records, revision identity, recovery, and transitions in addition to this content standard. New models use `.scratch/<work-slug>/change.md` in the same work directory as `issue.md` and `issue.log.md`; existing authoritative project models may remain precisely referenced and synchronized under its location rule. The author/controller must establish and verify local Git exclusion before workflow writes, including worktree-aware exclusion resolution and tracked-file blocking. Never stage, commit, or publish workflow records; planning creates no `delivery.md`.
-
-Use `issue.md` for current stage, scope/route, model and approval references, blockers, roles, and next action. Resume from it, applicable models, open findings, and latest evidence/decisions, reconciling actual sources before reuse. The controller (author in standalone mode) saves read-only reviewer reports in `issue.log.md`; reviewers do not write logs or exclusion rules. Record each round/reviewer, standards, exact source/model/code basis, verdict, category coverage, evidence/limits, stable finding IDs, and independent dispositions. Private files need path plus digest or another verifiable local revision; repository HEAD alone cannot identify ignored models or dirty/untracked code. Identify every relevant source and preserve enough evidence to compare current content without pretending logs are snapshots.
-
-Persist reviews before repair or gate advancement; repair decisions, material rationale, addressed IDs and fresh evidence before new review; dispositions/current state before handoff; and recovery data before blockers or session/stage transitions. Author repairs are `addressed, awaiting review`, not self-closed findings; disputes remain open with counter-evidence until independent disposition. Save explicit human approval with exact scope/basis and a faithful short quotation or durable reference to the actual decision. Preserve prior outcomes and current applicability in the log, with only current approval metadata in the model. Apply the shared metadata-only revision rule. Task dispatches may carry review packages, but essential identities, decisions, findings, and evidence must persist locally.
+Before starting or resuming any role, load `workflow-artifacts` by name and read all of `WORKFLOW-ARTIFACTS.md`. It owns storage, records, revision/approval identity, and transitions. The execution entry owns artifact paths and persistence triggers.
 
 ## Evidenced baseline and scope
 
@@ -42,20 +49,20 @@ Explain each consequential decision with the background and actual key basis nee
 
 For every dimension below state **Changed**, **Unchanged**, or **Unresolved**. Explain the basis and affected scope. Changed requires the concrete transformation and complete target; Unchanged requires a verified target reference or description and why the change preserves it; Unresolved prevents approval. Genuine absence of a mechanism is a grounded fact, not permission to omit the view: a single-process system still has a macro collaboration view, and no concurrency must be supported by its execution model.
 
-| Dimension | Required account |
+| Dimension | Owning TECHNICAL-MODEL.md section |
 | --- | --- |
-| Macro topology | Current and target processes, modules, external participants, responsibility/execution boundaries and actual communication mechanisms. |
-| Data flow and state authority | Sources, transformations, direction, representations, authoritative state and write ownership across crossings; distinguish data, control and dependencies. |
-| Concurrency and completion | Execution contexts, scheduling, ordering, atomicity/consistency, relevant lifetimes and error/cancellation/shutdown behavior; identify the actual enforcing mechanism and scope. |
-| Macro sequences and flows | Entry-to-outcome interactions, participants, ordering, branches and relevant failures; show exactly how changed and preserved scenarios run after the change. |
-| Micro topology and ownership | Concrete objects/modules/types, their responsibilities, creation, multiplicity, references, owned state/resources and relationships to macro participants. |
-| Micro sequences and operations | Exact collaborating operations, algorithms, transitions, data and error propagation realizing macro guarantees; no unnamed helper hiding a decision. |
-| File organization | Complete scoped target file-responsibility tree, assigned objects/definitions, affected unchanged integration files, relocations, removed locations and callers. |
-| Data and interface contracts | Complete resulting types/representations and exact operations, owners/locations, pre/postconditions, errors, side effects, lifetime and concurrency semantics, with precise references for unchanged definitions. |
+| Macro topology | Macro runtime and collaboration model — Topology |
+| Data flow and state authority | Macro runtime and collaboration model — Data flow and state authority |
+| Concurrency and completion | Macro runtime and collaboration model — Concurrency and ordering |
+| Macro sequences and flows | Macro runtime and collaboration model — Sequences |
+| Micro topology and ownership | Micro object and collaboration model — Topology and ownership |
+| Micro sequences and operations | Micro object and collaboration model — Sequences and operations |
+| File organization | File organization and responsibility tree |
+| Data and interface contracts | Complete data-structure definitions; Complete interface contracts |
 
 Apply the imported technical-content standard to each target, not merely to the assessment labels. Topology staying unchanged does not establish that ordering, data, ownership, or behavior stayed unchanged. A file list without responsibilities or a proposed change without the resulting definition is incomplete. Settle production algorithms, collaboration and contract details before implementation; the document need not dictate ordinary local expression choices.
 
-Provide complete scoped target macro topology and sequence/flow views and micro topology and sequence views in Mermaid, plus the target file tree and full definitions/contracts. Current views must explain the evidence and transformation where needed; reconstruct them if no trustworthy material exists. Use separate current/target diagrams where one diagram would mix incompatible states or imply false ordering. Small diagrams are acceptable; invented participants or generic boxes are not.
+All imported target views remain mandatory: macro and micro Mermaid topologies and sequences, scoped file-responsibility tree, complete data definitions, and interface contracts. Current views must explain the transformation where needed; reconstruct them when no trustworthy material exists. Separate current and target diagrams where combining them would mix incompatible states or imply false ordering.
 
 Unchanged target views may use exact accessible references only after verifying they still apply. An absent, stale, generic, or inaccessible reference cannot substitute for a view; describe/draw the necessary content instead. Do not mechanically duplicate every unchanged diagram, but do not equate silence with no impact. Readers must be able to determine the complete scoped target without reconstructing a chain of amendments or private conversation.
 
@@ -67,18 +74,13 @@ For each migrated or replaced responsibility identify the final owner, affected 
 
 Assess the resulting local concept set, not just the added lines. Confirm there is no unclaimed invariant, duplicate source of truth, accidental extra representation or obsolete path left by this change. Keep the analysis bounded to affected responsibilities rather than attaching an unrelated architectural cleanup program.
 
-## Verification and direct-execution fit
+## Verification and execution readiness
 
-Inspect existing integration-test guidance, runner/configuration, representative tests, fixtures/environment and actual invocation before selecting flow coverage. Plan a small set of macro flows showing changed behavior and consequential preserved collaboration. Tie each to the target diagrams, real entry and participants, starting condition, high-level actions, expected observable result, location/invocation and actual substitution limits. Do not demand an exhaustive boundary matrix or write detailed TDD fixtures/assertions at this stage.
+Apply **Overall workflow integration test plan** in TECHNICAL-MODEL.md without redefining its fields or expanding it into detailed TDD. The change-specific selection must cover changed behavior and consequential preserved collaboration. Explain which existing flow coverage remains valid and what requires new or revised coverage.
 
-Render and visually inspect required diagrams for both graphical and semantic correctness. Reused diagrams require applicable inspected render evidence for the exact unchanged content. Check definitions, references, unchanged claims, scenario traces, source consistency and necessary feasibility facts. If required evidence or rendering is unavailable, retain Draft and report the blocker. Planning approval does not require future production tests to exist or pass, but future macro-flow execution before delivery remains mandatory.
+Apply **Consistency, evidence, and clean integration** to the complete change package, including claimed unchanged views, current-to-target mappings, affected callers, migrations, and canonical references. Reused diagrams need applicable inspected render evidence for the exact unchanged content. Missing mandatory verification blocks readiness; future production tests need not already exist or pass.
 
-The execution route is a deliberate conclusion:
-
-- **Direct:** one coherent bounded change can be understood, implemented, verified and repaired in one implementation context, with settled target files/owners, prerequisites, acceptance outcomes, and all required local and macro verification. The model is the work authority, identified by its path/revision. No ticket, ticket-set index, or synthetic ticket ID is required. The mandatory `issue.md` recovery entry is not another planning authority or ticket index; direct-work records use `issue.log.md` without creating an `issues/` directory.
-- **Decomposed:** several independently meaningful results, real dependencies, or excessive combined reasoning scope require tickets. Supply this same approved package to split-tickets; preserve the target structure and obligations rather than inventing abstractions to ease splitting.
-
-Judge fit using the full reasoning/verification cycle, not age of project, number of changed lines, or a fixed token threshold. If scope grows during execution, return to this route decision and appropriate approved decomposition before continuing; do not squeeze an unsafe large change into 'direct' or silently create unapproved tickets.
+Provide the evidence supporting the direct/decomposed route selected under [SKILL.md](SKILL.md), including scope, prerequisites, acceptance outcomes, and verification obligations. A route label does not establish whole-cycle boundedness.
 
 ## Canonical synchronization and authority
 
@@ -90,11 +92,11 @@ When earlier models do not exist, this package supplies the complete scoped requ
 
 Keep target design approval distinct from actual implementation status. The code may still implement the old behavior while a target is approved; this is not evidence the target has shipped. Before implementation, sources and target decisions must be current and approved. During implementation, design deviations return to clarification and renewed package approval. A code-only conformance defect goes to the original implementer for repair, not a model rewrite. After execution, the implementation reviewer checks the actual code, synchronized targets and current runtime evidence; only then can the user accept the implemented result.
 
-Revisions integrate into owning sections with necessary background and decision basis. No normative patches, model-embedded changelogs, override addenda, review reports, implementation diaries, or chronological Q&A belong in canonical artifacts. The required sidecar `issue.log.md` preserves review/repair/approval records and essential evidence under WORKFLOW-ARTIFACTS.md; it never overrides canonical targets. Keep existing authoritative documents in place when appropriate and use the shared exact paths for new private artifacts.
+Apply the imported clean-integration rules to each owning section. Before/after explanations and actual decision rationale belong beside the affected concept, not in amendments. WORKFLOW-ARTIFACTS.md governs process records and current approval metadata; neither overrides canonical targets.
 
-## Independent review and approval
+## Delivery criteria
 
-A fresh independent read-only model reviewer receives the complete current package, WORKFLOW-ARTIFACTS.md, this standard and imported content rules, original request and confirmed decisions, actual baseline evidence and documentation gaps, verification artifacts, workspace/exclusion evidence, and previous findings. Do not supply private author reasoning as instructions. Apply every requirement, organized by:
+Apply this standard and every imported content requirement to the complete current package, organized by these categories. [reviewer-prompt.md](reviewer-prompt.md) defines review inputs and results; the execution entry owns review/repair and human approval.
 
 1. **Baseline credibility:** sufficient affected behavior/structure grounded in evidence; document gaps and drift explicit; no fabricated history or accidental behavior promoted to a requirement.
 2. **Requirements and rationale:** changed/preserved outcomes, scope and consequential choices are explicit, confirmed where needed, and supported by actual background and basis.
@@ -104,8 +106,6 @@ A fresh independent read-only model reviewer receives the complete current packa
 6. **Concept and transition integrity:** reuse/consolidation choices, migration, final owners and obsolete-path exits are complete without speculative cleanup or indefinite duplicate structures.
 7. **Synchronization and authority:** canonical targets and change model agree, each definition has one owner, approval scope is identifiable, and missing original documents do not cause fake prerequisites.
 8. **Verification and execution readiness:** mandated current diagram/reference/feasibility checks are supported, future macro coverage is project-grounded, and the direct/decomposed route has evidence and executable obligations.
-9. **Private record integrity:** required location and verified exclusion, recovery entry, source/revision identities, persistent review/repair/evidence records, stable finding dispositions, and applicable approval evidence satisfy WORKFLOW-ARTIFACTS.md. Assess records available at this gate; do not require the current report or future human approval before they occur.
+9. **Private record integrity:** satisfy WORKFLOW-ARTIFACTS.md for records due at this gate, without demanding this review report or future human approval before they occur.
 
-Use reviewer-prompt.md for the report contract. Known violations yield Changes required, with additional blockers reported separately. If no violation is demonstrated but required evidence is inaccessible, use Blocked. Pass requires all applicable obligations satisfied without unresolved findings/blockers. Repair then obtain a fresh full-package review, not only a check of prior finding locations. A reviewer cannot approve on the human's behalf or redesign the target according to personal preference.
-
-Draft applies during clarification, repair or blocked assessment. Current independent Pass permits Awaiting approval; explicit human approval of that exact package permits Approved. Changed model content, essential references or relevant baseline assumptions invalidate affected approval and require renewed verification and review; metadata-only updates do not. Resumed material requires a current complete-package assessment before handoff; unchanged established human approval may remain applicable after Pass. Approval authorizes the chosen next stage but does not auto-execute, commit, publish or release anything.
+The approved scope is this synchronized target and its necessary surrounding consistency, not an invented reapproval of unrelated history. Design approval is distinct from implementation completion.

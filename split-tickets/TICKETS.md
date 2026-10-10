@@ -4,9 +4,7 @@
 
 Use this same standard while decomposing work, writing and repairing tickets, and independently reviewing the resulting set. The purpose is to keep each implementation task within a fresh context's comfortable reasoning scope while the whole set faithfully realizes the approved requirements and technical design.
 
-Before authoring, resumption, or review, load `workflow-artifacts` by registered name using the Skill tool or the harness's equivalent named mechanism (omp: `skill://workflow-artifacts`) and read its WORKFLOW-ARTIFACTS.md from that skill's resolved installed location. Its private-storage, pre-write exclusion, clean-authority, record, revision, and recovery contract is mandatory. Reuse a supplied complete current standard or verified readable resource with its owning skill identity without recursively loading it; a summary is not sufficient. Missing or inaccessible required standards block affected work; report the exact dependency, without guessing sibling paths or auto-installing.
-
-This reference belongs to `split-tickets`; companion links resolve relative to that installed skill/document under [SKILL.md](SKILL.md). Consulting the standard does not start ticket planning or its review/approval workflow. Keep installed skill resources separate from the target checkout and private work directory. Upstream routes are `clarify-requirements`, `clarify-technical-design`, or `clarify-change`; implementation routes to `implement`. Load a required stage by name in reference-only mode for standards, or execute it only when authorized under its existing gates.
+Before authoring, resuming, or reviewing, read this complete standard and WORKFLOW-ARTIFACTS.md from the named skill `workflow-artifacts`. Apply that skill’s loading/resource and reference-only rules. This document owns ticket content and eligibility; the shared contract owns workspace, records, revision integrity, and recovery. Workflow order and handoff belong to [SKILL.md](SKILL.md).
 
 A ticket is a work unit, not a code module or a new design document. The production structure, file ownership, objects, data definitions, interfaces, algorithms, concurrency model, and selected macro-flow tests come from the approved source basis defined below. Decomposition determines the work scope, prerequisites, sequence, and completion conditions; it does not finish or replace the design.
 
@@ -21,11 +19,11 @@ Select and identify one authoritative requirements-and-technical source basis, w
 
 Preserve the actual decisions, prohibitions, exceptions, and quantitative guarantees of the selected basis. A change basis must identify bounded scope, precise target owners, structure, definitions and contracts, dependencies and prerequisites, acceptance outcomes, and local and macro verification. Follow its explicit Changed/Unchanged/Unresolved dispositions for macro topology, data, concurrency and sequences; micro topology and sequences; file organization; and data/contracts. Exact essential references may supply unchanged definitions; an unresolved decision needed by a ticket is an upstream gap, not permission to invent it.
 
-On the change route, use the change model's direct-versus-decomposed decision and supporting scope/context evidence. If the entire change fits one direct implementation unit, leave it to `implement` using the approved change document path and revision as identity; create no synthetic ticket or ticket-set index. Its root `issue.md` remains the work entry and `issue.log.md` holds direct execution records. This route produces actual ticket sets only when the change needs decomposition.
+Use the approved change model’s evidence-backed routing decision. A change fitting one complete implementation unit goes directly to `implement`; decomposition here creates actual ticket sets, not synthetic bookkeeping tickets.
 
 Inspect the relevant repository state, current callers, runtime evidence where available, and verification methods. Keep observed current behavior, confirmed requirements, and unknowns distinct. An observed legacy behavior is not an approved requirement or evidence that a bug should be preserved. Distinguish unchanged required behavior, work still required, and planned files or definitions. A future file does not have to exist now, but its role must resolve to the approved target. Existing code references must match inspected evidence rather than recollection.
 
-Missing or conflicting source decisions return to requirements or technical clarification on the original route, or to `clarify-change` on the change route. Re-review and obtain human approval of the affected source package before resuming; the change route does not require rerunning the entire original two-stage pipeline. Do not fill the gap with "implementer decides," an extra design ticket, or a locally invented contract. Background and rationale belong beside the work they explain, scaled to what a reader unfamiliar with the conversation needs; do not invent reasons or repeat the interview chronology.
+Missing or conflicting source decisions return to requirements or technical clarification on the original route, or to `clarify-change` on the change route. Resume after the affected package’s own review and human approval; do not force the latter through the entire original pipeline. Tickets cannot defer design to the implementer or invent contracts. Keep context-proportional background and actual deciding rationale beside the work, not interview chronology.
 
 ## Ticket size and fresh-context fit
 
@@ -57,7 +55,7 @@ Keep an atomic contract change and necessary caller updates together when separa
 
 ## Artifact organization
 
-Use `.scratch/<work-slug>/issue.md` as the work entry and set index, and `issues/NN-<slug>.md` for each ticket. Before writing, the author/controller must complete WORKFLOW-ARTIFACTS.md exclusion setup: resolve the actual Git root and local exclusion path, preserve existing rules, block tracked workflow paths, and verify effective exclusion. No project convention or old example bypasses this gate. Reuse the stable work directory; create only needed files. Each ticket has a same-stem `NN-<slug>.log.md` for later unit records; planning and whole-set records use root `issue.log.md`. Keep identifiers stable while revising a set; make changed dependencies explicit rather than relying on filenames as execution instructions.
+Use `.scratch/<work-slug>/issue.md` as entry/set index and `issues/NN-<slug>.md` for tickets, with later execution in same-stem logs. The author/controller completes the shared exclusion gate before writes and owns planning records in root `issue.log.md`. Apply WORKFLOW-ARTIFACTS.md for storage, ownership, and recovery; preserve stable ticket IDs when revising dependencies.
 
 ### Set index
 
@@ -102,28 +100,22 @@ Assess the set as a whole, not only each ticket in isolation. The required work 
 
 Resolve document links and distinguish references to inspected code from proposed locations in the approved technical basis. Render and inspect any dependency diagram, checking it against the ticket blockers and arrow semantics. A parse-only check or a visually plausible graph does not prove correct dependencies. Unavailable required planning verification is a blocker. Do not require not-yet-implemented ticket code or future tests to pass at this stage.
 
-Maintain one clean current `issue.md` and ticket set. Update owning sections and all affected references when splitting, merging, or correcting work; remove superseded proposed content. No interview logs, patches, changelogs, revision histories, override addenda, review reports, or cleanup narration belong in these canonical sections. Save process records in `issue.log.md`; ignored artifacts have no Git history to rely on. Necessary rationale is not a license to preserve old competing plans.
-
-The author/controller records every review round and actual verdict before repair or gate advancement, using stable finding IDs and precise source/set revisions. Record each planning repair's decision, rationale, changes, and fresh evidence before re-review. Only the independent reviewer confirms closure/withdrawal; disputed findings remain open with counter-evidence. Record explicit human approval with actual decision evidence and scope/basis before handoff. Update the current entry before blockers or session/stage handoffs. Recover from it plus relevant sources, open findings and applicable evidence, not conversation memory.
-
-Apply WORKFLOW-ARTIFACTS.md revision integrity: paths plus digests or another verifiable local mechanism identify private source/set bodies; HEAD alone does not. Identify every relevant source revision and consistently distinguish metadata-only updates from substantive changes. Existing authoritative project models may remain at their approved locations with precise references and synchronized owning sections. Logs never authorize target changes or reconstruct unavailable historical bodies.
+Maintain one clean current index and set under WORKFLOW-ARTIFACTS.md’s clean-authority and revision rules. Splits, merges, and repairs update owning sections, coverage, references, and dependencies together; remove superseded proposed work. Planning decisions and essential evidence belong in root `issue.log.md`, never normative overrides. The author/controller persists repairs before re-review, reports before repairs/gate advancement, and actual approval before handoff, using the shared record and finding lifecycle.
 
 ## Delivery checks and ticket-set approval gate
 
 The independent reviewer uses these categories to apply the full standard, not as a reduced replacement for it:
 
-1. **Approved basis and fidelity:** the selected source package meets its route's current review and human-approval prerequisites; exact requirements and target technical references resolve, and the set preserves their decisions and required macro-flow verification. A change route is not blocked solely by absent old separate models or historical approvals.
-2. **Coherent, bounded work:** each ticket has a useful objective, a manageable read/reasoning scope for implementation through repair, and no empty scaffolding or artificial file-sized split.
-3. **Fresh-context handoff:** the ticket's necessary context, exact source references, code scope, and prerequisite outputs let an unfamiliar agent proceed without hidden history or design work.
-4. **Structural fidelity:** the work respects the approved file organization, objects, data, contracts, and cutover; decomposition has not introduced a new architecture or compatibility path.
-5. **Dependency and intermediate-state correctness:** blockers are concrete, accurate and acyclic; each ticket can reach its stated usable result when prerequisites are met.
-6. **Local and macro verification:** every unit has meaningful completion evidence; whole-flow test work has explicit ownership and prerequisites; detailed TDD policy is not prematurely prescribed.
-7. **Complete composition:** coverage and integration account for the whole approved change without gaps, conflicting ownership, or misleading claims that partial results finish the feature.
-8. **Reviewability and verified plan:** rationale, links, coverage, ticket declarations, and any rendered dependency diagram agree; the set is clean and current, and planned execution is not presented as observed evidence. Shared artifact requirements are satisfied: private paths/exclusion evidence, recoverable current state, stable findings and repair records, exact source/review identities, and no log-based normative overrides.
+1. **Approved basis and fidelity:** the route’s approved inputs and inspected-baseline criteria.
+2. **Coherent, bounded work:** ticket size and whole-cycle fresh-context fit.
+3. **Fresh-context handoff:** complete actionable ticket content and exact references.
+4. **Structural fidelity:** approved production organization and cutover, without ticket-created design.
+5. **Dependency and intermediate-state correctness:** real acyclic blockers and meaningful usable results.
+6. **Local and macro verification:** the full verification-responsibility criteria, with later TDD boundaries.
+7. **Complete composition:** whole-set coverage, ownership, and integration.
+8. **Reviewability and verified plan:** clean consistent artifacts, rationale, checked references and rendered/visually inspected diagrams, truthful evidence, and shared artifact integrity.
 
-Use [reviewer-prompt.md](reviewer-prompt.md) for the independent input and report contract. Author self-review cannot supply this gate. Repair findings, synchronize the entire set, and obtain a fresh full-set review, including effects outside the original finding. Missing necessary evidence, independent reviewer access, or mandatory planning verification is a blocker, not a waived criterion.
-
-Give every reviewer the target repository/checkout and work identity, governing owners `split-tickets` and `workflow-artifacts`, and complete current standards/reviewer instructions or verified resolved installed resource locations. Explicitly assign read-only review with reference-only skill loading; do not require a fresh reviewer to reconstruct installation paths or start planning.
+Use [reviewer-prompt.md](reviewer-prompt.md) for the independent role, complete input package, and report contract. Every full-set round uses a fresh independent reviewer, including repaired sets. Author self-check cannot supply this gate; mandatory planning verification or reviewer-access gaps block it.
 
 Use `Draft` while decomposing, repairing, or blocked. An independent `Pass` for the complete current set with no unresolved finding or blocker permits `Awaiting approval`. Only explicit final human approval of that reviewed set permits `Approved`. Neither upstream approval nor approval of a proposed split is approval of the finished set.
 
@@ -131,4 +123,4 @@ Changing a ticket, the index's substantive content, or a relevant approved basel
 
 Set approval is permission for subsequent implementation under the applicable implementation workflow, not proof that any ticket ran or completed. Do not mark every ticket immediately runnable regardless of its blockers or auto-start execution. Keep this planning approval distinct from the execution lifecycle that later instructions will govern.
 
-Persist planning approval and handoff in the work records, but do not create `delivery.md`: final implementation delivery belongs to the later implementation controller after verification and independent Pass. Keep the private workspace excluded; no approval authorizes publishing or committing it.
+Planning-only work creates no `delivery.md`. The author/controller persists final approval and updates `issue.md` before handoff under the shared contract; approval does not authorize execution, publication, or commits.

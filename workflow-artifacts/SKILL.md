@@ -1,26 +1,24 @@
 ---
 name: workflow-artifacts
-description: Shared reference for this suite's private issue workspace, local Git exclusion, review and repair records, source identities, recovery, and delivery summaries. Load when another workflow or reviewer needs these rules, including after installation or resumption. This is a reference to consult, not a separate workflow to execute.
+description: Shared reference for private workflow storage, records, recovery, and delivery summaries. Load for authoring, coordinating, reviewing, or resuming this suite's work; loading it does not execute a workflow.
 ---
 
 # Workflow Artifacts
 
-Read [WORKFLOW-ARTIFACTS.md](WORKFLOW-ARTIFACTS.md) before producing, coordinating, or reviewing this suite's artifacts. Apply the same rules to authors and reviewers. Loading this skill supplies the standard; it does not itself create a workspace, edit Git exclusion, write logs, run implementation, dispatch reviewers, or approve anything. Those actions belong to the authorized consuming stage and role. Read-only reviewers remain read-only.
+Every role must read the complete [WORKFLOW-ARTIFACTS.md](WORKFLOW-ARTIFACTS.md) before starting or resuming its work. Authors use this and the applicable stage standard to guide generation; reviewers use the same criteria. This reference owns no execution: workspace setup, writing, dispatch, and approval belong to the authorized consuming stage. Reviewers remain read-only.
 
 ## Loading skills and their resources
 
-Install this whole directory as the model-loadable skill `workflow-artifacts`; no file outside this directory is required for this reference. Keep the companion standard with this entry. Install each consuming skill and its declared skill dependencies as complete units, using the harness's supported installation mechanism. Do not assume a single-skill installer automatically installs dependencies or that different skills share a filesystem parent.
+Install each skill and its declared dependencies as complete directories through the harness. Dependencies need not be siblings and are not assumed to install automatically. This skill needs only its own directory.
 
-To obtain another skill's resources, call the Skill tool with its registered name. If the harness exposes a different named skill-loading/resource mechanism instead of a Skill tool, use that mechanism; for example, omp exposes `skill://<name>` and `skill://<name>/<resource>`. Use the actual registered skill location returned by the harness, not a guessed configuration path, a sibling-directory traversal, or a path into the source checkout. A bare slash-name mention is not a completed load.
+Load dependencies by registered name through the Skill tool or the harness's equivalent mechanism; omp uses `skill://<name>` and `skill://<name>/<resource>`. Use the resolved installed owner, not guessed configuration paths, source-checkout paths, or `../` traversal. Resolve companion links relative to their owning skill/document. Mentioning a slash command is not loading it.
 
-Resolve every companion-document link relative to its owning installed skill/document, never relative to the product working directory or the consuming skill. Load another skill in **reference-only mode** when only its standard or reviewer contract is needed: read the requested resources without starting that skill's execution steps or approval workflow. Loading a dependency is not user authorization to run another stage.
+When only a standard or reviewer contract is needed, load **reference-only**: read the requested material and its mandatory dependencies, then return without executing that skill's steps or prerequisites. A dependency load never authorizes another stage.
 
-If a caller/reviewer already supplies the complete current required standard, or a verified readable resource location with its owning skill identity, use it without recursively reloading the same skill. Do not substitute a summary or remembered version for missing required content. Missing, ambiguous, or inaccessible registered dependencies block the affected work; report the exact name/resource and needed installation/access. Do not silently fetch, install, fall back to another skill of similar name, or assume an absolute source path on the author's machine.
+Reuse complete current supplied standards, or read verified resource locations identified by their owning skill. Intact supplied content needs no recursive reload; a summary or remembered version is insufficient. Missing, ambiguous, or inaccessible dependencies block affected work. Report the exact resource/access need; do not auto-install or substitute another skill.
 
 ## Keep installation and project roots separate
 
-The **skill root** locates installed instructions and companion resources. Treat these as read-only while executing a product workflow; an installation can be global, copied, symlinked, read-only, or stored in a plugin cache.
+The **skill root** contains read-only instructions, including when globally installed, symlinked, or cached. The **project root** is the actual target checkout: resolve code, commands, project links, Git exclusion, and `.scratch/<work-slug>/` there. Loading skills does not change the working directory or authorize writing into their installation. Reconcile both roots on resumption.
 
-The **project root** is the target repository identified from the user's work and actual checkout. Resolve `.scratch/<work-slug>/`, Git exclusion, product code, commands, and project-document links against that repository, not the skill installation. Loading global skills must not change the product working directory. Inspect both identities when resuming; do not initialize a work directory under a global skill installation merely because instructions were loaded there.
-
-Before dispatching a worker/reviewer, provide the target repository/checkout, work identity, governing skill names, and complete required content or verified resolved resource locations. State reference-only versus executable use and the authorized role. A fresh context must not reconstruct paths from the source repository layout or inherit an assumed current directory. Resource resolution does not grant write permission or relax existing review/approval gates.
+Each dispatch supplies the target checkout/work identity, governing skill owners, complete current required content or verified readable locations, and the authorized role and execution/reference-only mode. Fresh contexts must not infer paths, inherit an assumed working directory, or treat access as write permission. Applicable authoring standards must reach the worker before its decisions and edits, not only its reviewer.
