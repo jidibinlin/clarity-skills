@@ -1,5 +1,7 @@
 # Requirements and Domain Model: Delivery Standard
 
+This standard belongs to the `clarify-requirements` skill. Load that skill by name in reference-only mode when another stage needs this resource; use its resolved companion location or complete current supplied content under the `workflow-artifacts` loading rules. Reading this standard does not start its author's workflow or require that workflow's execution prerequisites. The consuming stage determines the authorized scope and role; actual stage execution retains its existing gates.
+
 ## Purpose and scope
 
 Produce a requirements and domain model that both a human reviewer and an implementing agent can use without reconstructing the original conversation. It defines what behavior is correct before deciding how to implement it.
@@ -9,6 +11,14 @@ This is the shared authoring and review standard for the first stage of the ligh
 The model covers one bounded requirement or change. Reference established project knowledge instead of redescribing the whole system. Domain modeling clarifies the requirement through concepts, relationships, rules, and examples; it is not limited to a glossary and does not require inventing a concept for every noun.
 
 All skill instructions and companion standards are written in English. This language convention does not require the human conversation to be in English.
+
+## Private location and persistent process records
+
+Load `workflow-artifacts` by name through the Skill tool or the harness's equivalent registered resource mechanism and read its companion `WORKFLOW-ARTIFACTS.md` under its resource-resolution and supplied-content reuse rules before authoring, resuming, or reviewing. It governs private placement, exclusion, persistent records, revision identity, recovery, and transitions in addition to this content standard. New models use `.scratch/<work-slug>/requirements.md` in the same work directory as `issue.md` and `issue.log.md`; existing authoritative project models may remain precisely referenced and synchronized under its location rule. The author/controller must establish and verify local Git exclusion before workflow writes, including worktree-aware exclusion resolution and tracked-file blocking. Never stage, commit, or publish workflow records; planning creates no `delivery.md`.
+
+Use `issue.md` for current stage, scope/route, model and approval references, blockers, roles, and next action. Resume from it, applicable models, open findings, and latest evidence/decisions, reconciling actual sources before reuse. The controller (author in standalone mode) saves read-only reviewer reports in `issue.log.md`; reviewers do not write logs or exclusion rules. Record each round/reviewer, standards, exact source/model/code basis, verdict, category coverage, evidence/limits, stable finding IDs, and independent dispositions. Private files need path plus digest or another verifiable local revision; repository HEAD alone cannot identify ignored models or dirty/untracked code. Identify every relevant source and preserve enough evidence to compare current content without pretending logs are snapshots.
+
+Persist reviews before repair or gate advancement; repair decisions, material rationale, addressed IDs and fresh evidence before new review; dispositions/current state before handoff; and recovery data before blockers or session/stage transitions. Author repairs are `addressed, awaiting review`, not self-closed findings; disputes remain open with counter-evidence until independent disposition. Save explicit human approval with exact scope/basis and a faithful short quotation or durable reference to the actual decision. Preserve prior outcomes and current applicability in the log, with only current approval metadata in the model. Apply the shared metadata-only revision rule. Task dispatches may carry review packages, but essential identities, decisions, findings, and evidence must persist locally.
 
 ## Required coverage
 
@@ -112,17 +122,19 @@ Whenever a requirement changes, update affected diagrams and prose together. Bef
 
 Update the model as conclusions emerge rather than reconstructing it from a long conversation at the end. The deliverable must remain one clean, integrated account of the current requirement.
 
-**Hard rule: no document patches or change logs.** Never append or create patch files, changelog files or sections, revision histories, dated update notes, supplemental override documents, or addenda that repair or supersede the main text. A reader must not have to combine a base document with later corrections to discover the current rules. This applies during drafting as well as at final delivery. Keep revision history in version control, not in the requirements deliverable.
+**Hard rule: no normative document patches or model-embedded change logs.** Never append or create patch files, revision histories, dated update notes, override documents, or addenda that repair or supersede the main text. A reader must not combine a base document with later corrections to discover current rules. This applies during drafting and final delivery. The required `issue.log.md` is a process record, never a normative patch or a substitute for integrated model sections; private artifact history is not kept in Git.
 
 Apply each change directly to the sections that own the affected concepts and rules. Update dependent scenarios, references, and diagrams in the same revision; remove obsolete or conflicting statements. If inherited material already contains patches or a change log, integrate the still-applicable decisions into the main text and remove the patch material. If their authority is unclear, ask about the specific conflict before choosing which rule to preserve.
 
 Keep current proposals, assumptions, and unresolved questions distinct from confirmed conclusions. Necessary rationale, meaningful rejected alternatives, and descriptions of current versus desired behavior belong beside the relevant decision; they are not a license to preserve a chronological discussion or revision log. Maintain only the current approval status and applicable approval note, not an accumulating approval history. Apply the review and approval gate below whenever reviewed content changes; downstream work must not silently override confirmed decisions.
 
-Keep editing instructions and cleanup commentary out of the model itself: no lists of patch files to delete, statements that a patch was folded in, descriptions of the rewrite, or narratives about invalidated approvals. Perform those maintenance actions and report them in the conversation, not as requirement content. Show the current approval status and remove obsolete approval notes. Mention previous behavior only when it is necessary to understand the requirement or a real migration constraint, not to recount document revisions.
+Keep editing instructions and cleanup commentary out of the model: no patch-deletion lists, rewrite narratives, or accounts of invalidated approvals. Record material maintenance decisions and review applicability in `issue.log.md`, not conversation alone. Show current approval status and remove obsolete approval notes from the model while preserving historical outcomes in the log. Mention previous behavior only when necessary to understand the requirement or a real migration constraint.
 
 Essential knowledge for the next stage must not exist only in the current agent's context. At a handoff, the model and its explicit references must carry that knowledge.
 
 ## Delivery check and first approval gate
+
+This gate governs full requirements-model authoring through clarify-requirements. For scoped changes to an existing system, the `clarify-change` skill (load by name in reference-only mode to consult its standard; execute only when that route is authorized) governs the coordinated change-package route: integrate affected requirements and technical targets in their canonical sections and review/approve that package together with necessary surrounding consistency. Prior approval does not cover changed content, but this route does not require separate repeated whole-project requirements and technical ceremonies or nonexistent historical approvals. Unaffected content is not falsely reapproved.
 
 Before asking for approval, an independent reviewer in a fresh context must check the complete current model against the confirmed discussion, inherited constraints, and inspected evidence. The author supplies evidence and repairs findings; author self-review cannot satisfy this gate. Use [reviewer-prompt.md](reviewer-prompt.md) for the review input and return contract. Apply these criteria:
 
@@ -134,8 +146,9 @@ Before asking for approval, an independent reviewer in a fresh context must chec
 6. **Handoff completeness:** an agent unfamiliar with the conversation can understand the requirement from the model and its explicit references.
 7. **Diagram verification:** Mermaid diagrams have been rendered and inspected, and their conditions, paths, terminology, and scope match the prose. Report any verification limitation.
 8. **Open questions:** no unresolved question or unverified assumption silently determines a material behavior. Questions that prevent technical modeling from proceeding must be resolved before this stage is complete.
+9. **Private record integrity:** required location and verified exclusion, recovery entry, source/revision identities, persistent review/repair/evidence records, stable finding dispositions, and applicable approval evidence satisfy WORKFLOW-ARTIFACTS.md. Assess records available at this gate; do not require the current review result or future human approval before they occur.
 
-Fix findings in the canonical model, then dispatch a fresh independent reviewer to assess the revised model against all applicable checks again, including previous findings and regressions elsewhere. Repeat until the review passes. Recover omitted information from available discussion and evidence before asking new questions. Keep findings and repair reports in the conversation, not in the clean deliverable.
+Fix findings in the canonical model, persist repairs and fresh evidence in `issue.log.md`, then dispatch a fresh independent reviewer to assess all applicable checks, previous findings, and regressions. Save each result before advancing. Recover omitted information from available discussion/evidence before asking new questions. Keep findings and repair reports in the sidecar log, not the clean model or conversation alone.
 
 A review passes only with an independent `Pass` for the current artifact: all applicable criteria are satisfied, no findings remain unresolved, and required verification has actually been completed. `Changes required` and `Blocked` do not permit approval. An unavailable independent reviewer, necessary evidence, or mandatory check is a blocker, not a waived criterion. Disclosing a limitation or receiving early human approval does not turn an incomplete review into a pass.
 
@@ -145,4 +158,4 @@ An edit to requirement content, diagrams, or required references invalidates the
 
 Do not begin technical clarification or present an approved handoff until both review and final human confirmation have succeeded for the current model. If blocked, report the draft and its specific blocker instead.
 
-The lightweight workflow has three separate human approval gates: this requirements/domain model, the technical model, and the implementation tickets. Approval at one gate authorizes the next stage only, not all later stages. This document defines the first gate; the technical-model and ticket delivery standards are separate decisions.
+The initial lightweight modeling/planning workflow has separate human approval gates for requirements, technical design, and tickets; approval at one gate does not approve later artifacts or code. The scoped change-package route above can instead hand a complete approved bounded change directly to implementation without tickets. Both routes still require independent review and explicit human approval of their current governing design.

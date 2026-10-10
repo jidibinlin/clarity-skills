@@ -1,8 +1,16 @@
 # Technical Model: Authoring and Review Standard
 
+This standard belongs to the `clarify-technical-design` skill. Load that skill by name in reference-only mode when another stage needs this resource; use its resolved companion location or complete current supplied content under the `workflow-artifacts` loading rules. Reading this standard does not start its author's workflow or require that workflow's execution prerequisites. The consuming stage determines the authorized scope and role; actual stage execution retains its existing gates.
+
 ## Purpose and completeness
 
-This is the single authoritative standard for producing and independently reviewing the technical realization of an approved requirements/domain model. Apply it while investigating, clarifying, writing, and repairing. Review uses these same requirements, not a separate quality rulebook.
+This is the single authoritative content standard for producing and independently reviewing the technical realization of an approved requirements/domain model. Apply it while investigating, clarifying, writing, and repairing. Review uses these same requirements, not a separate quality rulebook.
+
+Load `workflow-artifacts` by name through the Skill tool or the harness's equivalent registered resource mechanism and read its companion `WORKFLOW-ARTIFACTS.md` under its resource-resolution and supplied-content reuse rules before authoring, resuming, or reviewing. It governs private placement, exclusion, persistent records, revision identity, recovery, and transitions in addition to this content standard. New models use `.scratch/<work-slug>/technical.md` in the same work directory as `issue.md` and `issue.log.md`; existing authoritative project models may remain precisely referenced and synchronized under its location rule. The author/controller must establish and verify local Git exclusion before workflow writes, including worktree-aware exclusion resolution and tracked-file blocking. Never stage, commit, or publish workflow records; planning creates no `delivery.md`.
+
+Use `issue.md` for current stage, scope/route, model and approval references, blockers, roles, and next action. Resume from it, applicable models, open findings, and latest evidence/decisions, reconciling actual sources before reuse. The controller (author in standalone mode) saves read-only reviewer reports in `issue.log.md`; reviewers do not write logs or exclusion rules. Record each round/reviewer, standards, exact source/model/code basis, verdict, category coverage, evidence/limits, stable finding IDs, and independent dispositions. Private files need path plus digest or another verifiable local revision; repository HEAD alone cannot identify ignored models or dirty/untracked code. Identify every relevant source and preserve enough evidence to compare current content without pretending logs are snapshots.
+
+Persist reviews before repair or gate advancement; repair decisions, material rationale, addressed IDs and fresh evidence before new review; dispositions/current state before handoff; and recovery data before blockers or session/stage transitions. Author repairs are `addressed, awaiting review`, not self-closed findings; disputes remain open with counter-evidence until independent disposition. Save explicit human approval with exact scope/basis and a faithful short quotation or durable reference to the actual decision. Preserve prior outcomes and current applicability in the log, with only current approval metadata in the model. Apply the shared metadata-only revision rule. Task dispatches may carry review packages, but essential identities, decisions, findings, and evidence must persist locally.
 
 The artifact must settle the scoped technical design before implementation. It describes the intended final system and code structure, not merely an implementation approach, a set of options, or a sequence of tickets. Do not reserve file organization, object decomposition, algorithms, data representation, interface details, coordination, or failure handling for the coding stage. Implementation translates the settled design into code; it does not complete the design.
 
@@ -16,6 +24,7 @@ The following are mandatory, including for small changes:
 - Micro topology and micro sequence diagrams.
 - Complete data-structure definitions.
 - Complete interface contracts.
+- A project-grounded plan for a small set of overall workflow integration tests.
 - A coherent account of the technical decisions connecting these views, with evidence and verification sufficient to review them.
 
 Scale the size of each view to the actual system; do not omit a required view because the change is small. Do not invent processes, asynchronous messages, objects, or states merely to fill a view. Label the macro and micro views distinctly so neither is silently substituted for the other.
@@ -27,6 +36,12 @@ Identify the approved requirements model and content revision, its scope and ess
 Inspect the relevant existing code before proposing new concepts. Identify reusable processes, modules, objects, types, and contracts with repository references. Describe the affected current structure only as needed to explain the target design, compatibility, or a real transition constraint. Explain why a proposed new abstraction is necessary, why an existing one cannot take the responsibility, and whether a superseded abstraction or duplicate representation must disappear.
 
 Lead with the decision, then provide the background and actual decisive basis needed by an unfamiliar human or agent. Give consequential tradeoffs their relevant constraints, alternatives, and accepted consequences; do not repeat empty background/rationale headings for self-explanatory facts. Distinguish inspected facts, imposed constraints, confirmed choices, proposals, and unverified assumptions. Generic claims such as "best practice," "flexible," or "clean architecture" do not establish a decision's basis.
+
+### Constraints for first-pass implementation
+
+The approved technical model is the normative basis for later implementation and code-conformance review. Settle consequential quality constraints here, before coding: canonical state and invariant owners, reuse of existing concepts, responsibility locality, allowed collaboration, error and resource ownership, and retirement of replaced paths. Integrate each constraint and its actual rationale into the owning design section; do not create a parallel quality checklist or prescribe every local statement. Reference applicable repository rules precisely and resolve conflicts before approval.
+
+Make these constraints concrete enough to guide the first implementation, rather than planning to repair its structure during code review. Local expression choices may remain with the implementer when they preserve the specified structure, contracts, algorithms, and guarantees. A later reviewer must tie required corrections to this approved design, its requirements basis, applicable repository rules, or the shared implementation/verification standard, not introduce a preferred architecture or an unstated style rule. If evidence exposes a defective or incomplete design, return it to clarification and renewed approval; neither silently implement a different design nor approve incorrect behavior merely because the code follows the document.
 
 ## File organization and responsibility tree
 
@@ -111,30 +126,53 @@ Each operation must have an exact name, owner and code location, signature or pr
 
 State genuine non-applicability where needed instead of inventing error cases or infrastructure. An exact signature without behavioral obligations is incomplete, as is a behavioral description whose types, errors, or owner are unspecified. Resolve contract-affecting details now; do not instruct implementation to choose an error type, payload, method split, or synchronization policy later.
 
+## Overall workflow integration test plan
+
+**Inspect the project before selecting tests.** Read the existing integration-test guidance, runner/configuration, representative tests, fixture or environment setup, and relevant local/CI commands. Establish how this project actually exercises integrated behavior, what it can reuse, and its limitations. Cite the relevant repository evidence; do not infer capabilities from a framework name or prescribe a new harness before this investigation. If the evidence is inaccessible, report that gap rather than asking the human to invent repository facts.
+
+Use those findings to select a small set of representative macro-level business flows, tied to the macro topology and sequence diagrams. Their purpose is to prevent a change being released or handed to joint integration before its basic collaboration works: exercise the path from the real entry through the participating processes or modules to the final observable outcome. Cover the main path and only consequential alternatives or failures, not a case for every interface, field, boundary value, state combination, or concurrency interleaving. Individually working modules do not establish that the macro flow works.
+
+For each selected flow, record:
+
+- The approved scenario and why this flow needs integration coverage.
+- The existing testing method and entry point, the participating modules or processes, and the material limits of what is actually exercised.
+- The starting situation, the high-level action sequence, and the observable overall result expected from the approved requirement and interface contracts.
+- The intended test location and how the existing project setup and invocation will support it; reference existing conventions rather than redescribing the harness.
+
+Preserve the distinction between real collaboration and replaced dependencies. An existing setup that substitutes an external system can still exercise a useful workflow, but cannot establish that external system's real behavior. Do not claim cross-process or persistence guarantees from a setup that replaces those interactions. If existing means cannot exercise a necessary overall flow, explain the gap and resolve the minimal approach through technical clarification instead of silently inventing infrastructure or expanding the test scope.
+
+This stage defines overall integration coverage, not the complete testing strategy. Unit tests, fine-grained contract and boundary cases, detailed fixture construction, assertion code, additional test files, and other testing techniques belong to the later implementation-stage TDD instructions. Do not design that future TDD policy here or block technical approval because those details are absent. The requirement to settle production structure, data definitions, and interface behavior remains unchanged; this limited test plan does not reopen them.
+
+The deliverable at this technical stage is a plan, not an executable test suite. The selected macro flows are to be implemented and exercised in the later implementation stage before release or handoff to joint integration; do not leave the first attempt to run them until after that handoff. A plan, successful compilation, or passing isolated tests is not evidence that these flows ran successfully. Distinguish planned flow tests from checks or disposable feasibility probes actually run. Unwritten future tests are not failed current design verification. Final human approval includes the selected macro flows and project-grounded testing approach, not an exhaustive test matrix.
+
 ## Consistency, evidence, and clean integration
 
-Keep stable names and references across the requirements mapping, file tree, macro and micro views, definitions, and contracts. Every scoped responsibility has a concrete owner; each interaction has a contract; every payload and state has a defined representation. Walk approved normal, boundary, failure, and relevant concurrency scenarios through the entire design. A scenario must not work only in one view.
+Keep stable names and references across the requirements mapping, file tree, macro and micro views, definitions, and contracts. Every scoped responsibility has a concrete owner; each interaction has a contract; every payload and state has a defined representation. Walk approved normal, boundary, failure, and relevant concurrency scenarios through the entire design. A scenario must not work only in one view. These design walkthroughs do not require a separately specified integration test for every scenario.
 
 Render and visually inspect all Mermaid diagrams. Check for misleading boundaries, arrow meanings, ordering, guards, concurrency, and missing paths as well as rendering errors. Parsing alone does not prove correctness. Keep verification results and artifacts available to the reviewer and tied to the current content. An unavailable renderer or necessary inspection capability blocks delivery rather than making diagrams optional.
 
-Verify referenced code and definitions against the inspected repository. Support feasibility-sensitive execution assumptions with existing evidence or a targeted disposable probe. Distinguish observations from expectations; do not claim future production tests have already run. Define what observable results will establish the design's required behavior and where those checks belong, without decomposing work into tickets. An unresolved assumption on which the design depends prevents approval.
+Verify referenced code and definitions against the inspected repository. Support feasibility-sensitive execution assumptions with existing evidence or a targeted disposable probe. Distinguish observations from expectations; do not claim future production tests have already run. Check that the selected overall workflow tests use investigated project capabilities and have meaningful observable outcomes. Their implementation and detailed test strategy belong to the later implementation/TDD stage. An unresolved assumption on which the production design depends still prevents approval.
 
-Maintain a clean canonical model throughout clarification and repair. Integrate corrections into their owning sections and synchronize all dependent views. No patch files, changelogs, revision histories, override addenda, chronological interview records, review reports, or cleanup commentary belong in the deliverable. Necessary rationale and current-versus-target explanations are part of the model, not an excuse to retain superseded proposals. Keep history in version control and review/maintenance reports in the conversation.
+Maintain a clean canonical model throughout clarification and repair. Integrate corrections into owning sections and synchronize dependent views. No normative patch files, model-embedded changelogs/revision histories, override addenda, interview records, review reports, or cleanup commentary belong in the model. Necessary rationale and current-versus-target explanations remain beside the decision. Persist material review/repair/approval history and evidence in the shared work directory's `issue.log.md`, not Git history or conversation alone; this sidecar never overrides the integrated model.
 
 ## Delivery checks and second approval gate
+
+The gate below governs full initial technical modeling through clarify-technical-design. Scoped changes to existing systems use the `clarify-change` skill (load by name in reference-only mode to consult its standard; execute only when that route is authorized), which imports this standard's design-content requirements while supplying its own baseline reconstruction, coordinated canonical updates, review and approval gate. That route may start without prior models and approve a complete bounded change for direct implementation; it does not invent historical approvals or waive target completeness. Its approval covers the exact affected target sections and necessary consistency, not unrelated historical content.
 
 The author uses the requirements above throughout the work. A fresh independent reviewer applies the same standard to the complete current artifact and evidence, reporting these categories:
 
 1. **Approved basis and faithfulness:** the current requirements input passed its own review and final approval; the technical model preserves it and has not invented business decisions.
-2. **Existing-design fit and rationale:** inspected code grounds reuse, changes, new abstractions, and necessary cutovers; consequential choices have their actual basis.
+2. **Existing-design fit and rationale:** inspected code grounds reuse, changes, new abstractions, and necessary cutovers; consequential choices and first-pass implementation constraints have their actual basis and can guide later conformance review.
 3. **File organization:** the complete scoped target tree assigns every responsibility and definition to a concrete file and explains any relevant relocation or retirement.
 4. **Macro completeness:** topology and sequence diagrams, data flow, state authority, and the actual concurrency/ordering model are complete and agree.
 5. **Micro completeness:** topology and sequence diagrams resolve concrete ownership, collaboration, algorithms, and lifetimes and realize the macro model.
 6. **Data completeness:** complete resulting definitions and semantics exist for all required state, payloads, inputs, outputs, and representations.
 7. **Contract completeness:** every required interaction has a defined owner, exact interface, and complete caller-relevant behavior; internal operations do not hide undecided work.
 8. **Cross-view consistency and decision closure:** approved scenarios can be traced through consistent views; no technical decision or necessary assumption remains for implementation to settle.
-9. **Verification:** every diagram was rendered and inspected, references were checked, and required feasibility evidence is available for the current content.
-10. **Reviewability and clean handoff:** an unfamiliar reader can understand and evaluate the complete design from the model and explicit references, without interview history, patches, or an implementation ticket list.
+9. **Overall workflow integration coverage:** the project's existing integration-test methods were investigated before selecting a small set of relevant overall flows. The plan identifies the chosen method, entry, real collaboration and limits, expected outcome, and test location. An exhaustive interface-test matrix or detailed TDD test design is not required here.
+10. **Verification:** every diagram was rendered and inspected, references were checked, and required feasibility evidence is available for the current content. Planned acceptance tests are not misrepresented as completed verification.
+11. **Reviewability and clean handoff:** an unfamiliar reader can understand and evaluate the complete design from the model and explicit references, without interview history, patches, or an implementation ticket list.
+12. **Private record integrity:** required location and verified exclusion, recovery entry, source/revision identities, persistent review/repair/evidence records, stable finding dispositions, and applicable approval evidence satisfy WORKFLOW-ARTIFACTS.md. Assess records available at this gate; do not demand the current report or future human approval before they occur.
 
 These categories index the full standard, not a reduced replacement for it. Use [reviewer-prompt.md](reviewer-prompt.md) for independent-review inputs and results. Author self-review cannot satisfy this gate. Repair findings in place and obtain a new independent full review, including regressions outside previous findings. Missing independent review, necessary evidence, or mandatory verification is a blocker, not a waived requirement.
 
@@ -142,4 +180,4 @@ Retain `Draft` during clarification, repair, or blocked assessment. Only an inde
 
 Changes to the model's content, its approved requirements input, or essential references invalidate review and final approval for the affected artifact. Return to `Draft` and repeat review, repair, and final approval. Approval-metadata updates alone do not invalidate a content review. Always review resumed material before an approved handoff; an unchanged model may retain its established final approval after passing the new review.
 
-Approval authorizes a separate subsequent ticket-decomposition stage, not immediate implementation. This standard does not split tickets or define the later post-implementation change-governance workflow.
+Approval through this initial technical-model workflow authorizes subsequent ticket decomposition, not immediate implementation. The scoped change route identified above may instead authorize direct implementation of its independently reviewed, human-approved change package. Design changes outside an existing approved execution basis return to the applicable modeling route; code-conformance repairs remain in implementation.
