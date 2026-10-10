@@ -1,4 +1,4 @@
-# Custom Skills
+# Clarity Skills
 
 ## Workflow and standards
 
