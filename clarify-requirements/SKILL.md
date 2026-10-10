@@ -19,7 +19,7 @@ Stage routes name separately installed complete skills: `clarify-technical-desig
 
 Read the user's request and any supplied model, references, or inherited decisions. Establish the problem, intended outcome, and scope. Ask only for missing choices; do not repeat decisions already made.
 
-Inspect relevant project guidance, existing domain definitions, affected behavior, and tests to establish what is currently true. Follow references needed to interpret inherited constraints. Keep repository facts separate from proposed behavior. If evidence is inaccessible, identify the gap instead of pretending to have inspected it.
+Use the already-read REQUIREMENTS-MODEL.md to guide investigation before questioning or drafting. Inspect relevant project guidance, existing domain definitions, affected behavior, and tests to establish what is currently true. Follow references needed to interpret inherited constraints. Keep repository facts separate from proposed behavior. If evidence is inaccessible, identify the gap instead of pretending to have inspected it.
 
 Resolve the repository and existing work identity before choosing or reusing `.scratch/<work-slug>/`. As author/controller, complete the shared pre-write exclusion procedure: resolve `info/exclude` with Git (including worktrees), preserve its contents, establish `/.scratch/`, block writes to tracked workflow material, and verify effective exclusion for planned paths. Do this before writing workflow content; never stage, commit, or publish it.
 
@@ -29,7 +29,7 @@ For delegated work, stay within the supplied scope. If a necessary decision conf
 
 ## 2. Build and test the requirements model
 
-Clarification is driven by gaps in understanding, not by an exhaustive decision tree. Build a coherent account of the requirement, challenge it with relevant scenarios, and ask only questions whose answers materially change that account.
+Use REQUIREMENTS-MODEL.md as the authoring contract to expose gaps and organize each draft, not only to judge the finished document. Clarification is driven by gaps in understanding, not by an exhaustive decision tree or a questionnaire made from the standard. Challenge the account with relevant scenarios and ask only questions whose answers materially change it.
 
 **Understand the problem before accepting a proposed solution.** Distinguish the user's actual difficulty and desired outcome from a suggested feature or mechanism. Use the context already supplied; ask about purpose only when that distinction is genuinely unclear. Start with a concrete situation: who acts, under what conditions, on what, toward which observable result. Derive and refine concepts and their relationships from that situation rather than requesting a dictionary of terms up front.
 
@@ -55,13 +55,15 @@ Revise owning sections and synchronize diagrams, scenarios, and dependent rules.
 
 On resumption, read `issue.md`, applicable models/references, open findings, and the latest evidence/decisions; reconcile their identities, approvals, and actual sources before reuse. Reuse settled requirements, but always run step 4 before an approved handoff. Keep `issue.md` current with stage, basis, approval links, blockers, roles, and next action; persist recovery information before blockers or session/stage handoffs. An inherited `Approved` status does not bypass review.
 
-## 4. Review, repair, and review again
+## 4. Verify, review, repair, and review again
+
+Before dispatch, check the complete model against REQUIREMENTS-MODEL.md for coverage and consistency across concepts, rules, scenarios, and diagrams. Correct known omissions and contradictions; return unresolved decisions to clarification rather than leaving them for the reviewer or implementer. Render and inspect Mermaid diagrams and complete all other required verification. If a required decision or check remains unresolved, retain `Draft` and report the specific blocker. Author checks prepare the model for independent review; they never replace it.
 
 After requirements clarification, act as controller and dispatch an independent, read-only reviewer using [reviewer-prompt.md](reviewer-prompt.md). Supply the complete current artifact/references, REQUIREMENTS-MODEL.md and WORKFLOW-ARTIFACTS.md, original requirement evidence, current verification, workspace/exclusion evidence, and previous findings. The package may remain in task input, but its essential source identities, decisions, findings, and evidence must persist in `issue.log.md`. Identify private models by path plus digest or another verifiable local revision, not HEAD alone; identify every relevant source and any dirty/untracked code basis under the shared contract. Provide facts and decisions, not endorsement instructions. Supply the target repository/checkout, work identity, governing skill names, and complete current standards/reviewer contract or verified readable resource locations with their owning skills under the shared dispatch rules. State reference-only use and the read-only reviewer role; do not assume the reviewer inherits a working directory or sibling skill layout.
 
 Use a fresh reviewer context for every round, without the author's working conversation or private reasoning. The same model may serve as reviewer; a role switch inside the author's conversation does not qualify. The reviewer only inspects and reports. You own writing, corrections, and human interaction. If an independent context or necessary input cannot be provided, retain `Draft` and report the specific blocker; do not substitute self-review or ask for final approval.
 
-Render and inspect Mermaid diagrams and complete other required verification. Give the reviewer access to the current results and artifacts, or the read-only tools needed to check them. Missing mandatory verification blocks a pass; disclosure alone is insufficient.
+Give the reviewer access to the current verification results and artifacts, or the read-only tools needed to check them. Missing mandatory verification blocks a pass; disclosure alone is insufficient.
 
 Require the exact reviewed basis and complete return contract. A stale, incomplete, or inconsistent response is not a pass: request correction or report the blocker. As sole controller writer (the author in standalone mode), save every returned review, including failed/blocked outcomes, in `issue.log.md` before repair or gate advancement. Preserve round/reviewer identity, standards, basis, coverage, evidence/limits, and stable finding IDs with closure conditions. Keep the model free of review logs and repair notes.
 

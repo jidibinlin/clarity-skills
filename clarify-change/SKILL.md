@@ -21,7 +21,7 @@ Create a new model at `.scratch/<work-slug>/change.md` with `issue.md` as the wo
 
 ## 1. Inspect the baseline before prescribing changes
 
-Identify the change objective and affected entry points. Inspect existing requirements/technical material if present, repository rules, actual code/callers, interfaces and data, configuration, tests, and relevant runtime facilities. Establish source identities and scope. Preserve existing user work.
+Use the already-read CHANGE-MODEL.md and its imported technical-content sections to guide baseline investigation, consequential questions, and each target-model draft, not only later review. Identify the change objective and affected entry points. Inspect existing requirements/technical material if present, repository rules, actual code/callers, interfaces and data, configuration, tests, and relevant runtime facilities. Establish source identities and scope. Preserve existing user work.
 
 Check whether documentation agrees with actual code and evidence. With stale or missing documents, reconstruct the affected current behavior, macro collaboration, micro ownership, file responsibilities, and interfaces from the actual system. Follow a concrete scenario through the involved boundaries, not merely a directory tree. Use targeted safe runtime investigation when behavior or a feasibility assumption cannot be established from existing evidence; do not claim a read-through proves runtime behavior.
 
@@ -49,7 +49,7 @@ Apply the synchronization rules in CHANGE-MODEL.md. Update affected existing req
 
 Keep one authoritative target definition for each changed concept, whether written here or precisely referenced in an updated canonical model. Never require implementers to replay amendments. Keep before/after rationale in owning sections; process reviews/repairs/approvals and essential evidence belong in `issue.log.md`, not canonical artifacts, Git history, or conversation alone. Keep `issue.md` current with stage, route, exact basis, approvals, blockers, roles, and next action; persist it before blockers or session/stage handoffs. Documentation approval is not implementation completion.
 
-Check all source references, the claimed unchanged views, current-to-target mappings, callers, migrations, contract completeness and execution prerequisites. Render and visually inspect the required diagrams; reused renderings must still apply to the referenced unchanged content. Perform necessary design-feasibility probes. Required unavailable verification is a blocker, not permission to mark the model ready. Future production tests need not already exist or pass.
+Check the complete package against CHANGE-MODEL.md and its imported technical-content requirements, including source references, claimed unchanged views, current-to-target mappings, callers, migrations, contract completeness and execution prerequisites. Correct known omissions and inconsistencies before independent review; return unsettled decisions to clarification rather than delegating them to review or implementation. Render and visually inspect the required diagrams; reused renderings must still apply to the referenced unchanged content. Perform necessary design-feasibility probes. Required unavailable verification is a blocker, not permission to mark the model ready. Future production tests need not already exist or pass.
 
 ## 5. Review, repair, and obtain human approval
 

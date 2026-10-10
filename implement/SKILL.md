@@ -29,6 +29,8 @@ Before any artifact write, establish or verify the shared contract's repository-
 
 ## 2. Dispatch a ready unit to its bound implementer
 
+Apply the already-read ORCHESTRATION.md when preparing assignments. Require the implementer to read and apply IMPLEMENTATION.md and the approved target before choosing evidence or editing code, then complete the unit's pre-review conformance checks. Supplying standards only to the reviewer is insufficient.
+
 For a ticket set choose a pending ticket whose actual prerequisite outputs exist on the shared basis and whose relevant reviews remain applicable. Numbering or completion claims are insufficient. For a direct change dispatch its one full-scope unit only after the bounded-fit and prerequisite gates pass. Continue authorized work without asking permission for each unit.
 
 On first execution create an implementer context and bind its handle to the ticket identity or direct change path/revision. Supply the verified resolved installed SKILL.md owned by `implement-unit`, explicitly authorize delegated execution of that unit rather than reference-only consultation, and include source route and exact approved basis, current approval evidence, target repository/checkout and workspace/code basis, actual prerequisites, verification responsibilities, and controller return route. Review requests are intermediate and a current Pass returns without per-unit human approval. A direct assignment includes every acceptance, regression, macro-flow, and final-conformance obligation. Do not transmit previous implementers' full conversations.
