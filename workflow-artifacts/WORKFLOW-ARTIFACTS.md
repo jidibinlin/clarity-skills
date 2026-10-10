@@ -98,6 +98,8 @@ Models/tickets express the complete current intended result. Integrate revisions
 
 Curate current entry/status fields and link governing records instead of duplicating conclusions. A log cannot change requirements, interfaces, topology, file responsibilities, approvals, or dependencies. Design changes return to the owning modeling gate and regain applicable review/approval before execution. Historical decisions are not competing current specifications.
 
+Keep known material pending decisions in `issue.md`, with their affected scope/model reference, missing human input or prerequisite, and next action or owning later stage. Reconcile this current list after each answer and before a pause/handoff; remove resolved or superseded entries while integrating conclusions into their owning models. Preserve unresolved parts of partial answers. This is recovery state, not an exhaustive questionnaire, a second specification, or a substitute for review findings. Apply `ask-with-context`'s continuation rules within the authorized stage.
+
 On resumption, read `issue.md`, relevant current models/tickets, open findings, and latest applicable decisions/evidence; consult older history only as needed. Reconcile actual checkout/code, approvals, prerequisites, and role availability. Stored status or retained context is not proof. Restore implementation roles under IMPLEMENTATION.md; model reviewers remain fresh per round.
 
 ## Review records and finding lifecycle

@@ -13,7 +13,7 @@ The executable rules live in the skills, not this README:
 
 ## Shared questioning
 
-[ask-with-context](ask-with-context/SKILL.md) is a self-contained communication skill: establish the background and causal understanding needed to decide, then choose focused diagrams, comparable tables, or prose before asking. It introduces no artifact layout or approval process and can be used outside engineering workflows. The five clarification stages explicitly load it before substantive questions; their scope and gates remain authoritative.
+[ask-with-context](ask-with-context/SKILL.md) is a self-contained communication skill: establish the background and causal understanding needed to decide, then choose focused diagrams, comparable tables, or prose before asking. After each answer, its continuation loop advances remaining material decisions rather than ending at an acknowledgement. It introduces no artifact layout or approval process and can be used outside engineering workflows. The five clarification stages explicitly apply it before questions and after answers; their scope and gates remain authoritative.
 
 Its model-facing description permits discovery after registration; it does not guarantee always-on activation. Explicit caller references provide the suite-level requirement. This repository does not install it, change global instructions, or enable it by default in the harness.
 
@@ -59,7 +59,7 @@ Cross-skill resources use registered names, not installation-directory adjacency
 
 Every role reads [WORKFLOW-ARTIFACTS.md](workflow-artifacts/WORKFLOW-ARTIFACTS.md). New work lives under repository-local `.scratch/<work-slug>/`, after the author/controller establishes and verifies local Git exclusion. Its heavyweight layout adds root map/shared-requirements/architecture models and scoped `requirements/NN-<slug>/` modeling entries; implementation tickets and final delivery remain at the root. The shared standard owns the exact tree, hierarchical source identities, record ownership, and cross-layer handoffs. Existing authoritative project models can remain precisely referenced at their owning locations.
 
-`issue.md` is recovery state and, when needed, the ticket index. Clean models/specifications stay separate from sidecar process logs. Logs retain review findings, repair decisions, actual evidence, and approvals; after verified implementation, `delivery.md` summarizes the result before human acceptance. These records remain private and retained. Git exclusion is not a packaging/upload security boundary, and completion does not authorize publication or commits.
+`issue.md` is recovery state, including current pending decisions and their prerequisites, and, when needed, the ticket index. Clean models/specifications stay separate from sidecar process logs. Logs retain review findings, repair decisions, actual evidence, and approvals; after verified implementation, `delivery.md` summarizes the result before human acceptance. These records remain private and retained. Git exclusion is not a packaging/upload security boundary, and completion does not authorize publication or commits.
 
 Example invocation after installation:
 

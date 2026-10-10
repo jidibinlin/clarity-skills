@@ -54,8 +54,17 @@ Before sending, check whether a user who has not read the agent's source materia
 
 If using a structured question/choice widget, present necessary context and visuals before it; short option labels do not replace the explanation. Wait for the answer. A request for explanation is not a selection, and silence is not consent.
 
-## 5. Repair understanding and hand back
+## 5. Resolve the question and continue the active task
 
 If the user asks for missing background, address that gap and restate the still-open decision using the corrected explanation. Do not repeat the unexplained options or respond with disconnected fragments. Correct affected diagrams/tables as understanding changes, and distinguish new facts from a changed decision.
 
-After an answer, briefly clarify its effect when useful and return the decision, necessary background, and actual rationale to the active task. The owning workflow integrates them into its current model and records under its own rules. Do not create a separate questioning log, transcript artifact, approval ceremony, or automatic next stage. Stop asking when the current decision is sufficiently resolved; the caller determines overall stage completeness.
+After an answer, integrate its effect, necessary background, and actual rationale into the active task under its recording rules. Reconcile all known material decisions in the authorized scope: retain unanswered parts and dependent choices, revisit assumptions affected by the answer, and remove genuinely superseded questions with their reason. Resolving one question does not finish the interview.
+
+Continue from that reconciled state in the same turn:
+
+- Resolve accessible evidence and incidental details yourself. If another material choice needs the user, prepare and ask the next ready question using steps 1–4. Do not end with an acknowledgement, summary, or offer to continue while that choice can be advanced.
+- A blocked or deferred item does not stop independent ready items. Preserve its missing prerequisite or owning later stage; deferral must respect the agreed scope, not hide an unmet current-stage obligation.
+- When no material choice remains for this stage, return to its required modeling, verification, and review steps without inventing more questions. The caller determines stage completeness; an interview answer is not artifact approval or authorization for another stage.
+- If only genuinely blocked work remains, state the unresolved items and exactly what would unblock them. Honor an explicit user pause or redirection, preserving the applicable recovery state.
+
+Use the caller's existing work entry when one exists; standalone communication needs no new artifact. Keep decision state current rather than creating a separate questioning log, transcript, or approval ceremony.
