@@ -12,6 +12,7 @@ Settle the selected effort's global technical decisions and cross-child guarante
 For reference-only use, read the requested standard/contract and its required dependencies, then return without executing prerequisites, investigation, drafting, review dispatch, or approval. Consuming routes determine their own authorized scope and gates.
 
 Before every role starts or resumes, load `workflow-artifacts` by name and read its entire WORKFLOW-ARTIFACTS.md. Follow its loading, supplied-content reuse, missing-dependency, reference-only, and root-separation rules. Before decisions or drafting, read [ARCHITECTURE-MODEL.md](ARCHITECTURE-MODEL.md) and its named `clarify-technical-design` content dependencies. Apply the same standards during authoring, repair, and independent review.
+For substantive questions, load the named `ask-with-context` skill and read its complete SKILL.md before preparing the question. Apply it as the shared communication reference under the loading rules above; it owns cognitive alignment and diagram/table/prose selection, not this stage’s scope, artifacts, or approval gates.
 
 Routes name separately installed skills: `clarify-requirements` for business-rule conflicts, `clarify-technical-design` for subsequently authorized child realization, and `clarify-change` for approved-model changes under applicable change governance. Reference loading and approval never execute another stage.
 
@@ -27,7 +28,7 @@ Reuse the verified excluded effort root. The root author/controller owns `archit
 
 Start with an approved cross-child scenario, inspected system behavior, and a candidate global design. Challenge runtime boundaries, state authority, data movement, ordering/concurrency, completion/failure semantics, and responsibility allocation. Trace consequential counterexamples, including overlap or partial completion when relevant; test whether the proposed mechanism actually establishes each required guarantee and whether a reusable existing owner avoids a new abstraction.
 
-Resolve accessible facts and reuse confirmed constraints yourself. Ask only when materially different compliant choices need human authority/preference or a missing human constraint changes the result. Give the inspected background, actual uncertainty, viable alternatives and consequences, recommendation with its real basis, and affected guarantees/children. Ask a focused question or small independent round, wait for the answer, and do not treat a proposal or silence as a decision. Dependent choices wait for their prerequisites; a fully specified input may require no questions.
+Use `ask-with-context` to clarify consequential global technical choices. Show the affected cross-child guarantees and responsibilities at macro resolution; keep later child-detail decisions out of this stage’s questions. A fully specified input may require no questions.
 
 Use draft topology, dataflow and macro sequences to make choices concrete. Integrate each answer and its actual deciding rationale into the owning model section. Business-rule conflicts return to requirements; do not redefine the product here. Use targeted disposable feasibility investigation when needed, recording only what was actually exercised. Keep unverified assumptions and unresolved decisions visible.
 

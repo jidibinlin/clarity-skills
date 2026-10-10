@@ -11,6 +11,12 @@ The executable rules live in the skills, not this README:
 - **Reviewer contract:** independent role, inputs, assessment, and return contract against that same standard.
 - **workflow-artifacts:** shared resource loading, private workspace, durable records, source identity, and delivery summaries.
 
+## Shared questioning
+
+[ask-with-context](ask-with-context/SKILL.md) is a self-contained communication skill: establish the background and causal understanding needed to decide, then choose focused diagrams, comparable tables, or prose before asking. It introduces no artifact layout or approval process and can be used outside engineering workflows. The five clarification stages explicitly load it before substantive questions; their scope and gates remain authoritative.
+
+Its model-facing description permits discovery after registration; it does not guarantee always-on activation. Explicit caller references provide the suite-level requirement. This repository does not install it, change global instructions, or enable it by default in the harness.
+
 ## Entry points
 
 | Skill | Authorized work | Governing standard | Reviewer contract |
@@ -37,11 +43,12 @@ Register complete skill directories through the harness. They have not been inst
 | Skill | Required reference dependencies |
 | --- | --- |
 | `workflow-artifacts` | None outside its own directory. |
-| `wayfinder` | `workflow-artifacts` |
-| `clarify-requirements` | `workflow-artifacts` |
-| `clarify-architecture` | `workflow-artifacts`, `clarify-technical-design` for applicable design-content rules |
-| `clarify-technical-design` | `workflow-artifacts`; heavyweight child design also loads `clarify-architecture` reference-only |
-| `clarify-change` | `workflow-artifacts`, `clarify-technical-design` for design-content rules; `clarify-architecture` or `wayfinder` reference-only when their existing authorities are affected |
+| `ask-with-context` | None outside its own directory. |
+| `wayfinder` | `workflow-artifacts`; `ask-with-context` before substantive questions |
+| `clarify-requirements` | `workflow-artifacts`; `ask-with-context` before substantive questions |
+| `clarify-architecture` | `workflow-artifacts`, `clarify-technical-design` for applicable design-content rules; `ask-with-context` before substantive questions |
+| `clarify-technical-design` | `workflow-artifacts`; `ask-with-context` before substantive questions; heavyweight child design also loads `clarify-architecture` reference-only |
+| `clarify-change` | `workflow-artifacts`, `clarify-technical-design` for design-content rules; `ask-with-context` before substantive questions; `clarify-architecture` or `wayfinder` reference-only when their existing authorities are affected |
 | `split-tickets` | `workflow-artifacts` |
 | `implement` | `workflow-artifacts`, `implement-unit` |
 | `implement-unit` | `workflow-artifacts`; delegated use has a separately authorized `implement` controller |
