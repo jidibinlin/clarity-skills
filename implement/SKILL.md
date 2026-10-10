@@ -11,11 +11,11 @@ Before starting/resuming or making scheduling choices, load `workflow-artifacts`
 
 ## 1. Establish the authorized route and execution basis
 
-Apply IMPLEMENTATION.md’s approved-basis and route-validation gates. Resolve supplied effort/child entries to the governing root `issue.md`; read the full global set and its selected flat/hierarchical/change source package, or the entire bounded direct change package, with current scope/approval evidence and execution authorization. Hierarchy uses one root controller and ticket set; child entries are model recovery, not new controllers. A direct change’s path/revision is its identity, without fabricated tickets or historical prerequisites.
+Apply IMPLEMENTATION.md’s approved-basis and route-validation gates. Resolve supplied effort/child entries to the governing root `issue.md`; read the full global set and its selected flat/hierarchical/change source package, or the entire bounded direct change package. Resolve current scoped review/approval evidence through model metadata and owning object logs, and establish execution authorization. Hierarchy uses one root controller and ticket set; child entries define models, not new controllers or recovery files. A direct change’s path/revision is its source identity, without fabricated tickets or historical prerequisites.
 
 Inspect actual code, repository rules, prerequisites, target coverage, and verification facilities. Route source/design conflicts and scope expansion under the unit standard before proceeding. Establish ORCHESTRATION.md's shared execution basis, preserving user work, and verify the harness can retain/resume independent original roles. Missing capability is a blocker, not permission to silently replace roles.
 
-The controller establishes the shared exclusion gate before artifact writes and owns the work entry/root `issue.log.md`; ticket execution uses same-stem unit logs. Recover the current basis, evidence, prerequisites, and original roles under the shared contract and ORCHESTRATION.md before trusting saved progress.
+The controller establishes the shared exclusion gate before artifact writes, maintains definition/navigation in `issue.md`, and owns `implementation.review-fix-decisions.log.md`. Each existing ticket carries its compact non-normative execution block and has its own review log under explicit single-writer assignments. Direct work shares one implementation review log with its full-scope pair; its compact identity header binds the original roles without progress, blockers or next actions. Create no state file, scheduler ledger, duplicate checklist or recovery snapshot. Resume or cut over artifacts, current basis/evidence, prerequisites and original roles under the shared contract and ORCHESTRATION.md before trusting saved status.
 
 ## 2. Dispatch a ready unit to its bound implementer
 
@@ -27,9 +27,9 @@ Create and bind the original implementer at first execution; resume it for repai
 
 At the first review request, load `implement-unit`'s reviewer-prompt.md and create the unit's bound independent read-only reviewer with that contract's full initial package. Retain the original pair under IMPLEMENTATION.md; later rounds use its incremental package, and genuine role loss uses its explicit replacement procedure.
 
-Persist the implementation/repair result and fresh evidence in the owning log before review. Save every returned report before routing repairs or advancing. Require a complete applicable verdict; return incomplete reports to the reviewer rather than reinterpret them.
+Persist the identified review submission and verification, or finding-linked repair decisions and fresh evidence, in the owning review log before review. Save every returned report before routing repairs or advancing. Require a complete applicable verdict; return incomplete reports to the reviewer rather than reinterpret them.
 
-Route demonstrated violations to the original implementer, then refreshed evidence to the original reviewer for complete current-unit reassessment. Follow ORCHESTRATION.md for blockers, stalled progress, and evidence invalidation. Only current `Pass` with no unresolved finding/blocker and usable incorporated output permits passed state or dependent scheduling. The controller checks applicability, not code conformance in place of independent review. Persist dispositions/current state before proceeding; no author self-closure or retry count waives a finding.
+Route demonstrated violations to the original implementer, then refreshed evidence to the original reviewer for complete current-unit reassessment. Follow ORCHESTRATION.md for blockers, stalled progress, and evidence invalidation. Only current `Pass` with no unresolved finding/blocker and usable incorporated output permits a passed ticket status or dependent scheduling. The controller checks applicability, not code conformance in place of independent review. Persist dispositions and update the existing ticket’s execution block when applicable before proceeding; direct work uses its actual code and review evidence. No author self-closure or retry count waives a finding.
 
 ## 4. Establish final verification and independent Pass
 
@@ -40,8 +40,8 @@ Apply ORCHESTRATION.md's route-specific final gate:
 
 ## 5. Request final human acceptance and stop
 
-After mandatory current verification and the route-appropriate final independent Pass, persist overall evidence/verdict in `issue.log.md`. The controller writes `.scratch/<work-slug>/delivery.md` under the shared summary contract, links it from `issue.md`, and asks for explicit acceptance of the reviewed whole result. Prior model/set approval and unit Passes are not human code acceptance.
+After mandatory current verification and the route-appropriate final independent Pass, preserve the overall submission/evidence and verdict in `implementation.review-fix-decisions.log.md`; direct work already uses this same record. The controller writes `.scratch/<work-slug>/delivery.md` under the shared summary contract, links the summary from `issue.md`, explicitly surfaces significant autonomous repair decisions with record links, and asks for acceptance of the reviewed whole result. Prior model/set approval and unit Passes are not human code acceptance. Keep `issue.md` for specification navigation, not acceptance-record links.
 
-Apply ORCHESTRATION.md's handoff gate for requested repairs, renewed evidence/review, and upstream design changes. Record the actual acceptance decision in `issue.log.md`, then update entry and summary. Until then report `Awaiting acceptance`. Retain the private records under the shared contract.
+Apply ORCHESTRATION.md’s handoff gate for requested repairs, renewed evidence/review, and upstream design changes. Record the actual acceptance decision with exact scope/code/source basis in `implementation.review-fix-decisions.log.md`, then update the delivery summary with its acceptance-evidence link. Until then report `Awaiting acceptance`. Retain the private records under the shared contract.
 
 Stop at acceptance or an exact external blocker after all reachable authorized work. Do not automatically commit, merge, push, close remote issues, or release.

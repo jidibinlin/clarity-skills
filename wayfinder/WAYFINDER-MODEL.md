@@ -1,6 +1,6 @@
 # Wayfinder Model: Authoring and Review Standard
 
-Use this complete standard to guide exploration and first-pass authoring, then assess the same criteria independently. Before either role starts/resumes, load the complete shared WORKFLOW-ARTIFACTS.md through named skill `workflow-artifacts`. It owns storage, records, authority, recovery, and hierarchical handoffs; [SKILL.md](SKILL.md) owns this stage's execution and approval loop.
+Use this complete standard to guide exploration and first-pass authoring, then assess the same criteria independently. Before either role starts/resumes, load the complete shared WORKFLOW-ARTIFACTS.md through named skill `workflow-artifacts`. It owns storage, records, authority, resumption, and hierarchical handoffs; [SKILL.md](SKILL.md) owns this stage's execution and approval loop.
 
 ## Purpose and fidelity
 
@@ -42,11 +42,11 @@ Render and visually inspect every current diagram. Verify labels, branching, cro
 
 ## Unresolved areas and handoff
 
-Keep unresolved material in its owning map section: the question if it can be stated, or the area still too vague, its relevance, what would clarify it, and the responsible next stage/scope. Distinguish a blocker to the current handoff from an explicitly later decision. Unknown future work need not be artificially decomposed or fully resolved.
+Keep the scope and meaning of unresolved exploration in its owning map section: the area still too vague, its relevance, and the responsible later stage/scope. Keep missing inputs and decisions blocking the selected scope explicit beside the affected rules; integrate settled answers, rationale and evidence there instead of maintaining a duplicate question queue. Distinguish a blocker to the current handoff from an explicitly later decision. Unknown future work need not be artificially decomposed or fully resolved.
 
-The handoff to `clarify-requirements` identifies the selected scope, its map/source revision, confirmed inherited constraints separately from hypotheses, relevant scenario/dependency references, and unresolved business questions to deepen. The root entry owns assignment, child paths, progress, and records; the map owns the explanation of the split. Children are modeling scopes, not implementation tickets. The root shared requirements model will own cross-child business rules; the eventual formal architecture must derive from clarified approved requirements rather than simply approving this sketch.
+The handoff to `clarify-requirements` identifies the selected scope, its map/source revision, confirmed inherited constraints separately from hypotheses, relevant scenario/dependency references, and unresolved business questions to deepen. The root entry owns definition, child paths and exact source-package scope, paths/sections and revisions; the map owns the explanation of the split and unresolved exploration. Approval evidence belongs to model metadata and the applicable object review logs, not entry navigation. Children are modeling scopes, not implementation tickets. The root shared requirements model will own cross-child business rules; the eventual formal architecture must derive from clarified approved requirements rather than simply approving this sketch.
 
-When formal models supersede an estimate, integrate references to their current owning sections. Preserve a clean map; process logs retain history. A change contradicting an approved downstream model returns to that model's governance, not to an overriding map note.
+When formal models supersede an estimate, integrate references to their current owning sections. Preserve a clean map with original evidence and decision rationale; `wayfinder.review-fix-decisions.log.md` retains only the shared contract’s admissible review/fix/approval records, not exploration history. A change contradicting an approved downstream model returns to that model’s governance, not to an overriding map note.
 
 ## Delivery categories
 
@@ -58,6 +58,6 @@ Authors check, and reviewers report coverage of, every category:
 4. **Reviewable decisions:** proportional background and actual deciding rationale, rather than chronology or unsupported defaults.
 5. **Diagrams and evidence:** consistent, accurately labeled, currently rendered and visually inspected views.
 6. **Uncertainty and handoff:** explicit dependencies and next clarification scope; current blockers resolved without pretending later details are settled.
-7. **Authority and recovery:** clean canonical content, precise references and source identity, correct private workspace/record ownership, and no downstream authorization inferred from map approval.
+7. **Authority and resumption:** clean canonical content, precise references and source identity, correct private workspace/record ownership, and no downstream authorization inferred from map approval.
 
 No category is satisfied by its heading alone. `Not applicable` requires a scope-specific reason; missing mandatory evidence is unverified, not an optional improvement. The stage may pass with explicitly owned later unknowns, but not with an unanswered decision that prevents the selected requirements handoff.

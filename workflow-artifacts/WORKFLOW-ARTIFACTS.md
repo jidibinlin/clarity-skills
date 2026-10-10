@@ -21,53 +21,54 @@ Never force-add, stage, commit, push, publish, upload, or automatically copy the
 
 ## Layout and ownership
 
-Create only files needed by the route and current stage:
+Separate definitions, ticket progress, and review evidence. Create only artifacts needed by the authorized route and current work; no empty stage files or per-session, per-agent, or per-review-round files.
 
-```text
-.scratch/<work-slug>/
-├── issue.md
-├── requirements.md
-├── technical.md
-├── change.md
-├── issue.log.md
-├── issues/
-│   ├── 01-<slug>.md
-│   └── 01-<slug>.log.md
-└── delivery.md
-```
+- `issue.md` is the work definition and navigation entry: objective, exclusions, checkout, route, authoritative model/source-package references, and final delivery-summary navigation. For a ticket set it also owns stable ticket links, coverage, planned dependencies, and integration/verification responsibilities under TICKETS.md. Change it when this definition or navigation changes, not after execution steps. No approval-record index, active stage/step, pending interview questions, runtime blockers, role handles, progress, investigation notes, or repair history belongs here. Child entries have the same boundary and link their parent.
+- Models and tickets contain the clean current specification. Unresolved modeling decisions remain explicit beside their affected rules; settled answers replace them in place. Tickets also carry a compact, non-normative execution status under **Progress and resumption** below. Keep document approval metadata distinct from execution status.
+- There are no standalone state files or substitute progress/checklist artifacts. Models already express clarification progress; tickets already define implementation work.
+- `<object>.review-fix-decisions.log.md` contains only that object's review submissions, actual review outcomes, finding-linked repair decisions/evidence, and corresponding human approvals or acceptance. Follow **Review records and finding lifecycle** and **Review submissions and fix decisions** below. It is not a general process log.
+- `delivery.md` summarizes verified, independently reviewed implementation before final human acceptance. Planning creates none. Delegated units do not create whole-work summaries; standalone tickets summarize only their reviewed scope and preserve any broader summary.
 
-- `issue.md`: current objective/exclusions, checkout, route, models and applicable approvals, stage, blockers, next action, original role handles/recovery. On the ticket route, also the TICKETS.md set index: stable ticket links, coverage, dependencies, integration/verification ownership, and set approval. Keep planning approval, code conformance, and human acceptance distinct; no separate `STATE.md` or `INDEX.md`.
-- `requirements.md`, `technical.md`, `change.md`: clean stage models. Create only applicable models; precisely referenced existing authorities need no copy, and missing history needs no placeholders.
-- `issues/<NN>-<slug>.md`: clean ticket specification/current status. IDs are stable; numbering is not dependency order. Its same-stem `.log.md` holds unit results, reviews, repairs, evidence, and handoffs—not separate files per round/finding/agent/session.
-- `issue.log.md`: document-stage reviews/repairs/approvals and overall implementation review/acceptance. Direct changes also keep implementation and full-change review here; their identity is the approved change model path/revision, with no artificial ticket or `issues/` directory.
-- `delivery.md`: implementation summary after required verification and independent Pass, before final human acceptance. Delegated units return to their controller without whole-work summaries. Standalone tickets summarize only their reviewed scope and preserve any broader summary. Planning produces no delivery summary.
+Use these object stems within the assigned private work directory; append `.review-fix-decisions.log.md`, not the model’s `.md` extension:
 
-Use relative artifact links and stable heading/finding anchors. Code paths are checkout-relative; identify different checkouts explicitly. Temporary tool output/agent handles cannot replace durable essential content. Exclude secrets, credentials, private reasoning traces, and raw conversation dumps.
+| Object | Stem | Specification / review scope |
+| --- | --- | --- |
+| Coarse decomposition | `wayfinder` | `wayfinder.md` |
+| Requirements | `requirements` | Assigned `requirements.md`, or the root's identified composite package |
+| Overall architecture | `architecture` | `architecture.md` |
+| Technical design | `technical` | Assigned `technical.md` |
+| Scoped change | `change` | `change.md` and its identified synchronized sources |
+| Ticket planning | `tickets` | Root `issue.md` set definition and `issues/<NN>-<slug>.md` specifications; no synthetic `tickets.md` |
+| Whole/direct implementation | `implementation` | Whole ticket-set result, or the entire approved direct change |
+| One implementation ticket | `issues/<NN>-<slug>` | That ticket's code result, not ticket-plan approval |
+
+Thus requirements use `requirements.review-fix-decisions.log.md`; a ticket uses `issues/01-<slug>.review-fix-decisions.log.md`. A direct change has distinct change-model and implementation reviews, but no artificial ticket or state artifact. Its full-scope pair and controller share one assigned implementation review-record writer, not duplicate direct-unit records. A standalone ticket uses only its ticket and review log, not an artificial whole-set controller. Referenced canonical models may remain outside the private directory; their review records remain in the assigned private workspace.
+
+The author/controller assigns one writer per ticket or review-record file. Delegated authors may write explicitly assigned exclusive object files or return updates to their writer; reviewers remain read-only and return reports. Each writer records its own facts; cross-object effects travel through explicit handoffs, not concurrent edits to a shared catch-all file.
+
+Use relative artifact links and stable heading/finding anchors. Code paths are checkout-relative; identify different checkouts explicitly. Essential decisions and review evidence must be durable, not just temporary tool output/agent handles. Exclude secrets, credentials, private reasoning traces, and raw conversation dumps.
 
 ### Heavyweight work: one effort, scoped models, one ticket set
 
-For a Wayfinder-led effort, extend the same excluded work root; standalone lightweight work keeps the flat layout above:
+For a Wayfinder-led effort, extend the same excluded root. The tree below shows specification placement; each reviewed object uses its own review log from the stem table above, at the same assigned work scope. Do not create every possible review file in advance.
 
 ```text
 .scratch/<effort>/
 ├── issue.md
-├── issue.log.md
 ├── wayfinder.md
 ├── requirements.md
 ├── architecture.md
 ├── requirements/
 │   └── 01-<requirement>/
 │       ├── issue.md
-│       ├── issue.log.md
 │       ├── requirements.md
 │       └── technical.md
 ├── issues/
-│   ├── 01-<ticket>.md
-│   └── 01-<ticket>.log.md
+│   └── 01-<ticket>.md
 └── delivery.md
 ```
 
-The root entry is the sole whole-effort index and later implementation controller entry. It identifies the authorized scope, child entries, governing sources, applicable gates, dependencies, and next handoff. Child entries track scoped modeling/recovery and link their parent; they do not own separate ticket sets or implementation controllers. A requirement is a modeling boundary, not a code module or implementation ticket. Ticket scope follows complete, meaningful changes, including necessary atomic changes across children.
+The root entry is the sole whole-effort definition/index and implementation navigation entry. It identifies scope, child entries, governing sources and planned dependencies, not approval-record navigation, live scheduling or next actions. Child entries define scoped modeling and link their parent; their requirements and technical reviews have separate logs within that child directory. They own no separate ticket set, implementation controller, or delivery summary. A requirement is a modeling boundary, not a code module or implementation ticket. Ticket scope follows complete, meaningful changes, including necessary atomic changes across children.
 
 Document authority is explicit:
 
@@ -76,13 +77,13 @@ Document authority is explicit:
 - `architecture.md`: approved overall technical topology, shared constraints/contracts, and cross-child collaboration/verification requirements, authored through `clarify-architecture`.
 - Child `requirements.md` and `technical.md`: complete scoped models under the existing respective standards. Cite applicable parent definitions, with one owner per decision; references must supply the actual required content, not conceal gaps.
 
-Root `issue.log.md` holds root-model/package, ticket-set, and whole-implementation records; each child log holds its model-stage records. Actual implementation/repair records stay with root tickets. One controller owns shared root writes; a delegated model author writes only its assigned child artifacts and returns parent updates. All models remain clean and all records obey the shared lifecycle below. Create `change.md` only when needed at its governing work scope; later separately authorized changes keep their own work identity and reference affected original authorities.
+Root model/package reviews stay with their respective root object, child model reviews with that child's respective object, ticket-plan reviews with root `tickets.review-fix-decisions.log.md`, and whole implementation reviews with root `implementation.review-fix-decisions.log.md`. Actual single-ticket repairs stay with that root ticket's review log. One controller owns root definition writes; delegated model authors write only assigned child artifacts and return proposed parent changes. Create `change.md` only at its governing work scope; later separately authorized changes keep their own work identity and reference affected original authorities.
 
-Every dispatch/resume identifies the checkout, effort root, assigned entry/output paths, parent references, authorized stage/scope, and record writer. Child work must reuse that assignment, not derive another top-level slug. Read relevant current parent sections and essential dependencies without importing the entire effort history. Hierarchy never grants permission to write another owner's files or to publish private artifacts.
+Every dispatch/resume identifies the checkout, effort root, assigned definition/model or ticket, review-record paths, parent references, authorized stage/scope, and each writer. Child work reuses that assignment, not another top-level slug. Read applicable parent sections and essential dependencies, not the whole effort history. Hierarchy grants neither another owner’s write permission nor publication permission.
 
 ### Hierarchical source packages and handoffs
 
-The root entry identifies each package's exact scope, source paths/sections and verifiable revisions, applicable review/approval records, and unresolved/excluded scope. This is index data, not another manifest file or a copy of source definitions. Store revision bindings in the entry/approval records; model links identify owning paths/sections rather than embedding mutually recursive digests. Child entries cite the relevant package and its sources. Apply the shared non-normative metadata convention to navigation/status-only updates; changed package membership, scope, or governing obligations are substantive changes, not exempt index edits.
+The root entry identifies each package’s exact scope, source paths/sections and verifiable revisions, and unresolved/excluded scope. This is specification index data, not another manifest or an approval registry. Approval evidence belongs to the reviewed object’s log and, where applicable, model metadata; consumers resolve it through the object mapping above, not a second entry-file index. Store source revision bindings in the entry and the applicable review records; model links identify owning paths/sections rather than embedding mutually recursive digests. Child entries cite the relevant package and its sources. Apply the shared non-normative metadata convention to navigation/status-only updates; changed package membership, scope, or governing obligations are substantive changes, not exempt index edits.
 
 For the authorized scope, the route is `wayfinder` → `clarify-requirements` (shared and child models) → `clarify-architecture` → `clarify-technical-design` (children) → `split-tickets` → `implement`/`implement-unit`. Modeling and ticket planning use their authoring standards, independent review and explicit applicable human approval. Implementation retains its unit-review and whole-scope acceptance gates, with no delegated-unit human gate. Loading or approving a stage does not execute the next one.
 
@@ -92,21 +93,29 @@ These gates apply to explicitly authorized scope and its real dependencies, not 
 
 Conflicts return to the decision's owner: shared business rules to requirements, global technical guarantees to architecture, local realization to its technical model. A child cannot override a parent by exception notes. For approved-model changes use applicable change governance, synchronize current authorities and affected index links, and reassess affected descendants, tickets, and evidence before resuming. Preserve unrelated valid approvals with an explicit impact basis. Ordinary code nonconformance stays with the original implementation/review pair. Final combined verification, overall independent review and human acceptance belong to the root authorized delivery scope, not the sum of child statuses.
 
-## Clean authority and current state
+## Clean authority and progress
 
-Models/tickets express the complete current intended result. Integrate revisions into owning sections, with necessary background and actual deciding rationale; remove superseded statements and synchronize diagrams/references. No interview chronology, normative patch files, changelogs, override appendices, review reports, or execution diaries belong in canonical artifacts. Process logs are not normative patches.
+Models/tickets express the complete current intended result. Integrate conclusions, necessary background, original requirement evidence and actual rationale into owning sections; synchronize diagrams/references and remove superseded rules. Ordinary clarification answers belong here, not as interview entries in a review log. Preserve necessary attributed human quotations or other retrievable original evidence alongside the relevant rule without dumping the conversation. No normative patches, changelogs, override appendices, review reports, or execution diaries belong in canonical artifacts.
 
-Curate current entry/status fields and link governing records instead of duplicating conclusions. A log cannot change requirements, interfaces, topology, file responsibilities, approvals, or dependencies. Design changes return to the owning modeling gate and regain applicable review/approval before execution. Historical decisions are not competing current specifications.
+Definition entries link authoritative specifications, not approval records or copies of model conclusions. Neither ticket execution metadata nor review records may change requirements, interfaces, topology, file responsibilities, or planned dependencies. Return design changes to their owning modeling gate and regain applicable review/approval before execution. Historical decisions are not competing specifications.
 
-Keep known material pending decisions in `issue.md`, with their affected scope/model reference, missing human input or prerequisite, and next action or owning later stage. Reconcile this current list after each answer and before a pause/handoff; remove resolved or superseded entries while integrating conclusions into their owning models. Preserve unresolved parts of partial answers. This is recovery state, not an exhaustive questionnaire, a second specification, or a substitute for review findings. Apply `ask-with-context`'s continuation rules within the authorized stage.
+### Progress and resumption
 
-On resumption, read `issue.md`, relevant current models/tickets, open findings, and latest applicable decisions/evidence; consult older history only as needed. Reconcile actual checkout/code, approvals, prerequisites, and role availability. Stored status or retained context is not proof. Restore implementation roles under IMPLEMENTATION.md; model reviewers remain fresh per round.
+Modeling and ticket planning create no state file. Keep material unresolved decisions beside their affected model rules or ticket-definition sections; integrate each settled answer and its necessary rationale/evidence there. Reconcile remaining decisions after every answer and before handoff under `ask-with-context`, without an exhaustive questionnaire, interview diary, or duplicate decision queue. A deferred decision identifies its owner and where it blocks the current scope.
+
+Implementation progress belongs to the existing ticket, in one compact non-normative execution block: current status, current blocker if any, bound implementation/reviewer handles, and applicable review/evidence references. Use the project’s status vocabulary or distinguish pending, implementing, in review, passed, and blocked. Update these fields in place; keep completed tickets, not a second step checklist or chronological history. Passed means current independent conformance, not source approval, whole-result acceptance, or a replacement for actual verification.
+
+The controller reads ticket status, planned dependencies, actual incorporated code, and applicable verification/review evidence to determine readiness. It maintains no duplicate global status ledger. Direct implementation has no synthetic ticket or state record: use the approved change package, actual code, and its implementation review evidence. Session-local todos may guide execution, but do not become another durable artifact or completion authority.
+
+Bind original implementation/reviewer roles using ticket execution metadata and the harness’s resumable context. When no ticket exists, the existing implementation review log may carry a compact identity header for its work scope and bound roles; this is review ownership metadata, not a fifth log event or a place for progress, next actions, or blockers. Record later authorized role replacement with the affected review submission and basis. No new role registry is needed.
+
+On resumption, use `issue.md` for specification navigation, then the governing models/tickets and applicable review records. Reconcile unresolved decisions, actual checkout/code, approvals, prerequisites, evidence and role availability; stored status is not proof. Restore implementation roles under IMPLEMENTATION.md; model reviewers remain fresh per round. Reconstruct only from available evidence, report what is missing, and never infer completion from lost context. A blocker is made explicit in its owning model, ticket or actual review report as applicable; report other execution blockers in the handoff without inventing a persistence file.
 
 ## Review records and finding lifecycle
 
-The reviewer returns the core fields below plus the stage reviewer contract's coverage and verdict requirements. The controller preserves each actual report in the owning log; standalone authors perform this duty. Shared work-level records have one controller writer. Delegated implementers supply entries or write only an explicitly assigned exclusive unit log.
+The reviewer returns the core fields below plus its stage contract's coverage/verdict requirements. The assigned writer preserves every actual report in the reviewed object's `.review-fix-decisions.log.md` before repair or advancement. A log accepts only four event types: review submission with its basis/evidence, reviewer outcome, finding-linked repair decision/evidence, and corresponding explicit human approval/acceptance. No routine investigation, interview, implementation progress, or miscellaneous decision entries. Follow the object mapping and single-writer rule above.
 
-Every report/record identifies:
+Every reviewer report identifies:
 
 - Stage/unit, round, date, reviewer, and exact reviewed artifact/code basis.
 - Governing standards and applicable approved sources.
@@ -119,18 +128,21 @@ For every blocker, identify the affected checks and the evidence, access, or dec
 
 Authors mark repairs `addressed, awaiting review`, never self-close findings. Disputes stay open with counter-evidence until independent correction/withdrawal; genuine upstream design disputes return to modeling. Only an applicable independent assessment establishes closure. Preserve historical outcomes and update applicability; new evidence may reopen findings. Pass requires no unresolved findings/blockers and is not human approval/acceptance. Obtain correction of incomplete, stale, or inconsistent reports rather than rewriting them into Pass.
 
-## Implementation and repair records
+## Review submissions and fix decisions
 
-In the existing unit log, or root log for direct work, record meaningful implementation results and repair batches with:
+Before review, preserve the identified submitted result, governing sources and applicable approved basis, original requirement evidence, and actual verification/evidence limits in the object's review log. An initial clean implementation still has a review submission and outcome; it does not need invented findings or a development diary. Later repair submissions cite the affected finding IDs and fresh evidence. Reuse durable evidence by exact reference rather than copying it across objects.
 
-- Objective/acceptance obligations or finding IDs.
-- Resulting behavior/structure and changed owners, not tool-call inventories.
-- Handling decision, necessary background, and key rationale. Trivial conformance repairs need only a concise explanation; non-obvious ones need enough context for an unfamiliar reviewer, not private reasoning.
-- Whether the work stays within approved design; otherwise the blocker and subsequent approved upstream decision. A repair record grants no authority.
-- Exact checks/scenarios, actual outcomes, environment/participants/substitutions, and applicable code basis. Distinguish planned, executed, failed, and passed. Preserve important output/assertions and limits locally; retain large raw artifacts only when necessary, referenced and redacted in the work directory.
-- Remaining issues, pending review, and next action/handoff.
+Every repair decision records:
 
-Link findings, handling, evidence, and disposition. Do not duplicate definitions, invent evidence, transcribe every tool call, or defer records until delivery. Clean implementation still records its result and verification even without findings.
+- The existing finding ID(s), violated obligation, and affected scope.
+- The author's chosen correction, necessary background, decisive rationale, and material consequences/tradeoffs. Explain meaningful autonomous decisions so the human can assess them; trivial conformance corrections need only a concise explanation.
+- Whether the correction conforms to the approved design. If not, record the conflict and owning upstream referral, then await the applicable approved resolution; do not authorize redesign in the log.
+- The resulting change and exact checks/scenarios, actual outcomes, environment/participants/substitutions, and code/source basis. Distinguish planned, executed, failed and passed; preserve important evidence locally and link large necessary redacted artifacts.
+- The subsequent reviewer disposition, tied to the same finding and reviewed basis. Until that exists the correction remains `addressed, awaiting review`.
+
+No repair entry without an existing review finding: ordinary implementation progress belongs nowhere in this log. Ticket progress stays in the ticket; unresolved modeling decisions, settled design and rationale stay in their owning canonical sections. If a finding requires an upstream change, keep its originating conflict/referral here and the actual design revision/review in the upstream object’s records; link the approved resolution back rather than copying the discussion. A human-requested model change with no existing review finding follows modeling and a new review submission, not an invented repair finding.
+
+When presenting a reviewed result, explicitly surface consequential autonomous repair decisions and link their records; merely saying `Pass` or burying decisions in a long file does not make them visible to the human. Do not introduce per-ticket human gates into delegated implementation.
 
 ## Revision, approval, and transition integrity
 
@@ -141,12 +153,20 @@ Dispatch packages need not be copied wholesale, but essential source identities,
 Persist before advancing:
 
 1. Save every returned review, including failed/blocked outcomes, before repair or gate advancement.
-2. Save implementation/repair decisions and fresh evidence before requesting review.
-3. Save reviewer disposition and update state before scheduling dependents or handing off.
-4. Before blockers, role replacement, or session/stage handoff, update recovery basis, open issues, evidence, roles, and next action.
-5. Save explicit human approval/acceptance with exact scope/basis and a faithful quotation or durable decision reference. Never invent consent or treat approval of an idea, proposed fix, or upstream model as approval of an unreviewed downstream result.
+2. Save the review submission's result and evidence, or finding-linked repair decisions and fresh evidence, before requesting review.
+3. Save reviewer disposition and update the ticket’s execution status, when a ticket exists, before scheduling dependents or handing off.
+4. Before a blocker or session/stage handoff, ensure the owning model’s unresolved decisions, ticket status, and actual review findings are current where applicable. Carry the relevant basis, blocker and bound-role references in the handoff; create no recovery snapshot or work diary.
+5. Save explicit human approval/acceptance in the corresponding object’s review log, with exact scope/basis and a faithful quotation or durable decision reference. Link it from model metadata or the delivery summary where applicable, not from `issue.md`. Never invent consent or treat approval of an idea, proposed fix, or upstream model as approval of an unreviewed downstream result.
 
 Source/code changes invalidate affected evidence, review, and acceptance under the stage standard; retain history and update applicability. Ticket Passes do not constitute an independent overall verdict. A direct full-change Pass is already its final independent review: recording introduces neither duplicate review nor per-ticket human approval.
+
+## Existing workspace cutover
+
+When resuming a workspace with mixed `issue.md`, `issue.log.md`, generic unit `.log.md`, or legacy global/object state files, inspect before writing. Classify existing content by owner: specification navigation stays in the entry; current ticket execution facts move into the ticket’s metadata; unresolved modeling decisions and applicable normative answers integrate into their owning sections under existing approval rules; original review reports, finding-linked repair decisions, verification submissions and approvals move to the respective review logs. Recover no-ticket role bindings in the existing implementation review identity header. Other obsolete progress stays read-only legacy material, not a new active file. Remove approval navigation from the entry only after its evidence remains accessible through the owning model metadata or object review log. Do not rename a mixed log or state file wholesale, or turn its investigation/interview diary into new log entries.
+
+Preserve original finding IDs, rounds, actual verdicts, reviewed identities, approval scope and necessary evidence/provenance; map old references to the new owned records and verify links before switching active readers/writers. Unknown ownership, missing evidence or conflicting authority blocks only the affected migration/approval, never justifies fabricated closure. Do not assume a substantive model/index rewrite is metadata-only or retain an approval for a changed basis without assessment.
+
+Stop writing legacy catch-all files after cutover; retain no compatibility aliases or dual-write paths. Before rewriting a mixed entry, preserve its original bytes in the excluded workspace at `legacy/<source-digest>/<original-relative-path>` when otherwise-unmigrated history or approval evidence would be lost; never overwrite a different original snapshot. These are read-only migration sources, not active records or competing authority. Keep unmigrated historical material read-only until necessary evidence is preserved and deletion is authorized. Migration does not authorize deleting private history, silently rewriting old reports, or changing unrelated workspaces. No new migration diary is required.
 
 ## Final delivery summary and retention
 

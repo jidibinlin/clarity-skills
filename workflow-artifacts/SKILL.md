@@ -1,11 +1,11 @@
 ---
 name: workflow-artifacts
-description: Shared reference for private workflow storage, records, recovery, and delivery summaries. Load for authoring, coordinating, reviewing, or resuming this suite's work; loading it does not execute a workflow.
+description: Shared reference for private definitions, ticket progress, review-fix decision records, resumption, and delivery summaries. Load for authoring, coordinating, reviewing, or resuming this suite's work; loading it does not execute a workflow.
 ---
 
 # Workflow Artifacts
 
-Every role must read the complete [WORKFLOW-ARTIFACTS.md](WORKFLOW-ARTIFACTS.md) before starting or resuming its work. Authors use this and the applicable stage standard to guide generation; reviewers use the same criteria. This reference owns no execution: workspace setup, writing, dispatch, and approval belong to the authorized consuming stage. Reviewers remain read-only.
+Every role must read the complete [WORKFLOW-ARTIFACTS.md](WORKFLOW-ARTIFACTS.md) before starting or resuming its work. Apply its artifact ownership and review-record admission rules when choosing any write destination: model decisions stay in their owning sections, execution progress stays in existing tickets, and no separate state/progress artifact is created. Do not treat the work entry or review logs as general process storage. Authors use it and the applicable stage standard during generation; reviewers assess the same rules. This reference owns no execution: workspace setup, writing, dispatch, and approval belong to the authorized consuming stage. Reviewers remain read-only.
 
 ## Loading skills and their resources
 
@@ -21,4 +21,4 @@ Reuse complete current supplied standards, or read verified resource locations i
 
 The **skill root** contains read-only instructions, including when globally installed, symlinked, or cached. The **project root** is the actual target checkout: resolve code, commands, project links, Git exclusion, and `.scratch/<work-slug>/` there. Loading skills does not change the working directory or authorize writing into their installation. Reconcile both roots on resumption.
 
-Each dispatch supplies the target checkout/work identity, governing skill owners, complete current required content or verified readable locations, and the authorized role and execution/reference-only mode. Fresh contexts must not infer paths, inherit an assumed working directory, or treat access as write permission. Applicable authoring standards must reach the worker before its decisions and edits, not only its reviewer.
+Each dispatch supplies the target checkout/work identity, assigned model or ticket and review-record paths and writers, governing skill owners, complete current required content or verified readable locations, and the authorized role and execution/reference-only mode. Fresh contexts must not infer paths, inherit an assumed working directory, or treat access as write permission. Applicable authoring standards must reach the worker before its decisions and edits, not only its reviewer.
