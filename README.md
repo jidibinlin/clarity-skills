@@ -13,7 +13,7 @@ The executable rules live in the skills, not this README:
 
 ## Shared questioning
 
-[ask-with-context](ask-with-context/SKILL.md) is a self-contained communication skill: establish the background and causal understanding needed to decide, then choose focused diagrams, comparable tables, or prose before asking. After each answer, its continuation loop advances remaining material decisions rather than ending at an acknowledgement. It introduces no artifact layout or approval process and can be used outside engineering workflows. The five clarification stages explicitly apply it before questions and after answers; their scope and gates remain authoritative.
+[ask-with-context](ask-with-context/SKILL.md) is a self-contained communication skill with a mandatory per-question protocol. Background-dependent decisions visibly connect context and impact, genuine options and tradeoffs, and the exact decision needed, using focused diagrams, comparable tables, or prose. Simple factual questions remain concise. After each answer, its continuation loop advances remaining material decisions rather than ending at an acknowledgement. It introduces no artifact layout or approval process and can be used outside engineering workflows. The five clarification stages require its pre-send check for initial questions, follow-ups, resumed work, and repairs; their scope and gates remain authoritative.
 
 Its model-facing description permits discovery after registration; it does not guarantee always-on activation. Explicit caller references provide the suite-level requirement. This repository does not install it, change global instructions, or enable it by default in the harness.
 

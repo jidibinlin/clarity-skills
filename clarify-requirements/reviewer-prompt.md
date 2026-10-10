@@ -25,7 +25,7 @@ Read the entire current assigned model/package and apply every applicable REQUIR
 
 Distinguish checks you performed, checks supported by current supplied evidence, and unverified claims. On re-review, independently dispose of previous findings and review the full assigned model/package for regressions; claimed repairs do not restrict scope or close findings. Reconcile source changes and the applicability of prior review/approval evidence under WORKFLOW-ARTIFACTS.md.
 
-Use the shared finding requirements. Enforce explicit obligations even when a defect appears small, but do not block on wording preferences or extra detail without a concrete comprehension or implementation consequence. Judge requirements, not a preferred technical solution; identify genuinely missing human decisions instead of making them.
+Use the shared finding requirements. Enforce explicit obligations even when a defect appears small, but do not block on wording preferences or extra detail without a concrete comprehension or implementation consequence. For each substantive requirement, locate its explicit acceptance conditions and necessary scenarios in the owning body section and apply **Keep acceptance with its requirement** from REQUIREMENTS-MODEL.md; failure is a required correction, not a wording preference. Judge requirements, not a preferred technical solution; identify genuinely missing human decisions instead of making them.
 
 ## Result
 

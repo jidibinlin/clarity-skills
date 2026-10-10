@@ -7,11 +7,11 @@ description: Use before asking a user for a consequential decision or clarificat
 
 Make the user ready to decide before asking them to decide. The user should not need several follow-up turns to recover the background, decode terms, or discover consequences that the agent already knows.
 
-This self-contained skill owns question preparation and communication, not a workflow stage. It needs no other skill, repository, artifact directory, reviewer, or approval process. Apply it within the active task's authorization and language. Reference-only loading provides guidance without starting an interview. Consuming skills retain their scope, investigation, recording, verification, and approval rules; an answer to a question does not approve a later artifact or authorize execution.
+This self-contained skill owns question preparation and communication, not a workflow stage. It needs no other skill, repository, artifact directory, reviewer, or approval process. Apply it within the active task's authorization and language. Reference-only loading provides guidance without starting an interview. Consuming skills retain their scope, investigation, recording, verification, and approval rules; an answer to a question does not approve a later artifact or authorize execution. Applying steps 1–4 is mandatory before every substantive question, including follow-ups, resumed work, and questions after repairs; apply step 5 after each answer. Having loaded this skill is not evidence that a question complies.
 
 ## 1. Decide whether to ask
 
-Identify the unresolved decision and what different answers would materially change. Use accessible evidence, confirmed answers, and applicable conventions first; do not ask the user to rediscover repository facts or choose incidental details. Disclose inaccessible evidence rather than inventing it. Ask when missing human knowledge, preference, or authority actually changes the answer. A contradiction with an established obligation calls for correction, not a vote to ignore it.
+Identify the unresolved decision and what different answers would materially change. Use accessible evidence, confirmed answers, and applicable conventions first; do not ask the user to rediscover repository facts or choose incidental details. Disclose inaccessible evidence rather than inventing it. Ask when missing human knowledge, preference, or authority actually changes the answer. A contradiction with an established obligation calls for correction, not a vote to ignore it. Distinguish a risk from an agreed guarantee and a possible mitigation from a required mechanism: identifying a failure possibility does not authorize adding recovery capabilities or expanding scope. Establish the required outcome before asking how to achieve it.
 
 Prioritize uncertainty that changes the current understanding or enables other decisions. Ask one focused question or a short group of independently answerable questions; defer dependent choices. Do not enumerate a decision tree or turn a completeness checklist into a questionnaire. A sufficiently specified request may need no questions.
 
@@ -46,11 +46,17 @@ Tables must compare genuinely comparable options using consistent dimensions, co
 
 A diagram may explain an interaction while a table compares its consequences, but each must contribute something distinct. Put each idea in its clearest form once. Text supplies missing context, non-obvious consequences, decisive rationale, and the question—not a line-by-line transcription of the visual. If the interface cannot display a useful visual, provide an equivalent readable explanation and disclose the limitation rather than relying on an unseen image.
 
-## 4. Ask the decision, not for a vague reaction
+## 4. Required question format and pre-send check
 
-Offer genuine alternatives with concrete consequences when alternatives exist. Recommend one only with its actual deciding evidence or constraint; expose the tradeoff rather than steering through loaded labels or omitted costs. A missing fact may need a direct question instead of fabricated choices. Ask exactly what human judgment is needed, not whether the whole explanation “looks good.”
+For a decision that depends on background or involves consequential alternatives, use visibly labeled blocks in the user's language, in this order:
 
-Before sending, check whether a user who has not read the agent's source material or participated in its private deliberation can understand why the question exists, what it decides, and the main consequences from this explanation and established shared context. Repair missing causal links before asking. This is an author check, not a separate user gate or mandatory set of headings.
+- **Context and impact:** present the concrete situation and causal explanation from step 2, with the representation chosen in step 3. When proposing a change, make current behavior, the candidate change, and its observable consequences explicit. Explain what changes hands, moves, or completes differently instead of naming a mechanism and expecting the user to infer its meaning.
+- **Options and tradeoffs:** compare genuine alternatives by their concrete outcomes and costs. Recommend one only with its actual deciding evidence or constraint. Distinguish different failure points or ownership boundaries before discussing their remedies; do not bundle unrelated problems into one implementation choice.
+- **Decision needed:** ask exactly which unresolved judgment is needed now. Defer dependent choices; do not ask for a vague reaction to the whole design.
+
+A simple factual clarification can use concise prose. Omit the alternatives block when asking for a missing fact, rather than fabricating options; necessary context and a precise question still apply. Visible structure must carry the explanation, not empty headings, jargon, or a mandatory tutorial.
+
+Before sending, check the actual outgoing question, not your private understanding: can the user explain the situation, the specific decision, and the main consequences using this message and demonstrated shared context? Are facts distinguishable from candidates, separate problems distinguishable from each other, and the needed diagram or comparison present? If not, rewrite before asking. This is a mandatory author check, not a request for the user to approve the explanation. If the user reports confusion, repair the missing relationship under step 5 instead of repeating the options or claiming that the skill was followed.
 
 If using a structured question/choice widget, present necessary context and visuals before it; short option labels do not replace the explanation. Wait for the answer. A request for explanation is not a selection, and silence is not consent.
 

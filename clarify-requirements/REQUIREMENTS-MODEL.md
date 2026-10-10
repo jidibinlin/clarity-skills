@@ -34,7 +34,7 @@ Cover the following wherever they apply. These are coverage obligations, not man
 - **Scope:** what this change includes and excludes, what existing behavior must remain unchanged, and which external participants or capabilities it depends on.
 - **Concepts and relationships:** the meanings, distinctions, relationships, and ownership needed to interpret the requirement. Reuse established terms with the same meaning.
 - **Behavior and rules:** triggers, preconditions, expected results, constraints, invariants, exceptions, and prohibited behavior. Include states and transitions where the requirement has a lifecycle.
-- **Concrete scenarios:** examples that establish the expected behavior, including relevant normal, boundary, and failure cases. Scenarios must make important rules verifiable, not merely restate that the feature works.
+- **Acceptance conditions and scenarios:** explicitly identify observable acceptance conditions for each substantive requirement, with concrete normal, boundary, or failure scenarios where needed to establish its meaning. Apply **Keep acceptance with its requirement** below.
 - **Decisions and unresolved questions:** confirmed choices, their necessary rationale, and the facts or choices still missing. Explain the effect of an unresolved question on the rest of the model.
 
 Separate observed current behavior from required future behavior. The existing code is evidence of the former, not automatic authority for the latter. Investigate facts available in the repository or other accessible sources rather than asking the human to retrieve them.
@@ -52,6 +52,14 @@ The reader must be able to identify who acts, what they act on, how the relevant
 Introduce necessary vocabulary where readers can understand it. Reuse a precise existing term; add a new term only when it names a meaningful distinction. A cluster of unexplained nouns is not a model. Keep each rule and its essential context together, with links for genuinely shared background.
 
 Mermaid diagrams expose this structure; they do not excuse fragmented prose. During review, check that a reader can explain the main flow and concept relationships from the model, not merely recognize individual terms or follow a record of what was discussed. Preserve the rationale needed to assess a decision, not the chronology of how the conversation reached it.
+
+### Keep acceptance with its requirement
+
+Each substantive requirement must explicitly state how to establish that it is satisfied in the body section that owns its behavior. Use a visible **Acceptance criteria** label or subheading (or the document-language equivalent, such as **验收标准**) beside the rules it verifies, stating the relevant preconditions or actions and observable expected results. Ordinary descriptive prose or examples without this explicit marker do not satisfy the requirement. Use concise prose, bullets, or a local table under the marker as appropriate; do not create a repetitive form for every sentence. Necessary background and rationale stay with the same requirement.
+
+Integrate explanatory and acceptance scenarios into their owning requirement sections. Cross-flow acceptance belongs in the body of the end-to-end business flow it verifies, alongside that flow and its rules. Preserve meaningful boundaries, numbers, and failure outcomes when integrating scenarios; remove redundant restatements rather than losing acceptance coverage.
+
+Do not collect acceptance conditions or scenarios into a detached checklist, final acceptance chapter, or appendix, even when they link back to the requirements or duplicate conditions already stated there. A scenario list is not a second specification. Stable identifiers may support downstream references, but do not replace explicit local acceptance conditions. A reader must be able to review a requirement and its acceptance basis together, without assembling them from a separate list.
 
 ### Scale explanation to background dependence
 
@@ -145,7 +153,7 @@ Apply all criteria below during authoring and independent review. The execution 
 1. **Faithfulness:** important confirmed requirements are neither omitted, weakened, nor expanded without agreement. Pay particular attention to numbers, ordering, prohibitions, and exceptions.
 2. **Clarity and structure:** different implementers should not have to guess at material business choices or infer them from vague wording. The model makes the main flow and concept relationships understandable, with connected explanations rather than terminology piles or a chronological discussion log.
 3. **Consistency and clean integration:** concepts, rules, scenarios, and diagrams agree. Current facts and desired changes are distinguishable. The canonical text incorporates every applicable correction; no patch, changelog, revision log, override addendum, or obsolete conflicting rule remains in the deliverable.
-4. **Verifiability:** concrete scenarios or observable conditions can establish whether the key rules hold.
+4. **Verifiability:** each substantive requirement has explicit, observable acceptance conditions and necessary scenarios satisfying **Keep acceptance with its requirement**. Missing or detached acceptance is a delivery defect, not an optional presentation improvement.
 5. **Reviewability:** background-dependent points contain enough context and actual rationale for a human to assess them. Sources and inherited decisions are accessible where needed.
 6. **Handoff completeness:** an agent unfamiliar with the conversation can understand the requirement from the model and its explicit references.
 7. **Diagram verification:** Mermaid diagrams have been rendered and inspected, and their conditions, paths, terminology, and scope match the prose. Report any verification limitation.
