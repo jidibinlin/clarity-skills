@@ -4,7 +4,7 @@ Read this complete standard before starting/resuming any author, controller, imp
 
 ## Repository-local private workspace
 
-Use `<repository-root>/.scratch/<work-slug>/` for one bounded requirement/change across stages and sessions. Inspect supplied paths and existing work before choosing a slug; state the path. Ask only when genuinely distinct efforts remain ambiguous. A new session does not create a new work identity.
+Use `<repository-root>/.scratch/<work-slug>/` for one work identity across stages and sessions: a bounded standalone requirement/change, or an overall effort with scoped children under the heavyweight layout below. Inspect supplied paths and existing work before choosing a slug; state the path. Ask only when genuinely distinct efforts remain ambiguous. A new session does not create a new work identity.
 
 New workflow artifacts belong here, not in `docs/`, personal folders, or remote trackers. Changing this policy requires explicit user direction, not an inherited example. Existing authoritative project documents may stay in their owning locations: reference and synchronize approved sections rather than duplicate, relocate, or untrack them. Approved product-documentation changes are distinct from private records.
 
@@ -43,6 +43,54 @@ Create only files needed by the route and current stage:
 - `delivery.md`: implementation summary after required verification and independent Pass, before final human acceptance. Delegated units return to their controller without whole-work summaries. Standalone tickets summarize only their reviewed scope and preserve any broader summary. Planning produces no delivery summary.
 
 Use relative artifact links and stable heading/finding anchors. Code paths are checkout-relative; identify different checkouts explicitly. Temporary tool output/agent handles cannot replace durable essential content. Exclude secrets, credentials, private reasoning traces, and raw conversation dumps.
+
+### Heavyweight work: one effort, scoped models, one ticket set
+
+For a Wayfinder-led effort, extend the same excluded work root; standalone lightweight work keeps the flat layout above:
+
+```text
+.scratch/<effort>/
+├── issue.md
+├── issue.log.md
+├── wayfinder.md
+├── requirements.md
+├── architecture.md
+├── requirements/
+│   └── 01-<requirement>/
+│       ├── issue.md
+│       ├── issue.log.md
+│       ├── requirements.md
+│       └── technical.md
+├── issues/
+│   ├── 01-<ticket>.md
+│   └── 01-<ticket>.log.md
+└── delivery.md
+```
+
+The root entry is the sole whole-effort index and later implementation controller entry. It identifies the authorized scope, child entries, governing sources, applicable gates, dependencies, and next handoff. Child entries track scoped modeling/recovery and link their parent; they do not own separate ticket sets or implementation controllers. A requirement is a modeling boundary, not a code module or implementation ticket. Ticket scope follows complete, meaningful changes, including necessary atomic changes across children.
+
+Document authority is explicit:
+
+- `wayfinder.md`: coarse requirement decomposition, its rationale, tentative dependencies/topology, and unresolved exploration. Approval permits scoped clarification, not architecture or implementation. As formal models settle an estimate, replace it with a precise reference; the map is not a competing specification.
+- Root `requirements.md`: shared domain meanings, cross-child rules and business flows, and exact child references. It composes the requirement model, rather than concatenating children.
+- `architecture.md`: approved overall technical topology, shared constraints/contracts, and cross-child collaboration/verification requirements, authored through `clarify-architecture`.
+- Child `requirements.md` and `technical.md`: complete scoped models under the existing respective standards. Cite applicable parent definitions, with one owner per decision; references must supply the actual required content, not conceal gaps.
+
+Root `issue.log.md` holds root-model/package, ticket-set, and whole-implementation records; each child log holds its model-stage records. Actual implementation/repair records stay with root tickets. One controller owns shared root writes; a delegated model author writes only its assigned child artifacts and returns parent updates. All models remain clean and all records obey the shared lifecycle below. Create `change.md` only when needed at its governing work scope; later separately authorized changes keep their own work identity and reference affected original authorities.
+
+Every dispatch/resume identifies the checkout, effort root, assigned entry/output paths, parent references, authorized stage/scope, and record writer. Child work must reuse that assignment, not derive another top-level slug. Read relevant current parent sections and essential dependencies without importing the entire effort history. Hierarchy never grants permission to write another owner's files or to publish private artifacts.
+
+### Hierarchical source packages and handoffs
+
+The root entry identifies each package's exact scope, source paths/sections and verifiable revisions, applicable review/approval records, and unresolved/excluded scope. This is index data, not another manifest file or a copy of source definitions. Store revision bindings in the entry/approval records; model links identify owning paths/sections rather than embedding mutually recursive digests. Child entries cite the relevant package and its sources. Apply the shared non-normative metadata convention to navigation/status-only updates; changed package membership, scope, or governing obligations are substantive changes, not exempt index edits.
+
+For the authorized scope, the route is `wayfinder` → `clarify-requirements` (shared and child models) → `clarify-architecture` → `clarify-technical-design` (children) → `split-tickets` → `implement`/`implement-unit`. Modeling and ticket planning use their authoring standards, independent review and explicit applicable human approval. Implementation retains its unit-review and whole-scope acceptance gates, with no delegated-unit human gate. Loading or approving a stage does not execute the next one.
+
+Shared and child requirements may be clarified iteratively against confirmed constraints and explicit hypotheses; do not create a parent/child approval deadlock. Before formal architecture, review/approve the current requirements package including cross-child consistency. Before child technical design, applicable requirements and overall architecture must pass their gates. Before ticketing, the package also needs the complete approved child technical designs and resolved shared realizations required by its scope. Local Passes alone do not establish package consistency. The requirements and ticket-set reviews assess their respective composition; do not add a duplicate generic package-review stage.
+
+These gates apply to explicitly authorized scope and its real dependencies, not every future idea. Unresolved detail outside that scope may remain in the map; a needed prerequisite cannot be relabeled as future work to pass a gate. Detailed production design belongs in the applicable technical models before ticketing, not in Wayfinder and not in implementation. A valid scoped change package remains an alternative basis without fabricated historical approvals.
+
+Conflicts return to the decision's owner: shared business rules to requirements, global technical guarantees to architecture, local realization to its technical model. A child cannot override a parent by exception notes. For approved-model changes use applicable change governance, synchronize current authorities and affected index links, and reassess affected descendants, tickets, and evidence before resuming. Preserve unrelated valid approvals with an explicit impact basis. Ordinary code nonconformance stays with the original implementation/review pair. Final combined verification, overall independent review and human acceptance belong to the root authorized delivery scope, not the sum of child statuses.
 
 ## Clean authority and current state
 

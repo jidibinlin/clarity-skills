@@ -11,7 +11,7 @@ Before starting/resuming or making scheduling choices, load `workflow-artifacts`
 
 ## 1. Establish the authorized route and execution basis
 
-Apply IMPLEMENTATION.md's approved-basis and route-validation gates. Read the full set and its approved source basis, or the entire direct change package and bounded-fit evidence, plus current approvals and execution authorization. Both routes use `.scratch/<work-slug>/issue.md`; only a ticket set uses it as an index. A direct change's path/revision is its identity, without fabricated tickets or historical prerequisites.
+Apply IMPLEMENTATION.md’s approved-basis and route-validation gates. Resolve supplied effort/child entries to the governing root `issue.md`; read the full global set and its selected flat/hierarchical/change source package, or the entire bounded direct change package, with current scope/approval evidence and execution authorization. Hierarchy uses one root controller and ticket set; child entries are model recovery, not new controllers. A direct change’s path/revision is its identity, without fabricated tickets or historical prerequisites.
 
 Inspect actual code, repository rules, prerequisites, target coverage, and verification facilities. Route source/design conflicts and scope expansion under the unit standard before proceeding. Establish ORCHESTRATION.md's shared execution basis, preserving user work, and verify the harness can retain/resume independent original roles. Missing capability is a blocker, not permission to silently replace roles.
 
@@ -36,7 +36,7 @@ Route demonstrated violations to the original implementer, then refreshed eviden
 Apply ORCHESTRATION.md's route-specific final gate:
 
 - **Direct change:** check that the original reviewer's full-change Pass and final combined runtime/regression evidence cover the entire current target. Return gaps to that pair; do not create another overall reviewer or repeat unchanged verification for duplicate review.
-- **Ticket set:** after all outputs are incorporated, establish complete composition and run current combined regression/macro-flow verification. Load [reviewer-prompt.md](reviewer-prompt.md) at first overall dispatch and send its full package to a separate independent overall reviewer. Retain that reviewer. Route integration repairs to original responsible implementers on current combined code, serialize repairs, renew affected unit reviews, then renew overall review. No catch-all cleanup author or aggregation of local Passes replaces this assessment.
+- **Ticket set:** after all outputs are incorporated, establish complete composition against the root selected scope and run current combined regression/macro-flow verification, including shared and cross-child obligations. Load [reviewer-prompt.md](reviewer-prompt.md) at first overall dispatch and send its full package to a separate independent overall reviewer. Retain that reviewer. Route integration repairs to original responsible implementers on current combined code, serialize repairs, renew affected unit reviews, then renew overall review. No catch-all cleanup author or aggregation of child/unit Passes replaces this assessment.
 
 ## 5. Request final human acceptance and stop
 

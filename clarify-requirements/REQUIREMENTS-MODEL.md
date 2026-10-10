@@ -6,15 +6,25 @@ This standard belongs to the `clarify-requirements` skill. Load that skill by na
 
 Produce a requirements and domain model that both a human reviewer and an implementing agent can use without reconstructing the original conversation. It defines what behavior is correct before deciding how to implement it.
 
-This is the shared authoring and review standard for the first stage of the lightweight workflow. Apply it throughout clarification and model construction, not just at the delivery gate. Independent review uses these same criteria. It also applies when a future heavyweight workflow delegates a bounded question with existing decisions and constraints. Reuse applicable prior decisions; clarify only what is missing, ambiguous, or contradictory.
+This is the shared authoring and review standard for standalone requirements and heavyweight shared/child requirements packages. Apply it throughout clarification and model construction, not just at the delivery gate. Independent review uses these same criteria. Reuse applicable prior decisions; clarify only what is missing, ambiguous, or contradictory.
 
-The model covers one bounded requirement or change. Reference established project knowledge instead of redescribing the whole system. Domain modeling clarifies the requirement through concepts, relationships, rules, and examples; it is not limited to a glossary and does not require inventing a concept for every noun.
+The model covers the selected requirement scope and its necessary interactions. Reference established project knowledge instead of redescribing the whole system. Domain modeling clarifies concepts, relationships, rules, and examples; it is not limited to a glossary and does not require inventing a concept for every noun.
 
 All skill instructions and companion standards are written in English. This language convention does not require the human conversation to be in English.
 
 ## Shared artifact contract
 
 Before starting or resuming any role, load `workflow-artifacts` by name and read all of `WORKFLOW-ARTIFACTS.md`. It owns storage, records, revision/approval identity, and transitions. [SKILL.md](SKILL.md) owns execution, artifact paths, and approval gates; this document owns requirements content and evidence criteria.
+
+## Shared and child requirements
+
+For heavyweight work, use the hierarchy and source-package rules in WORKFLOW-ARTIFACTS.md. The root model owns shared domain meanings, cross-child rules, and end-to-end business flows. Each child owns its scoped detail and cites applicable root definitions; a child boundary is neither a module boundary nor a ticket. Identify decision ownership explicitly and return conflicts to that owner rather than adding local exceptions.
+
+Compose, do not concatenate. Root sections may delegate detailed rules and scenarios by exact child path/section and current source identity, while explaining the shared relationships and end-to-end meaning. Every delegated obligation must be actually specified, accessible, and unambiguously owned. A reference to future detail, a generic directory, or a chain that leaves the rule undefined does not satisfy coverage. Preserve the same content and diagram quality in scoped children.
+
+Shared and child drafts may co-evolve against confirmed constraints and explicit hypotheses. Neither needs the other’s final approval to begin clarification. Before architecture, the selected composite package must pass this requirements review and explicit human approval together, including real prerequisites. Separate local reviews may support that work; they cannot substitute for package consistency and do not impose a second generic review ceremony. Future map ideas outside the authorized scope need no artificial completion or approval.
+
+In package authoring and review, trace every selected outcome and consequential cross-child scenario through the owning rules. Reconcile shared vocabulary, lifecycle/state meanings, cross-child preconditions and results, ordering, exceptions, coverage gaps, overlaps, and contradictory ownership. Include cross-child flow/scope diagrams where needed, linked to child detail, so no composition behavior must be guessed. Confirm both that child detail obeys shared rules and that shared rules can actually be realized by the composed requirements. Scope package conclusions explicitly; local Passes do not establish whole-effort closure.
 
 ## Required coverage
 
@@ -112,7 +122,7 @@ Give each diagram a clear subject and reading scope. Use an overview and focused
 
 Diagrams explain structure. Prose defines precise rules, background, rationale, and exceptions. Do not narrate every arrow again, and do not treat a diagram label as a complete rule definition.
 
-Whenever a requirement changes, update affected diagrams and prose together. Before delivery, actually render the Mermaid diagrams with an available renderer and inspect them for both rendering errors and misleading structure or labels. Successful parsing alone does not establish semantic correctness. If rendering is unavailable, explicitly report that verification gap rather than claiming the diagrams are verified.
+Whenever a requirement changes, update affected diagrams and prose together. Before delivery, actually render all required Mermaid diagrams and visually inspect them for rendering errors and misleading structure or labels. Successful parsing alone does not establish semantic correctness. Retain current renderings and inspection evidence for review. Unavailable rendering or visual inspection blocks the gate; report the affected check rather than claiming verification.
 
 ## Maintain the model during clarification
 
@@ -141,5 +151,6 @@ Apply all criteria below during authoring and independent review. The execution 
 7. **Diagram verification:** Mermaid diagrams have been rendered and inspected, and their conditions, paths, terminology, and scope match the prose. Report any verification limitation.
 8. **Open questions:** no unresolved question or unverified assumption silently determines a material behavior. Questions that prevent technical modeling from proceeding must be resolved before this stage is complete.
 9. **Private record integrity:** satisfy WORKFLOW-ARTIFACTS.md for records due at this gate, without demanding this review report or future human approval before they occur.
+10. **Composite consistency (heavyweight):** the selected shared/child package satisfies **Shared and child requirements**, with exact sources and scope, complete owned coverage, consistent meanings, and traceable cross-child flows. A child-only verdict is explicitly local and cannot authorize architecture.
 
 These criteria cover the complete current model, not only repaired passages. Review and human approval remain separate gates; the execution entry controls readiness, repair, resumed review, and handoff.

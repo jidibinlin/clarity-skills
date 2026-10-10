@@ -9,7 +9,7 @@ Before assessment, read all of [TICKETS.md](TICKETS.md) owned by `split-tickets`
 Receive the shared dispatch identity/access package plus:
 
 1. The complete current `.scratch/<work-slug>/issue.md` index and every `issues/NN-<slug>.md` ticket at an identifiable snapshot, not a diff, titles, or representative subset.
-2. TICKETS.md's exact route-appropriate approved source package, essential references, current approval evidence, and applicable human constraints/confirmations. Do not require historical documents absent from a valid change route.
+2. TICKETS.md’s exact route-appropriate approved source package, essential references, current approval evidence, and applicable human constraints/confirmations. For hierarchy, resolve the root selected scope and source identities, shared/child requirements, overall architecture, and complete applicable child technical designs; include cross-child dependencies and canonical owners, not unrelated history. Do not require absent historical documents on a valid change route.
 3. Relevant inspected repository evidence and actual verification facilities needed to judge scope, context burden, and intermediate states.
 4. Current planning-verification evidence, including checked references and any rendered dependency diagram with visual-inspection evidence or tools to inspect it. Future code/test results are neither required nor implied.
 5. Root `issue.log.md`'s applicable reviews/repairs, open findings and dispositions, recovery state, and shared exclusion evidence.
@@ -18,7 +18,7 @@ Receive evidence, not private author reasoning or instructions to endorse the pl
 
 ## Review the units and their composition
 
-Apply **all of TICKETS.md**, using its eight delivery-check categories to report coverage. Assess route eligibility, each unit's whole-cycle context fit, and the complete dependency/coverage walk. Source decisions and the standard—not a preferred planning methodology—govern conformance. No repository-wide redesign or invented token/file threshold.
+Apply **all of TICKETS.md**, using its eight delivery-check categories to report coverage. Assess route eligibility, each unit’s whole-cycle context fit, and the complete dependency/coverage walk. For hierarchy, assess cross-child contract consistency, shared realization/file ownership, atomic caller cutovers, and ownership/prerequisites of every selected integration flow across the one root set. Architecture alone or a collection of child Passes is insufficient. Source decisions and the standard—not a preferred planning methodology—govern conformance. No repository-wide redesign or invented token/file threshold.
 
 Re-review the complete revised set, not only repaired findings: splitting, removing, or reordering work can affect coverage and handoffs elsewhere. Apply the shared record/source-integrity criteria within reviewability. Only the reviewer confirms finding correction/withdrawal; the author records the report. Return production-design gaps through TICKETS.md's source route rather than prescribe new architecture. Distinguish demonstrated violations, unavailable evidence, and non-blocking preferences.
 

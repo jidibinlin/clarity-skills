@@ -13,9 +13,9 @@ Establish invocation mode under IMPLEMENTATION.md. Standalone: the current autho
 
 ## 1. Establish the executable work unit
 
-Apply IMPLEMENTATION.md's approved-basis and bounded-direct-fit gates. Read the route-appropriate approved source and exact essential references, current review/human-approval evidence, and execution authorization. Inspect affected code/callers, repository rules, facilities, and existing user changes; establish the current code basis and **actual usable prerequisite outputs**, not predecessor status alone.
+Apply IMPLEMENTATION.md’s approved-basis and bounded-direct-fit gates. Resolve supplied effort/child sources through the root entry; read the route-appropriate exact source revisions, applicable scope/review/human approvals and execution authorization. Load this unit’s precise shared/architecture/child references and necessary cross-child dependencies, not unrelated history. Inspect affected code/callers, repository rules, facilities, and existing user changes; establish the current code basis and **actual usable prerequisite outputs**, not predecessor status alone.
 
-Use `.scratch/<work-slug>/issue.md` for either route. The standalone author establishes the shared exclusion gate before writing; delegated workers use the controller's verified workspace and report failures. Recover current sources, evidence, findings, and original roles under the shared contract. A direct change uses its document path/revision, with no fabricated ticket/index or historical approvals.
+Use the resolved effort root’s `issue.md` for either route; a child modeling entry does not establish a separate implementation unit or controller. The standalone author establishes the shared exclusion gate before writing; delegated workers use the controller’s verified workspace and report failures. Recover current sources, evidence, findings, and original roles under the shared contract. A direct change uses its document path/revision, with no fabricated ticket/index or historical approvals.
 
 Return missing decisions, contradictions, stale required evidence, or unmet prerequisites through IMPLEMENTATION.md's design-boundary routes. Resume only on a valid renewed basis. Do not reopen settled choices, ask for recoverable repository facts, or shrink a direct change to force bounded fit.
 

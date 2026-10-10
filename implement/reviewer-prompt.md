@@ -10,7 +10,7 @@ Before assessment, read all of [ORCHESTRATION.md](ORCHESTRATION.md) owned by `im
 
 Receive the shared dispatch identity/access package plus:
 
-- Complete current `issue.md` index/tickets and the exact approved requirements/technical or change basis validated under IMPLEMENTATION.md, with essential references, current approval evidence, and execution authorization.
+- Complete current root `issue.md` index/tickets and its exact approved flat, hierarchical or change basis validated under IMPLEMENTATION.md, with selected scope, source identities, essential references, current approval evidence, and execution authorization. Hierarchy includes shared/child requirements, overall architecture and applicable complete child technical designs, not unrelated future map scope or full history.
 - Identified final combined code/change and necessary surrounding implementations/callers; actual prerequisites and the preserved-user-work boundary.
 - Ticket states, role/handoff records, unit Pass applicability, prior/open findings and repairs from root `issue.log.md` and relevant same-stem unit logs, and shared exclusion evidence.
 - Current actual combined regression/macro-flow results, environment/real-versus-substituted participants, target coverage, and verification limits—not only local Pass summaries.
@@ -19,7 +19,7 @@ For later rounds receive current code identity, intervening changes, finding dis
 
 ## Assessment
 
-Apply ORCHESTRATION.md's five whole-result categories and all applicable IMPLEMENTATION.md criteria. Inspect final composition across ticket boundaries; local Passes support but cannot replace this assessment. The approved target, requirements, repository rules, and execution standards govern findings, not personal architecture/style preferences.
+Apply ORCHESTRATION.md’s five whole-result categories and all applicable IMPLEMENTATION.md criteria. Inspect final composition across tickets and children against the root selected scope: shared guarantees, global architecture, contract/caller cutovers, real dependencies and all owned integration flows. Local Passes support but cannot replace whole-result assessment. The approved target, repository rules and execution standards govern findings, not personal architecture/style preferences.
 
 Classify findings under IMPLEMENTATION.md and identify affected approved owners/tickets for repair by the original implementers. Return upstream defects through its design-boundary routes rather than invent owners or replacement design. Reassess the complete current combined result and necessary interactions after repairs, including regressions outside previous findings. Check changed evidence applicability without demanding unrelated reruns or full historical conversations.
 

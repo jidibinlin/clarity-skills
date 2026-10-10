@@ -6,13 +6,13 @@ You review the complete change package read-only, not as its author, implementer
 
 Use a fresh independent context every full model-review round, separate from the author and earlier reviewers; unlike implementation, these roles are not retained across repair rounds. A role switch inside the author context is not independence. Receive the review package and governing instructions, not private author reasoning or endorsement instructions.
 
-Before starting or resuming, load `workflow-artifacts` by name and read its entire `WORKFLOW-ARTIFACTS.md`. Load `clarify-change` by name in reference-only mode and read all of `CHANGE-MODEL.md` and this contract, then load `clarify-technical-design` reference-only and read all the applicable sections imported by CHANGE-MODEL.md. Follow shared loading and dispatch rules for complete current supplied content or verified owner-qualified locations; never assume inherited standards/context. Missing required content blocks assessment. Do not execute the technical skill's initial-model workflow.
+Before starting/resuming, load named `workflow-artifacts` and its complete WORKFLOW-ARTIFACTS.md. Load `clarify-change` reference-only and all of CHANGE-MODEL.md/this contract, then `clarify-technical-design` reference-only for all applicable imported sections. When existing architecture governs affected work, also load named `clarify-architecture` reference-only and applicable ARCHITECTURE-MODEL.md criteria; use named `wayfinder` reference-only for affected map criteria. Apply the same standards used before author decisions, shared access/dispatch rules and missing-content blockers. These loads start no initial modeling workflows or historical approval prerequisites.
 
 ## Required package
 
 The controller supplies:
 
-- Target repository/checkout and work identity; the complete change model, resulting affected canonical sections, necessary surrounding context/references, and exact content identities. A patch or summary is insufficient.
+- Target checkout and governing work/root/child identities; complete change model, exact current source identities and resulting affected shared requirements, global architecture, child requirements/technical models and decomposition references where present, plus necessary cross-child context. A patch or summary is insufficient; unrelated archives are not required.
 - Original request and confirmed decisions with identifiable sources and enough context to preserve meaning; the model or author paraphrase alone cannot establish faithfulness.
 - Source/code/runtime baseline evidence and documentation gaps, plus current diagram renderings/inspection, reference, and feasibility evidence or read-only access to inspect it. Bare success claims are not verification.
 - `issue.md`, relevant `issue.log.md` reviews/repairs and previous findings, and workspace/source/approval evidence required by WORKFLOW-ARTIFACTS.md. Inspect record integrity read-only, assessing only records due at this gate.
@@ -23,7 +23,7 @@ Follow necessary accessible references; supplied artifacts and earlier reports a
 
 Apply every CHANGE-MODEL.md obligation and its imported technical criteria to the full package, using its nine delivery categories. Inspect each Changed/Unchanged/Unresolved assessment, concrete transformation, and resulting target; topology alone cannot establish unchanged sequences or ownership. Follow verified unchanged references and inspect reconstructed views where reliable references are absent.
 
-Trace changed and consequential preserved scenarios through the target and synchronized canonical owners. Distinguish observed behavior from confirmed intended behavior; a historical bug is not a requirement. Check actual evidence for concept reuse, transition integrity, and execution readiness against the selected route in SKILL.md. Do not demand synthetic tickets for direct work, fabricate historical approvals, or confuse target approval with implemented behavior.
+Trace changed and consequential preserved scenarios through target canonical owners, including cross-child guarantees, real prerequisites, callers and owned integration flows. Check root/child source-index synchronization, affected approval/unit/combined-evidence invalidation and the impact basis retaining unaffected work. Reject local override appendices; conflicts return to actual owners. Distinguish observed behavior from confirmed intent. Check concept reuse, transition integrity and route readiness; do not demand synthetic tickets, fabricated architecture history or a full heavyweight restart for bounded direct work.
 
 Use the imported technical standard for current verification and macro-flow planning, not an additional test checklist. Future detailed TDD need not exist; required current rendering or feasibility evidence cannot be waived for small scope. Distinguish your own checks, supplied evidence, and unverified claims.
 

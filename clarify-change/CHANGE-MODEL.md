@@ -17,9 +17,9 @@ Load `clarify-technical-design` by name in reference-only mode and read these co
 - **Overall workflow integration test plan**
 - **Consistency, evidence, and clean integration**
 
-They own technical content, first-pass constraints, macro-flow test planning, and verification. This document adds change-specific baseline, assessment, and synchronization requirements; [SKILL.md](SKILL.md) owns execution eligibility and gates. Neither import starts the initial technical workflow or requires its separate historical approvals.
+They own technical content, first-pass constraints, macro-flow planning and verification. When an existing overall architecture authority governs affected work, also load `clarify-architecture` by name reference-only and read applicable ARCHITECTURE-MODEL.md content criteria before investigation/decisions and review. Apply those criteria to affected global guarantees and collaboration without executing initial architecture gates. If affected decomposition remains in `wayfinder.md`, load `wayfinder` reference-only for its applicable map criteria; tentative estimates remain subordinate to formal models. This standard adds change-specific baseline, assessment and synchronization; [SKILL.md](SKILL.md) owns eligibility and gates.
 
-No prior requirements or technical model is assumed to exist. The change's confirmed requirements and target design may be contained in this one document. An independently reviewed and explicitly human-approved change package is a valid current design basis; historical approval records must not be fabricated to make it fit an initial-project workflow.
+No prior requirements, architecture or technical model is assumed. Confirmed requirements and target design may be contained in this scoped document. A reviewed and explicitly human-approved change package is a valid current basis: do not fabricate architecture history, retrospective approvals, or a full heavyweight route when reconstructing missing documentation. Existing applicable authorities still constrain the change.
 
 ## Shared artifact contract
 
@@ -27,7 +27,7 @@ Before starting or resuming any role, load `workflow-artifacts` by name and read
 
 ## Evidenced baseline and scope
 
-Identify the request, affected existing behavior and participants, source/code identities, necessary external contracts, and the boundaries of investigation and change. Inspect code, callers, state, data, configuration, tests and relevant runtime paths before proposing structure. Scope includes the interactions and preserved guarantees needed to change safely, not an automatic inventory or redesign of the whole repository.
+Identify the request, affected behavior/participants, source/code identities, external contracts and boundaries of investigation/change. Resolve supplied effort/child paths through their root entry and exact source package when present. Inspect relevant shared requirements, overall architecture, child requirements/technical models and map decomposition references alongside code, callers, state/data, configuration, tests and runtime paths. Scope includes interactions and preserved guarantees needed to change safely, not an automatic whole-project inventory or redesign.
 
 Handle available material according to its reliability:
 
@@ -84,9 +84,9 @@ Provide the evidence supporting the direct/decomposed route selected under [SKIL
 
 ## Canonical synchronization and authority
 
-One authoritative current target definition governs each affected concept. A change model explains the decision and transition; it must not become an override layer on top of contradictory canonical requirements/technical models. Where those models exist, integrate changed requirements, definitions, file responsibilities and diagrams into their owning sections and remove superseded rules. Reference exact updated targets from the change model rather than maintain competing definitions.
+One authoritative current target definition governs each concept. Integrate approved changes into their owning requirements, architecture and technical sections, removing superseded rules and synchronizing diagrams; the change model explains the transition and precisely references those targets, not an override layer. In hierarchy, cover affected root shared requirements, global architecture, child requirements/technical models and map decomposition references. Return conflicts to the owning layer under WORKFLOW-ARTIFACTS.md; a child addendum cannot override a global guarantee. The root controller owns shared edits/indices; delegated child writers stay within assigned artifacts and return requested parent edits.
 
-Review the change model, these resulting canonical sections, and all surrounding dependencies needed for consistency as one identified change package. The approval applies to this complete scoped target and its synchronized references, not an invented reapproval of unrelated historical content. Substantive canonical edits invalidate their affected prior approval claims until this package passes and the human approves it. The change route's coordinated review replaces repeating two separate whole-project clarification workflows; it does not waive affected consistency or evidence.
+Review the change model, resulting canonical sections and necessary surrounding dependencies as one identified scoped package. Trace impact through cross-child contracts, callers, descendants, tickets and integration flows; identify affected review/approval, unit and combined evidence and acceptance, and the explicit basis for preserving unaffected work. Synchronize root source identities, scope/coverage/dependency indices and affected child links through their owners. Affected approval claims remain stale until this package passes and receives human approval; affected implementation evidence must then be renewed on conforming code with original roles. This coordinated gate replaces separate whole-project ceremonies, not affected consistency checks. Never restart every child or ticket without impact.
 
 When earlier models do not exist, this package supplies the complete scoped requirements and technical target directly. Do not create empty stand-in documents or declare nonexistent historical approvals. Future work must consume the latest complete authoritative scoped model, not replay old change notes. If later work establishes a broader canonical model, integrate definitions and point to that owner instead of preserving contradictory alternatives.
 
@@ -104,8 +104,8 @@ Apply this standard and every imported content requirement to the complete curre
 4. **Micro and file completeness:** objects, state/resources, concrete operations/sequences and target file responsibilities have justified assessments and complete targets.
 5. **Definitions and contracts:** full resulting data/interfaces and behavior resolve the design, including unchanged references and caller obligations.
 6. **Concept and transition integrity:** reuse/consolidation choices, migration, final owners and obsolete-path exits are complete without speculative cleanup or indefinite duplicate structures.
-7. **Synchronization and authority:** canonical targets and change model agree, each definition has one owner, approval scope is identifiable, and missing original documents do not cause fake prerequisites.
-8. **Verification and execution readiness:** mandated current diagram/reference/feasibility checks are supported, future macro coverage is project-grounded, and the direct/decomposed route has evidence and executable obligations.
+7. **Synchronization and authority:** canonical requirements, architecture, child models, affected decomposition references and change model agree; definitions and root/child writers have explicit owners, source/approval scope and downstream impact are identified, and missing history causes no fake prerequisites.
+8. **Verification and execution readiness:** mandatory diagram/reference/feasibility checks are supported, cross-child/global flow coverage and real prerequisites have owners, affected evidence is invalidated with an unchanged-scope basis, and the direct/decomposed route has evidence and executable obligations.
 9. **Private record integrity:** satisfy WORKFLOW-ARTIFACTS.md for records due at this gate, without demanding this review report or future human approval before they occur.
 
 The approved scope is this synchronized target and its necessary surrounding consistency, not an invented reapproval of unrelated history. Design approval is distinct from implementation completion.

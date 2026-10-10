@@ -1,6 +1,6 @@
 ---
 name: split-tickets
-description: Use after requirements and technical models have passed independent review and final human approval to split implementation work or revise an existing ticket set; also use for an approved change package that needs decomposition instead of direct implementation. Not for production design, coding, or executing tickets.
+description: Use after a flat requirements/technical or hierarchical requirements/architecture/child-technical package has passed applicable review and human approval to split implementation work or revise its global ticket set; also use for an approved change package needing decomposition. Not for production design, coding, or executing tickets.
 ---
 
 # Split Tickets
@@ -11,11 +11,11 @@ Before starting or resuming, load `workflow-artifacts` by name and read its comp
 
 ## 1. Establish the approved baseline
 
-Select TICKETS.md's requirements-plus-technical or change-package route. Read the exact current source package, essential references, and independent-review/final-human-approval evidence. Validate route eligibility before decomposing: a bounded direct change goes to `implement`, with its root work entry but no synthetic tickets or ticket-set index.
+Select TICKETS.md's flat, hierarchical, or change-package basis. Resolve supplied effort/child paths through the root `issue.md`; read its selected scope, exact current source package, essential references, and applicable review/approval evidence rather than assuming sibling flat models. Validate route eligibility before decomposing: a bounded direct change goes to `implement`, with its root work entry but no synthetic tickets or ticket-set index.
 
 Inspect relevant code, callers, repository guidance, and verification facilities using the already-read standard. Distinguish observed behavior, confirmed requirements, and unknowns. Production-design gaps return to the owning clarification stage under TICKETS.md; resume only after renewed source review and approval.
 
-Reuse `.scratch/<work-slug>/`. The author establishes the shared exclusion gate before writes, maintains `issue.md` as entry/set index and `issues/NN-<slug>.md` as tickets, and records planning in root `issue.log.md`. Recover existing state under WORKFLOW-ARTIFACTS.md rather than create a competing plan. New or repairing sets remain `Draft`.
+Reuse the resolved `.scratch/<work-slug>/` effort root. The author establishes the shared exclusion gate before writes, maintains its `issue.md` as the single entry/set index and root `issues/NN-<slug>.md` as tickets, and records planning in root `issue.log.md`. Child entries retain only scoped model recovery; they create no ticket pool. Recover existing state under WORKFLOW-ARTIFACTS.md rather than create a competing plan. New or repairing sets remain `Draft`.
 
 ## 2. Find coherent work units and real dependencies
 

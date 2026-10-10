@@ -1,11 +1,11 @@
 ---
 name: clarify-requirements
-description: Clarify a bounded requirement and maintain a reviewable requirements/domain model until explicit human approval. Use for the requirements stage of a lightweight change, to resume an existing requirements model, or when a larger workflow delegates a bounded requirements question with inherited constraints. Also load reference-only when another stage or reviewer needs its requirements standard. Not for technical design, implementation planning, or coding.
+description: Clarify a bounded requirement or a heavyweight shared/child requirements package until independent review and explicit human approval. Use for standalone requirements, assigned child modeling, package consistency, or resumption. Also load reference-only for the requirements standard. Not for technical design, implementation planning, or coding.
 ---
 
 # Clarify Requirements
 
-Turn a requirement into an understandable, durable model of the intended behavior, not a transcript of the interview. The work ends at the first human approval gate, before technical clarification.
+Turn requirements into an understandable, durable model of intended behavior, not an interview transcript. Stop at requirements approval, before formal architecture or technical clarification.
 
 ## Entry mode and dependencies
 
@@ -13,7 +13,7 @@ For reference-only use, read the requested standard or reviewer contract and its
 
 Load the complete named dependency `workflow-artifacts` and read its entire `WORKFLOW-ARTIFACTS.md` before every role starts or resumes. Follow that skill's loading, supplied-content reuse, missing-dependency blocking, reference-only, and root-separation rules. Before investigation, questions, or drafting, read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md); apply these standards throughout authoring, repair, and review.
 
-Stage routes name separately installed complete skills: `clarify-technical-design` for an authorized subsequent technical stage, or `clarify-change` for an authorized scoped-change route. Load a routed skill by name for execution only when that stage is authorized; mentioning it or approving this stage does not run it.
+Stage routes name separately installed complete skills: `clarify-architecture` after a heavyweight requirements package, `clarify-technical-design` after standalone requirements, or `clarify-change` for an authorized scoped-change route. Load a routed skill by name for execution only when that stage is authorized; mentioning it or approving this stage does not run it.
 
 ## 1. Establish the bounded change
 
@@ -21,9 +21,11 @@ Read the user's request and any supplied model, references, or inherited decisio
 
 Use the already-read REQUIREMENTS-MODEL.md to guide investigation before questioning or drafting. Inspect relevant project guidance, existing domain definitions, affected behavior, and tests to establish what is currently true. Follow references needed to interpret inherited constraints. Keep repository facts separate from proposed behavior. If evidence is inaccessible, identify the gap instead of pretending to have inspected it.
 
-As author/controller, establish or reuse the verified private workspace under WORKFLOW-ARTIFACTS.md before writing. New work uses `.scratch/<work-slug>/requirements.md`, with `issue.md` and `issue.log.md`; state the paths. Apply the shared location rule to existing canonical models. Do not change production code or create `delivery.md`.
+As author/controller, establish or reuse the verified private workspace under WORKFLOW-ARTIFACTS.md before writing. Standalone work uses `.scratch/<work-slug>/requirements.md`, with `issue.md` and `issue.log.md`. Heavyweight work reuses the effort root and explicitly assigned root or child model, entry, and log paths; never derive a new slug for a child. State the paths and writer. Apply the shared location rule to existing canonical models. Do not change production code or create `delivery.md`.
 
-For delegated work, stay within the supplied scope. If a necessary decision conflicts with an inherited constraint or belongs to the parent effort, return that conflict for human resolution rather than silently changing the parent model. Do not create a heavyweight map here.
+For heavyweight work, read **Shared and child requirements** in REQUIREMENTS-MODEL.md and the root entry’s current source package. Establish selected scope, actual dependencies, applicable inherited decisions, and root/child ownership. Shared and child drafts may co-evolve without either requiring the other’s prior final approval. A Wayfinder map supplies scope and hypotheses, not settled business rules or formal architecture.
+
+Delegated authors write only assigned child artifacts and return shared-rule conflicts or proposed root updates to the root owner. Resolve accessible facts there and seek human choices only when material; do not silently override a parent or create another map.
 
 ## 2. Build and test the requirements model
 
@@ -55,24 +57,24 @@ On resumption, perform the shared recovery procedure and reuse settled requireme
 
 ## 4. Verify, review, repair, and review again
 
-Before dispatch, check the complete model against REQUIREMENTS-MODEL.md for coverage and consistency across concepts, rules, scenarios, and diagrams. Correct known omissions and contradictions; return unresolved decisions to clarification rather than leaving them for the reviewer or implementer. Render and inspect Mermaid diagrams and complete all other required verification. If a required decision or check remains unresolved, retain `Draft` and report the specific blocker. Author checks prepare the model for independent review; they never replace it.
+Before dispatch, check the complete assigned model or selected composite package against REQUIREMENTS-MODEL.md. For a heavyweight handoff, the root controller checks the shared model and applicable children together, including cross-child meanings, flows, rules, and coverage; local Passes do not establish package consistency. This is the requirements review, not an additional generic review stage. Correct omissions and contradictions and resolve material decisions. Render and visually inspect all required Mermaid diagrams with current evidence. Missing required access, decisions, rendering, or inspection keeps `Draft`; author checks never replace independent review.
 
 Dispatch a fresh independent, read-only reviewer for every round using [reviewer-prompt.md](reviewer-prompt.md), supplying its complete input package under the shared dispatch rules. If independence, required inputs, or verification are unavailable, retain `Draft` and report the blocker; self-review never substitutes.
 
-As controller (the author in standalone mode), persist every returned review in `issue.log.md` before repair or advancement. Use WORKFLOW-ARTIFACTS.md for record fields, finding closure, and snapshot applicability; request correction of stale, incomplete, or inconsistent reports.
+The assigned record writer persists every returned review in the owning log before repair or advancement: child model records in the child log, root/package records in the root log. Use WORKFLOW-ARTIFACTS.md for record fields, finding closure, and snapshot applicability; request correction of stale, incomplete, or inconsistent reports.
 
-For `Changes required`, repair owning sections and all dependent views. Recover evidence and settled answers before asking new questions. For `Blocked`, obtain missing inputs or verification. Persist repairs and fresh evidence before requesting another fresh **full-model** review, including prior findings and regressions. Save the independent disposition and update `issue.md` before advancing. Repeated attempts do not waive a gate.
+For `Changes required`, repair owning sections and all dependent views. Recover evidence and settled answers before asking new questions. For `Blocked`, obtain missing inputs or verification. Persist repairs and fresh evidence before requesting another fresh **full-model or full-package** review, including prior findings and regressions. Save the independent disposition and update the assigned entry before advancing. Repeated attempts do not waive a gate.
 
 Only a current independent `Pass`, with every applicable criterion satisfied, mandatory verification complete, and no unresolved finding or blocker, permits step 5. Changes to content, diagrams, or required references return to `Draft` and this loop; apply the shared metadata-only exception.
 
 ## 5. Obtain final human approval and stop
 
-After the review passes, set the model to `Awaiting approval`. Present its path and the passing review conclusion, point the human to the main flow and consequential decisions, and ask explicitly whether they approve this reviewed model for technical clarification.
+After the applicable review passes, set `Awaiting approval`. Present exact model/package paths and scope, its passing conclusion, main flows, and consequential decisions. Ask explicitly for approval of this reviewed basis: standalone requirements for technical clarification, or the selected heavyweight shared/child package for formal architecture. A child-only approval covers that child, not the composed package. Package approval may cover its identified shared and child sources together; do not require circular separate approvals first.
 
 Wait. Agreement with interview answers, approval of a proposed correction, or approval given before the current model passed review is not final approval. If the human requests changes, return to clarification as needed, integrate the changes, run the review-and-repair loop again, and request approval of the resulting reviewed model.
 
-Record `Approved` only for the same current model that passed review and received explicit final human approval. Persist that decision in `issue.log.md` and link current model metadata and `issue.md` using WORKFLOW-ARTIFACTS.md. An unchanged resumed model may retain evidenced final approval after current review; a label alone is insufficient.
+Record `Approved` only for the same current model/package that passed review and received explicit final human approval. Persist the decision in its owning log and link current metadata and entries using WORKFLOW-ARTIFACTS.md. The root entry identifies the exact heavyweight package and applicable records, not a separate manifest. Source changes require impact assessment and renewed affected gates, preserving unrelated approvals only with an explicit basis. An unchanged resumed model may retain evidenced final approval after current review; a label alone is insufficient.
 
-Return `issue.md`, the approved model path/revision, and essential references as the handoff. If blocked, return the draft path and persisted blocker, never an approved handoff. Stop at this stage: approval permits separate technical clarification, not automatic execution. Do not generate technical models, implementation tickets, code, or `delivery.md` here.
+Return the assigned entry, approved model/package identities, applicable approval evidence, and essential references; child work returns to the root controller. If blocked, return the draft and persisted blocker, never an approved handoff. Stop: the next separately authorized stage is `clarify-architecture` for heavyweight packages or `clarify-technical-design` for standalone work. Do not generate architecture, technical models, tickets, code, or `delivery.md` here.
 
 For scoped changes to an existing implemented system, route to `clarify-change`, loaded by name only when that stage is authorized, to reconstruct any missing baseline and clarify requirements with their technical consequences in one coordinated package. That route synchronizes affected canonical sections and obtains its own independent review and human approval; it does not silently retain this model's old approval for changed content. The full-model gate above remains the workflow when using clarify-requirements itself.
