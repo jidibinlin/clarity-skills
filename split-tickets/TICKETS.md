@@ -116,7 +116,7 @@ The independent reviewer uses these categories to apply the full standard, not a
 7. **Complete composition:** whole-set coverage, ownership, and integration.
 8. **Reviewability and verified plan:** clean consistent artifacts, rationale, checked references and rendered/visually inspected diagrams, truthful evidence, and shared artifact integrity.
 
-Use [reviewer-prompt.md](reviewer-prompt.md) for the independent role, complete input package, and report contract. Every full-set round uses a fresh independent reviewer, including repaired sets. Author self-check cannot supply this gate; mandatory planning verification or reviewer-access gaps block it.
+Use [reviewer-prompt.md](reviewer-prompt.md) for the independent role, initial/incremental input contract, and report contract. Retain the ticket-plan author and reviewer under WORKFLOW-ARTIFACTS.md's **Persistent author/reviewer lifecycle** for repairs and every full-set assessment. Author self-check cannot supply this gate; mandatory planning verification or reviewer-access gaps block it.
 
 A set remains a draft while decomposing, repairing, or blocked. An independent `Pass` for the complete current set with no unresolved finding or blocker permits requesting approval. Only explicit final human approval of that reviewed set permits calling it approved; derive that disposition from the current set and its review/approval evidence, not a planning-state file. Neither upstream approval nor approval of a proposed split is approval of the finished set.
 

@@ -4,13 +4,13 @@ You review the complete technical model read-only, not as its author, repair age
 
 ## Load and isolate the review
 
-Use a fresh context for every full review round, separate from the author and earlier reviewers. Receive the review package and governing instructions, not the author's working conversation, private reasoning, or endorsement instructions. The same underlying model is acceptable; a role switch inside the author's conversation is not independence.
+Remain the bound independent reviewer for this object under **Persistent author/reviewer lifecycle** in WORKFLOW-ARTIFACTS.md. Resume this same context for repair re-reviews, final full-scope review, human revisions, and upstream/current-source reassessment; apply the shared genuine-loss recovery/replacement rule if continuation fails. Stay separate from the author/repair owner's context. Receive the review package and governing instructions, not private author reasoning or endorsement instructions; a role switch inside the author's context is not independence.
 
-Before starting or resuming, load `workflow-artifacts` by name and read its entire `WORKFLOW-ARTIFACTS.md`. Load `clarify-technical-design` by name in reference-only mode and read all of `TECHNICAL-MODEL.md` and this contract. Follow shared loading and dispatch rules for complete current supplied content or verified owner-qualified resource locations. Never assume inherited standards or context; missing required content blocks assessment.
+Before starting or resuming, load `workflow-artifacts` by name and read its entire `WORKFLOW-ARTIFACTS.md`. Load `clarify-technical-design` by name in reference-only mode and read all of `TECHNICAL-MODEL.md` and this contract. Follow shared loading and dispatch rules for complete current supplied content or verified owner-qualified resource locations. Verify retained material is complete and current; missing required content blocks assessment.
 
 ## Required package
 
-The controller supplies:
+The controller supplies the full applicable package below on first assignment or genuine replacement. Later messages may be incremental under the shared lifecycle: current source identities, changes since your last basis, findings/fix decisions, new evidence, and changed decisions or standards, with complete current artifacts and necessary references still accessible. Reuse intact current content already available; recover missing material rather than relying on a summary. Incremental messages do not narrow the full-scope assessment below or its regression checks.
 
 - Target repository/checkout, effort identity, authorized scope, assigned entry/model/review-log paths and writer; complete current technical model and exact identity with necessary references. A diff or summary is insufficient.
 - Current applicable approved requirements with original requirement evidence and passing-review/final-human-approval evidence. For heavyweight child work include the root package index, shared and child requirements, approved architecture with current identity/evidence, and all relevant shared realization owners/definitions and dependent child references. Supply original technical constraints, confirmations, and corrections with identifiable context; map approval and paraphrases do not establish this basis.

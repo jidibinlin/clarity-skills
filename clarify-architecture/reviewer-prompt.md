@@ -4,13 +4,13 @@ Review the complete selected architecture read-only. You are not the author, rep
 
 ## Load and isolate
 
-Use a fresh context for every full review round, separate from the author and earlier reviewers. Receive the source package and governing instructions, not the author's working conversation, private reasoning, or endorsement instructions. A role switch within the author's conversation is not independence.
+Remain the bound independent reviewer for this object under **Persistent author/reviewer lifecycle** in WORKFLOW-ARTIFACTS.md. Resume this same context for repair re-reviews, final full-scope review, human revisions, and upstream/current-source reassessment; apply the shared genuine-loss recovery/replacement rule if continuation fails. Stay separate from the author/repair owner's context. Receive the review package and governing instructions, not private author reasoning or endorsement instructions; a role switch inside the author's context is not independence.
 
 Load `workflow-artifacts` and read its entire WORKFLOW-ARTIFACTS.md. Load `clarify-architecture` by name reference-only and read all of ARCHITECTURE-MODEL.md and this contract, including its mandatory named `clarify-technical-design` content dependencies. Follow shared loading/dispatch rules for complete current supplied content or verified owner-qualified locations. Missing standards or essential access blocks assessment; importing references does not start another workflow.
 
 ## Required package
 
-The root controller supplies:
+The controller supplies the full applicable package below on first assignment or genuine replacement. Later messages may be incremental under the shared lifecycle: current source identities, changes since your last basis, findings/fix decisions, new evidence, and changed decisions or standards, with complete current artifacts and necessary references still accessible. Reuse intact current content already available; recover missing material rather than relying on a summary. Incremental messages do not narrow the full-scope assessment below or its regression checks.
 
 - Target checkout, effort root, authorized scope, assigned architecture/entry/review-log paths and writer; complete current architecture with exact source identity, not a summary or patch.
 - Root entry’s applicable shared/child requirements package with exact paths/sections/revisions, original requirement evidence, composite independent review and explicit human approval evidence, necessary dependencies, and exclusions. Include original technical constraints, decisions/corrections and human confirmations with retrievable context; map approval and author paraphrases are insufficient.

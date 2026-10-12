@@ -7,9 +7,9 @@ description: Use to execute one approved ticket or bounded approved change, stan
 
 Implement one approved unit directly in its agreed structure; independent review checks conformance, not a planned rough-code-then-redesign phase.
 
-Before starting/resuming, load `workflow-artifacts` by name and read its complete WORKFLOW-ARTIFACTS.md, then all of [IMPLEMENTATION.md](IMPLEMENTATION.md), **before investigation, evidence choices, or code edits**. These own shared records and unit source/code/test/runtime criteria plus the original-pair lifecycle. Apply `workflow-artifacts`' loading/resource and reference-only rules to every role. A standards-only load starts no implementation or reviewer pair. Read [reviewer-prompt.md](reviewer-prompt.md) at first review dispatch; no external TDD/review rulebook replaces these standards.
+Before starting/resuming, load `workflow-artifacts` by name and read its complete WORKFLOW-ARTIFACTS.md, then all of [IMPLEMENTATION.md](IMPLEMENTATION.md), **before investigation, evidence choices, or code edits**. These own shared records/persistent author-reviewer lifecycle and unit source/code/test/runtime criteria respectively. Apply `workflow-artifacts`' loading/resource and reference-only rules to every role. A standards-only load starts no implementation or reviewer pair. Read [reviewer-prompt.md](reviewer-prompt.md) at first review dispatch; no external TDD/review rulebook replaces these standards.
 
-Establish invocation mode under IMPLEMENTATION.md. Standalone: the current author implements and retains an independent reviewer. Delegated: the existing controller binds both roles; send intermediate review requests/blockers and the eventual passed result to it. Do not recursively invoke `implement`, spawn competing roles, or request per-unit human approval.
+Establish invocation mode under IMPLEMENTATION.md. Standalone: bind or resume the original author to implement and retain its independent reviewer under WORKFLOW-ARTIFACTS.md’s **Persistent author/reviewer lifecycle**. Delegated: the existing controller binds both roles; send intermediate review requests/blockers and the eventual passed result to it. Do not recursively invoke `implement`, spawn competing roles, or request per-unit human approval.
 
 ## 1. Establish the executable work unit
 
@@ -39,7 +39,7 @@ Preflight the complete result against the same standard, approved target, reposi
 
 ## 5. Obtain independent conformance review
 
-Use reviewer-prompt.md's complete initial package and IMPLEMENTATION.md's original-pair lifecycle. Standalone, dispatch the bound read-only reviewer; delegated, send the request to the controller. Never substitute a role switch in the author's context or transmit private author reasoning as reviewer instructions.
+Use reviewer-prompt.md's complete initial package and WORKFLOW-ARTIFACTS.md's **Persistent author/reviewer lifecycle**. Standalone, dispatch the bound read-only reviewer; delegated, send the request to the controller. Never substitute a role switch in the author's context or transmit private author reasoning as reviewer instructions.
 
 The assigned writer saves every returned report before repairs or gate advancement. Return violations to the original implementer and current changes/evidence to the original reviewer for full-scope reassessment, using incremental rather than repeated initial packages. Only reviewer-confirmed closure and a complete current `Pass` without unresolved findings/blockers permit handoff. Continue ordinary repairs automatically; route genuine upstream/capability blockers without lowering the gate. Before blockers, replacements or handoffs, persist dispositions and reconcile ticket metadata where applicable, actual code, evidence and bound roles; carry the missing conditions and role handoff basis without a recovery file.
 
@@ -50,6 +50,6 @@ Persist the applicable Pass and update the existing ticket’s execution status 
 - **Delegated:** return to the supplied controller without per-unit human approval or whole-work `delivery.md`. It owns continuation and final acceptance under ORCHESTRATION.md. Ticket-local Pass is not whole-set completion; direct full-change Pass already supplies final independent review, without a duplicate overall reviewer.
 - **Standalone:** after mandatory verification and Pass, write `.scratch/<work-slug>/delivery.md` under the shared summary contract and request explicit acceptance, surfacing significant autonomous repair decisions with record links. A standalone ticket identifies only its reviewed scope and preserves a broader existing summary. Persist the actual scoped user decision and reviewed code/source basis in the owning review log, then update the summary’s acceptance and evidence link, not approval navigation in `issue.md`.
 
-Retain the original pair for conformance repairs. Reconcile current code and intervening user/ticket changes before edits; renew affected evidence and full-scope review, then integrate the summary before renewed acceptance. Genuine role loss follows IMPLEMENTATION.md; shared revision rules distinguish substantive changes from metadata-only updates.
+Retain the original pair for conformance repairs. Reconcile current code and intervening user/ticket changes before edits; renew affected evidence and full-scope review, then integrate the summary before renewed acceptance. Genuine role loss follows the shared lifecycle; shared revision rules distinguish substantive changes from metadata-only updates.
 
 Stop at this unit's authorized handoff or precise external blocker. Do not start another unit or automatically commit, merge, push, close remote issues, or release. Retain excluded records. Post-delivery design questions follow the unit standard's upstream route.

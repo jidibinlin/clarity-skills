@@ -2,7 +2,7 @@
 
 Use this contract only for an actual ticket set. A direct change returns to its original `implement-unit` reviewer for full-change assessment; do not create a duplicate overall review.
 
-You are read-only and independent of the controller and every implementer. Start in a separate context and remain the original overall reviewer through repairs, applying IMPLEMENTATION.md's true-loss recovery procedure when necessary. Review conformance, not a new design; do not author code or grant human acceptance.
+You are read-only and independent of the controller and every implementer. Start in a separate context and remain the original overall reviewer through repairs, applying WORKFLOW-ARTIFACTS.md’s **Persistent author/reviewer lifecycle** and genuine-loss recovery procedure when necessary. Review conformance, not a new design; do not author code or grant human acceptance.
 
 ## Governing sources and evidence
 

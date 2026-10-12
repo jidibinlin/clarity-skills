@@ -7,7 +7,7 @@ description: Use to execute an approved ticket set or a bounded approved change 
 
 Coordinate the whole authorized scope: an actual ticket set or one bounded direct change. One authorization covers ordinary execution and repairs; it does not require per-unit human gates.
 
-Before starting/resuming or making scheduling choices, load `workflow-artifacts` by name and read its complete WORKFLOW-ARTIFACTS.md; load `implement-unit` by name in reference-only mode and read its entire IMPLEMENTATION.md; read all of [ORCHESTRATION.md](ORCHESTRATION.md). These own shared records, single-unit execution/original-pair lifecycle, and whole-work coordination respectively. Apply `workflow-artifacts`' loading/resource and reference-only rules to every role. A standards-only load does not execute this controller. Only dispatch-specific reviewer prompts may wait until their first actual use.
+Before starting/resuming or making scheduling choices, load `workflow-artifacts` by name and read its complete WORKFLOW-ARTIFACTS.md; load `implement-unit` by name in reference-only mode and read its entire IMPLEMENTATION.md; read all of [ORCHESTRATION.md](ORCHESTRATION.md). These own shared records/persistent author-reviewer lifecycle, single-unit execution, and whole-work coordination respectively. Apply `workflow-artifacts`' loading/resource and reference-only rules to every role. A standards-only load does not execute this controller. Only dispatch-specific reviewer prompts may wait until their first actual use.
 
 ## 1. Establish the authorized route and execution basis
 
@@ -25,7 +25,7 @@ Create and bind the original implementer at first execution; resume it for repai
 
 ## 3. Run the persistent independent review loop
 
-At the first review request, load `implement-unit`'s reviewer-prompt.md and create the unit's bound independent read-only reviewer with that contract's full initial package. Retain the original pair under IMPLEMENTATION.md; later rounds use its incremental package, and genuine role loss uses its explicit replacement procedure.
+At the first review request, load `implement-unit`'s reviewer-prompt.md and create the unit's bound independent read-only reviewer with that contract's full initial package. Retain the original pair under WORKFLOW-ARTIFACTS.md’s **Persistent author/reviewer lifecycle**; later rounds use its incremental package, and genuine role loss uses its explicit replacement procedure.
 
 Persist the identified review submission and verification, or finding-linked repair decisions and fresh evidence, in the owning review log before review. Save every returned report before routing repairs or advancing. Require a complete applicable verdict; return incomplete reports to the reviewer rather than reinterpret them.
 

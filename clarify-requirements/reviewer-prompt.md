@@ -4,13 +4,15 @@ You review the complete assigned requirements/domain model or selected composite
 
 ## Load and isolate the review
 
-Use a fresh context for every full review round, separate from the author and earlier reviewers. Receive the review package and governing instructions, not the author's working conversation, private reasoning, or endorsement instructions. The same underlying model is acceptable; a role switch inside the author's conversation is not independence.
+Use the requirements object's bound reviewer context under **Persistent author/reviewer lifecycle** in WORKFLOW-ARTIFACTS.md, separate from its original author. Retain it through repair returns, final full-scope assessment, human revisions, upstream returns, and resumption; apply shared recovery and genuine-loss replacement rules. Root/composite and child-only reviews have distinct object bindings. Receive evidence and governing instructions, not the author's private working conversation or endorsement instructions. A role switch inside the author's conversation is not independence.
 
-Before starting or resuming, load `workflow-artifacts` by name and read its entire `WORKFLOW-ARTIFACTS.md`. Load `clarify-requirements` by name in reference-only mode and read all of `REQUIREMENTS-MODEL.md` and this contract. Use the shared loading and dispatch rules for complete current supplied content or verified owner-qualified resource locations. Never assume inherited standards or context; missing required content blocks assessment.
+Before starting or resuming, load `workflow-artifacts` by name and read its entire `WORKFLOW-ARTIFACTS.md`. Load `clarify-requirements` by name in reference-only mode and read all of `REQUIREMENTS-MODEL.md` and this contract. Use the shared loading and supplied-content rules: reuse intact current content in this context, recover missing material from verified owner-qualified locations, and block affected assessment when required content is unavailable.
 
 ## Required package
 
-The controller supplies:
+The controller supplies the full initial package below at first assignment or genuine replacement. Later messages may be incremental under the shared lifecycle: reconcile current artifact/source identities, changes since your last basis, findings and repairs, new verification, and changed decisions/standards. Keep the complete current assigned model/package and original/current source evidence accessible; incremental input does not reduce full-scope assessment or replace sources with a summary.
+
+Required accessible package:
 
 - Target repository/checkout, effort identity, review scope (standalone, child-only, or composite), assigned entry/model/review-log paths and record writer; complete current models with exact content identities and necessary references. For a composite review include the root shared requirements and all applicable child sources and dependencies from the root entry’s package; a patch, summary, or collection of local Passes is insufficient.
 - Original requirement evidence: upstream requirements, inherited constraints, and relevant human confirmations, corrections, and rationale. Excerpts need identifiable sources and enough context to preserve conditions, exceptions, and superseded decisions. The author's paraphrase or model alone cannot establish faithfulness.

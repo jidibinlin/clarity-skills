@@ -38,7 +38,9 @@ Technical, architecture and scoped-change modeling converge with the human throu
 
 The technical questioning baseline is macro-first: converge top-down on topology, boundaries and needed solution directions, then design micro capabilities bottom-up by module dependencies. Start with the configuration, stored/state definitions, interfaces and basic flows that actual consumers need. Data-first is a default, not a rigid pass order; choose sequence-first or a joint group when it resolves prerequisite uncertainty. This governs design decisions, not implementation or ticket ordering.
 
-Model and ticket-plan review uses a fresh independent context each round. Implementation retains the original implementer and independent reviewer across repairs. Delegated units have no per-ticket human acceptance gate. Ticket sets need combined verification and an overall independent review; a direct change's full-scope unit Pass is its final independent review. Neither review Pass nor model approval is final human acceptance of code.
+Every reviewed object retains its original author/repair owner and independent reviewer through repairs, re-review, final full-scope assessment and human revisions under WORKFLOW-ARTIFACTS.md’s **Persistent author/reviewer lifecycle**. First assignments receive complete inputs; later messages refresh changed inputs without narrowing review criteria. Persist resumable bindings in existing object review-log headers or implementation-ticket metadata; replace only genuinely lost roles through the shared recovery/handoff procedure. Composite and overall findings return to their original owning authors, not a new catch-all fixer.
+
+Delegated units have no per-ticket human acceptance gate. Ticket sets need combined verification and a retained overall independent reviewer; a direct change’s full-scope unit Pass is its final independent review, without another reviewer. Neither review Pass nor model approval is final human acceptance of code.
 
 ## Installation and resource access
 

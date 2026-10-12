@@ -4,13 +4,13 @@ You review the complete change package read-only, not as its author, implementer
 
 ## Load and isolate the review
 
-Use a fresh independent context every full model-review round, separate from the author and earlier reviewers; unlike implementation, these roles are not retained across repair rounds. A role switch inside the author context is not independence. Receive the review package and governing instructions, not private author reasoning or endorsement instructions.
+Remain the bound independent reviewer for this object under **Persistent author/reviewer lifecycle** in WORKFLOW-ARTIFACTS.md. Resume this same context for repair re-reviews, final full-scope review, human revisions, and upstream/current-source reassessment; apply the shared genuine-loss recovery/replacement rule if continuation fails. Stay separate from the author/repair owner's context. Receive the review package and governing instructions, not private author reasoning or endorsement instructions; a role switch inside the author's context is not independence.
 
 Before starting/resuming, load named `workflow-artifacts` and its complete WORKFLOW-ARTIFACTS.md. Load `clarify-change` reference-only and all of CHANGE-MODEL.md/this contract, then `clarify-technical-design` reference-only for all applicable imported sections. When existing architecture governs affected work, also load named `clarify-architecture` reference-only and applicable ARCHITECTURE-MODEL.md criteria; use named `wayfinder` reference-only for affected map criteria. Apply the same standards used before author decisions, shared access/dispatch rules and missing-content blockers. These loads start no initial modeling workflows or historical approval prerequisites.
 
 ## Required package
 
-The controller supplies:
+The controller supplies the full applicable package below on first assignment or genuine replacement. Later messages may be incremental under the shared lifecycle: current source identities, changes since your last basis, findings/fix decisions, new evidence, and changed decisions or standards, with complete current artifacts and necessary references still accessible. Reuse intact current content already available; recover missing material rather than relying on a summary. Incremental messages do not narrow the full-scope assessment below or its regression checks.
 
 - Target checkout and governing work/root/child identities, assigned model/review-log paths and record writer; complete change model, exact current source identities and resulting affected shared requirements, global architecture, child requirements/technical models and decomposition references where present, plus necessary cross-child context. A patch or summary is insufficient; unrelated archives are not required.
 - Original request and confirmed decisions with identifiable sources and enough context to preserve meaning; the model or author paraphrase alone cannot establish faithfulness.
@@ -22,7 +22,7 @@ Follow necessary accessible references; supplied artifacts and earlier reports a
 
 ## Assessment
 
-Apply every CHANGE-MODEL.md obligation and its imported technical criteria to the full package, using its nine delivery categories. Inspect each Changed/Unchanged/Unresolved assessment, concrete transformation, and resulting target; topology alone cannot establish unchanged sequences or ownership. Follow verified unchanged references and inspect reconstructed views where reliable references are absent.
+Apply every CHANGE-MODEL.md obligation and its imported technical criteria to the full synchronized package, using its nine delivery categories. Its affected canonical sections are reviewed and approved together under the coordinated change gate; original source-author ownership and retained reviewer bindings do not require additional initial technical/architecture workflows or duplicate standalone human approvals. A separately required review uses its bound reviewer, but a binding alone is not a review prerequisite. Inspect each Changed/Unchanged/Unresolved assessment, concrete transformation, and resulting target; topology alone cannot establish unchanged sequences or ownership. Follow verified unchanged references and inspect reconstructed views where reliable references are absent.
 
 Trace changed and consequential preserved scenarios through target canonical owners, including cross-child guarantees, real prerequisites, callers and owned integration flows. Check root/child source-index synchronization, affected approval/unit/combined-evidence invalidation and the impact basis retaining unaffected work. Reject local override appendices; conflicts return to actual owners. Distinguish observed behavior from confirmed intent. Check concept reuse, transition integrity and route readiness; do not demand synthetic tickets, fabricated architecture history or a full heavyweight restart for bounded direct work.
 
