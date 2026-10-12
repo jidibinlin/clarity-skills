@@ -26,9 +26,13 @@ Check whether documentation agrees with actual code and evidence. With stale or 
 
 Classify inspected facts, confirmed requirements, proposals, and unknowns. Existing behavior is not automatically intended behavior. Expose suspected bugs or accidental constraints without silently preserving them as requirements or changing them as cleanup. Never invent historical approval records. Missing documents alone do not block this workflow; unavailable evidence necessary to understand an affected guarantee does.
 
-## 2. Grill the proposed change and its consequences
+## 2. Co-design the change in bounded decision groups
 
 Start from the inspected behavior and a concrete proposed outcome. Use `ask-with-context` for unresolved behavior, scope, or technical tradeoffs. Distinguish current and proposed behavior and make the changed and preserved guarantees clear; compare only affected relationships rather than presenting a whole-system redesign.
+
+Run the **Progressive design convergence** loop from the imported TECHNICAL-MODEL.md across steps 2 and 3: choose the next affected group, develop and show its concrete topology/sequence/declarations/file responsibilities/contracts, ask through `ask-with-context`, resolve the human’s response, and integrate it before refining dependent groups. Actually show affected macro and micro topology rather than only discussing direction. **Clarify actual declarations with the human** applies to every introduced or changed structure. Neither a small change, missing historical models nor a Draft label permits completing the entire target privately and asking once at the end. Recover valid unchanged/already-confirmed scope; reopen only decisions affected by new evidence.
+
+Use **Macro-first, dependency-led micro design** to order affected questions: settle changed macro boundaries and solution directions first, then work bottom-up through the affected modules’ configuration, stored/state definitions, contracts and basic flows to their consumers. Reuse verified unchanged macro choices and foundations. Prefer data declarations as the micro entry point, but choose sequence-first or a bounded joint group when dependencies require it, explaining why. This is design convergence, not ticket ordering or a reason to redesign unaffected infrastructure.
 
 Resolve behavior changes within this workflow alongside the technical consequences. Confirm what is preserved, corrected, replaced, or excluded, with observable acceptance outcomes. Return to the affected question when evidence contradicts a proposal. If the request expands into a separate broad requirement discovery problem, make that scope change explicit and use requirements clarification; do not routinely force a small change through the original two-stage pipeline.
 
@@ -36,7 +40,7 @@ Challenge concept reuse and retirement before proposing additional structure. Id
 
 ## 3. Model present-to-target behavior at both levels
 
-Apply CHANGE-MODEL.md’s mandatory dimension assessment and imported technical completeness rules. Explain each change and provide the complete scoped target; an unexplained unchanged label or an omitted dimension is insufficient. Unresolved design cannot be approved.
+Step 3 supplies the views for each group in step 2; it is not an autonomous design phase after grilling. Apply CHANGE-MODEL.md’s mandatory dimension assessment and imported technical completeness rules as those groups converge. Explain each change and ultimately provide the complete scoped target; an unexplained unchanged label or omitted dimension is insufficient. Completion requires the actual affected design groups to have current confirmation or valid reuse evidence, not only a complete target ready for final approval.
 
 Show current and target views separately where needed to avoid ambiguity. Supply or precisely reference complete target macro and micro topologies and sequences, the file-responsibility tree, definitions, and contracts. Reconstruct missing current views needed to justify the change. Keep unchanged references verified and accessible; do not redraw every project diagram or infer that unchanged topology means unchanged sequence. Explain migration and exit of old responsibilities, representations, files, and callers in the owning sections.
 

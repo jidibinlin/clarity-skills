@@ -8,11 +8,11 @@ Use this standard both to produce a change model and independently review it. A 
 
 Load `clarify-technical-design` by name in reference-only mode and read these complete applicable sections of its resolved `TECHNICAL-MODEL.md` under the shared loading rules:
 
-- **Approved basis and decision rationale**
+- **Approved basis and decision rationale**, including **Progressive design convergence**
 - **File organization and responsibility tree**
 - **Macro runtime and collaboration model**
 - **Micro object and collaboration model**
-- **Complete data-structure definitions**
+- **Complete data-structure definitions**, including **Clarify actual declarations with the human**
 - **Complete interface contracts**
 - **Overall workflow integration test plan**
 - **Consistency, evidence, and clean integration**

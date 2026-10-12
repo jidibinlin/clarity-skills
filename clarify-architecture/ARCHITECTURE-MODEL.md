@@ -8,7 +8,7 @@ Before every role starts or resumes, load `workflow-artifacts` and read its enti
 
 Before investigation, decisions, drafting, or review, load `clarify-technical-design` by name in **reference-only** mode and read these TECHNICAL-MODEL.md sections completely:
 
-- **Approved basis and decision rationale**, including **Constraints for first-pass implementation**: evidence-grounded reuse, consequential quality choices, proportional background, actual deciding rationale, and distinct facts/proposals/decisions.
+- **Approved basis and decision rationale**, including **Progressive design convergence** and **Constraints for first-pass implementation**: progressively discussed concrete global proposals, evidence-grounded reuse, consequential quality choices, proportional background, actual deciding rationale, and distinct facts/proposals/decisions.
 - **Macro runtime and collaboration model**, all subsections: complete relevant topology, data movement/state authority, actual concurrency/ordering, and macro sequences.
 - **Overall workflow integration test plan**: project investigation before selection, few meaningful overall flows, actual collaboration versus substitutions, planned tests versus current evidence.
 - **Consistency, evidence, and clean integration**: scenario traces, accurate rendered and visually inspected diagrams, checked references, feasibility evidence, and integrated current authority.
@@ -52,7 +52,7 @@ Resolve an actual capability gap through the minimal justified technical choice;
 Author from these criteria and assess the same complete current model on every independent review round. Coverage headings index the content rules, not replace them:
 
 1. **Approved basis and scope:** exact applicable requirements package, composite review/human approval evidence, real prerequisites and exclusions; no map-as-approval or invented business decisions.
-2. **Existing-system fit and rationale:** inspected runtime/code/testing facts ground reuse, changes, cutovers and consequential choices, with sufficient background and actual deciding basis.
+2. **Existing-system fit, rationale and convergence:** inspected runtime/code/testing facts ground reuse, changes, cutovers and consequential choices, with sufficient background and actual deciding basis; progressive convergence works top-down from scoped global topology and boundaries to the solution directions needed for consequential technical problems, with applicable concrete confirmation or reuse evidence. Technology labels or direction agreement followed by a finished architecture awaiting final confirmation are insufficient. Child bottom-up micro design remains at its assigned technical gate.
 3. **Macro completeness:** complete relevant topology and sequences, explicit dataflow/state authority and concrete concurrency/ordering mechanisms, consistent with approved scenarios.
 4. **Shared guarantees and ownership:** clear cross-child boundary contracts and invariant/responsibility owners; every global decision needed to design children is settled.
 5. **Realization boundary and closure:** exactly one child design owner per shared concrete realization, explicit consumers/dependencies and remaining child detail, no missing prerequisite disguised as local detail or design deferred to coding.
