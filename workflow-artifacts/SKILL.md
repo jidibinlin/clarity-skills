@@ -7,6 +7,8 @@ description: Shared reference for private definitions, ticket progress, review-f
 
 Every role must read the complete [WORKFLOW-ARTIFACTS.md](WORKFLOW-ARTIFACTS.md) before starting or resuming its work. Apply its artifact ownership and review-record admission rules when choosing any write destination: model decisions stay in their owning sections, execution progress stays in existing tickets, and no separate state/progress artifact is created. Do not treat the work entry or review logs as general process storage. Authors use it and the applicable stage standard during generation; reviewers assess the same rules. This reference owns no execution: workspace setup, writing, dispatch, and approval belong to the authorized consuming stage. Reviewers remain read-only.
 
+Before any specification-document write, apply **Human-confirmed specification writes** in WORKFLOW-ARTIFACTS.md: present the exact proposed content and destination, wait for explicit human confirmation, then write only that content. This includes initial drafts, review repairs, formatting, references and embedded metadata; neither ownership nor a no-design-change judgment bypasses it. Keep unconfirmed proposals in the conversation.
+
 Apply **Persistent author/reviewer lifecycle** in that standard before edits or dispatch: bind and resume the original author/repair owner and a separate original reviewer for each object, including final review. Use the fixed repair-return loop and genuine-loss handoff procedure; later rounds refresh changed inputs without discarding valid context or narrowing the stage’s assessment obligations. Store bindings only in existing ticket metadata or object review-log identity headers.
 
 ## Loading skills and their resources

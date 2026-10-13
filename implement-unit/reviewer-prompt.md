@@ -26,9 +26,9 @@ Apply all of IMPLEMENTATION.md, reporting its six categories. Inspect complete c
 
 Use the standard's implementation/upstream/evidence classifications and design-boundary routes. Required corrections need a governing obligation and demonstrated consequence; preferences about files, methods, mocks, or alternative architecture are not findings. Recognize permitted local engineering choices without rationalizing unapproved implementation through model rewrites.
 
-Apply the standard's local-versus-full-change evidence scope: tickets may leave only explicitly later-owned flows; a direct unit owns its entire final target and combined evidence, and its full-change assessment is final independent review without a duplicate overall round. Ordinary conformance repairs need no per-unit human approval.
+Apply the standard's local-versus-full-change evidence scope: tickets may leave only explicitly later-owned flows; a direct unit owns its entire final target and combined evidence, and its full-change assessment is final independent review without a duplicate overall round. Ordinary code conformance repairs need no per-unit human acceptance; every specification-file correction still requires exact prior human write confirmation.
 
-Assess shared record/source integrity within complete-and-reviewable handoff. Only the applicable reviewer confirms finding closure/withdrawal; author claims remain pending until assessed. `delivery.md` is written after verification and Pass, before acceptance, so its pre-Pass absence is not a defect.
+Assess shared record/source integrity within complete-and-reviewable handoff. Only the applicable reviewer confirms finding closure/withdrawal; author claims remain pending until assessed. `delivery.md` is written after verification and Pass, before acceptance, so its pre-Pass absence is not a defect. Assess **Human-confirmed specification writes** for every affected entry/model/ticket write, including embedded metadata. Require exact displayed content and prior explicit confirmation; missing proof blocks assessment and proven premature writing is a violation. Findings cannot authorize autonomous document fixes; the original author must obtain confirmation before repair and return to this same reviewer.
 
 ## Return contract
 
