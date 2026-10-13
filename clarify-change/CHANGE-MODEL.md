@@ -1,10 +1,10 @@
 # Change Model: Authoring and Review Standard
 
-Content and evidence for a transition from an evidenced system to a completely decided scoped target, including changed requirements and technical decisions. Small scope reduces volume, not precision. The consuming stage owns execution, write permission and approval validity; `artifact-layout` owns artifact paths, names, purposes and ownership. Record-schema loading is controlled by the stage's actual record gate, not this content standard.
+Use these criteria to shape and review a transition from an evidenced existing system to a complete scoped target. The package includes changed requirements, preserved guarantees and technical decisions. Missing historical models do not require invented history or a heavyweight conversion.
 
 ## Purpose and governing design standard
 
-Read these sections, with subsections, directly from registered `clarify-technical-design`'s `TECHNICAL-MODEL.md` before constructing or reviewing the target:
+Read these sections, including subsections, from registered `clarify-technical-design`'s `TECHNICAL-MODEL.md`:
 
 - **Approved basis and decision rationale**.
 - **File organization and responsibility tree**.
@@ -15,87 +15,46 @@ Read these sections, with subsections, directly from registered `clarify-technic
 - **Overall workflow integration test plan**.
 - **Consistency, evidence, and clean integration**.
 
-They supply technical completeness, concrete-confirmation evidence, dependency reasoning, first-pass constraints, limited flow planning, and current verification. When existing architecture governs affected work, also read applicable `ARCHITECTURE-MODEL.md` criteria from registered `clarify-architecture`; for affected decomposition in `wayfinder.md`, read applicable `WAYFINDER-MODEL.md` criteria from registered `wayfinder`. Tentative estimates remain subordinate to formal models. These conditional imports do not apply merely because the skills exist.
-
-Resolve resources relative to their registered owners or reuse intact current supplied content. Imports do not load owner SKILLs, workflows, or historical prerequisites. Missing necessary sources/evidence block work; missing historical models do not. This package may supply confirmed requirements and the complete target directly, with current review and human approval, without retrospective approvals or mandatory heavyweight conversion. Existing applicable authority still constrains it.
+Resolve resources through their registered owners and import content, not workflows. Where affected, also apply `clarify-architecture`'s `ARCHITECTURE-MODEL.md` and `wayfinder`'s `WAYFINDER-MODEL.md` to their respective authorities.
 
 ## Evidenced baseline and scope
 
-Identify the request, affected behavior/participants, source/code identities (including dirty/untracked changes), external contracts, and investigation/change boundaries. Existing effort/child references resolve through their governing root. Inspect applicable models/map references, repository rules, code/callers, data/interfaces, configuration, tests, and runtime paths; include necessary interactions and preserved guarantees, not automatic whole-project redesign.
+The baseline identifies the request, affected behavior, participants, source/code state and relevant external contracts. Reliable documents have been checked against the system; stale or missing affected content is reconstructed from code, callers, configuration, tests and runtime evidence.
 
-| Prior documentation | Required evidence |
-| --- | --- |
-| Reliable | Affected content checked against the system; exact references for applicable unchanged definitions/views. |
-| Partial or stale | Concrete divergence and reconstruction of missing/unreliable affected content; neither document nor code automatically wins an intent dispute. |
-| Absent | Sufficient reconstructed current behavior, macro collaboration, micro ownership, files, and contracts in this package; no empty stand-ins or unrelated models. |
-
-Trace concrete scenarios across boundaries rather than inferring behavior from directories. Attribute claims to inspection, execution, external contracts, or human decisions. A read-through is not runtime observation; test source is not a passing run. Supplied failures are evidence, not a reason to rerun for confirmation. Necessary uncertain behavior/feasibility needs safe permitted investigation, not speculation.
-
-Historical defects and incidental constraints are not automatically target requirements. State what is preserved, corrected, replaced, or excluded, without silent unrelated repairs. Identify any inaccessible evidence necessary to establish affected behavior, ownership, contracts, or feasibility and its consequence.
+Current behavior, confirmed intent and uncertainty are distinguishable. The reconstruction is sufficient to explain affected scenarios, macro collaboration, micro ownership, files and contracts without surveying unrelated scope. Existing code facts do not override an approved target.
 
 ## Requirements and decision rationale
 
-Define desired scenarios, rules, constraints, exclusions, and observable acceptance outcomes, distinguishing changed requirements from preserved guarantees, including meaningful failures and concurrency. A technical-only change still identifies unchanged obligations and evidence. Ordinary bounded behavior clarification belongs in this package, not an invented historical requirements stage.
+Changed and preserved scenarios have clear rules, constraints, exclusions and observable acceptance outcomes. Technical-only changes still identify their preserved obligations.
 
-Apply imported decision rationale and concrete-convergence evidence. Explain changed/failed premises; valid settled decisions need not be re-interrogated. Existing behavior is evidence, not automatic intent. Affected macro decisions precede dependent micro design, which follows affected module foundations upward. Valid unchanged foundations need not be redesigned. Concrete structures, interfaces, topology, and sequences require their own applicable confirmation/reuse basis.
+Context and decisive rationale explain the transition, reuse and consequential tradeoffs. Concrete target views and definitions have been progressively agreed with the human or are supported by applicable unchanged references.
 
 ## Mandatory change assessment and complete targets
 
-Every dimension below is assessed as **Changed**, **Unchanged**, or **Unresolved**, with concrete scope and basis. Changed identifies transformation and complete target. Unchanged identifies a verified target reference/description and preservation rationale. Unresolved remains conversational and blocks readiness; it is not a placeholder row admitted to the model. Written assessments need exact human confirmation under the stage's write gate.
+The current-to-target comparison addresses macro topology, dataflow/state authority, concurrency/completion, macro sequences, micro ownership/sequences, file organization, and data/interface contracts. Each has a justified **Changed** or **Unchanged** assessment. **Unresolved** identifies a decision still needed before readiness.
 
-| Dimension | Owning technical section |
-| --- | --- |
-| Macro topology | Macro runtime and collaboration model — Topology |
-| Data flow and state authority | Macro runtime and collaboration model — Data flow and state authority |
-| Concurrency and completion | Macro runtime and collaboration model — Concurrency and ordering |
-| Macro sequences and flows | Macro runtime and collaboration model — Sequences |
-| Micro topology and ownership | Micro object and collaboration model — Topology and ownership |
-| Micro sequences and operations | Micro object and collaboration model — Sequences and operations |
-| File organization | File organization and responsibility tree |
-| Data and interface contracts | Complete data-structure definitions; Complete interface contracts |
-
-Apply full content criteria to every target, not merely its label. Macro/micro Mermaid topologies and sequences, complete target file tree, data definitions, and contracts remain mandatory. Unchanged topology proves nothing alone about ordering, ownership, payloads, or behavior. A mechanism's absence is an evidenced fact, not an omitted view; a single process or no-concurrency claim still needs a concrete execution model.
-
-Current views explain the transformation and are reconstructed when reliable sources are absent. Separate current and target when mixing them implies incompatible states or false ordering. Checked exact unchanged references avoid mechanical redraws; silence is not evidence of no impact. An unfamiliar reader must recover the complete scoped target without replaying amendments or conversation.
+The complete target satisfies the imported technical criteria: file tree, macro and micro Mermaid topology and sequences, full structures and contracts. Checked unchanged references may supply retained content. Separate current and target views where combining them would obscure the transition.
 
 ## Reuse, consolidation, migration, and exit
 
-Assess the resulting concept set, not just added lines. Explain whether affected concepts retain, absorb, merge, move, or replace responsibilities. New requirements alone do not justify layers, adapters, files, or second representations.
-
-Migrations/replacements identify final owners, affected callers and stored/transferred data, transition constraints, conversion/ordering/cutover feasibility, and obsolete-path exit. A compatibility interval needs a real requirement and explicit retirement/completion conditions, not indefinite parallel paths. No generic rollback/retry framework is implied.
-
-No affected invariant is unclaimed, truth duplicated, or obsolete path left without an exit. Keep this bounded to the authorized change rather than unrelated structural cleanup.
+The resulting concept set explains retained, moved, consolidated and replaced responsibilities. Migrations identify final owners, affected callers/data, transition constraints, cutover and obsolete-path exits. The target leaves one clear authority for each responsibility.
 
 ## Verification and execution readiness
 
-The imported flow plan covers changed behavior and consequential preserved collaboration using inspected real project means. Identify valid existing coverage and necessary revisions/additions; do not introduce another test standard or exhaustive TDD design.
+The limited macro-flow plan covers changed behavior and consequential preserved collaboration using actual project facilities. Current checks cover the baseline-to-target mapping, referenced definitions, callers and migration feasibility. Every diagram has current rendering and visual-inspection evidence.
 
-Current verification covers unchanged claims, baseline-to-target mappings, callers, migrations, and canonical references as well as changed views. Reused diagrams need rendering and visual-inspection evidence applicable to their exact content. Missing mandatory evidence blocks readiness; future production tests need not already exist or pass.
-
-Route rationale covers the whole understanding, implementation, verification, and repair scope, with settled owners, prerequisites, observable acceptance outcomes, and local/macro verification. A direct change fits one coherent implementation context; independent meaningful increments, real dependencies, or excessive combined reasoning require decomposition. Patch size or a route label alone establishes neither.
+A **direct** change fits one coherent context for implementation, verification and repair, with settled owners, prerequisites and acceptance. **Decomposed** work needs meaningful separate increments or dependency coordination. The route has a scope-based rationale; a bounded direct change needs no synthetic tickets.
 
 ## Canonical synchronization and authority
 
-Each target concept has one current authority. Existing canonical requirements, architecture, technical models, and decomposition references contain integrated confirmed changes with superseded rules removed and views/references synchronized. The change model explains transition and precisely references resulting targets; it is not an override layer. Necessary surrounding and cross-child context accompanies affected sections in one coordinated scoped package.
+Affected canonical requirements, architecture, technical and map sections contain the integrated target. The change model explains the transition and references those authorities; without older models, it supplies the scoped authority itself.
 
-Impact is explicit across contracts, callers, descendants, tickets, integration flows, approvals, unit/combined evidence, and acceptance. Source identities, scope, coverage, dependencies, and links remain consistent. Preservation of unaffected work has an actual basis; impact does not automatically restart every child/ticket. Changed premises invalidate affected evidence semantically even if metadata has not yet caught up. Target approval does not make existing code conforming or renew implementation evidence.
+Impact identifies affected callers, dependent work, acceptance, approvals and verification evidence, with a basis for what remains valid. The change package includes enough surrounding and cross-child context to assess these effects together. Approval of the target does not establish code conformance.
 
-Without older models, this package is the complete scoped authority. Future work consumes the latest integrated target, not a chain of change notes. A later broader canonical model absorbs definitions and becomes their referenced authority instead of adding competing targets.
+## Authorization, continuity, and evidence validity
 
-Before/after explanations, factual evidence, and decisive rationale accompany affected concepts. Entries provide source navigation, not approval or progress registries. Review records identify decisions and approvals, not competing design authority. An approved unimplemented target may coexist with old code; a code conformance defect is not a reason to change the specification to excuse it.
+Specification writes require prior human confirmation of the exact displayed content. Independent review and final human approval are separate. Original change/canonical authors and the original independent change reviewer retain the work through repairs; evidence and approval apply only while their underlying result and sources remain applicable.
 
 ## Delivery criteria
 
-Apply all local/imported obligations; these categories index coverage:
-
-1. Evidenced affected baseline, explicit drift/gaps, no invented history or accidental requirement promotion.
-2. Changed/preserved outcomes, bounded scope, decisive rationale, and concrete confirmation/reuse evidence.
-3. Justified macro assessments and complete topology, flow/state, concurrency, and sequence targets.
-4. Justified micro/file assessments and complete ownership, operation/sequence, and responsibility targets.
-5. Complete resulting data/interfaces, semantics, callers, and checked unchanged references.
-6. Justified concept reuse/consolidation, migrations/final owners, and obsolete-path exits.
-7. One synchronized authoritative target with current source scope and precise downstream impact.
-8. Current mandatory verification, owned flow coverage/prerequisites, scoped invalidation, and justified executable route.
-9. Attributable current source and confirmation/reuse evidence.
-
-Approval of this target is neither historical approval nor completed implementation.
+The integrated package explains the affected baseline, complete agreed target, transition and downstream impact, supported by current checks and a justified execution route. Context, decisive rationale and acceptance outcomes accompany the decisions they explain.

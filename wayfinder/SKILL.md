@@ -5,50 +5,62 @@ description: Coarsely split a large requirement into drillable clarification sco
 
 # Wayfinder
 
-Make a large requirement navigable. Approval covers a coarse map, not a technical solution.
+Make a large requirement navigable. Use LOW-resolution tentative topology to challenge the decomposition, not to approve a technical solution.
 
-## Load and establish the effort
+## 1. Establish the destination and evidence
 
-Read all of [WAYFINDER-MODEL.md](WAYFINDER-MODEL.md) and `artifact-layout` before questioning or construction. Load reference skills by registered name through the harness; resolve this stage's own files relative to its installed owner, never guessed configuration paths. Reuse intact current supplied resources; missing required material blocks work. Consumers importing this content standard resolve it directly through registered `wayfinder`, without loading this workflow or its prerequisites.
+Read [WAYFINDER-MODEL.md](WAYFINDER-MODEL.md) before modeling; it guides both construction and review. Load `artifact-layout` by registered name for the effort root and artifact ownership. Resolve resources through their installed skill owners, not assumed neighboring directories.
 
-Read `review-records` before the first submission or record creation, before finding-linked repair, or when recovering relevant existing review records; initial clarification alone does not require it. Layout owns file names, paths and ownership; the record resource owns admitted event contents and evidence representation. This stage owns permission, chronology and validity.
+Read the original request, confirmed decisions and relevant domain/repository evidence. Establish the practical problem, intended outcomes and selected scope. Separate current facts from the confirmed target. On resume, recover the current map and review state, including formal decisions that supersede its estimates.
 
-Inspect original requirements/decisions, supplied models and repository/domain evidence. Identify the practical problem, observable outcomes and selected scope, separating facts from hypotheses. If the work is already bounded for standalone clarification, explain why a map adds no value and stop with that handoff rather than create a hierarchy.
+Retain the original map author and a separate independent reviewer through repairs. If the work is already bounded for standalone requirements clarification, return that handoff instead of creating a hierarchy.
 
-For substantive questions use registered `ask-with-context` and its **Required question format and pre-send check**. Investigate accessible facts first; reconcile each answer and continue with the next ready material question in the same turn.
+## 2. Walk scenarios before naming children
 
-Use `artifact-layout` to establish/reuse the verified excluded effort root and its map, entry and review-record locations; the original map author is their single assigned writer. On resume, follow actual sources, code and evidence, not status labels. Reconcile changed formal authorities and previous decisions before editing.
+Walk an actor through an initiating event, starting state, decisions and observable outcome. Contrast current and intended behavior, identifying existing/preserved, new, changed, external and excluded scope. Follow variations where they expose different responsibilities or dependencies.
 
-Retain the original map author and a separate independent read-only reviewer across fixes, human revisions and resume, using real handles in the existing log's binding header. Attempt role resumption and input recovery before replacing a genuinely unavailable role; explain replacement, transfer current inputs and prior findings, and preserve the available counterpart. Speed, disagreement or repeated findings do not justify replacement. Missing independence blocks review.
+Group related rules and outcomes into candidate requirements slices. Test whether each slice can be understood without deciding its neighbors' rules. Assign shared meanings and cross-child flows to the future root requirements owner. The goal is independent clarification, not independent deployment.
 
-## Shape a drillable map
+## 3. Challenge the split with LOW-resolution topology
 
-Walk end-to-end business situations to identify candidate scopes and real dependencies. Sketch only enough tentative collaboration to test boundaries under the content standard. A child must be independently understandable for requirements clarification, not independently deployable. Preserve cross-child scenarios; revise or merge boundaries that require children to decide each other's rules privately.
+Sketch the participants, broad responsibility/state ownership and collaboration directions needed to expose coupling. Distinguish tentative estimates from established facts and imposed constraints.
 
-Before **every specification write**, the assigned author shows the exact content/patch, destinations, current basis, deletions and material consequences; obtains explicit human approval; and applies only that approved content. This includes creation, edits, moves, deletion, reorganization, diagrams, metadata, formatting/typos, synchronization, migration and reversion of entries or models, with no inferred exemptions. One confirmation may cover a fully displayed multi-file batch. Direction agreement, reviewer Pass and permission to continue do not authorize unseen text or dependent detail. Keep unconfirmed proposals, candidates and questions in conversation, never draft files or logs.
+For each connection, ask what rule or information crosses the boundary and which unresolved answer another slice needs. Revise or merge boundaries when scenarios reveal hidden coupling. Stop refining when further detail would choose a technical realization rather than improve the split.
 
-Immediately before applying, recheck both basis and proposal against the confirmation; any change requires renewed confirmation. Resuming authors and delegates recover concrete confirmation evidence, not remembered consent, and retain it in the submission or finding-linked repair record. Final human approval is separate; it may simultaneously confirm exact metadata changes only when displayed in that batch. Ordinary authorized code-only fixes and factual admitted records bypass this specification gate, but cannot amend specifications indirectly. Integrate confirmed content into its owning sections; `issue.md` remains definition/navigation, not a diary or approval registry.
+Keep business relationships, tentative collaboration and clarification prerequisites distinguishable. Explain what each prerequisite supplies and why it matters. Even a human-confirmed topology estimate remains tentative until formal architecture is developed from detailed requirements.
 
-For migration of existing mixed content, recover provenance and obtain exact confirmation before affected writes; missing provenance blocks only that migration. Preserve private history and ownership under the layout and record resources. Existing formal authorities supersede map estimates; refer conflicts to their owners rather than override them here.
+## 4. Resolve the next material boundary question
 
-## Heavyweight ownership and route
+Use registered `ask-with-context`, including its **Required question format and pre-send check**. Investigate accessible facts first, then choose a ready question that materially changes the scope, boundary or prerequisite.
 
-The root owns one effort, selected source package, shared requirements, overall architecture, **one root ticket set, implementation controller and delivery summary**. Children own complete scoped requirements/technical models at root-assigned paths and return to root; no child ticket sets or whole-work summaries. Root and child writers do not implicitly edit one another's files. Requirements boundaries need not match modules or tickets; a meaningful ticket may span children atomically.
+Resolve the coarse choices needed to begin useful requirements clarification. Leave later detailed choices with their owners rather than trying to solve the whole system here. After each answer, reconcile the affected scenarios and split and continue with the next ready material question. Keep candidate maps and unresolved proposals in conversation.
 
-The initial route is map → shared/child requirements → overall architecture → scoped technical models → root ticket set → root-controlled implementation/delivery. Shared and child requirements may co-evolve, but the selected complete composite requirements package needs independent Pass and human approval before architecture. Scoped technical work requires applicable approved requirements and architecture. Root ticket planning requires every complete approved technical realization needed for the selected scope. Local Passes do not prove composition; use requirements and ticket-set reviews rather than invent another generic package ceremony.
+## 5. Integrate the map and authorize its write
 
-Store selected scope, source paths/sections and verifiable identities, dependencies and excluded scope in root `issue.md` and review submissions, not an approval registry or new manifest. Each real prerequisite must be present; future unrelated detail may remain outside scope. Business conflicts return to requirements, global guarantees to architecture and realization conflicts to technical owners. Approved-source changes require synchronized authorities and affected evidence reassessment, never a child override. Later direct changes may reconstruct the real legacy baseline under `clarify-change`, without fictitious historical models or approvals. These are route constraints, not instructions to load or launch later SKILLs now.
+Organize confirmed conclusions around the overall journey and its scopes. Explain each scope's purpose, boundaries, outcomes and dependencies, with the background and actual rationale needed for consequential decisions. Integrate refinements into their owning sections rather than accumulating discussion history.
 
-## Review, approve and stop
+Before writing specification content, show the concrete proposed text or patch and its destination, explain material consequences, and obtain human confirmation. Apply the confirmed content; if the proposal changes, confirm it again. Do not persist candidate specifications.
 
-The assigned stage writer alone persists records at the locations defined by `artifact-layout`, using `review-records`. Persist submission and actual finding-linked repair evidence before review; collect and preserve all required reports, including blocked/failed outcomes, before repairs, other actions or advancement. Record reviewer dispositions before dependent work or handoff, and surface consequential repairs with record links. A fix round is not a stopping point or reason to rotate reviewers. Missing required evidence or independence blocks advancement.
+Use Mermaid to explain business flow and scope, including tentative collaboration when it influenced the split. Render the views and visually inspect them against the narrative; retain the output and inspection evidence.
 
-Keep exact current result/source identities, including relevant dirty/untracked code, applicable throughout review and approval. A metadata-only difference may be excluded from the reviewed digest or explicitly explained; it still needs write confirmation. Substantive result, source, scope or package-membership changes immediately invalidate affected evidence and approval even while status text awaits permission. Retain unaffected approval only with an actual impact basis; preserve comparison evidence or disclose its absence.
+## 6. Make the heavyweight handoff navigable
 
-1. Walk representative journeys through the complete map. Check scope coverage, dependencies and source validity; actually render and visually inspect every required current Mermaid view. Missing mandatory evidence or a business choice blocking the selected requirements handoff blocks readiness; explicitly owned later choices need not be solved now.
-2. Persist the submission using `review-records`, then send [reviewer-prompt.md](reviewer-prompt.md) with the complete map, standards, approved sources, original requirement evidence, concrete prior write confirmations (including newly written maps), actual verification/limits and prior findings. Later diffs are communication, not a reduction of review scope.
-3. Preserve each report. The original author handles repairs with exact write confirmation and renewed evidence; the **same reviewer** checks the complete current scope, prior findings and regressions until `Pass` has no findings/blockers. Only the reviewer disposes findings and corrects incomplete reports. Resumption requires current independent assessment even for a previously approved map.
-4. Confirm reviewed result/source identities still match. Present exact scope, consequential boundary decisions, evidence and coarse-stage limits for **explicit final human approval**, distinct from direction agreement or repair consent. Human revisions return through the original pair. Evidenced approval may remain applicable to an unchanged resumed result after current review. Apply semantic invalidation immediately to affected approvals/evidence, even if metadata correction awaits confirmation; retain unrelated valid evidence.
-5. Record exact approval and return map/source identities, selected next requirements scope, inherited constraints separately from hypotheses, governing references and owned later unknowns. A blocked return identifies current blockers and missing evidence, not readiness.
+Use root `issue.md` to identify the selected sources, scope and dependencies. Preserve the route:
 
-Stop. Only separately authorized `clarify-requirements` begins the next stage; naming or approving a route does not run it. Root assigns child paths when that work begins. Create no child placeholders, formal architecture/technical models, tickets, code or delivery summary here.
+1. `clarify-requirements` develops shared and child requirements. Root owns shared meanings and cross-child flows; children own scoped detail. They may co-evolve, but the selected composed package needs review and human approval before architecture.
+2. `clarify-architecture` establishes overall architecture from that approved requirements package.
+3. `clarify-technical-design` develops scoped realizations from applicable approved requirements and architecture.
+4. `split-tickets` builds one root ticket set from the complete approved technical scope, followed by root-controlled implementation and one delivery summary.
+
+Children retain their assigned model ownership and return to root; they do not create separate ticket sets or whole-work summaries. Return conflicts to the owning stage. Map approval establishes a useful requirements handoff, not approval of these later stages.
+
+## 7. Review, repair, obtain approval and stop
+
+Load registered `review-records` for recording the review and repair loop, using the locations from `artifact-layout`.
+
+1. Submit the complete current map, original requirements, confirmed decisions, source basis, human confirmations and diagram evidence to the original independent reviewer using [reviewer-prompt.md](reviewer-prompt.md).
+2. Record findings and return repairs to the original author. Record repair decisions, including those made autonomously within the confirmed scope. Confirm specification changes through step 5, then return the result to the same reviewer. Continue until `Pass`; the reviewer assesses closure and regressions.
+3. Present the reviewed map, consequential boundaries and coarse-stage limits for final human approval, separate from permission to write. Human revisions return through the same author/reviewer loop. Review and approval must apply to the current result.
+4. Record approval and return the map, selected next requirements scope, inherited constraints and owned later questions. State any remaining blockers plainly.
+
+Stop. Only separately authorized `clarify-requirements` begins the next stage; naming or approving the route does not launch it.
