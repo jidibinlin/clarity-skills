@@ -1,65 +1,62 @@
 # Architecture Model: Authoring and Review Standard
 
-This standard belongs to `clarify-architecture`. Load that skill by name in reference-only mode when another stage needs it; use the resolved companion location or complete current supplied content under `workflow-artifacts` loading rules. Reading content does not execute architecture prerequisites or approval steps. [SKILL.md](SKILL.md) owns execution; this document owns architecture content and evidence.
+Architecture is the root global technical authority for the selected effort, not another requirements model or an expanded topology estimate. This resource specifies content and evidence; its consuming stage owns execution and artifact permissions. The registered `artifact-layout` reference skill, defines file locations and ownership.
 
-## Shared rules and selective technical reuse
+## Selective technical content
 
-Before every role starts or resumes, load `workflow-artifacts` and read its entire WORKFLOW-ARTIFACTS.md. It owns privacy, hierarchy, writer ownership, source identity, records, scoped approvals, and impact propagation. Architecture is the clean root global technical authority, not a second requirement model or an expanded Wayfinder estimate.
+Read these sections, including subsections, directly from registered `clarify-technical-design`'s `TECHNICAL-MODEL.md` before constructing or reviewing architecture:
 
-Its **Human-confirmed specification writes** gate governs all initial architecture and entry/index writes, diagrams, declarations, references, root/child/model synchronization, deletions, repairs, and embedded status/approval metadata. Propose exact content or patches in the conversation and obtain explicit human confirmation before writing only that change. Standards below remain full authoring guidance; they are not authority to populate a speculative draft. Unconfirmed choices, answers, and placeholders stay in the conversation, never files or review logs. No author-chosen exemption applies.
+- **Approved basis and decision rationale**.
+- **Macro runtime and collaboration model**.
+- **Overall workflow integration test plan**.
+- **Consistency, evidence, and clean integration**.
 
-Before investigation, decisions, drafting, or review, load `clarify-technical-design` by name in **reference-only** mode and read these TECHNICAL-MODEL.md sections completely:
+Resolve imported sections relative to the actual installed `clarify-technical-design` owner or reuse intact current supplied content; never guess configuration paths. Missing required sources block work. Importing these sections does not load the owner's SKILL, workflow, or prerequisites.
 
-- **Approved basis and decision rationale**, including **Progressive design convergence** and **Constraints for first-pass implementation**: progressively discussed concrete global proposals, evidence-grounded reuse, consequential quality choices, proportional background, actual deciding rationale, and distinct facts/proposals/decisions.
-- **Macro runtime and collaboration model**, all subsections: complete relevant topology, data movement/state authority, actual concurrency/ordering, and macro sequences.
-- **Overall workflow integration test plan**: project investigation before selection, few meaningful overall flows, actual collaboration versus substitutions, planned tests versus current evidence.
-- **Consistency, evidence, and clean integration**: scenario traces, accurate rendered and visually inspected diagrams, checked references, feasibility evidence, and integrated current authority.
-
-Apply those content rules to the architecture scope below. Importing them neither starts technical-stage execution nor demands a completed child micro model at architecture approval. In imported cross-view rules, trace macro responsibilities to the explicit child realization assignments; complete child file trees, micro diagrams, data declarations, and implementation interfaces are delivered at child technical gates. This scope boundary does not permit deferring a cross-child decision needed to design those children.
+Apply them at **global architecture resolution**: cross-view checks trace macro responsibilities to explicit child realization assignments. Child file trees, micro diagrams, complete local declarations, and implementation interfaces belong to child technical design, not this gate. No global choice needed for compatible child design may be deferred under that boundary.
 
 ## Approved basis and global completeness
 
-Use the root entry to identify the selected shared/child requirements package, exact current sources/sections/revisions and real prerequisites. Resolve applicable composite review and explicit human approval through the models and their object review logs, not approval-record navigation in the entry. Preserve approved behavior, quantitative bounds, exceptions, and exclusions. Map approval, rough topology, code's current limitations, and local child Passes are not substitutes. Initial architecture requires actually approved clarified requirements; an authorized coordinated scoped-change route may import this content standard under its own gates without inventing historical approvals.
+Identify the selected root shared/child requirements, necessary dependencies, and exclusions by exact paths/sections and digest or verified revision, with applicable composite independent review and explicit human approval evidence. Preserve behavior, bounds, exceptions, and exclusions. Wayfinder approval, rough topology, code limitations, and a collection of child-local Passes do not establish an approved requirements package. A coordinated change may apply this content standard under its own gate without fictional history.
 
-Explain relevant current runtime/code structure and reusable owners with repository evidence. Settle the target global organization and meaningful cutovers, including displaced responsibilities and affected callers. Model the selected scope and necessary interactions, not every future map idea or the whole repository. A business requirement boundary need not be a module, process, code owner, or ticket boundary.
+Ground reusable owners, changed global organization, displaced responsibilities, and affected callers in inspected runtime/code evidence. Scope covers the selected effort and necessary interactions, not future map ideas. Requirements need not correspond one-to-one to processes, modules, code owners, or tickets.
 
-The architecture must contain:
-
-- **Macro topology:** all relevant actual processes, modules and external participants, their responsibilities and boundaries, selected communication mechanisms, and existing/new/changed/external scope distinctions. A single-process design still has an explicit runtime boundary; do not invent distribution.
-- **Dataflow and state authority:** origins, transformations, destinations, representations at crossings, authoritative writes and invariant owners; distinguish dependency, control, and data arrows.
-- **Concurrency and macro sequences:** real execution contexts, permitted overlap, selected coordination mechanisms and their scope, ordering, lifetime/completion, and relevant capacity/error/termination behavior. Cover every distinct approved cross-child interaction pattern and consequential alternatives without false prerequisites or speculative recovery features.
-- **Shared technical guarantees and boundary contracts:** the obligations children can rely on and must preserve, with responsibility ownership as specified below.
-- **Overall integration-flow plan:** the small project-grounded set below, not a detailed TDD strategy.
-
-Use the imported macro semantic and Mermaid requirements in full. Provide complete relevant topology and sequence diagrams, plus a separate dataflow view when one topology cannot express it clearly. Split complex views for readability without losing necessary paths, boundaries, or cross-view consistency.
+The global model includes complete scoped Mermaid topology and sequences, explicit dataflow/state authority, and actual concurrency/ordering mechanisms. A separate flow view is needed when topology cannot express data semantics clearly. Split complex views without losing paths or consistency. Concrete confirmation/reuse evidence covers actual global views, guarantees, and mechanisms—not just technology labels. Child foundation-up micro design follows those settled macro decisions.
 
 ## Global decisions versus owned child realization
 
-Architecture settles every global choice and caller-visible cross-boundary guarantee needed to design children. For each shared responsibility or crossing, specify its owning runtime/module, participating children, purpose, semantic inputs/results/state effects, invariants, completion and failure/rejection propagation, ordering/concurrency, ownership/lifetime, and applicable compatibility or quantitative constraints. Define the chosen mechanism and why it establishes the guarantee. Include exact payload, protocol, or representation details here when children need them to design compatible behavior; a label such as “shared API later” is not a contract.
+Settle every global decision and cross-boundary caller-visible guarantee needed by children. Each shared responsibility or crossing identifies:
 
-Distinguish these settled global decisions from later **child implementation-detail design**. For each necessary shared concrete definition, interface realization, or code responsibility not fully specified here, assign exactly one owning child technical-model path/section, identify consumers and design dependencies, and state the fixed contract it must realize and the detail still to specify. The assignment is a design obligation, not a fake existing source reference or a ticket. A child may own shared code serving multiple business requirements; do not create duplicate definitions in each child or infer ownership from directory names.
+- Owning runtime/module, participating children, purpose, semantic inputs/results, state effects, and invariant authority.
+- Completion, rejection/errors and propagation, ordering/concurrency, ownership/lifetime, and applicable compatibility or quantitative constraints.
+- Selected mechanism and the concrete reason it establishes these guarantees.
+- Exact payload/protocol/representation details wherever compatible child design depends on them.
 
-Only detail that cannot change a settled global guarantee or another child's design basis may remain for that owner. If a prospective child cannot design correctly without a missing boundary choice, resolve it here before approval. Local objects, algorithms, full declarations, file assignments and operation contracts are still mandatory in applicable child technical models; they must be fully specified and compatibly reviewed/approved before global tickets. No production-design choice remains for coding. Once a concrete definition is settled, reference its single authority precisely rather than copying it into consumers or maintaining competing versions here.
+A promise to define a shared API later is not a boundary contract.
 
-Route conflicts to their owning requirements, architecture, or child technical model, with exact human-confirmed reference/model corrections and renewed applicable gates under WORKFLOW-ARTIFACTS.md. Record actual design revisions and their review in the owning upstream model and object log; the originating review record only links the referral and approved resolution. Keep unresolved choices in the conversation with their owners and effects on the current scope; preview exact updates for settled answers and necessary rationale/evidence, obtain write confirmation, and integrate only that content without a duplicate queue. The original author proposes document corrections, the human confirms their exact patch, and the same reviewer reassesses the resulting model. Neither local exception notes nor review records override authority. Use current source identities and an explicit impact basis to distinguish affected dependents from unrelated valid approvals.
+Every necessary concrete shared definition, interface realization, and code responsibility has **exactly one owning child technical-model path/section**, with consumers and design dependencies identified. Distinguish settled obligations from remaining local detail. This is a design assignment, not a ticket or a fictional reference to an already existing definition. Ownership cannot be inferred from directory names; a child may own shared code serving several requirements.
+
+Only detail that cannot change a settled guarantee or another child's design basis may remain local. Local objects, algorithms, full declarations, file assignments, and operation contracts must still be complete at the child technical gate, never left to coding. Reference each settled concrete definition at its single authority instead of duplicating it into consumers. All scoped child/shared realizations need compatible review and approval before one root ticket set.
+
+Requirements, architecture, and child models remain distinct authorities. A local exception, appendix, or review record cannot override an upstream guarantee. Consistency evidence identifies affected owners and dependencies and explains why any claimed unaffected scope remains valid.
 
 ## Overall workflow integration coverage
 
-Apply the imported **Overall workflow integration test plan** without expanding it. Inspect existing project means first; select a few representative end-to-end flows across the actual participating children/runtime owners, tied to approved scenarios and macro sequences. Name starting conditions, entry/action, real participants and substituted dependencies, expected observable outcomes, intended test locations and existing invocation/setup, plus the owning child design responsibility for realizing the flow and any necessary collaboration.
+Apply the imported limited macro-flow plan using inspected project guidance, runner/configuration, representative tests, setup, and actual invocation. Each selected cross-child flow additionally identifies the child responsible for realizing its coverage and the cooperation required. Children inherit exact flow references and complete their participation without duplicating a global suite.
 
-Resolve an actual capability gap through the minimal justified technical choice; do not invent a harness from a framework name. Children inherit these overall flows by exact reference and complete their scoped participation rather than duplicating a global suite. Detailed fixtures/assertions, unit cases and exhaustive boundary matrices belong to later implementation/TDD. The plan is not proof of execution, and future unwritten tests are not failed current architecture verification.
+Real and substituted collaboration have different evidentiary reach. This plan neither proves future tests ran nor requires exhaustive matrices or child TDD design. Actual current diagram rendering/visual inspection, reference/scenario checks, and necessary feasibility evidence remain mandatory.
 
 ## Delivery criteria
 
-Author from these criteria and assess the same complete current model on every independent review round. Coverage headings index the content rules, not replace them:
+Apply all local and imported obligations; these categories index coverage:
 
-1. **Approved basis and scope:** exact applicable requirements package, composite review/human approval evidence, real prerequisites and exclusions; no map-as-approval or invented business decisions.
-2. **Existing-system fit, rationale and convergence:** inspected runtime/code/testing facts ground reuse, changes, cutovers and consequential choices, with sufficient background and actual deciding basis; progressive convergence works top-down from scoped global topology and boundaries to the solution directions needed for consequential technical problems, with applicable concrete confirmation or reuse evidence. Technology labels or direction agreement followed by a finished architecture awaiting final confirmation are insufficient. Child bottom-up micro design remains at its assigned technical gate.
-3. **Macro completeness:** complete relevant topology and sequences, explicit dataflow/state authority and concrete concurrency/ordering mechanisms, consistent with approved scenarios.
-4. **Shared guarantees and ownership:** clear cross-child boundary contracts and invariant/responsibility owners; every global decision needed to design children is settled.
-5. **Realization boundary and closure:** exactly one child design owner per shared concrete realization, explicit consumers/dependencies and remaining child detail, no missing prerequisite disguised as local detail or design deferred to coding.
-6. **Overall integration coverage:** project means investigated first; a few meaningful overall flows with real/substituted collaboration, outcomes, locations, invocation and scoped realization ownership.
-7. **Consistency and verification:** scenarios trace through consistent views; references and necessary feasibility assumptions have evidence; every Mermaid diagram has current rendering and visual-inspection evidence. Missing required access/rendering/inspection blocks the gate honestly.
-8. **Clean, reviewable handoff and records:** integrated current authority with precise accessible references, proportional background and actual rationale; concrete prior human confirmation matches every actual specification write, including repairs and metadata; shared record/source/ownership rules satisfied for records due now, not the review report or approval still to occur.
+1. Exact approved requirements package, necessary dependencies, scope, and exclusions.
+2. Inspected existing-system fit, justified reuse/cutovers/mechanisms, decisive rationale, and concrete global confirmation or valid reuse.
+3. Complete consistent macro topology, sequences, dataflow/state authority, and concurrency.
+4. Settled cross-child contracts, invariant owners, and global design prerequisites.
+5. Unique shared realization owners, consumers/dependencies, fixed obligations, and legitimate remaining local detail.
+6. A few meaningful project-grounded integration flows, actual limits, and child coverage ownership.
+7. Scenario/reference consistency, necessary feasibility evidence, and current rendering plus visual inspection of every Mermaid diagram.
+8. Clean integrated authority, accessible current sources, and attributable confirmation/reuse evidence.
 
-Pass concerns this selected architecture, not whole-effort delivery. Final child design, global ticket planning, combined implementation verification, overall independent review and human acceptance retain their own gates.
+Complete architecture is not complete child design or completed implementation.

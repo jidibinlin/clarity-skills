@@ -1,213 +1,142 @@
 # Technical Model: Authoring and Review Standard
 
-This standard belongs to the `clarify-technical-design` skill. Load that skill by name in reference-only mode when another stage needs this resource; use its resolved companion location or complete current supplied content under the `workflow-artifacts` loading rules. Reading this standard does not start its author's workflow or require that workflow's execution prerequisites. The consuming stage determines the authorized scope and role; actual stage execution retains its existing gates.
+Content and evidence criteria for a complete scoped production design. Read this resource directly from the actual installed `clarify-technical-design` owner; an import does not load its SKILL, workflow, or prerequisites. The consuming stage owns execution and artifact permissions; `artifact-layout` defines file locations and ownership.
 
 ## Purpose and completeness
 
-This is the authoritative content standard for technical modeling and independent review. Apply it while investigating, clarifying, writing, and repairing; review uses the same requirements. The consuming execution entry determines the authorized scope, prerequisites, and approval gates.
+The target settles structure, object decomposition, algorithms, representations, contracts, coordination, resources, and failure handling before coding. Implementation translates it; it does not finish production design. Scope includes necessary interactions, not an unrelated repository inventory or speculative redesign.
 
-Before starting or resuming any role, load `workflow-artifacts` by name and read its entire `WORKFLOW-ARTIFACTS.md`. It owns storage, records, revision/approval identity, and transitions. [SKILL.md](SKILL.md) owns the initial technical-stage workflow and artifact paths; importing this content alone does not impose its execution prerequisites. Apply its **Human-confirmed specification writes** before every document mutation, including first drafts, repairs, related views and metadata. This content standard supplies no exception.
-
-The artifact must settle the scoped technical design before implementation. It describes the intended final system and code structure, not merely an implementation approach, a set of options, or a sequence of tickets. Do not reserve file organization, object decomposition, algorithms, data representation, interface details, coordination, or failure handling for the coding stage. Implementation translates the settled design into code; it does not complete the design.
-
-"Complete" means complete for the approved change and its necessary interactions, not an inventory or redesign of the entire repository. Identify that scope explicitly. Reuse unchanged code and definitions through precise, accessible references. A reference must resolve the design question without guessing; a generic link to a package, an inaccessible definition, or an unspecified version of an external contract is not sufficient. Do not add speculative architecture to make a diagram or checklist look comprehensive.
-
-The following are mandatory, including for small changes:
-
-- A complete target file tree with file responsibilities and code ownership.
-- Macro topology and macro sequence diagrams.
-- Explicit data-flow direction and concurrency semantics.
-- Micro topology and micro sequence diagrams.
-- Complete data-structure definitions.
-- Complete interface contracts.
-- A project-grounded plan for a small set of overall workflow integration tests.
-- A coherent account of the technical decisions connecting these views, with evidence and verification sufficient to review them.
-
-Scale the size of each view to the actual system; do not omit a required view because the change is small. Do not invent processes, asynchronous messages, objects, or states merely to fill a view. Label the macro and micro views distinctly so neither is silently substituted for the other.
+Every scoped target includes a complete file-responsibility tree, distinctly labeled macro and micro Mermaid topology and sequence views, dataflow/concurrency semantics, complete data and interface definitions, and a project-grounded overall-flow test plan. Scale views to reality without omitting them or inventing infrastructure. Exact accessible unchanged definitions may be referenced after checking applicability, including external contract versions; a package link is not a definition.
 
 ## Heavyweight child realization
 
-When this is an initial heavyweight child design, identify the applicable approved shared/child requirements and approved architecture through the root entry’s exact source package and evidence. Their selected scope and real prerequisites govern this model; future map ideas do not. Follow WORKFLOW-ARTIFACTS.md for ownership, current source identity, propagation, and renewed affected gates. This section does not add heavyweight prerequisites to standalone work or the coordinated scoped-change route.
+Initial child design identifies the root's approved shared/child requirements package and architecture, with current review/approval evidence. This does not impose heavyweight history on standalone work or coordinated change.
 
-Preserve every mandatory scoped view and definition above. Show local macro collaboration and its connections to the overall architecture, then complete micro topology/sequences, the target file-responsibility tree, data structures, and interfaces. Cite inherited definitions by precise owner/path/section rather than duplicating them; resolve their exact current revisions through the root source package and approval records under WORKFLOW-ARTIFACTS.md, not inline mutually recursive model digests. A reference must provide the actual complete definition and semantics required here. Architecture approval is not permission to leave child production design for coding.
+Connect every local view to inherited global guarantees by exact owner/path/section and verified revision. Each concrete shared definition, interface realization, and code responsibility has exactly one child technical owner; consumers reference that complete authority. Architecture approval does not complete child design. Requirements, modules, children, and tickets need not map one-to-one.
 
-Honor architecture’s global guarantees and explicit realization assignments. Each shared concrete definition, interface, or code responsibility has one owning child technical model, even when several business requirements use it. The owner specifies its complete realization and consumers cite it. A child may own shared code; children need not map one-to-one to modules or tickets. Dependent child drafts may coordinate around explicit proposals, but their final gates require settled, compatible referenced definitions and applicable approval evidence before global ticketing. No circular approval prerequisite is needed: mutually dependent current designs may be reviewed and human-approved in one explicitly identified technical package, with every child’s full criteria assessed. This is not an extra generic package stage.
-
-Trace inherited cross-boundary guarantees to actual local operations, state owners, mechanisms, and project-grounded integration coverage. Reuse the architecture’s overall flow plan by exact reference and assign the child’s participation/test ownership; add only needed scoped flows, not a duplicate suite. Return conflicts to the requirement, architecture, or technical owner and renew affected gates; local overrides and appendices cannot change shared authority.
+Trace guarantees to local operations, mechanisms, state owners, and integration participation. Inherit global flows by exact reference and add only necessary local coverage. Dependent children need compatible settled definitions, not circular prerequisites demanding that each be approved first: mutually dependent designs may constitute one explicitly scoped review/approval package assessing every child's full criteria. All applicable child/shared realizations must be complete and approved before the single root ticket set.
 
 ## Approved basis and decision rationale
 
-Identify governing requirements, their content identity, scope, essential references, and actual decision authority. The consuming route determines approval evidence: standalone initial design realizes approved requirements; initial heavyweight child design also realizes approved architecture under **Heavyweight child realization**; the change route may establish confirmed requirements within its coordinated package. Preserve terms, constraints, prohibitions, exceptions, quantitative bounds, and acceptance scenarios. Do not decide a missing business rule or replace intended behavior with what code happens to support.
+Identify governing requirements, exact identities, scope, essential references, and decision authority. Preserve terminology, constraints, prohibitions, exceptions, quantitative bounds, and acceptance scenarios. Initial standalone design realizes approved requirements; initial heavyweight design also realizes approved architecture; coordinated change may establish confirmed requirements in its own package. Code limitations and technical preferences do not decide business rules.
 
-Inspect the relevant existing code before proposing new concepts. Identify reusable processes, modules, objects, types, and contracts with repository references. Describe the affected current structure only as needed to explain the target design, compatibility, or a real transition constraint. Explain why a proposed new abstraction is necessary, why an existing one cannot take the responsibility, and whether a superseded abstraction or duplicate representation must disappear.
-
-Lead with the decision, then provide the background and actual decisive basis needed by an unfamiliar human or agent. Give consequential tradeoffs their relevant constraints, alternatives, and accepted consequences; do not repeat empty background/rationale headings for self-explanatory facts. Distinguish inspected facts, imposed constraints, confirmed choices, proposals, and unverified assumptions. Generic claims such as "best practice," "flexible," or "clean architecture" do not establish a decision's basis.
+Ground concepts in inspected processes, modules, objects, types, contracts, and callers. Cite reusable owners; justify each new abstraction by the need existing owners cannot serve. Identify displaced concepts and duplicate representations to retire. Lead each consequential decision with its background, decisive evidence/constraint, credible alternatives, and accepted consequences. Distinguish facts, constraints, confirmed choices, proposals, and assumptions; generic virtues are not rationale.
 
 ### Progressive design convergence
 
-Technical design is a progressive human-facing decision process, not a preliminary direction interview followed by autonomous detailed design and one final confirmation. Apply this rule at the consuming stage’s authorized resolution: global architecture settles global choices; child technical design settles its concrete realization.
+A reviewable design has concrete human-confirmation evidence for its consequential groups, not merely agreement on a direction followed by a privately completed blueprint. Evidence identifies the actual topology, sequences, declarations, file responsibilities, and contracts shown, the agreed scope, and its current applicability. Coupled views may form one group; no fixed round count or question per field is required.
 
-Work in bounded coherent decision groups, starting with the unresolved choice that most constrains subsequent design. Show a concrete proposal and the exact intended document content in the conversation, explain its necessary background, decisive basis and consequences, and obtain explicit human confirmation before writing that content or refining dependent groups. Related topology, sequence, data and contract choices may be discussed together; this is neither a fixed per-view approval ceremony nor a question for every field or name. Low-resolution look-ahead may expose dependencies or feasibility risks, but must not become a complete downstream blueprint before its premises are confirmed. Marking that blueprint Draft or Proposed does not satisfy this process.
-
-Actually present new or changed macro topology, micro object/collaboration topology, core sequences, declarations, file responsibilities and contracts as their groups are decided. Use scoped Mermaid topology/sequence diagrams, complete declarations and file-tree/contract views as appropriate, not only prose direction labels or a link to the finished model. Macro agreement does not confirm micro structure; a sequence does not substitute for a topology. Make existing facts, proposed changes and the exact confirmation scope distinguishable. Mandatory final views must still become complete through these exchanges.
-
-Partial agreement confirms only the stated choice. Keep unresolved coupled semantics or ownership open; do not call a declaration or group fully confirmed while asking to defer part of its meaning. Later groups may refine a settled choice, but cannot supply a missing premise that was needed to confirm it.
-
-After each response, revise proposed content and affected views in the conversation. Write only the exact content explicitly confirmed under the shared gate, then continue the next group. If a discovery changes a confirmed premise, explain the impact and reopen only affected decisions before extending dependents; no silent reinterpretation or document repair before confirmation. Conventions, feasibility evidence and one recommended design justify a proposal, not write permission.
-
-Inspected exact unchanged reuse and already explicitly confirmed concrete designs need no repeated question while their structure, semantics and governing basis remain applicable. These exceptions avoid re-deciding settled design, never the exact document-write gate. An unchanged shape with changed meaning, ownership, invariant or use contract does not qualify. Direction-only agreement, silence, or permission to continue before the concrete proposal was shown is insufficient. Keep concise, attributable confirmation or reuse evidence beside each owning section/group, identifying what was actually shown and agreed; do not create a confirmation ledger, decision-tree inventory, interview log or state file. Independent review checks this basis and technical completeness; final whole-model approval cannot replace the intervening design decisions.
+Inspected exact unchanged reuse and previously confirmed concrete design remain valid while their structure, semantics, and governing basis remain applicable. Changed ownership, meaning, invariants, or use contracts invalidate that basis even when shape is unchanged. Direction agreement, silence, and permission given before seeing the proposal do not confirm concrete detail. Keep concise confirmation/reuse provenance beside the owning content, without a separate ledger or interview chronology.
 
 #### Macro-first, dependency-led micro design
 
-The main baseline is macro before micro. Work top-down from approved scenarios to the scoped process/module topology, responsibility and state boundaries, dataflow/concurrency guarantees, and the solution directions needed for the consequential technical problems. Explain which problem each selected mechanism solves and why it fits the constraints; technology names alone do not settle a solution. Show and confirm these concrete macro choices, or establish applicable unchanged/confirmed reuse, before detailed micro design that depends on them. This is scoped architectural convergence, not a demand to freeze every micro detail or redesign the whole system.
+Macro decisions establish process/module topology, responsibility/state boundaries, dataflow/concurrency guarantees, and consequential mechanisms from approved scenarios. Their confirmed or validly reused basis precedes dependent micro detail; technology names alone explain no mechanism.
 
-Within those macro constraints, design micro structure bottom-up by actual module dependencies: settle the needed foundational configuration, stored/state representations, interfaces and basic operations/flows before the higher-level module collaboration that consumes them. Identify which prerequisite a group settles and which later design it enables. Bottom-up describes design dependencies, not call-stack order, file order, a ticket sequence, or a reason to invent generic infrastructure. Use the approved scenarios and coarse consumer needs to bound the foundations; do not design every possible configuration or storage abstraction first. Existing valid foundations are reused, not re-grilled.
+Micro design follows actual module dependencies from foundations upward: required configuration, stored/state representations, interfaces, and basic operations precede collaborations consuming them. Approved scenarios and coarse consumer needs bound these foundations; generic infrastructure is not a prerequisite by default. This is design dependency order, not call-stack, file, implementation, or ticket order.
 
-Iterate within each module over data structures and interfaces together with concrete code-flow sequences, then compose settled capabilities into dependent modules and cross-module flows. Data/declaration-first is the default heuristic, not a mandatory serial pass over all schemas before all interfaces and all sequences. The agent chooses the next entry point by which uncertainty most constrains the design: a sequence may need to expose lifecycle, ownership or completion semantics before a safe representation or contract can be proposed. Explain that dependency briefly in the exchange, rather than asking the human to choose the questioning order. Keep mutually dependent data, contract and sequence choices in a bounded joint group where necessary; neither direction permits silently settling one view from another’s approval.
-
-Each confirmed group should remove alternatives for its actual dependents. Check the emerging micro model back against the macro guarantees; if foundational or module-level evidence invalidates one, explain the impact and reopen the affected macro choice with its owner before continuing dependent detail. Preserve unrelated decisions. This is a technical-design reasoning and questioning order, not an implementation plan or an additional chronological artifact.
+Within a module, data, interfaces, topology, and sequences inform one another. Data/declaration-first is a heuristic: sequence-first is appropriate when lifecycle, ownership, or completion determines representation; coupled choices can be one bounded group. The rationale explains the actual dependency. Micro detail must realize macro guarantees; a changed premise requires a revised authoritative decision, not a silently weakened guarantee.
 
 ### Constraints for first-pass implementation
 
-The approved technical model is the normative basis for later implementation and code-conformance review. Settle consequential quality constraints here, before coding: canonical state and invariant owners, reuse of existing concepts, responsibility locality, allowed collaboration, error and resource ownership, and retirement of replaced paths. Integrate each constraint and its actual rationale into the owning design section; do not create a parallel quality checklist or prescribe every local statement. Reference applicable repository rules precisely and resolve conflicts before approval.
+Specify consequential quality constraints where owned: canonical invariant/state owners, concept reuse, responsibility locality, allowed collaboration, error/resource ownership, and retirement of replaced paths. Cite applicable repository rules and resolve conflicts. These guide the first implementation, not a later structural cleanup.
 
-Make these constraints concrete enough to guide the first implementation, rather than planning to repair its structure during code review. Local expression choices may remain with the implementer when they preserve the specified structure, contracts, algorithms, and guarantees. A later reviewer must tie required corrections to this approved design, its requirements basis, applicable repository rules, or the shared implementation/verification standard, not introduce a preferred architecture or an unstated style rule. If evidence exposes a defective or incomplete design, return it to clarification and renewed approval; neither silently implement a different design nor approve incorrect behavior merely because the code follows the document.
+Local expression choices remain with implementers only when structure, algorithms, contracts, and guarantees stay intact. Conformance findings need a basis in the design, requirements, repository rules, or applicable implementation/verification standard, not a preferred architecture. An incomplete or defective design needs clarification; neither silent redesign nor faithful implementation of known incorrect behavior is acceptable.
 
 ## File organization and responsibility tree
 
-Provide a repository-relative file tree of the intended final organization. Every file participating in the scoped design must have an identified responsibility, either annotated in the tree or linked directly to a responsibility description. Include the concrete locations of new and modified code, definitions and contracts, and the unchanged files necessary to explain integration. Identify the verification/test locations needed by the design without turning them into implementation tickets. Explicitly exclude unrelated repository areas rather than using an incomplete tree to conceal missing design.
+Provide the complete repository-relative target tree for scoped code, contracts, unchanged integration files, and needed verification/test locations. Assign every participating file its responsibility, objects/definitions/operations, and macro/micro relationships. Explicitly exclude unrelated areas.
 
-For each participating file, establish:
-
-- The responsibility it owns and the objects, definitions, or operations assigned to it.
-- Which existing role is preserved, changed, or replaced, when that distinction is necessary to understand the design.
-- Its relationship to the runtime or module responsibilities shown in the diagrams.
-
-Show the disposition of replaced or relocated code separately from the target tree, so removed files are not mistaken for part of the final structure. Name the final owner of migrated responsibilities and affected callers; do not leave a new implementation alongside an undefined obsolete path. This describes the structural cutover, not a chronological change log or task list.
-
-A layer label such as "business logic" is not a file assignment. A proposed helper with no location or responsibility is unfinished design. Keep closely related state, behavior, and invariants together. If an object's implementation spans files, explain the actual reason and the responsibility of each part; do not split methods mechanically or create pass-through files without a role. Follow the repository's language and organization conventions unless a concrete requirement justifies changing them.
+Describe removals/relocations separately from the final tree, with final owners, migrated callers, and obsolete-path exits. Keep related state, behavior, and invariants together. Explain real reasons for multi-file objects and each part's role; a layer label, unlocated helper, pass-through file, or mechanical method split is not ownership. Follow repository conventions unless a concrete requirement justifies departure.
 
 ## Macro runtime and collaboration model
 
 ### Topology
 
-Provide a complete Mermaid topology view of the scoped business collaboration. Identify processes and their boundaries, participating modules within them, external participants, and the communication or dependency relationships relevant to the change. Distinguish an object or module from a separately running process; a box named "worker" must not leave its execution location ambiguous.
-
-Label nodes with their responsibilities and relationships with their meaning. State which participants are existing, changed, new, or outside the implementation scope where that distinction matters. Define the selected communication mechanism and interaction contract at each crossing. For a single-process design, show that actual boundary and its participants rather than omitting the view or inventing distributed infrastructure.
+Show complete scoped Mermaid topology: actual processes/boundaries, contained modules, external participants, responsibilities, and communications/dependencies. Distinguish modules/objects from independently running processes. Label crossings with mechanisms and contracts, and distinguish existing/new/changed/out-of-scope participants where material. A single process still has a real boundary.
 
 ### Data flow and state authority
 
-Show where each relevant data item originates, how it is transformed, where it goes, and which result or state change consumes it. This may be carried by the topology if direction and edge semantics remain unambiguous; otherwise supply a focused flow view.
-
-Identify authoritative state, ownership of writes, and whether a crossing carries a reference, copied value, message, or persisted representation. Map payloads and transformations to the complete definitions below. Distinguish data movement from control flow and dependency; an unlabeled arrow must not stand for all three. Do not imply that replicas or cached values are authoritative, or that a call automatically synchronizes all state.
+For relevant data show origin, transformations, destination, and observable result/state change. Use topology when unambiguous, otherwise a focused flow view. Identify authoritative state/write owners, crossing representations (reference, copy, message, persistence), and exact payload/mapping definitions. Distinguish data movement, control, and dependency: calls do not imply synchronized state; caches do not imply authority.
 
 ### Concurrency and ordering
 
-Define the execution model: processes, threads, event loops, tasks, or other actual execution contexts; what can run concurrently; what must be serialized; and who schedules or coordinates the work. State who may modify shared state and the selected mechanism and scope of any required mutual exclusion, ordering, or consistency guarantee.
+Specify actual processes, threads, event loops, tasks, or other execution contexts; permitted overlap, serialization, scheduling/coordinating owners, and mutation authority. Define the selected mechanism and scope establishing mutual exclusion, ordering, or consistency and the permitted overlapping outcomes. Labels such as async/thread-safe or process-local locks cannot establish unstated cross-process guarantees.
 
-Define the lifetime and completion semantics needed by the scoped collaboration. Where the design uses queues, shared resources, overlapping requests, or asynchronous work, resolve their capacity, ownership, scheduling, and completion/error behavior rather than leaving them as generic boxes. Cover cancellation, shutdown, contention, or backpressure when they arise from the chosen design or approved requirements; do not invent new product behavior or generic recovery features just to populate a checklist.
-
-Terms such as "async," "thread-safe," or "eventual consistency" alone are not a concurrency model. A process-local lock does not establish cross-process serialization. Explain how the actual selected mechanisms establish the stated guarantees and what outcomes are permitted when operations overlap.
+Resolve resource lifetime and completion. Queues, shared resources, overlapping requests, and asynchronous work need capacity, ownership, scheduling, completion, and errors. Include cancellation, shutdown, contention, and backpressure where required by this design, not as generic recovery infrastructure or invented behavior.
 
 ### Sequences
 
-Provide Mermaid sequence diagrams for the macro interactions that realize the approved scenarios. Show real participants, boundary crossings, direction, initiation, responses or completion notifications, and the selected synchronous or asynchronous semantics. Account for applicable success, rejection, failure, termination, and concurrent paths. Use separate diagrams or clearly scoped alternatives when combining them would imply false ordering or prerequisites.
-
-Cover every distinct interaction pattern required by the approved behavior. Several scenarios may share one diagram if their guards and outcomes are explicit and can be traced through it; do not duplicate a diagram for every input value. The macro sequences must agree with the topology, data-flow direction, concurrency rules, and interface contracts.
+Provide macro Mermaid sequences for every distinct interaction pattern realizing approved scenarios: actual participants, initiation, direction, crossings, responses/completion, and synchronous/asynchronous semantics. Cover applicable success, rejection, failure, termination, and concurrency with explicit guards/alternatives or separate diagrams when combined paths would imply false ordering. Scenarios differing only in inputs may share a diagram. All sequences agree with topology, state/dataflow, concurrency, and contracts.
 
 ## Micro object and collaboration model
 
 ### Topology and ownership
 
-Provide a complete Mermaid topology view of the concrete modules, objects, and definitions implementing the scoped macro responsibilities. Map them to their files and macro participants. Define each object's responsibility and owned state; distinguish creation, ownership, reference holding, dependency, and invocation rather than representing them with indistinguishable arrows.
-
-Resolve instantiation, instance multiplicity, lifetime, and disposal where the design has state or resources. Identify shared versus per-request/per-operation instances and who may access or mutate them. Reuse existing abstractions by their actual role and contract. Explain necessary splits and merges; do not add a class for every noun or distribute one invariant across uncoordinated objects.
+Show complete Mermaid topology of concrete modules, objects, and definitions, mapped to files and macro participants. Specify responsibilities/state; distinguish creation, ownership, reference holding, dependency, and invocation. Resolve instantiation, multiplicity, lifetime/disposal, shared versus per-request/per-operation instances, and access/mutation ownership. Justify splits/merges; one class per noun or fragmented invariants is not decomposition.
 
 ### Sequences and operations
 
-Provide Mermaid sequence diagrams showing how concrete objects and operations carry out the macro scenarios, including their required alternatives and failure paths. Use the actual operation names from the contracts. Show the relevant data passed, state transitions, side effects, and completion/error propagation. A participant named "helper" or "implementation detail" cannot hide undecided work.
+Concrete Mermaid sequences realize macro scenarios and required alternatives/failures using contract operation names. Show data, state transitions, effects, completion, and error propagation. Settle algorithms, transformations, coordination, and resource handling, including internal operations carrying design responsibility, through precise prose, pseudocode, or declarations rather than production-code transcription. An unspecified helper or algorithm left to coding is missing design.
 
-Resolve the algorithms, transformations, coordination operations, and resource handling required to realize these sequences. Define internal operations as well as public entry points when they carry part of that design. Use precise prose, pseudocode, or declarations as appropriate, without making the document a transcript of production code. "Implement normally," "choose an algorithm later," and an unspecified collaborator do not settle a technical decision.
-
-Trace each macro interaction and guarantee to its concrete realization. A macro serialization rule, for example, needs an actual coordinating owner and an interface/operation sequence whose scope enforces it. If the micro design cannot realize the macro rule, repair the design rather than silently weakening the rule.
+Every macro interaction/guarantee traces to a concrete owner and mechanism: serialization, for example, needs a coordinating owner and operation sequence with sufficient scope.
 
 ## Complete data-structure definitions
 
-Define all data structures needed by the scoped design: owned state, operation inputs and results, messages, and stored or transferred representations that it uses. Existing unchanged structures may be referenced exactly; new or changed structures must be fully defined. Show a complete resulting definition, not a patch containing only new fields.
+Fully define owned state, collections, inputs/results, messages, and stored/transferred representations. New/changed structures require complete resulting definitions, not added-field patches. Unchanged definitions need exact checked references.
 
-For every definition, provide its canonical name and code location, complete fields or variants and their types, and the semantics needed to use it correctly. Resolve identifiers, units, nullability/optionality, defaults, valid ranges or states, relationships, ownership, mutability, and invariants wherever relevant. For collections, define element and key meaning and any relied-upon ordering or uniqueness. If layout, encoding, or representation affects the design, define it rather than leaving the choice to implementation.
+Specify canonical name/location, every field/variant/type, and applicable identifiers, units, optionality/nullability, defaults, valid states/ranges, relationships, ownership, mutability, and invariants. Define collection elements/keys, relied-upon ordering/uniqueness, consequential layout/encoding, transformations, retained/discarded information, invalid-input behavior, and invariant/transition authority.
 
-For transformations between representations, identify the mapping, information preserved or discarded, and handling of invalid input required by the approved behavior. Establish where each invariant is enforced and who can perform a state transition. A field declaration alone is not a semantic definition; an informal concept description alone is not a complete type.
-
-Do not use ellipses, "other fields," unbounded generic payloads, or example-only schemas to conceal unresolved definitions. Opaque values are acceptable only when opacity is an intentional, fully specified contract, not a missing design. Avoid multiple competing definitions of the same concept; reference one canonical definition and explicitly model a different representation only where necessary.
+Declarations without semantics and concepts without types are incomplete. Ellipses, example-only schemas, unspecified fields, or generic payloads cannot hide design. Intentional opacity needs a complete contract. Each concept has one canonical definition; other representations need a real purpose.
 
 ### Clarify actual declarations with the human
 
-Every new or changed data structure in the scoped design must be discussed as an actual declaration under **Progressive design convergence** before it is treated as settled. This covers owned state, collections, inputs/results, messages and stored/transferred representations, including internal or anonymous structures; do not select only unusual or risky declarations.
+Confirmation evidence covers actual complete target-language declarations or precise schemas for every introduced/changed structure, including ordinary, internal, and anonymous ones. It identifies the resulting definition and baseline difference, purposes/types, stored versus derived values, keys/relationships, defaults/units/optionality, ownership/mutability, and invariants, with creation/update/consumption traced through sequences. Tables and relationship diagrams supplement declarations, not replace them.
 
-Present complete candidate declarations in the target language or precise schema notation, grouped around their owner or core flow. For a change, show the resulting definition and identify the difference from the inspected baseline. Explain field/variant purposes and types, stored versus derived values, keys and relationships, relevant units/defaults/optionality, ownership/mutability and invariants; trace creation, updates and consumption through the sequence. Relationship diagrams or tables supplement, not replace, the declarations. Propose a concrete design with real tradeoffs rather than making the human design from a blank page or inventing alternatives.
-
-Obtain explicit confirmation of these definitions and semantics within that loop; agreement on the architecture, core sequence or implementation risk does not cover them. Apply the common unchanged-reuse/already-confirmed exceptions and evidence rules, including reopening affected groups when later detailing or repair changes a confirmed definition. Keep unconfirmed definitions and dependent choices only in the conversation; explore dependent views only as needed to clarify the current group, not as a separately completed design awaiting final approval.
+Architecture, sequence, or risk agreement alone does not confirm declarations and semantics. Valid reuse follows **Progressive design convergence**; proposed choices reflect genuine tradeoffs, not blank-page questions or fabricated alternatives.
 
 ## Complete interface contracts
 
-Define every interface needed for the scoped collaboration, including module/object interfaces used by other code and process or external protocol crossings. Also define the internal operations that the selected micro design relies on. "External" does not mean HTTP only.
+Define necessary module/object interfaces, process/external crossings, and internal operations relied on by micro design. External interfaces are not limited to HTTP. Every operation has an exact name, owner/location, signature/protocol, inputs/results linked to complete definitions, and applicable:
 
-Each operation must have an exact name, owner and code location, signature or protocol shape, inputs and outputs tied to the complete data definitions, and specified behavior. Resolve:
+- Preconditions/checking owner, postconditions, state transitions, invariants, and observable effects.
+- Success, rejection, errors, concrete representation, and propagation.
+- Argument/result/resource ownership and lifetime.
+- Synchronous/asynchronous completion, ordering, concurrency, and reentrancy.
+- Compatibility, configuration, and quantitative performance constraints.
 
-- Preconditions and the operation's responsibility for checking them.
-- Postconditions, state transitions, invariants preserved, and observable side effects.
-- Success, rejection, and error outcomes, including their concrete representation and propagation.
-- Ownership/lifetime of arguments, results, and resources where relevant.
-- Synchronous/asynchronous completion, ordering, and concurrency/reentrancy guarantees needed by callers.
-- Any existing compatibility, configuration, or quantitative performance constraint on correct use.
-
-State genuine non-applicability where needed instead of inventing error cases or infrastructure. An exact signature without behavioral obligations is incomplete, as is a behavioral description whose types, errors, or owner are unspecified. Resolve contract-affecting details now; do not instruct implementation to choose an error type, payload, method split, or synchronization policy later.
+Explain genuine non-applicability. A signature alone or behavior without types/errors/owner is incomplete; consequential payloads, method splits, error types, and synchronization cannot be left to coding.
 
 ## Overall workflow integration test plan
 
-**Inspect the project before selecting tests.** Read the existing integration-test guidance, runner/configuration, representative tests, fixture or environment setup, and relevant local/CI commands. Establish how this project actually exercises integrated behavior, what it can reuse, and its limitations. Cite the relevant repository evidence; do not infer capabilities from a framework name or prescribe a new harness before this investigation. If the evidence is inaccessible, report that gap rather than asking the human to invent repository facts.
+Selection rests on inspected project integration-test guidance, runner/configuration, representative tests, fixtures/environment, and local/CI commands. Cite actual capabilities, reuse, and limitations; a framework name is not evidence. Missing necessary repository facts are blockers, not questions asking the human to invent capabilities.
 
-Use those findings to select a small set of representative macro-level business flows, tied to the macro topology and sequence diagrams. Their purpose is to prevent a change being released or handed to joint integration before its basic collaboration works: exercise the path from the real entry through the participating processes or modules to the final observable outcome. Cover the main path and only consequential alternatives or failures, not a case for every interface, field, boundary value, state combination, or concurrency interleaving. Individually working modules do not establish that the macro flow works.
+Select a small set of representative macro business flows tied to scenarios and topology/sequences, from real entry through participating modules/processes to observable result. Include the main path and consequential alternatives/failures, not every field, boundary, combination, or interleaving. Isolated working modules do not prove collaboration.
 
-For each selected flow, record:
+Each flow identifies scenario/coverage reason, existing method/entry and actual participants, starting situation/actions/expected observable outcome, intended test location and setup/invocation, and material limits or substitutions. Substituted systems cannot prove real external behavior, cross-process coordination, or persistence guarantees. Necessary coverage beyond existing means needs a minimal justified approach, not a silently expanded harness.
 
-- The approved scenario and why this flow needs integration coverage.
-- The existing testing method and entry point, the participating modules or processes, and the material limits of what is actually exercised.
-- The starting situation, the high-level action sequence, and the observable overall result expected from the approved requirement and interface contracts.
-- The intended test location and how the existing project setup and invocation will support it; reference existing conventions rather than redescribing the harness.
-
-Preserve the distinction between real collaboration and replaced dependencies. An existing setup that substitutes an external system can still exercise a useful workflow, but cannot establish that external system's real behavior. Do not claim cross-process or persistence guarantees from a setup that replaces those interactions. If existing means cannot exercise a necessary overall flow, explain the gap and resolve the minimal approach through technical clarification instead of silently inventing infrastructure or expanding the test scope.
-
-This stage defines overall integration coverage, not the complete testing strategy. Unit tests, fine-grained contract and boundary cases, detailed fixture construction, assertion code, additional test files, and other testing techniques belong to the later implementation-stage TDD instructions. Do not design that future TDD policy here or block technical approval because those details are absent. The requirement to settle production structure, data definitions, and interface behavior remains unchanged; this limited test plan does not reopen them.
-
-This stage delivers a plan, not an executable suite. Implementation must implement and exercise the selected macro flows before release or handoff to joint integration, not first attempt them afterward. A plan, successful compilation, or passing isolated tests does not prove those flows ran. Distinguish planned tests from checks or disposable feasibility probes actually run; unwritten future tests are not failed current design verification.
+This is a plan, not a suite or exhaustive test design. Detailed TDD cases, fixtures, assertions, and additional test files belong to implementation; their absence does not reopen settled production design. Implementation must exercise selected flows before release or joint-integration handoff. Distinguish that future obligation from checks and disposable probes actually run now.
 
 ## Consistency, evidence, and clean integration
 
-Keep stable names and references across the requirements mapping, file tree, macro and micro views, definitions, and contracts. Every scoped responsibility has a concrete owner; each interaction has a contract; every payload and state has a defined representation. Walk approved normal, boundary, failure, and relevant concurrency scenarios through the entire design. A scenario must not work only in one view. These design walkthroughs do not require a separately specified integration test for every scenario.
+Names, owners, references, representations, and contracts agree across requirements, tree, macro/micro views, data, and interfaces. Trace normal, boundary, failure, and relevant concurrency scenarios across views; this walkthrough does not require a test per scenario.
 
-Render and visually inspect all Mermaid diagrams. Check for misleading boundaries, arrow meanings, ordering, guards, concurrency, and missing paths as well as rendering errors. Parsing alone does not prove correctness. Keep verification results and artifacts available to the reviewer and tied to the current content. An unavailable renderer or necessary inspection capability blocks delivery rather than making diagrams optional.
+Every Mermaid diagram has actual current-content rendering and visual-inspection evidence checking boundaries, arrows, ordering, guards, concurrency, missing paths, and rendering errors. Parsing alone is insufficient; missing rendering/inspection capability blocks readiness. Checked referenced code/definitions and existing evidence or targeted disposable probes support feasibility-sensitive assumptions. Report actual exercise, keep exploratory code out of production, and distinguish future tests from current checks. Unresolved production assumptions block readiness.
 
-Verify referenced code and definitions against the inspected repository. Support feasibility-sensitive execution assumptions with existing evidence or a targeted disposable probe. Distinguish observations from expectations; do not claim future production tests have already run. Check that the selected overall workflow tests use investigated project capabilities and have meaningful observable outcomes. Their implementation and detailed test strategy belong to the later implementation/TDD stage. An unresolved assumption on which the production design depends still prevents approval.
-
-Maintain a clean canonical model. Present every correction and affected view/reference update for explicit confirmation before writing it into the owning sections. No unconfirmed candidates, placeholders, alternate draft files, normative patches, changelogs, override addenda or interview/review diaries belong in the model. Keep unresolved choices, missing inputs, deferred owners and blockers in the conversation; the exact confirmed write includes its necessary rationale and evidence. Use the object review log only for its admitted submissions/outcomes, finding-linked decisions/evidence and human approvals, never as a draft store.
+The result is current integrated content in canonical owning sections, understandable without interviews, normative patches, override appendices, alternate drafts, or review diaries. Evidence and decisive rationale accompany the concepts they support.
 
 ## Delivery criteria
 
-Apply all requirements above; these categories index them rather than replace them. [reviewer-prompt.md](reviewer-prompt.md) defines review inputs and results. Execution prerequisites, repair loops, and human gates belong to [SKILL.md](SKILL.md), or to the consuming change route when it imports the design-content sections.
+Apply all obligations above; these categories index coverage:
 
-1. **Governing basis and faithfulness:** identified requirements and decision authority satisfy the consuming route; heavyweight design also satisfies **Heavyweight child realization**, including current architecture, owned shared definitions, and inherited guarantees, without invented business decisions.
-2. **Existing-design fit and rationale:** inspected code grounds reuse, changes, new abstractions, and necessary cutovers; consequential choices and first-pass implementation constraints have their actual basis and can guide later conformance review.
-3. **File organization:** the complete scoped target tree assigns every responsibility and definition to a concrete file and explains any relevant relocation or retirement.
-4. **Macro completeness:** topology and sequence diagrams, data flow, state authority, and the actual concurrency/ordering model are complete and agree.
-5. **Micro completeness:** topology and sequence diagrams resolve concrete ownership, collaboration, algorithms, and lifetimes and realize the macro model.
-6. **Data completeness and declaration clarification:** complete resulting definitions and semantics exist for all required state, payloads, inputs, outputs, and representations; every new or changed definition satisfies **Clarify actual declarations with the human**, with current confirmation evidence or a valid unchanged-reuse basis. Well-formed declarations and consistent sequences alone do not satisfy this category.
-7. **Contract completeness:** every required interaction has a defined owner, exact interface, and complete caller-relevant behavior; internal operations do not hide undecided work.
-8. **Cross-view consistency and progressive decision closure:** approved scenarios trace through consistent views, including inherited global contracts and other owning child definitions where applicable; **Progressive design convergence** is satisfied for the actual macro/micro structures, sequences and other scoped design groups, with applicable confirmation or reuse evidence. A complete self-consistent blueprint followed only by final confirmation is insufficient. No technical decision or necessary assumption remains for implementation to settle.
-9. **Overall workflow integration coverage:** the project's existing integration-test methods were investigated before selecting a small set of relevant overall flows. The plan identifies the chosen method, entry, real collaboration and limits, expected outcome, and test location. An exhaustive interface-test matrix or detailed TDD test design is not required here.
-10. **Verification:** every diagram was rendered and inspected, references were checked, and required feasibility evidence is available for the current content. Planned acceptance tests are not misrepresented as completed verification.
-11. **Reviewability and clean handoff:** an unfamiliar reader can understand and evaluate the complete design from the model and explicit references, without interview history, patches, or an implementation ticket list.
-12. **Private record integrity:** satisfy WORKFLOW-ARTIFACTS.md for records due at this gate, without demanding this review report or future human approval before they occur.
-
-Production-design defects return to clarification through the consuming route; conformance repairs against a settled design remain in implementation. Reference-only use does not execute either workflow.
+1. Governing basis and faithfulness.
+2. Existing-design fit, rationale, reuse/cutovers, and first-pass constraints.
+3. Complete file organization and final ownership.
+4. Macro topology, sequences, dataflow/state authority, and concurrency.
+5. Micro ownership, algorithms, collaboration, and lifetimes realizing macro guarantees.
+6. Complete data definitions/semantics and concrete confirmation or valid reuse.
+7. Complete interfaces, owners, and caller-relevant contracts.
+8. Cross-view consistency, scenario traces, and dependency-led concrete decision closure.
+9. Inspected project means and limited meaningful overall-flow coverage.
+10. Current rendering, visual inspection, references, and necessary feasibility evidence.
+11. Complete integrated target recoverable by an unfamiliar reader.
+12. Attributable current source and confirmation/reuse evidence.

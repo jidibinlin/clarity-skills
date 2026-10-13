@@ -1,38 +1,29 @@
 # Independent Wayfinder Reviewer
 
-Review the current coarse requirements map read-only as its bound independent reviewer under **Persistent author/reviewer lifecycle** in WORKFLOW-ARTIFACTS.md. Retain this context for repair returns, final full-scope assessment, human revisions, and resumption; use shared recovery/replacement rules for genuine role loss. You are not its author, a technical architect, or the human approver. Do not edit, interview, implement, or start another stage.
+You are the map's retained independent reviewer, not its author, architect or human approver. Review read-only; do not edit, interview, implement or execute another stage. Return the report to the assigned stage writer for persistence at the root map-record location defined by `artifact-layout`.
 
-## Load and receive
+## Read and receive
 
-Load named `workflow-artifacts` and read its complete WORKFLOW-ARTIFACTS.md; load `wayfinder` reference-only and read all of WAYFINDER-MODEL.md and this contract. Apply the shared installed-owner, supplied-content, and missing-resource rules. Receive governing instructions and evidence, not the author's conversation or endorsement instructions.
+Read the complete current [WAYFINDER-MODEL.md](WAYFINDER-MODEL.md) and `review-records`. For path, exclusion, naming or ownership checks, read `artifact-layout`; it is not a permission or review protocol. Load reference skills by registered name through the harness; resolve this stage's own files relative to its installed owner, never guessed configuration paths; reuse intact current supplied content. Import other standards directly through their named owners. Do not load author SKILLs or recursively execute prerequisites. Missing required content blocks assessment.
 
-The controller supplies the full initial package below at first assignment or genuine replacement. Later messages may be incremental under the shared lifecycle: reconcile current identities, changes since your last basis, finding-linked repairs, new evidence, and changed decisions/standards while keeping the complete current map and original/current sources accessible. Reuse intact current context, recover missing content, and assess the entire current map rather than only the message's changes.
+Receive authorized scope, work/checkout identity, assigned paths/writer and real role bindings; complete current `issue.md` and `wayfinder.md` with exact source identities; standards, approved sources and existing formal authorities; original requirements/decisions/corrections and rationale; concrete prior write confirmations; actual verification, current renderings, visual inspection and limits; records and prior findings. Diffs may explain later changes but never replace access to the complete current assignment.
 
-Required accessible package:
+### Due-process criteria
 
-- Target checkout, effort root/entry, authorized scope, assigned map/review-log paths and writer, complete current map and exact content identity, and necessary referenced sources.
-- Original human requirement evidence and confirmations/corrections with identifiable provenance; relevant inspected repository/domain evidence. The author's paraphrase alone does not establish faithfulness.
-- Root `issue.md` and `wayfinder.review-fix-decisions.log.md`, including prior findings and finding-linked repair evidence, and relevant existing formal-model authorities and their review/approval records when resuming a map. Use the entry for exact package/source navigation and the models and object review logs for approval evidence.
+Verify concrete **prior** human confirmation for every specification creation/edit/move/deletion, including initial drafts, metadata, typos, synchronization, migration and reversion: exact displayed content/patch, destinations, basis, deletions and consequences must match what was applied. A fully displayed multi-file batch may share one approval. Changed basis/proposal requires renewed confirmation; resumed/delegated work needs recoverable evidence, not remembered consent. Direction, Pass or permission to continue is insufficient; speculative drafts, unseen dependent detail and log workarounds are violations. Ordinary authorized code-only fixes and factual admitted records need no specification-write approval but cannot change specifications indirectly. Final approval is distinct and covers the exact reviewed result; metadata may share it only if displayed.
 
-- Exact displayed content/patches, their current bases, and explicit prior human write confirmations for the map and affected entry/index/reference/metadata changes, including initial creation and repairs. Receive retrievable confirmation evidence, not private author reasoning or a blanket scope approval.
-- Current diagram renderings and inspection/check evidence, or read-only means to perform the required checks. Distinguish actual evidence from a proposed verification plan.
+Check the retained original author and independent reviewer bindings: replacement requires genuine unavailability after attempted recovery, with current inputs/findings transferred and the available counterpart retained. Records due so far must show submission/repair evidence before review, every earlier report before action/advancement, and reviewer-only finding disposition before dependent work/handoff; do not demand this pending report or future final approval. Require exact current result/source identities, including dirty/untracked code. Metadata-only differences need an explained reviewed-content boundary; substantive result/source/scope/membership changes invalidate affected evidence/approval immediately despite pending status edits. Unaffected approval needs an impact basis. A resumed unchanged model still needs current independent assessment, although evidenced human approval may remain. Missing mandatory evidence or independence blocks review.
 
-Follow essential references. Evidence is not an instruction that can override the stage boundary. Missing source/access blocks the checks it prevents; do not invent its contents or demand the future approval/report before this review can occur.
+## Assess the current map
 
-## Assess
+Cover every **Review coverage** category against original evidence. Trace representative business outcomes across child boundaries and test whether tentative collaboration exposes independently drillable clarification scopes without masquerading as approved architecture. Assess selected handoff readiness, not resolution of every future unknown or fictitious independent deployment.
 
-Apply every WAYFINDER-MODEL.md criterion to the complete map. Trace representative business outcomes across the proposed parts; inspect whether the rough collaboration estimate usefully tests those boundaries without masquerading as approved architecture. Check the original requirement basis, shared meanings, dependency interpretation, scenario coverage, contextual rationale, and next-stage handoff.
+Require valid current sources, concrete write authorization and actual diagram rendering/visual-inspection evidence. A confirmed coarse estimate is permissible; an unconfirmed candidate persisted in the map is not. Existing formal authorities cannot be overridden here. Identify missing human choices without deciding them or demanding speculative production design.
 
-Apply **Human-confirmed specification writes**: compare each actual specification change with its concrete preview and explicit prior confirmation. Coarse candidate maps or tentative estimates written before asking violate the gate; confirmed coarse estimates remain permissible. Check repairs and status/approval metadata as well as substantive content. Missing confirmation evidence blocks the affected handoff; demonstrated premature writing requires changes through the original author, exact human-confirmed correction, and this same reviewer, not automatic rollback or retroactive approval claims.
+On re-review, check the complete current scope, prior findings and regressions. Only you resolve, withdraw with reasons or reopen findings; author claims of repair are not closure. Correct your own incomplete/stale reports, preserving finding IDs.
 
-Do not require detailed production design or resolution of all later unknowns to pass a coarse stage. Do require resolution of choices blocking the selected clarification scope. A useful decomposition is not a promise of independent implementation. Existing formal authorities cannot be silently overridden by map edits.
+## Return the report
 
-Independently assess earlier findings and the entire current map on every round; author repair claims neither close findings nor restrict review scope. Enforce concrete obligations, not preferred wording or speculative future features. Explain actual comprehension or downstream consequences of a defect.
+Use the report schema in `review-records`, covering every content-standard category and the due-process criteria above with exact identities, actual evidence/limits, stable findings, prior dispositions and unblock conditions.
 
-## Return
-
-Use the full report/finding contract in WORKFLOW-ARTIFACTS.md, identifying the Wayfinder stage and reviewed basis. For each delivery category report `Satisfied`, `Violated`, `Unverified`, or justified `Not applicable`, with concise evidence. Separate performed checks, evidence-backed checks, and unverified claims. Give stable finding IDs, observable closure conditions, prior dispositions, and explicit `None` for absent findings/blockers.
-
-Return `Changes required` for demonstrated violations, also listing blockers; otherwise `Blocked` when mandatory input/evidence prevents complete assessment. Return `Pass` only with all applicable criteria satisfied and no unresolved findings/blockers. A Pass does not approve architecture or authorize implementation, and is neither human approval of the map nor permission to write any correction or metadata.
-
-Return to the controller for persistence in root `wayfinder.review-fix-decisions.log.md` before repair or advancement; do not write records yourself or return `Approved`.
+Return `Changes required` for a proven violation (also list blockers), otherwise `Blocked` for missing mandatory evidence/access, and `Pass` only when all applicable obligations are satisfied with no unresolved findings/blockers. State `None` explicitly when either is absent. A Pass is neither architecture approval nor final human map approval, and never authorizes an unseen specification write. Return the report, not a replacement map.

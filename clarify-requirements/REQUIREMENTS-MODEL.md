@@ -1,166 +1,72 @@
-# Requirements and Domain Model: Delivery Standard
+# Requirements and Domain Model: Content Standard
 
-This standard belongs to the `clarify-requirements` skill. Load that skill by name in reference-only mode when another stage needs this resource; use its resolved companion location or complete current supplied content under the `workflow-artifacts` loading rules. Reading this standard does not start its author's workflow or require that workflow's execution prerequisites. The consuming stage determines the authorized scope and role; actual stage execution retains its existing gates.
+This standard defines content and evidence for standalone, child and composite requirements. It is not an execution protocol and imports no other workflow. Read it completely before constructing or reviewing requirements; importing stages resolve it directly through the actual installed `clarify-requirements` owner. The owning stage governs writes, review and approval; `artifact-layout` defines file locations and ownership, never the meaning of requirements.
 
-## Purpose and scope
+## Scope and domain meaning
 
-Produce a requirements and domain model that both a human reviewer and an implementing agent can use without reconstructing the original conversation. It defines what behavior is correct before deciding how to implement it.
+Explain correct behavior so an unfamiliar reader can understand the selected scope without reconstructing the conversation. Reuse established project knowledge and confirmed decisions; distinguish current facts from desired behavior. Model semantic relationships, not a glossary or a concept for every noun.
 
-This is the shared authoring and review standard for standalone requirements and heavyweight shared/child requirements packages. Apply it throughout clarification and model construction, not just at the delivery gate. Independent review uses these same criteria. Reuse applicable prior decisions; clarify only what is missing, ambiguous, or contradictory.
+Cover the following where applicable, without compulsory empty headings:
 
-The model covers the selected requirement scope and its necessary interactions. Reference established project knowledge instead of redescribing the whole system. Domain modeling clarifies concepts, relationships, rules, and examples; it is not limited to a glossary and does not require inventing a concept for every noun.
+- **Problem and outcome:** affected actors, initiating situations and observable improvement.
+- **Scope:** distinct new/changed behavior, existing behavior to preserve, external participants/capabilities and dependencies, and explicitly excluded work. Existing code proves current behavior, not authority for desired behavior.
+- **Concepts and relationships:** meanings, distinctions, ownership and relationships necessary to interpret behavior, using established vocabulary consistently.
+- **Rules and behavior:** triggers, preconditions, results, invariants, prohibitions, constraints, exceptions and real lifecycle states/transitions.
+- **Acceptance:** observable satisfaction of every substantive requirement, with consequential normal, boundary and failure scenarios.
+- **Decisions and evidence:** confirmed choices, proportionate background, actual rationale and retrievable original basis. No material choice or unverified assumption may silently determine behavior.
 
-All skill instructions and companion standards are written in English. This language convention does not require the human conversation to be in English.
+Externally imposed technical constraints belong here when they affect requirements. Private modules, algorithms, storage and code organization belong to technical modeling. Business choices exposed by technical investigation still belong to their requirements owner.
 
-## Shared artifact contract
+## Coherent domain flows
 
-Before starting or resuming any role, load `workflow-artifacts` by name and read all of `WORKFLOW-ARTIFACTS.md`. It owns storage, records, revision/approval identity, and transitions. [SKILL.md](SKILL.md) owns execution, artifact paths, and approval gates; this document owns requirements content and evidence criteria.
+Organize related concepts, behavior and rules into an account of who acts, on what, how concepts relate, what happens next and why the rules apply. Introduce vocabulary in context; state meaningful ownership, cardinality and lifecycle relationships rather than inventing unknown ones. An unfamiliar reader must be able to explain the flow, not merely recognize terms. Diagrams cannot repair fragmented prose.
 
-Apply **Human-confirmed specification writes** in WORKFLOW-ARTIFACTS.md throughout authoring and repair. Every initial model, entry/index, synchronized source, diagram, removal, formatting correction and embedded status/approval metadata change requires the original author to show the exact content or patch and current basis in the conversation, obtain explicit human confirmation, and write only that change. No design-preserving or administrative exemption applies. A direction-only answer does not approve unseen declarations or text. Keep unconfirmed proposals, missing-answer placeholders and deferred questions in the conversation, not canonical sections, sidecar drafts or review logs. Confirmed groups may be integrated progressively; these full content obligations still govern completeness before handoff. Preserve exact-write confirmation references with the applicable review submission or finding-linked repair record; actual records retain their existing admission rules. Write permission, independent conformance and final human approval remain distinct.
+Integrate later conclusions into these owning sections, synchronizing rules, scenarios, references and views and removing superseded conflicts. The model is current integrated authority, not interview rounds, patch appendices, change logs or cleanup commentary. Prior behavior belongs only where it explains the requirement or a real migration constraint. Essential handoff knowledge must be in the model or its exact references, not private agent context.
+
+### Local acceptance
+
+Every substantive requirement has a visible **Acceptance criteria** label/subheading (or document-language equivalent) in its owning body section. State relevant preconditions/actions and observable expected results there, using concise prose, bullets or a local table. Unlabeled examples or ordinary prose alone are insufficient; no form is required for every sentence.
+
+Keep explanatory and acceptance scenarios beside their rules; cross-flow acceptance belongs beside its end-to-end flow. Preserve meaningful boundaries, numbers and failure outcomes. A detached acceptance checklist, final acceptance chapter, appendix or standalone ledger is not an alternative, even with backlinks or duplicated local conditions. IDs support navigation; they never replace local acceptance.
+
+### Background, rationale and precision
+
+Lead with the conclusion, then supply the background needed to assess it. Self-contained points need only precision and examples preventing likely misunderstanding. Background-dependent rules need the relevant concepts/current behavior/constraints or exact references explaining their relevance. Consequential or counterintuitive choices need problem context, decisive constraints, actual basis and, when necessary, the principal rejected alternative and accepted consequences. Explain shared background once and link it; depth follows reader dependence, not discussion length.
+
+Distinguish observed facts, human preferences and decisions. Attribute non-self-contained facts to retrievable repository, external or human evidence. Generic claims of simplicity, flexibility or best practice are not a decision basis. Missing rationale must be recovered from original evidence, not retrospectively invented. Unconfirmed assumptions and choices stay in conversation with their owner and blocked scope until resolved.
+
+Retain numbers, units, ordering guarantees, prohibitions, exceptions and conditions. Stable headings and references must lead to comprehensible rules, not reference chains with no conclusion.
+
+## Mermaid views and evidence
+
+Use accurate Mermaid to show material flows and explicit scope distinctions. Choose flowcharts for decisions/actions/outcomes, state diagrams for real lifecycles, sequences for interactions/ordering and scope/relationship views for boundaries/dependencies. Use applicable forms only; one view may serve several purposes without inventing a workflow or lifecycle.
+
+- **Meaning:** defined terms, meaningful branch conditions and explicit arrow semantics. Do not silently mix chronology, control flow, ownership and dependency. Show required success, rejection, failure and termination paths without speculative recovery.
+- **Reachability:** connect nodes/branches to rules and scenarios. Normal behavior must remain reachable without optional concurrent actions or exceptions. Separate exceptional interactions when combining them would imply a false prerequisite.
+- **Scope:** visibly distinguish changed, preserved, externally supplied and excluded behavior. External steps identify their owner and exclusion from this implementation. Model business participants rather than unconfirmed technical modules.
+- **Readability:** a clear subject and reading scope, overview/detail only where useful, no color-only distinction or unreadable/redundant giant view. Prose provides precision, rationale and exceptions without narrating every arrow.
+- **Evidence:** every required current diagram has actually rendered output and visual-inspection evidence covering labels, structure, readability and semantic agreement with prose. Parsing alone is insufficient; missing rendering or visual inspection is a gate blocker.
+
+A partial draft view describes only its confirmed scope. Missing paths remain delivery obligations, not permission to record speculative answers.
 
 ## Shared and child requirements
 
-For heavyweight work, use the hierarchy and source-package rules in WORKFLOW-ARTIFACTS.md. The root model owns shared domain meanings, cross-child rules, and end-to-end business flows. Each child owns its scoped detail and cites applicable root definitions; a child boundary is neither a module boundary nor a ticket. Identify decision ownership explicitly and return conflicts to that owner rather than adding local exceptions.
+For heavyweight work, root requirements own shared meanings, cross-child rules and end-to-end business flows; children own complete scoped details and cite applicable root definitions. Each decision has one owner. A child is a modeling boundary, not necessarily a module or ticket.
 
-Compose, do not concatenate. Root sections may delegate detailed rules and scenarios by exact child path/section and current source identity, while explaining the shared relationships and end-to-end meaning. Every delegated obligation must be actually specified, accessible, and unambiguously owned. A reference to future detail, a generic directory, or a chain that leaves the rule undefined does not satisfy coverage. Preserve the same content and diagram quality in scoped children.
+Compose rather than concatenate: the root explains relationships and delegates detail by exact child path/section and verifiable source identity. Every delegated obligation must exist, be accessible and have an unambiguous owner. Directory links, future-detail promises and reference chains without rules do not establish coverage. Each child retains the full applicable content and diagram standard.
 
-Shared and child drafts may co-evolve as exact content is confirmed. Discuss hypotheses in the conversation; scope or direction agreement does not authorize speculative model content. Neither needs the other’s final approval to begin clarification. Before architecture, the selected composite package must pass this requirements review and explicit human approval together, including real prerequisites. Separate local reviews may support that work; they cannot substitute for package consistency and do not impose a second generic review ceremony. Future map ideas outside the authorized scope need no artificial completion or approval.
+The selected package must trace every outcome and consequential cross-child scenario through its owning rules. Reconcile vocabulary, lifecycle meanings, preconditions/results, ordering, exceptions, gaps, overlaps and ownership. Include cross-child flow/scope views linked to detail where needed. Children must obey shared rules, and their composition must be able to realize them. A child-only verdict is local; package consistency covers all selected sources and real prerequisites, not unrelated future ideas.
 
-In package authoring and review, trace every selected outcome and consequential cross-child scenario through the owning rules. Reconcile shared vocabulary, lifecycle/state meanings, cross-child preconditions and results, ordering, exceptions, coverage gaps, overlaps, and contradictory ownership. Include cross-child flow/scope diagrams where needed, linked to child detail, so no composition behavior must be guessed. Confirm both that child detail obeys shared rules and that shared rules can actually be realized by the composed requirements. Scope package conclusions explicitly; local Passes do not establish whole-effort closure.
+## Review coverage
 
-## Required coverage
+Assess the complete current assignment against these categories; a heading alone is not evidence:
 
-Cover the following wherever they apply. These are coverage obligations, not mandatory headings or a form to fill with invented content.
-
-- **Problem and outcome:** who encounters the problem, in what situation, and what observable improvement is needed.
-- **Scope:** what this change includes and excludes, what existing behavior must remain unchanged, and which external participants or capabilities it depends on.
-- **Concepts and relationships:** the meanings, distinctions, relationships, and ownership needed to interpret the requirement. Reuse established terms with the same meaning.
-- **Behavior and rules:** triggers, preconditions, expected results, constraints, invariants, exceptions, and prohibited behavior. Include states and transitions where the requirement has a lifecycle.
-- **Acceptance conditions and scenarios:** explicitly identify observable acceptance conditions for each substantive requirement, with concrete normal, boundary, or failure scenarios where needed to establish its meaning. Apply **Keep acceptance with its requirement** below.
-- **Decisions:** confirmed choices and their necessary rationale. Identify missing facts or choices and their effects in the conversation, resolve those needed for this scope, and obtain exact write confirmation before adding the resulting content.
-
-Separate observed current behavior from required future behavior. The existing code is evidence of the former, not automatic authority for the latter. Investigate facts available in the repository or other accessible sources rather than asking the human to retrieve them.
-
-Keep this model independent of the implementation proposal. Record externally imposed technical constraints when they affect the requirement, but leave choices of modules, algorithms, storage structures, and private code organization to technical modeling. When technical investigation exposes an unresolved business choice, return that choice to requirements clarification.
-
-## Writing for review and implementation
-
-### Organize by the requirement, not by the conversation
-
-Write a coherent model of the current requirement, not meeting minutes, a chronological decision log, or a succession of question-and-answer summaries. Organize the explanation around the problem, related concepts, behavior, and rules. Integrate later clarifications into the relevant explanation instead of appending another round of notes.
-
-The reader must be able to identify who acts, what they act on, how the relevant concepts relate, what happens next, and which rules govern that behavior without reverse-engineering a list of terms. Explain each material concept through its role and relationships; a glossary of isolated definitions is not sufficient. State ownership, cardinality, or lifecycle relationships when they matter and are known, but discuss unknown relationships in the conversation and resolve them before proposing their model text rather than inventing or pre-filling them.
-
-Introduce necessary vocabulary where readers can understand it. Reuse a precise existing term; add a new term only when it names a meaningful distinction. A cluster of unexplained nouns is not a model. Keep each rule and its essential context together, with links for genuinely shared background.
-
-Mermaid diagrams expose this structure; they do not excuse fragmented prose. During review, check that a reader can explain the main flow and concept relationships from the model, not merely recognize individual terms or follow a record of what was discussed. Preserve the rationale needed to assess a decision, not the chronology of how the conversation reached it.
-
-### Keep acceptance with its requirement
-
-Each substantive requirement must explicitly state how to establish that it is satisfied in the body section that owns its behavior. Use a visible **Acceptance criteria** label or subheading (or the document-language equivalent, such as **验收标准**) beside the rules it verifies, stating the relevant preconditions or actions and observable expected results. Ordinary descriptive prose or examples without this explicit marker do not satisfy the requirement. Use concise prose, bullets, or a local table under the marker as appropriate; do not create a repetitive form for every sentence. Necessary background and rationale stay with the same requirement.
-
-Integrate explanatory and acceptance scenarios into their owning requirement sections. Cross-flow acceptance belongs in the body of the end-to-end business flow it verifies, alongside that flow and its rules. Preserve meaningful boundaries, numbers, and failure outcomes when integrating scenarios; remove redundant restatements rather than losing acceptance coverage.
-
-Do not collect acceptance conditions or scenarios into a detached checklist, final acceptance chapter, or appendix, even when they link back to the requirements or duplicate conditions already stated there. A scenario list is not a second specification. Stable identifiers may support downstream references, but do not replace explicit local acceptance conditions. A reader must be able to review a requirement and its acceptance basis together, without assembling them from a separate list.
-
-### Scale explanation to background dependence
-
-Lead with the rule, conclusion, or decision. Then supply the background needed to understand it and the key basis needed to evaluate it. Determine explanation depth from the perspective of the intended reader who did not attend the discussion, not from what the current agent remembers.
-
-| Background dependence | Required treatment |
-| --- | --- |
-| Low: understandable on its own | State the point precisely. Add an example if it prevents a likely misunderstanding. |
-| Medium: depends on other concepts, existing behavior, or constraints | Explain or link the necessary background and show how it affects this point. |
-| High: counterintuitive, crosses several concepts, or involves a consequential tradeoff | Explain the problem context, decisive constraints, chosen conclusion, and key basis. Include the principal rejected alternative and accepted consequences when needed to judge the choice. |
-
-Do not mechanically attach three empty headings to every point. A short statement can be sufficient; a longer explanation earns its place by making the point understandable and reviewable.
-
-Background should establish why the problem arises, what is currently true, and which concepts or limitations matter. Include the information whose absence would cause a reader to misinterpret the point, not the entire history of the discussion.
-
-Explain shared background once and link to it from dependent points. Readers must be able to follow those references without searching the original chat.
-
-### Preserve the actual basis for decisions
-
-For a decision requiring explanation, identify the concrete requirement, constraint, evidence, or explicit human preference that drove it. Where alternatives matter, explain why the chosen option wins and what cost or limitation it accepts.
-
-Generic claims such as "for simplicity," "for flexibility," or "best practice" are not sufficient unless connected to the actual choice and its consequences.
-
-Distinguish facts and decisions in confirmed model prose; assess assumptions and unresolved questions in the conversation before proposing model content:
-
-- **Fact:** identify a retrievable source when the fact is not established in the model itself. Sources can include repository locations, external references, and explicitly attributed human-provided constraints.
-- **Decision:** record what was chosen and the real basis for choosing it. A stated human preference is a valid basis; do not manufacture objective evidence for it.
-- **Assumption:** explain in the conversation what is unverified and what depends on it; obtain the needed evidence or decision before it determines material behavior.
-- **Unresolved question:** state in the conversation what information or choice is missing, its owner and blocked scope. Neither a default decision nor a missing-answer placeholder belongs in the model.
-
-When a decision's rationale is missing, consult the discussion or available evidence first. If the gap still prevents meaningful review, ask the human. Never invent retrospective justification.
-
-### Preserve precision
-
-Retain meaningful numbers, units, ordering guarantees, negative requirements, exceptions, and conditions. Do not weaken a precise requirement into general intent while summarizing it.
-
-Use stable headings or references so diagrams, scenarios, and future implementation tickets can identify the relevant rules. References complement the explanation; they must not become a trail of links with no understandable conclusion.
-
-## Mermaid requirements
-
-Use Mermaid to make requirement flows and scope accurately visible. Choose the diagram form that represents the relationship being described:
-
-- **Flowchart:** triggers, actions, decisions, branches, and outcomes.
-- **State diagram:** lifecycle states, transition triggers or guards, and allowed transitions.
-- **Sequence diagram:** interactions between participants and relevant ordering.
-- **Scope or relationship diagram:** what changes, what remains unchanged, which external participants or dependencies are involved, and what is explicitly excluded. Use clear grouping and labels.
-
-A document does not need every diagram type. Show material flows rather than making readers reconstruct them from prose, and make scope distinctions explicit in an appropriate diagram. One diagram may serve both purposes when it remains clear. Do not invent a lifecycle or workflow for a requirement that has none.
-
-### Semantic accuracy
-
-- Use the same defined terms in diagrams and prose.
-- Give decision branches meaningful conditions rather than vague labels such as "check" or "process."
-- Make the meaning of arrows clear. Do not silently mix control flow, chronological order, ownership, and dependency.
-- Include the success, rejection, failure, and termination paths that the requirement actually calls for. Do not add speculative recovery behavior merely to make a diagram look complete.
-- Keep unresolved behavior in the conversation while resolving the affected path. A partial diagram may cover only a concretely displayed and confirmed scope; do not fill missing branches or imply they are decided. Material paths remain completeness obligations before delivery.
-- Relate key nodes and branches to the corresponding rules, scenarios, or decisions. Walk each concrete scenario through the diagram: ordinary behavior must remain reachable without an optional concurrent action or exception, and a missing answer is not permission to complete a branch. Show exceptional interactions separately when combining them would imply a false prerequisite.
-
-### Scope accuracy
-
-Distinguish new or changed behavior from existing behavior that remains unchanged, externally provided capabilities, and work explicitly excluded from this change. These are different categories, not a single "out of scope" bucket.
-
-External steps may appear when needed to understand the requirement, but their ownership and exclusion from this implementation must be clear. Use business behavior and participants at this stage, not unconfirmed technical modules.
-
-### Readability and consistency
-
-Give each diagram a clear subject and reading scope. Use an overview and focused detail only when complexity warrants it. Avoid both unreadable giant diagrams and redundant diagrams of the same idea. Do not rely on color alone to convey status or scope.
-
-Diagrams explain structure. Prose defines precise rules, background, rationale, and exceptions. Do not narrate every arrow again, and do not treat a diagram label as a complete rule definition.
-
-Whenever a requirement changes, preview the affected diagrams and prose together and obtain exact write confirmation before applying their synchronized revision. Before delivery, actually render all required Mermaid diagrams and visually inspect them for rendering errors and misleading structure or labels. Successful parsing alone does not establish semantic correctness. Retain current renderings and inspection evidence for review. Unavailable rendering or visual inspection blocks the gate; report the affected check rather than claiming verification.
-
-## Maintain the model during clarification
-
-As conclusions emerge, preview the precise integrated changes and obtain human write confirmation before updating the model rather than reconstructing it from a long conversation at the end. The deliverable must remain one clean, integrated account of the current requirement.
-
-**Hard rule: no normative document patches or model-embedded change logs.** Never append or create patch files, revision histories, dated update notes, override documents, or addenda that repair or supersede the main text. A reader must not combine a base document with later corrections to discover current rules. This applies during drafting and final delivery. `requirements.review-fix-decisions.log.md` holds only review submissions/outcomes, finding-linked repair decisions/evidence, and applicable human approvals under WORKFLOW-ARTIFACTS.md; it never substitutes for integrated model sections or permits ordinary process/interview logs. Private artifact history is not kept in Git.
-
-Propose each change in the sections that own the affected concepts and rules, including dependent scenarios, references, diagrams and deletion of obsolete or conflicting statements in the exact patch. Apply only the human-confirmed revision. If inherited material already contains patches or a change log, propose integrating still-applicable decisions and removing patch material, then obtain exact confirmation before applying that cleanup. If their authority is unclear, ask about the specific conflict before choosing which rule to preserve.
-
-Keep unconfirmed proposals, assumptions and unresolved questions in the conversation, identifying affected rules, missing inputs, deferred-decision owners and blocked scope. After exact write confirmation, necessary rationale, meaningful rejected alternatives, original requirement evidence and current-versus-desired behavior belong beside the relevant settled decision, not in a chronological discussion. Maintain no durable decision queue or interview log. Apply the shared resumption and approval-applicability rules; downstream work must not silently override confirmed decisions.
-
-Keep editing instructions and cleanup commentary out of the model. Mention previous behavior only when necessary to understand the requirement or a real migration constraint.
-
-Essential knowledge for the next stage must not exist only in the current agent's context. At a handoff, the model and its explicit references must carry that knowledge.
-
-## Delivery criteria
-
-Apply all criteria below during authoring and independent review. The execution and human-approval sequence belongs to [SKILL.md](SKILL.md); [reviewer-prompt.md](reviewer-prompt.md) defines independent review inputs and results. Scoped change packages use the named `clarify-change` route and its coordinated package gate instead of separate whole-project ceremonies.
-
-1. **Faithfulness:** important confirmed requirements are neither omitted, weakened, nor expanded without agreement. Pay particular attention to numbers, ordering, prohibitions, and exceptions.
-2. **Clarity and structure:** different implementers should not have to guess at material business choices or infer them from vague wording. The model makes the main flow and concept relationships understandable, with connected explanations rather than terminology piles or a chronological discussion log.
-3. **Consistency and clean integration:** concepts, rules, scenarios, and diagrams agree. Current facts and desired changes are distinguishable. The canonical text incorporates every applicable correction; no patch, changelog, revision log, override addendum, or obsolete conflicting rule remains in the deliverable.
-4. **Verifiability:** each substantive requirement has explicit, observable acceptance conditions and necessary scenarios satisfying **Keep acceptance with its requirement**. Missing or detached acceptance is a delivery defect, not an optional presentation improvement.
-5. **Reviewability:** background-dependent points contain enough context and actual rationale for a human to assess them. Sources and inherited decisions are accessible where needed.
-6. **Handoff completeness:** an agent unfamiliar with the conversation can understand the requirement from the model and its explicit references.
-7. **Diagram verification:** Mermaid diagrams have been rendered and inspected, and their conditions, paths, terminology, and scope match the prose. Report any verification limitation.
-8. **Open questions:** no unresolved question or unverified assumption silently determines a material behavior. Questions that prevent technical modeling from proceeding must be resolved before this stage is complete.
-9. **Private record integrity:** satisfy WORKFLOW-ARTIFACTS.md for records due at this gate, including evidence that actual specification writes match exact displayed content and explicit prior human confirmation. Assess initial drafting, entries/indices, synchronization, repairs and embedded metadata as well as model rules; do not demand this review report or future final human approval before they occur.
-10. **Composite consistency (heavyweight):** the selected shared/child package satisfies **Shared and child requirements**, with exact sources and scope, complete owned coverage, consistent meanings, and traceable cross-child flows. A child-only verdict is explicitly local and cannot authorize architecture.
-
-These criteria cover the complete current model, not only repaired passages. Review and human approval remain separate gates; the execution entry controls readiness, repair, resumed review, and handoff.
+1. **Faithfulness and scope:** original requirements and precise changed/preserved/external/excluded boundaries.
+2. **Clarity:** coherent domain flows and meaningful relationships.
+3. **Consistency:** agreeing concepts, rules, scenarios, diagrams and clean current authorities.
+4. **Verifiability:** explicit local acceptance for every substantive requirement.
+5. **Reviewability:** proportionate background, actual rationale and accessible original evidence.
+6. **Handoff completeness:** usable without the conversation; no unresolved material choice or unverified assumption blocking the next modeling stage.
+7. **Diagrams:** semantic accuracy, scope clarity and current rendered/visual evidence.
+8. **Artifact integrity:** attributable current sources, exact identities and unambiguous content ownership.
+9. **Composite consistency, when applicable:** the complete selected package satisfies **Shared and child requirements**; child-only review does not claim package approval.

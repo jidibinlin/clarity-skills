@@ -1,65 +1,59 @@
-# Wayfinder Model: Authoring and Review Standard
+# Wayfinder Model: Content Standard
 
-Use this complete standard to guide exploration and first-pass authoring, then assess the same criteria independently. Before either role starts/resumes, load the complete shared WORKFLOW-ARTIFACTS.md through named skill `workflow-artifacts`. It owns storage, records, authority, resumption, and hierarchical handoffs; [SKILL.md](SKILL.md) owns this stage's execution and approval loop.
+This standard defines map content and evidence, not execution. Read it completely before constructing or reviewing a map. Importing stages resolve it directly through the actual installed `wayfinder` owner; it imports no other workflow. The owning stage governs writes, review and approval; `artifact-layout` defines file locations and ownership.
 
-Apply **Human-confirmed specification writes** before every map, root/child entry, index, source-reference, diagram, status/approval-metadata, or repair write. Authoring criteria below govern what to propose, not permission to save it: show exact content or a patch in the conversation, obtain explicit confirmation, then write only that change. Review checks the displayed content, prior confirmation, and actual written change. `Draft`, coarse resolution, typo fixes, and reviewer findings create no exceptions.
+## Destination and fidelity
 
-## Purpose and fidelity
+Explain the practical problem, actors, observable outcomes and selected scope before enumerating parts, so an unfamiliar reader understands the overall business journey. Distinguish the selected clarification/delivery scope from the wider effort, explicitly identifying exclusions and real prerequisites. Future extensions are not implicit scope; prerequisites cannot be disguised as exclusions. Use original human decisions and inspected facts, stable business names and meaningful reference labels.
 
-The map decides what large requirement is being explored and how to take it into detailed requirements modeling. It is a coherent explanation of the current coarse understanding, not a transcript, glossary dump, technical specification, or list of implementation tasks. Its approval says the selected scope can be clarified in bounded parts; it does not say those parts can already be implemented independently.
+The map is a coherent coarse decomposition into bounded requirements-modeling scopes, not detailed requirements, architecture or implementation tasks. Approval means the parts can be clarified, not implemented or deployed independently.
 
-A rough macro-topology estimate is a decomposition aid. It may identify likely participants, responsibility boundaries, state owners, and directions of collaboration when these affect the split. Show the exact estimate in the conversation and obtain explicit write confirmation before persisting it; never save an AI candidate first to ask about later. Label a human-confirmed estimate explicitly tentative: confirmation permits its inclusion at coarse resolution, not its promotion to binding architecture. Do not require or freeze process counts, technologies, file trees, concrete objects, full data structures, protocols, or concurrency design here. Existing verified architectural facts and actual imposed constraints retain their distinct authority; a diagram cannot turn a guess into one.
+A low-resolution topology estimate is useful only when it tests the split: participants, responsibility boundaries, state owners and collaboration directions that affect decomposition. Distinguish tentative estimates from verified architectural facts and imposed constraints. Even a human-confirmed estimate is not committed architecture: it does not freeze process counts, technologies, file trees, concrete objects, data structures, protocols or concurrency design.
 
-## Destination, scope, and original basis
+## Drillable boundaries and dependencies
 
-Explain the practical problem, affected actors, intended observable outcomes, and exclusions. Distinguish the current clarification/delivery scope from the wider effort; reference the actual human decisions and inspected facts supporting it. Do not treat an interesting future extension as in scope or hide a necessary prerequisite among exclusions.
+Each candidate child explains its purpose, initiating situation/outcome, boundary with adjacent requirements, relevant known constraints and why it is independently understandable for clarification. Include only concepts necessary to explain those boundaries; detailed definitions belong to requirements modeling.
 
-Describe the overall business journey before enumerating parts. A reader should understand why the parts exist and how they contribute to the outcome without replaying the conversation. Use stable business names in prose and meaningful link labels; internal IDs supplement rather than replace them.
+Expose shared meanings/rules and cross-child flows needing an overall requirements owner. Keep three different relationships legible:
 
-## Coarse decomposition and collaboration
+- Business relationships between outcomes or rules, independent of implementation.
+- Tentative collaboration estimates testing the split.
+- Clarification prerequisites: answers or evidence needed to resolve dependent questions.
 
-For each candidate child requirement, identify its purpose, main initiating situation and outcome, boundary with adjacent requirements, relevant known constraints, and why this is a useful clarification scope. Record only the principal concepts needed to understand that boundary; detailed domain definitions belong to requirements modeling.
+Every material dependency states what is needed and why; ordering numbers/arrows alone do not establish readiness. Representative end-to-end scenarios must remain coherent across children without private decisions about one another's rules. Revise or merge weak boundaries instead of inventing interfaces, adapters or concepts to simulate independence. Neither one module per requirement nor independent deployment is necessary.
 
-Expose shared business meanings/rules and cross-child flows that need an overall requirements owner. Do not clone them into every child. Separate:
+## Context and actual basis
 
-- Business relationships: which outcomes or rules interact, regardless of implementation.
-- Tentative collaboration estimates: how existing or plausible responsibilities might cooperate, used only to test boundaries.
-- Prerequisites for clarification: what confirmed answer/evidence must be available before a dependent question can be resolved.
+Place consequential scope/boundary decisions beside their background and original evidence. Give the decisive reason, meaningful alternatives and accepted consequences where needed to judge the choice, especially when an attractive split hides coupling or omits an outcome. Scale explanation to an unfamiliar reader's dependence. Generic benefits and exhaustive discussion histories are not rationale.
 
-For a material dependency, state what is needed and why; numbering and arrows without a meaning do not establish readiness. A candidate topology should reveal suspicious coupling, not dictate a module per requirement. Test the split against representative end-to-end scenarios and likely shared ownership: can each part be clarified coherently without privately deciding another part's business rule? Preserve necessary collaboration. Do not manufacture interfaces, adapters, or extra concepts to make a poor split look independent.
+Distinguish confirmed decisions, observed facts and hypotheses. Silence is not confirmation. Resolve coarse business choices that determine the next scope; later detailed-requirements/technical choices remain explicitly owned rather than silently settled. Unconfirmed exploration, candidate answers and missing inputs stay in conversation with their relevance, owner and blocked scope. Only exact human-confirmed coarse descriptions of later unknowns may enter the map, without prefilling their answers.
 
-## Background and deciding rationale
+Maintain a clean current account, integrating confirmed refinements into owning sections rather than patch appendices or a chronological diary. As formal models supersede estimates, use precise references to those authorities. An approved downstream decision cannot be overridden by a map note.
 
-Place a consequential boundary or scope decision beside the context and evidence needed to judge it. Explain the actual decisive reason, especially when an apparent alternative would create hidden coupling or omit part of the outcome. Straightforward decisions need short explanations; unfamiliar constraints need sufficient background for a new human or agent reader. Avoid generic benefits, exhaustive rejected-option histories, and private reasoning traces.
+## Diagrams and visual evidence
 
-Keep confirmed decisions, observed facts, and assumptions visibly distinct. A recommendation does not become confirmed because the human has not objected. If a coarse business choice determines the next scope, resolve it before that scope's handoff. Uncertainty that belongs to later detailed requirements or technical design remains explicit there, not silently settled here.
+Use accurate Mermaid for overall business flow and scope boundaries. Include a low-resolution collaboration/topology view when an estimate influences decomposition. Combine views only if business relationships and tentative technical relationships remain unmistakable; omit decorative architecture and redundant views.
 
-## Diagrams and narrative
+Names agree with prose; arrow meanings/directions are clear; estimates, confirmed scope and existing facts are distinct. Explain external participants and excluded behavior at boundaries. Views agree with one another and with the narrative without implying undecided detail or guarantees.
 
-Use accurate Mermaid to show the overall business flow and scope boundaries. Include a low-resolution collaboration/topology view for the estimates that actually influence decomposition; it may share a diagram with the flow only when business relationships and speculative technical relationships remain unmistakable. Avoid redundant views and decorative architecture.
+Every required current view has actual rendered output and visual-inspection evidence covering syntax, labels, branching, crossings, boundary readability and semantic agreement. Parsing alone is insufficient. Missing rendering or visual inspection blocks a verified Pass.
 
-Name participants consistently with the prose; label arrow meaning/direction and distinguish tentative estimates from confirmed scope or existing facts. Explain relevant external participants and excluded behavior at boundaries. The views must agree with each other and with the text, but must not imply detail or guarantees not yet decided.
+## Requirements handoff
 
-Render and visually inspect every current diagram. Verify labels, branching, crossings, and boundary readability as well as syntax. Record actual rendering/inspection evidence under the shared artifact rules. Unavailable tools or inspection prevent a verified Pass; never invent render results.
+A usable handoff identifies selected scope, exact map/source revision, inherited confirmed constraints separately from hypotheses, scenario/dependency references and owned questions to deepen. Current blockers are distinct from later choices; future unknown work need not be artificially decomposed or resolved.
 
-## Unresolved areas and handoff
+The map explains the split; root `issue.md` defines package selection, source identities and assigned navigation. The root shared requirements model will own cross-child rules; children will own full scoped detail, not tickets. Formal architecture derives from the approved clarified requirements, not automatic promotion of the sketch. The map must not claim approval of those later stages.
 
-Keep unconfirmed exploration, missing inputs, proposed answers, and questions in the conversation with their relevance, owner, and blocking scope. A map may contain an explicitly human-confirmed description of a later unresolved area at coarse resolution only after exact write confirmation; it must not prefill missing business decisions. Distinguish blockers to the current handoff from owned later decisions. Integrate settled answers, rationale, and evidence into owning sections only through the same gate, without a duplicate queue or sidecar draft. Unknown future work need not be artificially decomposed or fully resolved.
+## Review coverage
 
-The handoff to `clarify-requirements` identifies the selected scope, its map/source revision, confirmed inherited constraints separately from hypotheses, relevant scenario/dependency references, and unresolved business questions to deepen. The root entry owns definition, child paths and exact source-package scope, paths/sections and revisions; the map owns the explanation of the split and unresolved exploration. Approval evidence belongs to model metadata and the applicable object review logs, not entry navigation. Children are modeling scopes, not implementation tickets. The root shared requirements model will own cross-child business rules; the eventual formal architecture must derive from clarified approved requirements rather than simply approving this sketch.
+Assess the complete current map against each category:
 
-When formal models supersede an estimate, preview and obtain confirmation for the exact replacement/reference patch before integrating it. Preserve a clean map with original evidence and decision rationale; `wayfinder.review-fix-decisions.log.md` retains only the shared contract’s admissible review/fix/approval records, not exploration history. A change contradicting an approved downstream model returns to that model’s governance, not to an overriding map note.
+1. **Destination and faithfulness:** original problem/outcomes, selected scope, exclusions and prerequisites.
+2. **Coherent decomposition:** drillable child boundaries, shared meanings and representative cross-child journeys.
+3. **Low-resolution topology:** useful estimates without premature design commitments.
+4. **Reviewable decisions:** proportionate background, actual rationale and accessible original evidence.
+5. **Diagrams:** semantic agreement, readable boundaries and current rendered/visual evidence.
+6. **Uncertainty and handoff:** real readiness of the selected next scope, with later choices owned rather than guessed.
+7. **Artifact integrity:** attributable current sources, exact identities and unambiguous content ownership.
 
-## Delivery categories
-
-Authors check, and reviewers report coverage of, every category:
-
-1. **Destination and faithfulness:** original problem/outcomes, scope/exclusions, inspected evidence and actual human decisions are accurately represented.
-2. **Coherent decomposition:** understandable child purposes/boundaries, shared meanings and complete representative cross-child journeys, without fictitious implementation independence.
-3. **Low-resolution topology:** relevant estimates test the split, clearly separated from facts and binding architecture; no premature detailed design.
-4. **Reviewable decisions:** proportional background and actual deciding rationale, rather than chronology or unsupported defaults.
-5. **Diagrams and evidence:** consistent, accurately labeled, currently rendered and visually inspected views.
-6. **Uncertainty and handoff:** explicit dependencies and next clarification scope; current blockers resolved without pretending later details are settled.
-7. **Authority and resumption:** clean canonical content, precise references and source identity, correct private workspace/record ownership, evidence that every specification write matched exact displayed content and explicit prior human confirmation, and no downstream authorization inferred from map approval.
-
-No category is satisfied by its heading alone. `Not applicable` requires a scope-specific reason; missing mandatory evidence is unverified, not an optional improvement. The stage may pass with explicitly owned later unknowns, but not with an unanswered decision that prevents the selected requirements handoff.
+A heading alone establishes nothing. Explicitly owned later unknowns may remain; unanswered business choices blocking the selected requirements handoff cannot pass.
