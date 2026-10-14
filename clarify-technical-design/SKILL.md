@@ -5,45 +5,99 @@ description: Clarify or resume technical realization of approved requirements; h
 
 # Clarify Technical Design
 
-Co-design the technical model **top-down from macro to micro**. Within micro design, work **bottom-up along foundational dependencies**, using complete behavior as the unit of discussion. Finish with independent review and final human approval.
+Co-design the technical realization with the human, from macro to micro.
+Follow [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as the authoring and review standard.
 
 ## Establish the basis
 
-Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) before designing. Use the `artifact-layout` skill for locations/ownership and the `communication-style` skill for human communication, including its Ask when human judgment is needed section for consequential questions. Resolve skills through their registered names and resources through their installed owners; a standard import does not invoke its author's workflow.
+- Read approved requirements, original context and prior decisions/approvals.
+- Inspect the relevant repository baseline.
+- Use `artifact-layout` for storage and ownership.
+- Use `communication-style` for human communication.
+- Resolve cross-skill resources through registered owners. Reading a standard does not start its workflow.
 
-Read the approved requirements, original context and applicable review/approval evidence. Inspect relevant repository guidance, runtime boundaries, owners, types, interfaces, callers and tests. Recover current work and prior decisions when resuming.
+For heavyweight children:
+- Read the approved root requirements and architecture.
+- Inherit guarantees, boundary contracts, shared-owner assignments and child dependencies.
+- Return global conflicts to the owning authority.
 
-For a heavyweight child, read the root's approved requirements package and architecture document. Inherit its guarantees, boundary contracts, shared realization assignments and relevant child dependencies; refine the scoped macro design within that basis. Return conflicts to the owning authority rather than changing a global premise locally.
+## Workflow
 
-## 1. Macro design: settle topology and technical direction
+```mermaid
+flowchart TD
+    A["Approved basis"] --> B["Macro design"]
+    B --> C["Human confirms macro basis"]
+    C --> D["Closed-loop micro-design group"]
+    D --> E["Human confirms group and proposed content"]
+    E --> F["Integrate confirmed content"]
+    F -->|More groups| D
+    F -->|Scope complete| G["Check and independent review"]
+    G -->|Changes required| H["Original-author repair"]
+    H --> E
+    G -->|Pass| I["Final human approval"]
+    I -->|Changes requested| H
+    I -->|Approved| J["Return approved model; stop"]
+```
 
-Trace approved scenarios from entry to observable outcome through processes, modules and state owners, including consequential alternatives. Compare existing concepts and collaboration with what the target needs; reuse capable owners before introducing new abstractions. Existing code explains the baseline, not a reason to override approved intent.
+Module decomposition may lead to multiple macro-to-micro cycles.
+Integrate confirmed macro and micro groups as the design progresses.
+Reconfirm a changed macro basis before dependent micro design.
 
-Propose actual macro topology, responsibility boundaries, technical approaches, state/dataflow, concurrency mechanisms and core sequences. Walk the scenarios through these views to expose ownership, completion and boundary-contract choices. Discuss concrete groups with context, alternatives and decisive rationale; obtain human confirmation of the macro basis before its dependent micro design.
+## Macro design
 
-## 2. Micro design: co-design complete behavior
+Settle topology, responsibility boundaries and technical direction.
 
-1. Choose a bounded behavior, including the collaborating modules needed to complete it. Restore its confirmed macro guarantees and prior decisions. Work from foundational state and operations toward their consumers; use the whole flow to test those foundations.
-2. Develop an end-to-end proposal before asking for decisions. Connect state owners, triggers, computation, consumers and outcomes, including consequential interruption/recovery paths. Use declarations first when their meaning is stable; let lifecycle and sequences lead when they determine representation. Keep working assumptions explicit in conversation; if a missing human premise blocks the design, ask about that premise and its impact.
-3. Walk the normal flow and decisive counterexamples, reconciling data, interfaces and sequences before presentation. Inspect existing implementations to establish reuse and necessary changes against the target, rather than reopen confirmed intent.
-4. Present one coherent micro-design group in the main response: brief context, complete target-language declarations and operation signatures with their file/owner locations, matching topology and sequences, then the remaining tradeoffs. Use the standard's representation rules for protocol and dynamic data. Keep rationale beside the definitions it explains. Confirm the concrete group, propagate the answer across affected views, then advance to dependent behavior. Reference unchanged approved definitions precisely.
+- Trace required scenarios through owners, state and core interactions.
+- Compare reuse with necessary changes. Existing code does not override approved intent.
+- Confirm the macro basis before dependent micro design.
 
-Build the complete scoped file tree from the owners, including integration/test locations and retired paths. Trace macro guarantees into concrete micro operations and mechanisms. Settle consequential design while leaving ordinary implementation choices to the implementing model.
+## Micro design: closed-loop groups
 
-Inspect the project's test facilities and choose a few meaningful macro flows from entry to observable outcome. Identify participants, setup, invocation and limits; heavyweight children inherit global flow references and complete their participation. Detailed future TDD stays with implementation.
+A group covers a complete bounded behavior across collaborating owners, definitions, operations and flows.
 
-## Integrate confirmed groups throughout the design
+- Develop the end-to-end proposal before asking for decisions.
+- Work from foundational state and operations toward their consumers.
+- Distinguish assumptions from confirmed choices. Clarify blocking human premises first.
+- Check normal flows, decisive counterexamples, and consequential interruption/recovery.
 
-Before every specification write, show the exact proposed content or patch and destination in the main response, explain material consequences, and obtain explicit human confirmation. Carry the confirmed definitions and matching flows into that content; question-tool previews supplement it rather than carry the only copy. One answer can approve the design and its write when both were fully displayed. Apply only the confirmed content; a changed proposal or basis needs renewed confirmation. Keep unconfirmed proposals conversational, not in candidate files.
+Present together in the main response:
+- Complete declarations and operation signatures.
+- File/owner locations and matching topology/sequences.
+- Remaining tradeoffs and precise references to unchanged approved definitions.
 
-Integrate agreed content by revising its owning sections and reconciling affected decisions, references and remaining open scope, so the model expresses the current design rather than accumulated amendments. Heavyweight children write their assigned realizations and return root navigation changes to the root owner. Mutually dependent children can be reviewed as one coordinated package.
+**Confirmation unit:** The whole group, not individual types, interfaces or files.
+Reconcile affected views before advancing to dependent behavior.
 
-## 3. Check, review and approve
+- Complete the scoped file tree and project-grounded macro-flow test plan.
+- Heavyweight children inherit global flow references and plan their participation.
+- Leave detailed TDD and ordinary implementation choices to implementation.
 
-Walk the scenarios across requirements, files, macro/micro views, declarations and contracts. Render every diagram and visually inspect its actual result. Resolve conflicts and substantiate consequential feasibility claims; distinguish current checks from the future flow plan.
+## Integrate confirmed groups
 
-Use the `review-records` skill to prepare the submission and preserve review/repair evidence. Supply [reviewer-prompt.md](reviewer-prompt.md) with the current model, governing sources, confirmations, checks and prior findings. Retain the original author and separate original independent reviewer: report, original-author repair with required write confirmation, then the same reviewer reassesses the complete current design and findings. Repeat until Pass without unresolved findings or blockers.
+- Show the exact content or patch and destination in the main response.
+- Explain consequences and obtain explicit human confirmation before writing.
+- One answer may approve both design and write when both are fully displayed.
+- Changed proposals or bases need renewed confirmation.
+- Keep unconfirmed proposals in conversation, not candidate files.
+- Update canonical sections and affected decisions/references, not amendment diaries.
+- Heavyweight children update assigned realizations; root navigation changes go to the root owner.
+- Mutually dependent children may share one coordinated review package.
 
-Present the reviewed design and limits for explicit final human approval, separate from write consent. Human revisions return through the same loop.
+## Check, review and approve
 
-Return the approved model/source references and review/approval evidence. A heavyweight child returns to the root: all scoped realizations must be complete and approved before one root ticket set, controller and delivery. Stop before ticketing or coding; do not automatically launch the next stage.
+- Check scenario consistency, concrete realization and consequential feasibility against the standard.
+- Render every diagram and visually inspect its result.
+- Distinguish performed checks from the future test plan.
+- Use `review-records` for submission and review/repair evidence.
+- Supply [reviewer-prompt.md](reviewer-prompt.md) with the model, sources, confirmations, checks and prior findings.
+- Keep the original author and separate original independent reviewer through repairs.
+- Repairs follow the write-confirmation rules.
+- The same reviewer reassesses the complete current design and prior findings until Pass without unresolved findings or blockers.
+- Obtain final human approval of the reviewed design and limits, separate from write consent.
+- Human revisions return through the same repair/review loop.
+
+## Return and stop
+
+- Return approved model/source references and review/approval evidence.
+- Heavyweight children return to the root. All scoped realizations must be complete and approved before one root ticket set, controller and delivery.
+- Stop before ticketing or coding. Do not automatically start the next stage.
