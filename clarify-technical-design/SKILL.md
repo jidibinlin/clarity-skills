@@ -9,11 +9,11 @@ Co-design the technical model **top-down from macro to micro**. Within micro des
 
 ## Establish the basis
 
-Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) before designing. Load `artifact-layout` for locations/ownership and `ask-with-context` for substantive questions, including its Required question format and pre-send check. Resolve skills through their registered names and resources through their installed owners; a standard import does not invoke its author's workflow.
+Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) before designing. Use the `artifact-layout` skill for locations/ownership and the `ask-with-context` skill for substantive questions, including its Required question format and pre-send check. Resolve skills through their registered names and resources through their installed owners; a standard import does not invoke its author's workflow.
 
 Read the approved requirements, original context and applicable review/approval evidence. Inspect relevant repository guidance, runtime boundaries, owners, types, interfaces, callers and tests. Recover current work and prior decisions when resuming.
 
-For a heavyweight child, also resolve the root's approved requirements package and architecture, and read registered `clarify-architecture`'s `ARCHITECTURE-MODEL.md` for inherited guarantees and shared realization assignments. Return conflicts to the owning authority rather than changing a global premise locally.
+For a heavyweight child, read the root's approved requirements package and architecture document. Inherit its guarantees, boundary contracts, shared realization assignments and relevant child dependencies; refine the scoped macro design within that basis. Return conflicts to the owning authority rather than changing a global premise locally.
 
 ## 1. Macro design: settle topology and technical direction
 
@@ -42,7 +42,7 @@ Integrate agreed content by revising its owning sections and reconciling affecte
 
 Walk the scenarios across requirements, files, macro/micro views, declarations and contracts. Render every diagram and visually inspect its actual result. Resolve conflicts and substantiate consequential feasibility claims; distinguish current checks from the future flow plan.
 
-Read `review-records` to prepare the submission and preserve review/repair evidence. Supply [reviewer-prompt.md](reviewer-prompt.md) with the current model, governing sources, confirmations, checks and prior findings. Retain the original author and separate original independent reviewer: report, original-author repair with required write confirmation, then the same reviewer reassesses the complete current design and findings. Repeat until Pass without unresolved findings or blockers.
+Use the `review-records` skill to prepare the submission and preserve review/repair evidence. Supply [reviewer-prompt.md](reviewer-prompt.md) with the current model, governing sources, confirmations, checks and prior findings. Retain the original author and separate original independent reviewer: report, original-author repair with required write confirmation, then the same reviewer reassesses the complete current design and findings. Repeat until Pass without unresolved findings or blockers.
 
 Present the reviewed design and limits for explicit final human approval, separate from write consent. Human revisions return through the same loop.
 

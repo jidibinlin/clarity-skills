@@ -9,7 +9,7 @@ Co-design the selected effort's global topology, guarantees and shared realizati
 
 ## Establish the basis
 
-Read [ARCHITECTURE-MODEL.md](ARCHITECTURE-MODEL.md) and its selective technical imports before designing. Load `artifact-layout` for locations/ownership and `ask-with-context` for substantive questions, including its Required question format and pre-send check. Resolve skills through their registered names and resources through their installed owners; importing a standard does not invoke its author's workflow.
+Read [ARCHITECTURE-MODEL.md](ARCHITECTURE-MODEL.md) and its selective technical imports before designing. Use the `artifact-layout` skill for locations/ownership and the `ask-with-context` skill for substantive questions, including its Required question format and pre-send check. Resolve skills through their registered names and resources through their installed owners; importing a standard does not invoke its author's workflow.
 
 Resolve the root entry's selected shared/child requirements, dependencies and exclusions. The package must have independent composite Pass and human approval. Inspect relevant runtime/code boundaries, state owners, interfaces, callers and repository guidance. Resume from current models and prior decisions, not just status labels.
 
@@ -37,7 +37,7 @@ Integrate agreed content into the canonical architecture and root navigation thr
 
 Walk scenarios through the complete global model and child assignments. Render every diagram and visually inspect the result against the intended boundaries, paths and ordering. Resolve contradictions and gather necessary feasibility evidence, distinguishing actual checks from planned integration tests.
 
-Read `review-records` to prepare the submission and preserve review/repair evidence. Give [reviewer-prompt.md](reviewer-prompt.md) the current model, approved sources, confirmations, checks and prior findings. Keep the original author and a separate original independent reviewer through the loop: report, original-author repair with any required write confirmation, then the same reviewer reassesses the current model and findings. Continue until Pass without unresolved findings or blockers.
+Use the `review-records` skill to prepare the submission and preserve review/repair evidence. Give [reviewer-prompt.md](reviewer-prompt.md) the current model, approved sources, confirmations, checks and prior findings. Keep the original author and a separate original independent reviewer through the loop: report, original-author repair with any required write confirmation, then the same reviewer reassesses the current model and findings. Continue until Pass without unresolved findings or blockers.
 
 Present the reviewed architecture, consequential choices, assignments and limits for explicit final human approval. Human revisions return through the same loop. This approval is separate from consent to write.
 

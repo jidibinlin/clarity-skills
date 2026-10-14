@@ -4,7 +4,7 @@ Review independently and read-only. Original change/canonical authors own repair
 
 ## Establish the review basis
 
-Read [CHANGE-MODEL.md](CHANGE-MODEL.md), its named imports and registered `review-records`. Resolve resources through their registered owners; import standards without invoking author workflows. Use `artifact-layout` for location/ownership questions.
+Read [CHANGE-MODEL.md](CHANGE-MODEL.md) and its named imports. Use the `review-records` skill. Resolve resources through their registered owners; import standards without invoking author workflows. Use the `artifact-layout` skill for location/ownership questions.
 
 Assess the current coordinated package: change model, affected canonical sections and necessary context. Use the request, confirmed intent, baseline evidence, concrete confirmations, actual checks and prior findings. Missing historical models do not imply missing historical approvals must be invented.
 

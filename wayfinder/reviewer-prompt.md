@@ -4,7 +4,7 @@ Review read-only. Return findings to the original map author rather than rewriti
 
 ## 1. Assemble the current assignment
 
-Read [WAYFINDER-MODEL.md](WAYFINDER-MODEL.md) and registered `review-records`. Resolve resources through their installed owners; use `artifact-layout` for artifact conventions.
+Read [WAYFINDER-MODEL.md](WAYFINDER-MODEL.md). Use the `review-records` skill. Resolve resources through their installed owners; use the `artifact-layout` skill for artifact conventions.
 
 Receive the complete current map, original requirements and confirmed decisions, relevant sources, human confirmations, rendered views and prior findings. Establish the selected scope and intended requirements handoff.
 

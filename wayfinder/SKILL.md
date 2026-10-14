@@ -9,7 +9,7 @@ Make a large requirement navigable. Use LOW-resolution tentative topology to cha
 
 ## 1. Establish the destination and evidence
 
-Read [WAYFINDER-MODEL.md](WAYFINDER-MODEL.md) before modeling; it guides both construction and review. Load `artifact-layout` by registered name for the effort root and artifact ownership. Resolve resources through their installed skill owners, not assumed neighboring directories.
+Read [WAYFINDER-MODEL.md](WAYFINDER-MODEL.md) before modeling; it guides both construction and review. Use the registered `artifact-layout` skill for the effort root and artifact ownership. Resolve resources through their installed skill owners, not assumed neighboring directories.
 
 Read the original request, confirmed decisions and relevant domain/repository evidence. Establish the practical problem, intended outcomes and selected scope. Separate current facts from the confirmed target. On resume, recover the current map and review state, including formal decisions that supersede its estimates.
 

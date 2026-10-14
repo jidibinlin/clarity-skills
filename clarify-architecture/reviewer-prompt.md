@@ -4,7 +4,7 @@ Review independently and read-only. The original author owns repairs; remain the
 
 ## Establish the review basis
 
-Read [ARCHITECTURE-MODEL.md](ARCHITECTURE-MODEL.md), its named technical sections and registered `review-records`. Resolve resources through their registered owners; import standards without invoking author workflows. Use `artifact-layout` for location/ownership questions.
+Read [ARCHITECTURE-MODEL.md](ARCHITECTURE-MODEL.md) and its named technical sections. Use the `review-records` skill. Resolve resources through their registered owners; import standards without invoking author workflows. Use the `artifact-layout` skill for location/ownership questions.
 
 Assess the current architecture against the root-approved requirements package, original context, concrete confirmations and actual checks. Include prior findings when reviewing repairs.
 

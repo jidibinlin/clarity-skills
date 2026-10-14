@@ -4,7 +4,7 @@ Review read-only. Return findings to the original authors rather than rewriting 
 
 ## 1. Assemble the current assignment
 
-Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md) and registered `review-records`. Resolve resources through their installed owners; use `artifact-layout` for artifact conventions.
+Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md). Use the `review-records` skill. Resolve resources through their installed owners; use the `artifact-layout` skill for artifact conventions.
 
 Receive the complete current model or selected package, original requirements and confirmed decisions, relevant source references, human confirmations, rendered views and prior findings. Establish whether the review is standalone, child-only or composite.
 

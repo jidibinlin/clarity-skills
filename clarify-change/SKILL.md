@@ -9,7 +9,7 @@ Recover the affected baseline, co-design the complete target, synchronize its au
 
 ## Establish scope and baseline
 
-Read [CHANGE-MODEL.md](CHANGE-MODEL.md) and its technical imports before designing. Load `artifact-layout` for locations/ownership and `ask-with-context` for substantive questions, including its Required question format and pre-send check. Resolve skills by registered name and resources through their installed owners; standard imports do not invoke owner workflows. Read conditional architecture/map criteria when those authorities are affected.
+Read [CHANGE-MODEL.md](CHANGE-MODEL.md) and its technical imports before designing. Use the `artifact-layout` skill for locations/ownership and the `ask-with-context` skill for substantive questions, including its Required question format and pre-send check. Resolve skills by registered name and resources through their installed owners; standard imports do not invoke owner workflows. Read conditional architecture/map criteria when those authorities are affected.
 
 Reuse the existing effort/root and canonical owners, or establish the change workspace through `artifact-layout`. Follow requested scenarios through current entry points, processes/modules, state owners, callers and outcomes. Compare documents with code, configuration, tests and runtime evidence. Retain reliable references and reconstruct missing affected behavior, ownership, files and contracts; bound investigation by the change and its necessary interactions.
 
@@ -43,7 +43,7 @@ Before every specification write, the owning author shows the exact proposed con
 
 Walk changed and preserved scenarios through the complete target and transition. Check referenced definitions, callers and migration feasibility. Render every diagram and visually inspect its current result, resolving cross-view conflicts before submission.
 
-Read `review-records` to prepare the submission and preserve review/repair evidence. Supply [reviewer-prompt.md](reviewer-prompt.md) with the coordinated package, baseline, governing sources, confirmations, actual checks and previous findings. Retain original change/canonical authors and the original independent change reviewer: report, original-author repairs with required write confirmation, then the same reviewer reassesses the package and findings. Repeat until Pass without unresolved findings or blockers.
+Use the `review-records` skill to prepare the submission and preserve review/repair evidence. Supply [reviewer-prompt.md](reviewer-prompt.md) with the coordinated package, baseline, governing sources, confirmations, actual checks and previous findings. Retain original change/canonical authors and the original independent change reviewer: report, original-author repairs with required write confirmation, then the same reviewer reassesses the package and findings. Repeat until Pass without unresolved findings or blockers.
 
 Present the reviewed target, impacts, route and limits for explicit final human approval, separate from write consent. Human revisions return through the same loop.
 

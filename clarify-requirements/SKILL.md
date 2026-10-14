@@ -9,7 +9,7 @@ Explain the intended behavior and domain meaning well enough for the next modeli
 
 ## 1. Recover the scope and working basis
 
-Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md) before modeling; it guides both construction and review. Load `artifact-layout` by registered name for workspace and ownership conventions. Resolve resources through their installed skill owners, not assumed neighboring directories.
+Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md) before modeling; it guides both construction and review. Use the registered `artifact-layout` skill for workspace and ownership conventions. Resolve resources through their installed skill owners, not assumed neighboring directories.
 
 Read the original request, confirmed decisions, relevant project knowledge and current behavior. Establish the selected scope and whether the assignment is standalone, child-only or composite. On resume, recover the current models and review state. Code establishes current facts; confirmed requirements govern the target.
 

@@ -7,7 +7,7 @@ description: Implement an approved ticket set or bounded direct change through i
 
 Coordinate the whole requirement. `implement-unit` runs each unit's implementation/review loop; its implementer uses `tdd`, and its independent reviewer uses `code-review`.
 
-Read [ORCHESTRATION.md](ORCHESTRATION.md), `IMPLEMENTATION.md` directly from registered `implement-unit`, and registered `artifact-layout`. Load `review-records` for review records and `ask-with-context` for substantive human questions. Resolve resources through their registered owners.
+Read [ORCHESTRATION.md](ORCHESTRATION.md) and `IMPLEMENTATION.md` directly from the registered `implement-unit` skill. Use the `artifact-layout` skill for storage. Use the `review-records` skill for review records and the `ask-with-context` skill for substantive human questions. Resolve resources through their registered owners.
 
 ## 1. Start from the approved work
 

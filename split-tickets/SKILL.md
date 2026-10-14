@@ -7,7 +7,7 @@ description: Use to decompose an approved design or change package into implemen
 
 Turn the approved scope into useful increments that a fresh implementer can understand, implement, verify and repair within one working context.
 
-Read [TICKETS.md](TICKETS.md) for generation and review criteria, and registered `artifact-layout` for storage. Load `review-records` when recording or recovering review work and `ask-with-context` for substantive human questions. Resolve references through their registered owners and local files relative to this skill.
+Read [TICKETS.md](TICKETS.md) for generation and review criteria. Use the `artifact-layout` skill for storage. Use the `review-records` skill when recording or recovering review work and the `ask-with-context` skill for substantive human questions. Resolve references through their registered owners and local files relative to this skill.
 
 ## 1. Recover the approved basis
 

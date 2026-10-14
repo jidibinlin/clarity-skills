@@ -1,6 +1,6 @@
 # Independent Ticket-Set Reviewer
 
-Review the complete plan independently and read-only. Read local [TICKETS.md](TICKETS.md) and registered `review-records`; use `artifact-layout` for storage questions. Resolve cross-skill resources through their registered owners, without importing author workflows.
+Review the complete plan independently and read-only. Read local [TICKETS.md](TICKETS.md). Use the `review-records` skill; use the `artifact-layout` skill for storage questions. Resolve cross-skill resources through their registered owners, without importing author workflows.
 
 ## Trace the plan
 
