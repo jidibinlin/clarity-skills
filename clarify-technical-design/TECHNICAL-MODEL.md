@@ -14,21 +14,21 @@ A child realizes the root's approved requirements package and architecture. Its 
 
 ## Approved basis and decision rationale
 
-The model identifies its governing requirements, scope and constraints. Heavyweight work also identifies its approved architecture; a change package may establish its own confirmed requirements. Existing code is evidence about the system, not authority to override an approved target.
+The model identifies its governing requirements, applicable approved upstream sources, scope and constraints. A change package may establish its own confirmed requirements. Existing code is evidence about the system, not authority to override an approved target.
 
 Decisions carry enough context to explain their purpose, decisive constraints, meaningful alternatives and consequences. Reuse existing concepts where they fit; explain new or displaced responsibilities in terms of the actual scenarios and owners.
-
-### Progressive design convergence
-
-Concrete topology, sequences, declarations, interfaces and file responsibilities have been progressively agreed with the human or are applicable unchanged reuse. Agreement on direction alone does not establish agreement on the completed design.
-
-#### Macro-first, dependency-led micro design
-
-The confirmed macro topology and technical direction ground micro design. Discussion groups realize bounded behavior across its participants, connecting foundational state and operations to consumers and outcomes, including consequential interruption/recovery paths. Each proposed design is coherent under its stated premises across data, interfaces and sequences, supported by normal flows and decisive counterexamples. Concrete human agreement covers the resulting group; working assumptions remain distinguishable from confirmed decisions. Data-first or sequence-first reasoning follows dependencies, not a field-by-field approval order; design order does not prescribe implementation order.
 
 ### Constraints for first-pass implementation
 
 Consequential ownership, invariants, collaboration and resource constraints are explicit where they belong, together with applicable repository conventions. These guide implementation without prescribing every local expression or helper.
+
+## Progressive design convergence
+
+Concrete topology, sequences, declarations, interfaces and file responsibilities have been progressively agreed with the human or are applicable unchanged reuse. Agreement on direction alone does not establish agreement on the completed design.
+
+### Coherent macro-to-micro realization
+
+Micro designs realize the confirmed macro topology and technical direction through complete behavior across state owners, foundational operations and consumers, including consequential interruption/recovery paths. Data, interfaces and sequences are coherent under their stated premises and supported by normal flows and decisive counterexamples. Human agreement covers the concrete collaborating definitions and sequences; working assumptions remain distinguishable from confirmed decisions.
 
 ## File organization and responsibility tree
 
@@ -86,7 +86,7 @@ Each flow identifies its scenario, participants, starting conditions, actions, e
 
 ## Consistency, evidence, and clean integration
 
-Requirements, files, macro/micro views, definitions and contracts agree. Scenario traces connect them, and referenced code or targeted investigation supports consequential feasibility claims.
+The requirements, views, definitions and contracts owned by the current design scope agree; concrete technical realizations also reconcile their files and micro views. Scenario traces connect them, and referenced code or targeted investigation supports consequential feasibility claims.
 
 Every diagram has been rendered and visually inspected against its current source. The evidence reports what was actually checked and any remaining limits.
 

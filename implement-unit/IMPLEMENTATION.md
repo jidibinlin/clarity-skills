@@ -1,6 +1,6 @@
-# Unit Implementation Standard
+# Implementation Standard: Shared Contracts and Unit Quality
 
-This standard guides implementation and independent review. SKILL.md supplies the unit workflow; registered `code-review` supplies the reviewer method. Read TESTING.md from registered `tdd` for shared test criteria. Registered `implement`'s ORCHESTRATION.md covers whole-work composition; `artifact-layout` and `review-records` own storage and records.
+This standard defines shared execution contracts and unit-result quality. The `implement-unit` skill supplies the unit method; the `code-review` skill supplies the reviewer method. `implement`'s ORCHESTRATION.md defines composition; `artifact-layout` and `review-records` define storage and records. Consumers read the named sections needed by their role.
 
 ## Executable basis
 
@@ -17,7 +17,7 @@ During authorized implementation, the assigned execution writer may automaticall
 
 Support these facts with actual dispatch/execution evidence, citing the owning log where applicable. Initial implementing status and actual handles need no fabricated log event. Updates retain the original-pair rules; recording a handle does not appoint a replacement. A passing status requires the saved independent Pass and current mandatory evidence, not an author's claim that findings are closed.
 
-This exception does not change the approved scope, design, acceptance, verification, dependencies or source selection. Separate facts from specification changes in a mixed patch. Once the evidence-backed handoff and actual prerequisites are satisfied, the controller may continue authorized dependent work without per-ticket human approval.
+This exception does not change the approved scope, design, acceptance, verification, dependencies or source selection. Separate facts from specification changes in a mixed patch.
 
 ## Authorization and evidence validity
 
@@ -29,7 +29,7 @@ Review is independent and belongs to the original reviewer, with repairs by the 
 
 ## Implementation and verification quality
 
-The result conforms to the approved behavior and production design, follows repository conventions and preserves unrelated user work. Complete the authorized cutover across affected owners, callers, tests and documentation. Local cleanup and test organization are engineering choices; changes to approved structure, interfaces or ownership require an approved basis.
+The result conforms to the approved behavior and production design, follows repository conventions and preserves unrelated user work. Complete the authorized cutover across affected owners, callers, tests and documentation. Local cleanup and test organization are engineering choices; changes to approved structure, interfaces or ownership require an approved basis. When constructing or assessing tests, read TESTING.md from the registered `tdd` skill.
 
 Run applicable project static checks, behavioral/regression tests and required suites. Exercise the actual changed surface and every assigned macro flow with the required participants. Compilation or isolated mocks cannot establish unexercised runtime behavior. Tickets own their assigned flows; direct changes own the complete combined result.
 

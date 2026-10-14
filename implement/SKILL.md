@@ -7,7 +7,7 @@ description: Implement an approved ticket set or bounded direct change through i
 
 Coordinate the whole requirement. `implement-unit` runs each unit's implementation/review loop; its implementer uses `tdd`, and its independent reviewer uses `code-review`.
 
-Read [ORCHESTRATION.md](ORCHESTRATION.md) and `IMPLEMENTATION.md` directly from the registered `implement-unit` skill. Use the `artifact-layout` skill for storage. Use the `review-records` skill for review records and the `ask-with-context` skill for substantive human questions. Resolve resources through their registered owners.
+Read [ORCHESTRATION.md](ORCHESTRATION.md) and the shared execution contract it names. Use the `artifact-layout` skill for storage, the `review-records` skill for review records and the `ask-with-context` skill for substantive human questions. Resolve cross-skill resources through their registered owners.
 
 ## 1. Start from the approved work
 
@@ -31,18 +31,18 @@ After unit Pass, incorporate the result, preserve the report and dispositions, a
 
 Follow the approved flows across incorporated outputs. Obtain the required combined regression and whole-flow evidence, reusing current evidence where it still proves the outcome.
 
-For a **ticket set**, assign an independent overall reviewer using `code-review`. Provide the complete scope and approved sources, combined code, unit reports, verification and prior findings; use ORCHESTRATION.md, the applicable IMPLEMENTATION.md criteria and `tdd`'s TESTING.md as standards, with `review-records` as the report format. Review composition and cross-ticket behavior, not just individual Passes.
+For a **ticket set**, assign an independent overall reviewer using the `code-review` skill. Provide the complete scope and approved sources, combined code, unit reports, verification and prior findings. Give the reviewer ORCHESTRATION.md and the **Implementation and verification quality** and **Review coverage** sections of IMPLEMENTATION.md as standards, with `review-records` as the report format. Review composition and cross-ticket behavior, not just individual Passes.
 
 Route findings to the original responsible implementers through `implement-unit`, renew affected unit reviews and return to the same overall reviewer until Pass. For a **direct change**, the original unit reviewer's full-change assessment is already the final independent review.
 
 ## 4. Obtain final acceptance
 
-After final Pass and required verification, write the one root `delivery.md` using IMPLEMENTATION.md. Present the reviewed whole result, evidence and consequential decisions for explicit human acceptance, and record the decision. Requested repairs retain the original owners and reviewers.
+After final Pass and required verification, read IMPLEMENTATION.md's **Delivery content and storage** and write the one root `delivery.md`. Present the reviewed whole result, evidence and consequential decisions for explicit human acceptance, and record the decision. Requested repairs retain the original owners and reviewers.
 
 Stop after acceptance or an unresolved external blocker. Execution authority does not include automatic commits, publication or release.
 
 ## Applying specification writes
 
-Use IMPLEMENTATION.md's **Authorization and evidence validity** and **Execution facts exception**. Show specification content or its exact patch and obtain explicit confirmation before writing; renew confirmation if the proposal or its basis changes. Keep unconfirmed proposals in conversation.
+Apply the shared **Authorization and evidence validity** criteria. Show specification content or its exact patch and obtain explicit confirmation before writing; renew confirmation if the proposal or its basis changes. Keep unconfirmed proposals in conversation.
 
-Only eligible facts in existing ticket execution fields update automatically; neither facts nor logs can revise approved scope or dependencies.
+When updating existing ticket execution fields, use **Execution facts exception**. Only eligible facts update automatically; neither facts nor logs can revise approved scope or dependencies.

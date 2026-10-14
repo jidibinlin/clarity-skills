@@ -1,6 +1,6 @@
 # Whole-Work Implementation: Composition Standard
 
-These criteria guide execution and review of the combined result. SKILL.md supplies the controller method and registered `code-review` supplies the reviewer method. `IMPLEMENTATION.md` from registered `implement-unit` supplies unit, authorization, execution-fact and delivery criteria.
+These criteria guide execution and review of the combined result. SKILL.md supplies the controller method and the `code-review` skill supplies the reviewer method. Read **Authorization and evidence validity** from `IMPLEMENTATION.md` through the registered `implement-unit` skill for the shared execution contract. Other sections are consulted for the responsibilities below.
 
 ## Authorized execution basis
 
@@ -8,13 +8,13 @@ The result covers an explicitly authorized approved ticket set or bounded whole-
 
 ## Readiness and execution facts
 
-Dependent work is ready when its required outputs are physically incorporated and usable, with applicable independent Passes, saved reports and finding dispositions. Evidence-backed execution-block updates follow IMPLEMENTATION.md's **Execution facts exception**, without another human approval of the handoff.
+Dependent work is ready when its required outputs are physically incorporated and usable, with applicable independent Passes, saved reports and finding dispositions. The controller may then continue authorized dependent work without per-ticket human approval. When updating existing ticket execution fields, read IMPLEMENTATION.md's **Execution facts exception**.
 
 A status label alone does not establish readiness. Factual blocker updates cannot remove normative dependencies.
 
 ## Evidence applicability
 
-Authority and role continuity follow IMPLEMENTATION.md's **Authorization and evidence validity** criteria. Review and verification evidence must apply to the current combined result; material changes require affected conclusions to be reassessed. Existing records preserve findings, decisions and outcomes.
+Apply the shared **Authorization and evidence validity** criteria to the current combined result. Material changes require affected conclusions to be reassessed; applicable unit evidence can support the combined result.
 
 ## Final combined result
 
@@ -26,4 +26,4 @@ A ticket set receives independent overall review in addition to unit reviews. A 
 
 ## Whole-result coverage
 
-Conformance means the approved scope is incorporated, original-owner repairs and independent findings are resolved, and current verification demonstrates the complete behavior. The one delivery summary meets IMPLEMENTATION.md's criteria and supports the final acceptance decision.
+Conformance means the approved scope is incorporated, original-owner repairs and independent findings are resolved, and current verification demonstrates the complete behavior. At final delivery, apply IMPLEMENTATION.md's **Delivery content and storage** criteria to the one summary supporting human acceptance.

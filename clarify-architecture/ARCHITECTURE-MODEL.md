@@ -19,7 +19,7 @@ The basis is the root-selected shared/child requirements package, independently 
 
 The design is grounded in approved scenarios and inspected runtime/code boundaries. It explains reuse, changed responsibilities and decisive choices. Existing implementation facts do not override the approved target.
 
-Complete scoped Mermaid topology and sequences show process/module responsibilities, dataflow, state authority, collaboration and concurrency mechanisms. Every scenario reaches an observable outcome through accountable owners. The global choices needed by children are settled.
+Complete scoped Mermaid topology and sequences show process/module responsibilities, dataflow, state authority, collaboration and concurrency mechanisms. Every scenario reaches an observable outcome through accountable owners. The global choices needed by children have been concretely agreed with the human or are applicable unchanged reuse.
 
 ## Global decisions versus owned child realization
 

@@ -7,6 +7,7 @@ Use these criteria to shape and review a transition from an evidenced existing s
 Read these sections, including subsections, from registered `clarify-technical-design`'s `TECHNICAL-MODEL.md`:
 
 - **Approved basis and decision rationale**.
+- **Progressive design convergence**.
 - **File organization and responsibility tree**.
 - **Macro runtime and collaboration model**.
 - **Micro object and collaboration model**.
@@ -15,7 +16,12 @@ Read these sections, including subsections, from registered `clarify-technical-d
 - **Overall workflow integration test plan**.
 - **Consistency, evidence, and clean integration**.
 
-Resolve resources through their registered owners and import content, not workflows. Where affected, also apply `clarify-architecture`'s `ARCHITECTURE-MODEL.md` and `wayfinder`'s `WAYFINDER-MODEL.md` to their respective authorities.
+Resolve resources through their registered owners. When canonical architecture or map content is affected, read only these content sections, including subsections:
+
+- From `clarify-architecture`'s `ARCHITECTURE-MODEL.md`: **Approved basis and global completeness**, **Global decisions versus owned child realization**, and **Overall workflow integration coverage**. Its referenced technical content is covered by the imports above.
+- From `wayfinder`'s `WAYFINDER-MODEL.md`: **Destination and fidelity**, **Drillable boundaries and dependencies**, **Context and actual basis**, **Diagrams and visual evidence**, and **Review coverage**.
+
+Apply these criteria to the affected canonical content. Change authors coordinate the updates and the change reviewer assesses the combined package under this stage's approval route.
 
 ## Evidenced baseline and scope
 

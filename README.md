@@ -17,12 +17,12 @@ Human-led requirements and technical design, followed by implementation against 
 
 Lightweight: requirements → technical design → tickets → implementation. Heavyweight: Wayfinder → shared/child requirements → overall architecture → child technical designs → one root ticket set → implementation. A bounded approved change can go directly to implementation. Stage approval does not automatically launch the next stage.
 
-`implement` starts from the approved work and coordinates ready units through `implement-unit`. The original implementer uses `tdd` for initial behavior and behavioral repairs; the independent reviewer uses `code-review`. Existing progress is continued when present, not required to start.
+`implement` starts from the approved work and coordinates ready units through `implement-unit`. It reads shared authorization, execution-fact and delivery criteria when those responsibilities apply; implementers and reviewers use the implementation-quality criteria. These remain single-source sections of `implement-unit`'s IMPLEMENTATION.md. The original implementer uses `tdd` for initial behavior and behavioral repairs; the independent reviewer uses `code-review`. Existing progress is continued when present, not required to start.
 
 ## Responsibilities and reading
 
 - **SKILL.md:** the working method and key human/agent handoffs.
-- **Content standard:** read before authoring; the same criteria guide generation and independent review.
+- **Content standard:** read before authoring; the same criteria guide generation and independent review. Cross-stage imports name applicable content sections; the consuming stage owns its method, role routing and approval route.
 - **Reviewer prompts:** scope modeling and ticket-planning reviews. Code review uses the shared method below with unit or whole-result criteria.
 - [ask-with-context](ask-with-context/SKILL.md): decision-ready questions and continued clarification.
 - [tdd](tdd/SKILL.md): the implementer's behavioral loop, including repair. [TESTING.md](tdd/TESTING.md) supplies shared test-quality criteria.
