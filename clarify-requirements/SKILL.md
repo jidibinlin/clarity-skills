@@ -29,7 +29,7 @@ Keep imposed technical constraints when they affect requirements; leave realizat
 
 ## 4. Ask the next ready material question
 
-Use registered `ask-with-context`, including its **Required question format and pre-send check**. Choose the question whose answer most usefully resolves the selected behavior or scope and whose prerequisites are understood. Work from upstream business choices toward their consequences, rather than conducting an exhaustive low-level interview.
+Use registered `communication-style` for human communication, including its **Ask when human judgment is needed** section for consequential questions. Choose the question whose answer most usefully resolves the selected behavior or scope and whose prerequisites are understood. Work from upstream business choices toward their consequences, rather than conducting an exhaustive low-level interview.
 
 After each answer, reconcile affected scenarios and concepts and continue with the next ready material question. A fully specified request needs no interview. Keep unresolved proposals in conversation; confirmed groups can progress while other groups remain open.
 

@@ -7,7 +7,7 @@ description: Implement an approved ticket set or bounded direct change through i
 
 Coordinate the whole requirement. `implement-unit` runs each unit's implementation/review loop; its implementer uses `tdd`, and its independent reviewer uses `code-review`.
 
-Read [ORCHESTRATION.md](ORCHESTRATION.md) and the shared execution contract it names. Use the `artifact-layout` skill for storage, the `review-records` skill for review records and the `ask-with-context` skill for substantive human questions. Resolve cross-skill resources through their registered owners.
+Read [ORCHESTRATION.md](ORCHESTRATION.md) and the shared execution contract it names. Use the `artifact-layout` skill for storage, the `review-records` skill for review records and the `communication-style` skill for human communication. Resolve cross-skill resources through their registered owners.
 
 ## 1. Start from the approved work
 

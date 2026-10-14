@@ -9,7 +9,7 @@ Co-design the technical model **top-down from macro to micro**. Within micro des
 
 ## Establish the basis
 
-Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) before designing. Use the `artifact-layout` skill for locations/ownership and the `ask-with-context` skill for substantive questions, including its Required question format and pre-send check. Resolve skills through their registered names and resources through their installed owners; a standard import does not invoke its author's workflow.
+Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) before designing. Use the `artifact-layout` skill for locations/ownership and the `communication-style` skill for human communication, including its Ask when human judgment is needed section for consequential questions. Resolve skills through their registered names and resources through their installed owners; a standard import does not invoke its author's workflow.
 
 Read the approved requirements, original context and applicable review/approval evidence. Inspect relevant repository guidance, runtime boundaries, owners, types, interfaces, callers and tests. Recover current work and prior decisions when resuming.
 

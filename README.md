@@ -24,7 +24,7 @@ Lightweight: requirements → technical design → tickets → implementation. H
 - **SKILL.md:** the working method and key human/agent handoffs.
 - **Content standard:** read before authoring; the same criteria guide generation and independent review. Cross-stage imports name applicable content sections; the consuming stage owns its method, role routing and approval route.
 - **Reviewer prompts:** scope modeling and ticket-planning reviews. Code review uses the shared method below with unit or whole-result criteria.
-- [ask-with-context](ask-with-context/SKILL.md): decision-ready questions and continued clarification.
+- [communication-style](communication-style/SKILL.md): shared context, clear explanations, Mermaid diagrams and consequential questions.
 - [tdd](tdd/SKILL.md): the implementer's behavioral loop, including repair. [TESTING.md](tdd/TESTING.md) supplies shared test-quality criteria.
 - [code-review](code-review/SKILL.md): the independent reviewer's method for conformance, engineering quality and verification evidence. It does not dispatch another review team or repair code.
 - [artifact-layout](artifact-layout/SKILL.md): private directories and file responsibilities.
@@ -36,7 +36,7 @@ Micro technical proposals and document drafts present concrete definitions with 
 
 ## Installation
 
-Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout` and `review-records`; questions use `ask-with-context`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
+Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout` and `review-records`; human communication uses `communication-style`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
 
 Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `wayfinder`, `tdd` and `code-review` unambiguously alongside any upstream skills. This repository does not auto-install or change global instructions.
 

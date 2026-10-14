@@ -7,7 +7,7 @@ description: Complete one approved ticket or bounded direct change, including ve
 
 Own one implementation unit through Pass. The same implementer uses `tdd` for initial behavioral work and behavioral repairs; the independent reviewer uses `code-review`. These are working methods, not additional agents or stages.
 
-Read [IMPLEMENTATION.md](IMPLEMENTATION.md). Use the `artifact-layout` skill. Use the `review-records` skill for review/repair records and the `ask-with-context` skill for substantive human questions. Resolve companion files relative to this skill and cross-skill resources through their registered owners.
+Read [IMPLEMENTATION.md](IMPLEMENTATION.md). Use the `artifact-layout` skill. Use the `review-records` skill for review/repair records and the `communication-style` skill for human communication. Resolve companion files relative to this skill and cross-skill resources through their registered owners.
 
 ## 1. Understand the assigned work
 

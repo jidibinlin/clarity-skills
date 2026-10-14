@@ -9,7 +9,7 @@ Recover the affected baseline, co-design the complete target, synchronize its au
 
 ## Establish scope and baseline
 
-Read [CHANGE-MODEL.md](CHANGE-MODEL.md) and its named technical imports before designing. Read its conditional architecture/map content sections when those authorities are affected. Use the `artifact-layout` skill for locations/ownership and the `ask-with-context` skill for substantive questions, including its Required question format and pre-send check. Resolve skills by registered name and resources through their installed owners.
+Read [CHANGE-MODEL.md](CHANGE-MODEL.md) and its named technical imports before designing. Read its conditional architecture/map content sections when those authorities are affected. Use the `artifact-layout` skill for locations/ownership and the `communication-style` skill for human communication, including its Ask when human judgment is needed section for consequential questions. Resolve skills by registered name and resources through their installed owners.
 
 Reuse the existing effort/root and canonical owners, or establish the change workspace through `artifact-layout`. Follow requested scenarios through current entry points, processes/modules, state owners, callers and outcomes. Compare documents with code, configuration, tests and runtime evidence. Retain reliable references and reconstruct missing affected behavior, ownership, files and contracts; bound investigation by the change and its necessary interactions.
 

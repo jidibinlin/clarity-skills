@@ -31,7 +31,7 @@ Keep business relationships, tentative collaboration and clarification prerequis
 
 ## 4. Resolve the next material boundary question
 
-Use registered `ask-with-context`, including its **Required question format and pre-send check**. Investigate accessible facts first, then choose a ready question that materially changes the scope, boundary or prerequisite.
+Use registered `communication-style` for human communication, including its **Ask when human judgment is needed** section for consequential questions. Investigate accessible facts first, then choose a ready question that materially changes the scope, boundary or prerequisite.
 
 Resolve the coarse choices needed to begin useful requirements clarification. Leave later detailed choices with their owners rather than trying to solve the whole system here. After each answer, reconcile the affected scenarios and split and continue with the next ready material question. Keep candidate maps and unresolved proposals in conversation.
 
