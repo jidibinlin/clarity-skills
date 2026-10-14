@@ -5,7 +5,7 @@ description: Clarify or resume technical realization of approved requirements; h
 
 # Clarify Technical Design
 
-Co-design a complete scoped production realization, independently review it, obtain human approval, then hand it back for the next authorized stage.
+Co-design the technical model **top-down from macro to micro**. Within micro design, work **bottom-up along foundational dependencies**, using complete behavior as the unit of discussion. Finish with independent review and final human approval.
 
 ## Establish the basis
 
@@ -15,31 +15,30 @@ Read the approved requirements, original context and applicable review/approval 
 
 For a heavyweight child, also resolve the root's approved requirements package and architecture, and read registered `clarify-architecture`'s `ARCHITECTURE-MODEL.md` for inherited guarantees and shared realization assignments. Return conflicts to the owning authority rather than changing a global premise locally.
 
-## Settle macro collaboration
+## 1. Macro design: settle topology and technical direction
 
 Trace approved scenarios from entry to observable outcome through processes, modules and state owners, including consequential alternatives. Compare existing concepts and collaboration with what the target needs; reuse capable owners before introducing new abstractions. Existing code explains the baseline, not a reason to override approved intent.
 
-Propose actual macro topology, state/dataflow, concurrency mechanisms and core sequences. Walk the scenarios through these views to expose ownership, completion and boundary-contract choices. Show the human bounded concrete groups with context, alternatives and decisive rationale, and settle them before dependent local detail.
+Propose actual macro topology, responsibility boundaries, technical approaches, state/dataflow, concurrency mechanisms and core sequences. Walk the scenarios through these views to expose ownership, completion and boundary-contract choices. Discuss concrete groups with context, alternatives and decisive rationale; obtain human confirmation of the macro basis before its dependent micro design.
 
-## Refine through foundational dependencies
+## 2. Micro design: co-design complete behavior
 
-Identify what consuming collaborations need from their foundations: configuration, owned/state representations, interfaces and basic operations. Design along those actual dependencies rather than directory or call-stack order.
-
-Within a module, use data/declaration-first as a heuristic. When lifecycle, ownership or completion determines representation, work through the sequence first or decide the coupled views together.
-
-Progressively show complete declarations or schemas, concrete interfaces, object topology, sequences and file responsibilities. Confirm these actual decisions with the human instead of revealing a completed blueprint after broad direction agreement. Reconcile answers across views, replay the scenario and continue to the next ready decision. Applicable unchanged definitions can be referenced without redesigning them.
+1. Choose a bounded behavior, including the collaborating modules needed to complete it. Restore its confirmed macro guarantees and prior decisions. Work from foundational state and operations toward their consumers; use the whole flow to test those foundations.
+2. Develop an end-to-end proposal before asking for decisions. Connect state owners, triggers, computation, consumers and outcomes, including consequential interruption/recovery paths. Use declarations first when their meaning is stable; let lifecycle and sequences lead when they determine representation. Keep working assumptions explicit in conversation; if a missing human premise blocks the design, ask about that premise and its impact.
+3. Walk the normal flow and decisive counterexamples, reconciling data, interfaces and sequences before presentation. Inspect existing implementations to establish reuse and necessary changes against the target, rather than reopen confirmed intent.
+4. Present the coherent proposal with its topology, sequences, complete declarations/schemas, interfaces and file responsibilities. Explain the remaining tradeoffs and refine the design with the human in this context. Confirm the concrete group, propagate the answer across affected views, then advance to dependent behavior. Reference unchanged approved definitions precisely.
 
 Build the complete scoped file tree from the owners, including integration/test locations and retired paths. Trace macro guarantees into concrete micro operations and mechanisms. Settle consequential design while leaving ordinary implementation choices to the implementing model.
 
 Inspect the project's test facilities and choose a few meaningful macro flows from entry to observable outcome. Identify participants, setup, invocation and limits; heavyweight children inherit global flow references and complete their participation. Detailed future TDD stays with implementation.
 
-## Write the agreed model
+## Integrate confirmed groups throughout the design
 
-Before every specification write, show the exact proposed content or patch and destination, explain material consequences, and obtain explicit human confirmation. Apply only the confirmed content; a changed proposal or basis needs renewed confirmation. Keep unconfirmed proposals conversational, not in candidate files.
+Before every specification write, show the exact proposed content or patch and destination, explain material consequences, and obtain explicit human confirmation. One answer can approve the design and its write when both were fully displayed. Apply only the confirmed content; a changed proposal or basis needs renewed confirmation. Keep unconfirmed proposals conversational, not in candidate files.
 
-Integrate agreed content in canonical sections. Heavyweight children write their assigned realizations and return root navigation changes to the root owner. Mutually dependent children can be reviewed as one coordinated package.
+Integrate agreed content by revising its owning sections and reconciling affected decisions, references and remaining open scope, so the model expresses the current design rather than accumulated amendments. Heavyweight children write their assigned realizations and return root navigation changes to the root owner. Mutually dependent children can be reviewed as one coordinated package.
 
-## Check, review and approve
+## 3. Check, review and approve
 
 Walk the scenarios across requirements, files, macro/micro views, declarations and contracts. Render every diagram and visually inspect its actual result. Resolve conflicts and substantiate consequential feasibility claims; distinguish current checks from the future flow plan.
 

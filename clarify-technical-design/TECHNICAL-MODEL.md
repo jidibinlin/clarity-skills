@@ -24,7 +24,7 @@ Concrete topology, sequences, declarations, interfaces and file responsibilities
 
 #### Macro-first, dependency-led micro design
 
-Macro guarantees form the basis for local realization. Micro decisions follow actual foundational dependencies, with compatible ownership, lifecycle and completion across data, interfaces and collaborations. These dependencies explain the design without prescribing implementation order.
+The confirmed macro topology and technical direction ground micro design. Discussion groups realize bounded behavior across its participants, connecting foundational state and operations to consumers and outcomes, including consequential interruption/recovery paths. Each proposed design is coherent under its stated premises across data, interfaces and sequences, supported by normal flows and decisive counterexamples. Concrete human agreement covers the resulting group; working assumptions remain distinguishable from confirmed decisions. Data-first or sequence-first reasoning follows dependencies, not a field-by-field approval order; design order does not prescribe implementation order.
 
 ### Constraints for first-pass implementation
 
@@ -90,7 +90,7 @@ Requirements, files, macro/micro views, definitions and contracts agree. Scenari
 
 Every diagram has been rendered and visually inspected against its current source. The evidence reports what was actually checked and any remaining limits.
 
-The model is integrated current content in canonical sections, with context, decisive rationale and relevant acceptance outcomes beside the decisions they explain. It is readable without reconstructing a conversation or amendment diary.
+The model is integrated current content in canonical sections, with context, decisive rationale and relevant acceptance outcomes beside the decisions they explain. Related decisions, references and remaining open scope reflect the same current design; resolved choices are no longer presented as undecided. It is readable without reconstructing a conversation or amendment diary.
 
 ## Authorization, continuity, and evidence validity
 
