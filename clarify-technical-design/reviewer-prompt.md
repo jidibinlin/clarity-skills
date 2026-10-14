@@ -12,11 +12,11 @@ Assess the current model against approved requirements, original context, concre
 
 Trace scenarios from macro entry to observable outcome, then through concrete micro operations. Compare topology, sequences, data/state ownership and concurrency with the promised behavior and boundary contracts.
 
-Cross-check the full file tree, declarations and interfaces against those traces. Follow creation, mutation and consumption to assess lifetime and invariant ownership. Check that foundational definitions support their consumers and that macro guarantees reach concrete mechanisms.
+Cross-check the full file tree, declarations and interfaces against those traces. Inspect the actual definitions in the model or its canonical references, distinguishing concrete declarations and native/dynamic schemas from inventories of intended state. Follow creation, mutation and consumption to assess lifetime and invariant ownership. Check that foundational definitions support their consumers and that macro guarantees reach concrete mechanisms.
 
 Inspect actual rendered diagrams and supporting source/feasibility evidence. Compare the limited macro-flow plan with project test facilities, participants and expected outcomes. Distinguish planned tests from checks already performed.
 
-Check progressive agreement on the concrete design and prior confirmation of written content. Preserve the approved target's authority over legacy code, while leaving ordinary implementation judgment available within the design.
+Compare the definitions and flows presented for human confirmation with the current model; ensure integration preserved their concrete content. Check progressive agreement and prior confirmation of written content. Preserve the approved target's authority over legacy code, while leaving ordinary implementation judgment available within the design.
 
 ## Report and reassess
 

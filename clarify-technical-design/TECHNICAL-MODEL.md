@@ -60,21 +60,21 @@ Mermaid topology shows concrete modules, objects and definitions mapped to files
 
 ### Sequences and operations
 
-Micro Mermaid sequences realize macro scenarios using concrete operation names, data and state transitions. Consequential algorithms, transformations, coordination and resource handling are specified through declarations, precise prose or pseudocode. Each macro guarantee reaches a concrete owner and mechanism.
+Micro Mermaid sequences realize macro scenarios using concrete operation names, data and state transitions. Consequential algorithms and state transitions use operation-level pseudocode, formulas or focused target-language code tied to declared inputs, outputs and owners. Prose explains semantics and rationale; full production method bodies are not required. Each macro guarantee reaches a concrete owner and mechanism.
 
 ## Complete data-structure definitions
 
-Owned state, inputs/results, collections, messages and stored/transferred representations have complete target-language declarations or precise schemas. Changed structures show the full resulting definition; unchanged structures have applicable references.
+New or changed program state, objects and typed inputs/results use complete target-language declarations, including internal types. Wire and stored data use their native protocol/schema definitions; intentionally dynamic representations use precise typed shapes matching the actual storage, without inventing wrapper types for presentation. Changed structures show the full resulting definition; unchanged structures have precise canonical references.
 
 Definitions include all fields, variants and types, with the semantics needed to use them correctly: defaults, optionality, units, valid states, relationships, ownership, mutability and invariants. Collection and encoding rules, transformations and invalid-input behavior are included where consequential. Each concept has a canonical definition.
 
 ### Clarify actual declarations with the human
 
-Agreement covers the actual declarations and their meaning, including internal structures that carry design responsibility. Creation, update and consumption agree with the sequences; a relationship diagram alone is not a data definition.
+Agreement covers the actual declarations and their meaning, including internal structures that carry design responsibility. The main proposal and proposed document content contain these definitions or precise references to unchanged canonical definitions, with matching creation, update and consumption flows. State inventories and prose summaries explain definitions rather than substitute for them.
 
 ## Complete interface contracts
 
-Interfaces cover module/object operations, process/external crossings and internal operations relied on by the design. Each has an owner, concrete signature or protocol, and inputs/results linked to full definitions.
+Interfaces cover module/object operations, process/external crossings and internal operations relied on by the design. Each has an owner, a concrete target-language callable signature or native protocol definition, and inputs/results linked to full definitions.
 
 Contracts explain behavior, preconditions, state effects, success and errors, ownership/lifetime, completion and concurrency, plus applicable compatibility and quantitative constraints. They are sufficient for callers and implementers to agree on the same behavior.
 

@@ -32,6 +32,8 @@ Lightweight: requirements → technical design → tickets → implementation. H
 
 Keep guidance focused on this workflow's choices, not exhaustive policies or generic engineering instruction. Assess the complete reading path: moving restrictions into referenced files is not simplification.
 
+Micro technical proposals and document drafts present concrete definitions with their operations and flows. Use target-language declarations for program types, native/dynamic schemas where appropriate, and precise references for unchanged definitions; prose explains rather than replaces them.
+
 ## Installation
 
 Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout` and `review-records`; questions use `ask-with-context`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.

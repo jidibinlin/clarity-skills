@@ -12,13 +12,13 @@ Assess the current coordinated package: change model, affected canonical section
 
 Trace affected current scenarios through the cited code, contracts and runtime evidence. Check the reconstruction where documents are missing or stale, distinguishing legacy facts from approved target intent.
 
-Follow changed and preserved scenarios into the target. Inspect the basis for Changed and Unchanged assessments across macro collaboration, state/dataflow, concurrency, micro ownership, files and contracts. Cross-check complete declarations and interfaces against concrete sequences and lifetimes.
+Follow changed and preserved scenarios into the target. Inspect the basis for Changed and Unchanged assessments across macro collaboration, state/dataflow, concurrency, micro ownership, files and contracts. Inspect actual declarations and native/dynamic schemas in the model or canonical references, rather than inventories of intended state; cross-check them and operation signatures against concrete sequences and lifetimes.
 
 Follow migrations through callers and data to final owners and obsolete-path exits. Compare synchronized canonical sections and downstream impact, including the basis for retained approvals or verification evidence. Assess the whole package together rather than requiring a replay of initial design stages.
 
 Inspect actual rendered diagrams and feasibility checks. Compare the limited changed/preserved flow plan with project facilities. Assess direct-route context fit across implementation, verification and repair, or the rationale for decomposition.
 
-Check progressive agreement on the concrete target and prior confirmation of written content. Keep ordinary implementation choices distinct from missing consequential design.
+Compare the definitions and flows presented for human confirmation with the integrated target; ensure their concrete content was preserved. Check progressive agreement and prior confirmation of written content. Keep ordinary implementation choices distinct from missing consequential design.
 
 ## Report and reassess
 

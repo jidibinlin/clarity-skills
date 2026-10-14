@@ -23,7 +23,7 @@ Compare retaining, moving or consolidating responsibilities with new collaborato
 
 Then follow actual module dependencies from foundational configuration, representations, interfaces and basic operations to their consumers. Reuse applicable unchanged foundations. Start with data/declarations when their meaning is stable; use sequence-first or coupled decisions when lifecycle, ownership or completion determines representation.
 
-Progressively show complete declarations/schemas, interfaces, topology, sequences and file responsibilities to the human. Reconcile each answer across the target and continue with the next ready decision. Agreement on broad direction is not agreement to unseen detail. Settle consequential design while leaving ordinary implementation choices to the implementing model.
+For each bounded behavior, present brief context, complete target-language declarations and operation signatures with file/owner locations, and matching topology and sequences together in the main response. Apply the imported technical standard's representation rules for protocol and dynamic data; reference applicable unchanged definitions precisely. Explain decisive tradeoffs beside the definitions, confirm the concrete group, and reconcile the answer across the target before dependent decisions. Settle consequential design while leaving ordinary implementation choices to the implementing model.
 
 Complete the target file tree, definitions/contracts, migrations and obsolete-path exits. Inspect actual integration-test facilities and select a few changed/preserved macro flows with setup, invocation and limits; detailed TDD belongs to implementation.
 
@@ -37,7 +37,7 @@ Trace impact through callers, dependent work, acceptance, approvals and verifica
 
 ## Write agreed specifications
 
-Before every specification write, the owning author shows the exact proposed content or patch and destination, explains material consequences, and obtains explicit human confirmation. Apply only that confirmed content; confirm again if the proposal or basis changes. Keep unconfirmed proposals in conversation, not candidate files. Integrate decisions and their context into current owning sections rather than amendment diaries.
+Before every specification write, the owning author shows the exact proposed content or patch and destination in the main response, carrying forward the confirmed definitions and matching flows. Question-tool previews supplement that content. Explain material consequences and obtain explicit human confirmation. Apply only that confirmed content; confirm again if the proposal or basis changes. Keep unconfirmed proposals in conversation, not candidate files. Integrate decisions and their context into current owning sections rather than amendment diaries.
 
 ## Check, review and approve
 
