@@ -92,6 +92,16 @@ Every diagram has been rendered and visually inspected against its current sourc
 
 The model is integrated current content in canonical sections, with context, decisive rationale and relevant acceptance outcomes beside the decisions they explain. Related decisions, references and remaining open scope reflect the same current design; resolved choices are no longer presented as undecided. It is readable without reconstructing a conversation or amendment diary.
 
+### Anti-patterns
+
+| Anti-pattern | Appropriate treatment |
+| --- | --- |
+| A "Current verification boundaries" chapter listing test names, PASS counts, durations, build or lint results | Omit the report from the model. Keep only findings that justify a current design choice, beside that choice with a concise evidence reference. |
+| "Synced main, rebased, resolved conflicts, reran checks" | Keep repository operations out of the design. If an upstream contract changed, describe its current effect on the target instead. |
+| "First inspected X, then ran probe Y, then found Z" | State the relevant baseline capability and its consequence for the chosen design, not the investigation chronology. |
+| Repeated "not real RPC/database/end-to-end verification" disclaimers | Preserve actual guarantee limits or unresolved feasibility beside the affected contract, and substitutions beside the planned flow. Report limits of performed checks with the review evidence. |
+| Moving the entire report into another model appendix or adding a review-log entry after every command | Preserve useful evidence at its existing source; summarize only what supports an actual review submission or finding-linked repair. |
+
 ## Authorization, continuity, and evidence validity
 
 Specification writes require prior human confirmation of the exact displayed content. Independent review and final human approval are separate. The original author and original independent reviewer retain the work through repairs; evidence and approval apply only while their underlying result and sources remain applicable.
