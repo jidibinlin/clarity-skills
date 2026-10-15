@@ -49,6 +49,6 @@ Use the `review-records` skill to prepare the submission and preserve review/rep
 
 Present the reviewed target, impacts, route and limits for explicit final human approval, separate from write consent. Human revisions return through the same loop.
 
-Return approved model/source references, baseline, impacts, prerequisites, acceptance and review/approval evidence. Separately authorized direct execution goes to `implement` with one full-scope implementer/reviewer pair. Decomposed work goes to `split-tickets`; heavyweight children return to one governing root set. New consequential design choices during execution return to the original authors and change reviewer, then back to the originating implementation review; ordinary code-conformance repairs stay with implementation.
+Return approved model/source references, baseline, impacts, prerequisites, acceptance and review/approval evidence. Separately authorized direct execution goes to `orchestrate-implementation` with one full-scope implementer/reviewer pair. Decomposed work goes to `split-tickets`; heavyweight children return to one governing root set. New consequential design choices during execution return to the original authors and change reviewer, then back to the originating implementation review; ordinary code-conformance repairs stay with implementation.
 
 Stop here. Approval does not automatically launch ticketing or execution.

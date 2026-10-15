@@ -6,7 +6,7 @@ Review the complete plan independently and read-only. Read local [TICKETS.md](TI
 
 Use the current root index, tickets, approved sources, relevant code and prior findings. Trace approved obligations to ticket outputs and verification owners, then check that proposed work and dependencies have an approved basis.
 
-Walk the dependency order as a fresh implementer. Check whether each unit has usable context and real prerequisite outputs, and whether the combined result covers the scope. Assess the plan against TICKETS.md, including its **Authority and evidence validity** criteria. If implementation facts are present, consult the referenced Execution facts exception rather than demanding fresh consent for compliant updates.
+Walk the dependency order as a fresh implementer. Check whether each unit has usable context and real prerequisite outputs, and whether the combined result covers the scope. Assess the plan against TICKETS.md, including its **Authority and evidence validity** criteria.
 
 Planning evidence should support the current set. Future code or test outcomes are not required to approve the plan.
 

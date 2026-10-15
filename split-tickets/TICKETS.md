@@ -42,8 +42,6 @@ Each ticket provides:
 
 Specification content, including the initial execution block and later plan changes, is shown and explicitly confirmed before writing. Final plan approval is distinct from permission to write. Candidate specification files are not a substitute for confirmation.
 
-Implementation-owned updates to existing execution fields follow only **Execution facts exception** in `IMPLEMENTATION.md` from registered `implement-unit`. Read that section when such facts are present; it does not import the implementation workflow. Compliant facts need no new human confirmation and do not change the approved plan.
-
 Review and approval apply to the actual current set and sources. Material changes require reassessment of affected conclusions. Records preserve findings and decisions, not a progress diary.
 
 ## Verification criteria

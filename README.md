@@ -12,12 +12,12 @@ Human-led requirements and technical design, followed by implementation against 
 | [clarify-technical-design](clarify-technical-design/SKILL.md) | Concrete files, topology, flows, data and contracts | [TECHNICAL-MODEL.md](clarify-technical-design/TECHNICAL-MODEL.md) |
 | [clarify-change](clarify-change/SKILL.md) | Current baseline and agreed target change | [CHANGE-MODEL.md](clarify-change/CHANGE-MODEL.md) |
 | [split-tickets](split-tickets/SKILL.md) | Context-fit usable increments | [TICKETS.md](split-tickets/TICKETS.md) |
-| [implement](implement/SKILL.md) | Whole-work implementation and human acceptance | [ORCHESTRATION.md](implement/ORCHESTRATION.md) |
-| [implement-unit](implement-unit/SKILL.md) | One ticket or bounded direct change | [IMPLEMENTATION.md](implement-unit/IMPLEMENTATION.md) |
+| [orchestrate-implementation](orchestrate-implementation/SKILL.md) | Whole-work implementation and human acceptance | [ORCHESTRATION.md](orchestrate-implementation/ORCHESTRATION.md) |
+| [implement](implement/SKILL.md) | One ticket or bounded direct change | — |
 
 Lightweight: requirements → technical design → tickets → implementation. Heavyweight: Wayfinder → shared/child requirements → overall architecture → child technical designs → one root ticket set → implementation. A bounded approved change can go directly to implementation. Stage approval does not automatically launch the next stage.
 
-`implement` starts from the approved work and coordinates ready units through `implement-unit`. It reads shared authorization, execution-fact and delivery criteria when those responsibilities apply; implementers and reviewers use the implementation-quality criteria. These remain single-source sections of `implement-unit`'s IMPLEMENTATION.md. The original implementer uses `tdd` for initial behavior and behavioral repairs; the independent reviewer uses `code-review`. Existing progress is continued when present, not required to start.
+`orchestrate-implementation` starts from the approved work and coordinates ready units through `implement`. The original implementer uses `tdd` for initial behavior and behavioral repairs; the independent reviewer uses `code-review`. Existing progress is continued when present, not required to start.
 
 ## Responsibilities and reading
 
@@ -44,4 +44,4 @@ Ordinary directory copying is sufficient; no source symlinks or installation-man
 
 Use the locally excluded `.scratch/<work-slug>/` layout. `issue.md` defines and links the work; models hold the current specification; ticket blocks hold execution facts; object-specific logs preserve review and repair decisions.
 
-Show specification changes and obtain confirmation before writing them. Authorized implementation proceeds autonomously within the approved design, including the bounded [Execution facts exception](implement-unit/IMPLEMENTATION.md#execution-facts-exception). Preserve the original implementer/reviewer pair through repairs and obtain final human approval or acceptance for the stage result. These approvals do not authorize publication of private artifacts.
+Show specification changes and obtain confirmation before writing them. Authorized implementation proceeds autonomously within the approved design. Preserve the original implementer/reviewer pair through repairs and obtain final human approval or acceptance for the stage result. These approvals do not authorize publication of private artifacts.
