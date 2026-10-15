@@ -25,7 +25,7 @@ Lightweight: requirements → technical design → tickets → implementation. H
 - **Content standard:** read before authoring; the same criteria guide generation and independent review. Cross-stage imports name applicable content sections; the consuming stage owns its method, role routing and approval route.
 - **Reviewer prompts:** scope modeling and ticket-planning reviews. Code review uses the shared method below with unit or whole-result criteria.
 - [communication-style](communication-style/SKILL.md): shared context, clear explanations, Mermaid diagrams and consequential questions.
-- [tdd](tdd/SKILL.md): the implementer's behavioral loop, including repair. [TESTING.md](tdd/TESTING.md) supplies shared test-quality criteria.
+- [tdd](tdd/SKILL.md): the implementer's behavioral loop, including repair. [writing-good-tests.md](tdd/writing-good-tests.md) provides test-writing guidance, copied unchanged from [Superpowers `bb92a77`](https://github.com/obra/superpowers/blob/bb92a77741419a4ab5f06e711a283343f1ada0c3/skills/test-driven-development/writing-good-tests.md) under its [MIT license](tdd/LICENSE.superpowers). [TESTING.md](tdd/TESTING.md) supplies shared test-quality criteria.
 - [code-review](code-review/SKILL.md): the independent reviewer's method for conformance, engineering quality and verification evidence. It does not dispatch another review team or repair code.
 - [artifact-layout](artifact-layout/SKILL.md): private directories and file responsibilities.
 - [review-records](review-records/SKILL.md): review reports and finding-linked decisions; needed when preparing or recovering records.
