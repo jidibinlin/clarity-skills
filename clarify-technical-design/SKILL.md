@@ -22,6 +22,54 @@ For heavyweight children:
 - Return global conflicts to the owning authority.
 - Update assigned realizations. Return root navigation changes to the root owner.
 
+## Clarification methods
+
+### Draft-based iteration
+
+Apply this method throughout macro and micro clarification.
+
+- Revise the proposal already presented in chat. Accumulate changes on that draft.
+- Re-present the complete revised proposal when appropriate, not only the changes.
+- Present the complete final proposal for human confirmation. Write that version into the model after confirmation.
+
+**Example:**
+
+```text
+AI：
+单任务实现流程如下：
+
+1. 使用 tdd 实现，完成验证。
+2. 委派独立子 agent，使用 code-review 评审。
+3. 有问题则修复、验证，交回原评审子 agent；重复直到 Pass。
+4. 返回完成结果。
+
+用户：
+送审前，先把本次改动提交一次 commit。
+
+AI：
+在当前方案的“完成验证”和“委派评审”之间加入 commit，其他内容保留。
+
+用户：
+每轮评审之后的修复也要提交，方便留痕。
+
+AI：
+合并这两次修改，完整方案更新为：
+
+1. 使用 tdd 实现，完成验证。
+2. 提交本任务的改动。
+3. 委派独立子 agent，使用 code-review 评审。
+4. 有问题则修复、验证，提交本轮改动，再交回原评审子 agent；重复直到 Pass。
+5. 返回完成结果。
+
+这份完整方案是否可以写入 implement/SKILL.md？
+
+用户：
+可以。
+
+AI：
+按上面确认的完整版本写入。
+```
+
 ## Workflow
 
 ```mermaid
