@@ -1,96 +1,121 @@
 # Technical Model: Authoring and Review Standard
 
-Use these criteria to shape the design and review it. The consuming skill supplies the working method; `artifact-layout` supplies artifact locations and ownership. Resolve this resource through the registered `clarify-technical-design` owner. Selective imports include the named sections and their subsections, not the owner's workflow.
+Use these criteria to author and review the technical model.
+
+- The consuming skill supplies the working method; `artifact-layout` supplies artifact locations and ownership.
+- Resolve this resource through the registered `clarify-technical-design` owner.
+- Selective imports include named sections and their subsections, not the owner's workflow.
 
 ## Purpose and completeness
 
-A complete scoped design settles consequential structure, representations, algorithms, contracts, coordination and failure handling. Ordinary implementation choices remain with the implementing model.
+Settle consequential design choices within scope.
+Leave ordinary implementation choices to the implementing model.
 
-The target includes a complete file-responsibility tree, macro and micro Mermaid topology and sequences, dataflow and concurrency semantics, full data definitions and interface contracts, and a project-grounded macro-flow test plan. Applicable unchanged definitions may be referenced precisely rather than copied.
-
-## Heavyweight child realization
-
-A child realizes the root's approved requirements package and architecture. Its local owners and operations implement the inherited guarantees, and each shared realization has one child authority referenced by consumers. Mutually dependent children may form one coordinated technical review package. All scoped child realizations must be complete and approved before one root ticket set.
+- Resolve structure, representations, algorithms, contracts, coordination and failure handling.
+- Include a complete file-responsibility tree.
+- Show macro and micro Mermaid topology and sequences, with concurrency semantics.
+- Provide complete data definitions and interface contracts.
+- Include a project-grounded macro-flow test plan.
 
 ## Approved basis and decision rationale
 
-The model identifies its governing requirements, applicable approved upstream sources, scope and constraints. A change package may establish its own confirmed requirements. Existing code is evidence about the system, not authority to override an approved target.
+Explain the design's basis and key choices.
+Make implementation constraints explicit.
 
-Decisions carry enough context to explain their purpose, decisive constraints, meaningful alternatives and consequences. Reuse existing concepts where they fit; explain new or displaced responsibilities in terms of the actual scenarios and owners.
+- Identify governing requirements, approved decisions and scope. When code conflicts with approved decisions, the decisions take precedence.
+- Explain the purpose, rationale, tradeoffs and consequences of key decisions.
+- State ownership, invariants, collaboration and resource constraints, plus applicable repository conventions.
 
-### Constraints for first-pass implementation
+## Concrete design realization
 
-Consequential ownership, invariants, collaboration and resource constraints are explicit where they belong, together with applicable repository conventions. These guide implementation without prescribing every local expression or helper.
+The model describes the concrete design, not only technical direction:
 
-## Progressive design convergence
-
-Concrete topology, sequences, declarations, interfaces and file responsibilities have been progressively agreed with the human or are applicable unchanged reuse. Agreement on direction alone does not establish agreement on the completed design.
+- Topology and sequences.
+- Declarations and interfaces.
+- File responsibilities.
 
 ### Coherent macro-to-micro realization
 
-Micro designs realize the confirmed macro topology and technical direction through complete behavior across state owners, foundational operations and consumers, including consequential interruption/recovery paths. Data, interfaces and sequences are coherent under their stated premises and supported by normal flows and decisive counterexamples. Human agreement covers the concrete collaborating definitions and sequences; working assumptions remain distinguishable from confirmed decisions.
+Micro design realizes the macro topology and technical direction.
+
+- Complete behavior spans state owners, foundational operations and consumers.
+- Consequential interruption and recovery paths are defined.
+- Data, interfaces and sequences are coherent under stated premises. Normal flows and decisive counterexamples support their consistency.
+- Working assumptions are distinguishable from design decisions.
 
 ## File organization and responsibility tree
 
-The complete repository-relative target tree assigns responsibilities to scoped production, contract, integration and test files. It maps participating definitions and operations to their owners and identifies removals, relocations and migrated callers. The tree describes the final organization, not just changed files.
+Describe the complete repository-relative target tree, not just changed files.
+
+- Assign responsibilities to scoped production, contract, integration and test files.
+- Map participating definitions and operations to their owners.
+- Identify removals, relocations and migrated callers.
 
 ## Macro runtime and collaboration model
 
+The model includes macro topology and sequence diagrams.
+
 ### Topology
 
-Mermaid topology shows the actual processes, contained modules, external participants and their responsibilities. Crossings identify communication mechanisms and contracts.
+- Topology diagrams show actual processes, contained modules, external participants and their responsibilities.
+- Cross-boundary communication mechanisms and contracts are defined.
 
 ### Data flow and state authority
 
-Data paths identify origins, transformations, destinations, state changes and authoritative owners. Crossing representations and payload mappings are defined. A separate flow view supplements topology when needed for clarity.
+- Data origins, transformations, destinations, state changes and authoritative owners are clear.
+- Crossing representations and payload mappings are defined.
 
 ### Concurrency and ordering
 
-The model identifies execution contexts, allowed overlap, coordination mechanisms, mutation authority and completion. Resource lifetime, capacity and failure behavior are resolved where they affect the scoped guarantees.
+- Execution contexts, allowed overlap, coordination mechanisms, mutation authority and completion are explicit.
+- Resource lifetime, capacity and failure behavior are defined where they affect scoped guarantees.
 
 ### Sequences
 
-Macro Mermaid sequences realize the distinct scenario interaction patterns, including meaningful alternative and failure paths. They show participants, calls/messages, responses, completion and ordering consistent with topology and contracts.
+- Sequence diagrams cover distinct interaction patterns, including meaningful alternatives and failure paths.
+- Participants, calls/messages, responses, completion and ordering agree with topology and contracts.
 
 ## Micro object and collaboration model
 
+The model includes micro topology and sequence diagrams.
+Micro views describe complete behavior within closed-loop groups.
+
 ### Topology and ownership
 
-Mermaid topology shows concrete modules, objects and definitions mapped to files and macro participants. Responsibilities, state, ownership, multiplicity and lifetime make their collaboration understandable.
+- Collaborating modules, objects and definitions have clear responsibilities and state ownership.
+- Their relationships and mappings to files and macro participants are clear.
 
 ### Sequences and operations
 
-Micro Mermaid sequences realize macro scenarios using concrete operation names, data and state transitions. Consequential algorithms and state transitions use operation-level pseudocode, formulas or focused target-language code tied to declared inputs, outputs and owners. Prose explains semantics and rationale; full production method bodies are not required. Each macro guarantee reaches a concrete owner and mechanism.
+- Sequences show concrete operations, data and state transitions that realize macro scenarios.
+- Normal flows and consequential failure paths are described across collaborating owners.
 
 ## Complete data-structure definitions
 
-New or changed program state, objects and typed inputs/results use complete target-language declarations, including internal types. Wire and stored data use their native protocol/schema definitions; intentionally dynamic representations use precise typed shapes matching the actual storage, without inventing wrapper types for presentation. Changed structures show the full resulting definition; unchanged structures have precise canonical references.
+Data definitions, including internal types, are presented in fenced code blocks.
 
-Definitions include all fields, variants and types, with the semantics needed to use them correctly: defaults, optionality, units, valid states, relationships, ownership, mutability and invariants. Collection and encoding rules, transformations and invalid-input behavior are included where consequential. Each concept has a canonical definition.
-
-### Clarify actual declarations with the human
-
-Agreement covers the actual declarations and their meaning, including internal structures that carry design responsibility. The main proposal and proposed document content contain these definitions or precise references to unchanged canonical definitions, with matching creation, update and consumption flows. State inventories and prose summaries explain definitions rather than substitute for them.
+- Key data structures, state semantics and creation/update/consumption lifecycles are clear.
 
 ## Complete interface contracts
 
-Interfaces cover module/object operations, process/external crossings and internal operations relied on by the design. Each has an owner, a concrete target-language callable signature or native protocol definition, and inputs/results linked to full definitions.
+Interfaces are presented as concrete callable signatures or native protocol declarations in fenced code blocks.
 
-Contracts explain behavior, preconditions, state effects, success and errors, ownership/lifetime, completion and concurrency, plus applicable compatibility and quantitative constraints. They are sufficient for callers and implementers to agree on the same behavior.
+- Behavior for callers and implementers is clear, including preconditions, state effects, success and consequential errors.
+- Inputs, results, ownership and lifetime are defined.
+- Completion, concurrency and applicable compatibility or quantitative constraints are explicit.
 
 ## Overall workflow integration test plan
 
-The plan uses inspected project guidance, runner/configuration, representative tests, setup and invocation. It selects a few meaningful business flows from real entry through collaborating modules/processes to observable outcome, including consequential alternatives.
+The model includes a clear and complete integration test plan for the scoped design.
 
-Each flow identifies its scenario, participants, starting conditions, actions, expected result, intended test location and how to run it. Substitutions and coverage limits are clear. This is a limited macro-flow plan; detailed TDD cases, fixtures and assertions belong to implementation. Planned tests are distinct from checks already performed.
+## Document integration and readability
 
-## Consistency, evidence, and clean integration
+Integrate the current design into canonical sections, readable without reconstructing a conversation or amendment diary.
 
-The requirements, views, definitions and contracts owned by the current design scope agree; concrete technical realizations also reconcile their files and micro views. Scenario traces connect them, and referenced code or targeted investigation supports consequential feasibility claims.
+- Keep context, decisive rationale and relevant acceptance outcomes beside the decisions they explain.
+- Resolved choices are not presented as undecided.
 
-Every diagram has been rendered and visually inspected against its current source. The evidence reports what was actually checked and any remaining limits.
-
-The model is integrated current content in canonical sections, with context, decisive rationale and relevant acceptance outcomes beside the decisions they explain. Related decisions, references and remaining open scope reflect the same current design; resolved choices are no longer presented as undecided. It is readable without reconstructing a conversation or amendment diary.
+References use file-level links. Identify specific functions or sections by name; do not use line numbers or line-based links.
 
 ### Anti-patterns
 
@@ -102,10 +127,6 @@ The model is integrated current content in canonical sections, with context, dec
 | Repeated "not real RPC/database/end-to-end verification" disclaimers | Preserve actual guarantee limits or unresolved feasibility beside the affected contract, and substitutions beside the planned flow. Report limits of performed checks with the review evidence. |
 | Moving the entire report into another model appendix or adding a review-log entry after every command | Preserve useful evidence at its existing source; summarize only what supports an actual review submission or finding-linked repair. |
 
-## Authorization, continuity, and evidence validity
-
-Specification writes require prior human confirmation of the exact displayed content. Independent review and final human approval are separate. The original author and original independent reviewer retain the work through repairs; evidence and approval apply only while their underlying result and sources remain applicable.
-
 ## Delivery criteria
 
-The scoped target is complete, coherent, concretely agreed and supported by current checks. No unresolved consequential design choice prevents implementation, while ordinary implementation judgment remains available.
+- No unresolved consequential design choice prevents implementation.

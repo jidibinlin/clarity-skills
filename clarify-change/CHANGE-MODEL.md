@@ -7,14 +7,14 @@ Use these criteria to shape and review a transition from an evidenced existing s
 Read these sections, including subsections, from registered `clarify-technical-design`'s `TECHNICAL-MODEL.md`:
 
 - **Approved basis and decision rationale**.
-- **Progressive design convergence**.
+- **Concrete design realization**.
 - **File organization and responsibility tree**.
 - **Macro runtime and collaboration model**.
 - **Micro object and collaboration model**.
 - **Complete data-structure definitions**.
 - **Complete interface contracts**.
 - **Overall workflow integration test plan**.
-- **Consistency, evidence, and clean integration**.
+- **Document integration and readability**.
 
 Resolve resources through their registered owners. When canonical architecture or map content is affected, read only these content sections, including subsections:
 

@@ -21,9 +21,11 @@ Clarify changed and preserved scenarios, constraints and acceptance outcomes. Co
 
 Compare retaining, moving or consolidating responsibilities with new collaborators. Settle affected macro topology, sequences and overall guarantees before dependent local realization. Show concrete views in bounded groups, with context, meaningful alternatives and decisive rationale.
 
+Use `Macro views` from registered `clarify-technical-design` for diagram guidance, without starting its workflow.
+
 Then follow actual module dependencies from foundational configuration, representations, interfaces and basic operations to their consumers. Reuse applicable unchanged foundations. Start with data/declarations when their meaning is stable; use sequence-first or coupled decisions when lifecycle, ownership or completion determines representation.
 
-For each bounded behavior, present brief context, complete target-language declarations and operation signatures with file/owner locations, and matching topology and sequences together in the main response. Apply the imported technical standard's representation rules for protocol and dynamic data; reference applicable unchanged definitions precisely. Explain decisive tradeoffs beside the definitions, confirm the concrete group, and reconcile the answer across the target before dependent decisions. Settle consequential design while leaving ordinary implementation choices to the implementing model.
+For each bounded behavior, present brief context, complete target-language declarations and operation signatures with file/owner locations, and matching topology and sequences together in the main response. Use the code and diagram presentation requirements from registered `clarify-technical-design`'s `Micro design: closed-loop groups`, without starting its workflow. Explain decisive tradeoffs beside the definitions, confirm the concrete group, and reconcile the answer across the target before dependent decisions. Settle consequential design while leaving ordinary implementation choices to the implementing model.
 
 Complete the target file tree, definitions/contracts, migrations and obsolete-path exits. Inspect actual integration-test facilities and select a few changed/preserved macro flows with setup, invocation and limits; detailed TDD belongs to implementation.
 

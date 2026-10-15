@@ -53,6 +53,11 @@ Settle topology, responsibility boundaries and technical direction.
 - Compare reuse with necessary changes.
 - Confirm the macro basis before dependent micro design.
 
+### Macro views
+
+- Use Mermaid topology and sequences to present macro collaboration.
+- Add a separate data-flow view when needed for clarity.
+
 ## Micro design: closed-loop groups
 
 Turn the confirmed macro design into implementation-ready definitions, contracts and collaboration flows.
@@ -67,10 +72,14 @@ A group covers a complete bounded behavior across collaborating owners, definiti
 **Confirmation unit:** The whole group, not individual fields, types, interfaces or files.
 Confirm the group and reconcile affected views before advancing to dependent design.
 
+- Present complete data definitions, including internal types, and interface declarations in fenced code blocks.
+- Use Mermaid topology and sequences to explain the group’s collaboration.
+
 ## Update the model
 
-Update confirmed macro and micro decisions as the design progresses.
+Integrate complete confirmed proposals as the design progresses.
 
+- Carry their diagrams, tables, code and essential explanations into the model. Do not replace them with prose summaries.
 - Show the exact content and destination in the main response. Obtain human confirmation before writing.
 - Integrate confirmed content into canonical sections. Reconcile affected decisions and references.
 

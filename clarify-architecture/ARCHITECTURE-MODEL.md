@@ -9,7 +9,7 @@ Read these sections, including subsections, from registered `clarify-technical-d
 - **Approved basis and decision rationale**.
 - **Macro runtime and collaboration model**.
 - **Overall workflow integration test plan**.
-- **Consistency, evidence, and clean integration**.
+- **Document integration and readability**.
 
 Resolve the resource through its registered owner and import the content, not its workflow. Apply it at global resolution: macro responsibilities connect to child realization assignments. Child file trees, micro views and local declarations belong to child technical design.
 

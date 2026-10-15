@@ -19,6 +19,8 @@ Follow approved cross-child scenarios from entry to observable outcome through p
 
 Start with macro topology and state boundaries. Walk core sequences through them to resolve dataflow, concurrency, completion and failure behavior. Compare mechanisms against the required guarantees and investigate consequential uncertainty as needed.
 
+Use `Macro views` from registered `clarify-technical-design` for diagram guidance, without starting its workflow.
+
 ## Converge with the human
 
 Present bounded groups of actual topology, sequences, dataflow and boundary contracts, with context, decisive alternatives and consequences. Confirm the concrete choices progressively before building dependent detail. Reconcile each answer across the views and continue with the next ready decision; reuse settled content while its basis remains applicable.
