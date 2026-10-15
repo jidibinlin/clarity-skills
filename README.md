@@ -17,7 +17,7 @@ Human-led requirements and technical design, followed by implementation against 
 
 Lightweight: requirements → technical design → tickets → implementation. Heavyweight: Wayfinder → shared/child requirements → overall architecture → child technical designs → one root ticket set → implementation. A bounded approved change can go directly to implementation. Stage approval does not automatically launch the next stage.
 
-`orchestrate-implementation` starts from the approved work and coordinates ready units through `implement`. The original implementer uses `tdd` for initial behavior and behavioral repairs; the independent reviewer uses `code-review`. Existing progress is continued when present, not required to start.
+`orchestrate-implementation` starts from the approved work and coordinates ready units through `implement`. The original implementer uses `tdd` for initial behavior and behavioral repairs, then uses `code-review` in the current context to dispatch independent Spec and Standards reviewers. Repair rounds return directly to those same reviewers. Existing progress is continued when present, not required to start.
 
 ## Responsibilities and reading
 
@@ -26,7 +26,8 @@ Lightweight: requirements → technical design → tickets → implementation. H
 - **Reviewer prompts:** scope modeling and ticket-planning reviews. Code review uses the shared method below with unit or whole-result criteria.
 - [communication-style](communication-style/SKILL.md): shared context, clear explanations, Mermaid diagrams and consequential questions.
 - [tdd](tdd/SKILL.md): the implementer's behavioral loop, including repair. [writing-good-tests.md](tdd/writing-good-tests.md) provides test-writing guidance, copied unchanged from [Superpowers `bb92a77`](https://github.com/obra/superpowers/blob/bb92a77741419a4ab5f06e711a283343f1ada0c3/skills/test-driven-development/writing-good-tests.md) under its [MIT license](tdd/LICENSE.superpowers). [TESTING.md](tdd/TESTING.md) supplies shared test-quality criteria.
-- [code-review](code-review/SKILL.md): the independent reviewer's method for conformance, engineering quality and verification evidence. It does not dispatch another review team or repair code.
+- [code-review](code-review/SKILL.md): Spec and Standards review criteria and independent subagent dispatch. Returns separate reports and reviewer references; `implement` owns repairs and direct re-review with the same agents.
+  Adapted from [Matt Pocock v1.3.1](https://github.com/mattpocock/skills/blob/v1.3.1/skills/engineering/code-review/SKILL.md) under its [MIT license](code-review/LICENSE.mattpocock).
 - [artifact-layout](artifact-layout/SKILL.md): private directories and file responsibilities.
 - [review-records](review-records/SKILL.md): review reports and finding-linked decisions; needed when preparing or recovering records.
 

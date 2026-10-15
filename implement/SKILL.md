@@ -9,14 +9,19 @@ description: Complete one approved ticket or bounded direct change, including ve
 flowchart TD
     Implement["Implement with TDD"] --> Verify["Verify implementation"]
     Verify --> Commit["Commit task changes"]
-    Commit --> Delegate["Delegate independent subagent<br/>Use code-review skill"]
-    Delegate --> Review["Review current result"]
-    Review --> Pass{"Pass?"}
+    Commit --> Delegate["Use code-review in current context<br/>Skill dispatches independent reviewers"]
+    Delegate --> Spec["Spec review"]
+    Delegate --> Standards["Standards review"]
+    Spec --> Reports["Separate reports and reviewer references"]
+    Standards --> Reports
+    Reports --> Pass{"Both axes Pass?"}
     Pass -->|Yes| Return["Return result"]
     Pass -->|No| Fix["Fix implementation"]
     Fix --> Reverify["Verify fixes"]
     Reverify --> FixCommit["Commit this round's changes"]
-    FixCommit -->|"Same review subagent"| Review
+    FixCommit --> Resubmit["Send commit and evidence directly<br/>to original reviewers"]
+    Resubmit --> Spec
+    Resubmit --> Standards
 ```
 
 Read the assigned requirements, design and relevant code.
@@ -36,14 +41,14 @@ Report actual results and material limits.
 Complete implementation and verification.
 Commit only this task's changes before the first review.
 
-Delegate review to an independent subagent.
-Have the subagent use the `code-review` skill.
+Use the code-review skill in the current context.
+Keep the returned Spec and Standards reviewer references.
 
 If issues are found:
 - Fix the implementation.
 - Verify the fixes.
 - Commit only this round's changes.
-- Resubmit the new commit to the same review subagent.
+- Send the new commit and verification evidence directly to the same reviewers.
 
-Repeat the repair–verification–review loop until Pass.
+Repeat the repair–verification–review loop until both axes Pass.
 Return the completed result to the caller.
