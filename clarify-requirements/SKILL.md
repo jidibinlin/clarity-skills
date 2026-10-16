@@ -5,55 +5,146 @@ description: Clarify or resume standalone, child, or composite requirements thro
 
 # Clarify Requirements
 
-Explain the intended behavior and domain meaning well enough for the next modeling stage. Stop at requirements approval.
+Clarify intended behavior and domain meaning with the human.
+Produce a requirements model ready for subsequent design.
+Stop at requirements approval.
 
-## 1. Recover the scope and working basis
+Follow [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md) as the authoring and review standard.
 
-Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md) before modeling; it guides both construction and review. Use the registered `artifact-layout` skill for workspace and ownership conventions. Resolve resources through their installed skill owners, not assumed neighboring directories.
+## Establish the basis
 
-Read the original request, confirmed decisions, relevant project knowledge and current behavior. Establish the selected scope and whether the assignment is standalone, child-only or composite. On resume, recover the current models and review state. Code establishes current facts; confirmed requirements govern the target.
+- Read the requirements materials supplied by the human: verbal descriptions, documents, examples and other provided sources.
+- Inspect existing behavior when it affects the requirements.
+- Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
+- Use the `communication-style` skill for human communication.
 
-Keep the original author and a separate independent reviewer for each object through its repair loop. Root and child authors retain their assigned files.
+For heavyweight children:
+- Read the applicable root requirements and assigned clarification scope.
+- Inherit shared domain meanings, business rules and clarification dependencies.
+- Return cross-scope conflicts or changes to shared rules to the root owner.
+- Update assigned requirements documents. Propose root document updates to the root owner.
 
-## 2. Reconstruct behavior with scenarios
+## Clarification methods
 
-Walk an actor through the initiating event, starting state, action or decision, resulting state and observable outcome. Contrast current and intended behavior. Identify what is existing/preserved, new, changed, external or excluded where it affects the flow.
+### Draft-based iteration
 
-Vary the scenario at consequential boundaries and failures to expose the business rules. Investigate accessible facts before asking the human. Continue until the selected behavior and the decisions still needed are clear.
+Apply this method throughout requirements clarification.
 
-## 3. Derive the concepts that explain those scenarios
+- Revise the requirements already presented in chat. Accumulate changes on that draft.
+- Re-present the complete revised draft when appropriate, not only the changes.
+- Present the complete final draft for human confirmation. Write that version into the model after confirmation.
 
-Identify distinctions that change ownership, permission, lifecycle or outcomes. Give them consistent domain names and explain their relationships. Retell the scenarios using those concepts: retain distinctions that explain behavior, and use ordinary prose where a separate concept adds nothing.
+**Example:**
 
-Keep imposed technical constraints when they affect requirements; leave realization choices to technical modeling.
+```text
+AI：
+创建 GitHub issue 的需求草稿：
+1. 整理标题与正文。
+2. 发布到指定仓库。
+3. 返回创建后的 issue 链接。
 
-## 4. Ask the next ready material question
+用户：
+发布前，我需要先确认正文。
 
-Use registered `communication-style` for human communication, including its **Ask when human judgment is needed** section for consequential questions. Choose the question whose answer most usefully resolves the selected behavior or scope and whose prerequisites are understood. Work from upstream business choices toward their consequences, rather than conducting an exhaustive low-level interview.
+AI：
+在当前草稿的发布步骤前，增加“展示正文并取得确认”，其他内容保留。
 
-After each answer, reconcile affected scenarios and concepts and continue with the next ready material question. A fully specified request needs no interview. Keep unresolved proposals in conversation; confirmed groups can progress while other groups remain open.
+用户：
+标题也一起确认。
 
-## 5. Integrate a confirmed group and authorize its write
+AI：
+合并两次修改，完整需求更新为：
+1. 整理标题与正文。
+2. 向用户展示标题和正文，取得确认。
+3. 将确认的内容发布到指定仓库。
+4. 返回创建后的 issue 链接。
 
-Organize the group in its owning domain flow, joining concepts, rules and outcomes. Make existing/new/changed behavior explicit. Add visibly labeled **Acceptance criteria** beside each substantive requirement, and include the background and actual rationale needed to understand consequential choices.
+是否将这份完整需求写入需求模型？
 
-Before writing specification content, show the concrete proposed text or patch and its destination, explain material consequences, and obtain human confirmation. Apply the confirmed content; if the proposal changes, confirm it again. Keep candidate specifications in conversation rather than draft files.
+用户：
+可以。
 
-Integrate refinements into the current owning sections, updating related acceptance and views. The model explains current authority; `issue.md` provides definition and navigation, not an interview diary.
+AI：
+按上面确认的完整版本写入需求模型。
+```
 
-## 6. Compose the package and make its views inspectable
+### Scenarios and domain concepts
 
-Use Mermaid views to make material flows, relationships and scope understandable. Choose the forms that fit the domain, render them and visually inspect their agreement with the prose. Retain the rendered output and inspection evidence.
+- Walk actors through triggers, starting states, actions and observable outcomes.
+- Vary consequential boundaries and failure cases to expose business rules.
+- Use consistent domain terms for distinctions that change rules or outcomes.
+- Investigate accessible facts before asking the human.
+- Resolve upstream business choices before their dependent details.
 
-For composite work, follow **Shared and child requirements** in the standard. Root owns shared meanings and end-to-end flows; children own complete scoped detail. Walk selected outcomes across those boundaries, resolve conflicting rules with their owners and link the actual source sections. Root and children may co-evolve; the complete selected package needs composition review and approval before architecture.
+## Workflow
 
-## 7. Review, repair, obtain approval and stop
+```mermaid
+flowchart TD
+    Input["Requirements materials"] --> Overview["Align requirements overview"]
+    Overview --> Group["Closed-loop requirements group"]
+    Group -->|"Overall understanding changes"| Overview
+    Group --> Confirm["Human confirms group<br/>and proposed content"]
+    Confirm --> Update["Update requirements model"]
+    Update -->|"More groups"| Group
+    Update -->|"Scope complete"| Review["Final independent review"]
+    Review -->|"Changes required"| Repair["Original-author repair"]
+    Repair --> Confirm
+    Review -->|Pass| Approval["Final human approval"]
+    Approval -->|"Changes requested"| Repair
+    Approval -->|Approved| Return["Return approved model; stop"]
+```
 
-Load registered `review-records` for recording the review and repair loop, using the locations from `artifact-layout`.
+Adjust clarification depth to the supplied material. A sufficiently specified request needs no separate interview.
 
-1. Submit the complete current model or selected package, its source basis, human confirmations and diagram evidence to the original independent reviewer using [reviewer-prompt.md](reviewer-prompt.md).
-2. Record the findings. Return repairs to the original authors, recording repair decisions, including those made autonomously within the confirmed scope. Confirm specification changes through step 5, then return the current result to the same reviewer. Continue until `Pass`; the reviewer assesses finding closure and regressions.
-3. Present the reviewed result and consequential decisions for final human approval, separate from permission to write. Human revisions return through the same author/reviewer loop. Review and approval must apply to the current result.
-4. Record approval and return the artifact paths, reviewed scope and remaining limitations. Child work returns to root.
+## Requirements overview
 
-Stop. A separately authorized standalone next step is `clarify-technical-design`; an approved heavyweight requirements package proceeds to `clarify-architecture`. Approval here does not launch either stage.
+Establish the overall business understanding within the assigned scope.
+
+- Clarify the problem, intended outcomes and business boundaries.
+- Identify the main actors, core concepts and end-to-end business flow.
+- Distinguish required changes from preserved behavior and exclusions.
+- Use Mermaid views where they help explain the overall flow and relationships.
+
+Retain imposed technical constraints when they affect requirements. Leave realization choices to subsequent design.
+
+## Detailed requirements: closed-loop groups
+
+Turn the overview into business behaviors with clear rules, observable results and acceptance criteria.
+
+A group covers a bounded business outcome across the relevant actors, concepts, rules and normal or exceptional paths.
+
+- Clarify triggering conditions, business rules, state changes, outcomes and consequential exceptions with the human.
+- Capture the reasons behind consequential business choices.
+- Add labeled **Acceptance criteria** beside the behavior they verify.
+- Assess when to present the complete group again, including its scenarios, rules, views and acceptance criteria.
+
+**Confirmation unit:** The whole group, not individual fields, rules or exceptions.
+
+Revisit the overview when group clarification changes the overall understanding. Reconcile affected groups before advancing to dependent requirements.
+
+## Update the requirements model
+
+Integrate confirmed overviews and groups as clarification progresses.
+
+- Carry their diagrams, tables, scenarios, rules, acceptance criteria and essential explanations into the model. Do not replace them with prose summaries.
+- Show the exact content and destination in the main response. Obtain human confirmation before writing.
+- Reconfirm changed content before writing.
+- Integrate refinements into their owning sections and update affected views, rather than accumulating interview history.
+
+Root models retain shared meanings and end-to-end flows; child models retain scoped detail.
+
+Keep unconfirmed proposals in conversation, not candidate files.
+
+## Final review
+
+- Submit the complete current model or requirements package, its sources and confirmation evidence to an independent review subagent using [reviewer-prompt.md](reviewer-prompt.md).
+- The original author repairs findings. The same reviewer reassesses.
+- Obtain final human approval after Pass.
+
+Use the `review-records` skill for review and approval evidence.
+
+## Return and stop
+
+- Return the approved model/source references and review/approval evidence.
+- Heavyweight children return to the root. The complete requirements package needs approval before architecture.
+- Stop before architecture, technical design, ticketing or implementation. Do not automatically start the next stage.

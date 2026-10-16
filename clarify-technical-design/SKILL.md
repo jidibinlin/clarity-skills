@@ -12,8 +12,8 @@ Follow [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as the authoring and review stan
 
 - Read approved requirements, original context and prior decisions/approvals.
 - Inspect the relevant repository baseline.
-- Use `artifact-layout` for storage and ownership.
-- Use `communication-style` for human communication.
+- Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
+- Use the `communication-style` skill for human communication.
 - Resolve cross-skill resources through registered owners. Reading a standard does not start its workflow.
 
 For heavyweight children:
