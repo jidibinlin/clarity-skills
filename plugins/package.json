@@ -1,0 +1,9 @@
+{
+  "name": "clarity-communication-plugins",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun build.mjs",
+    "test": "bun run build.mjs && bun test tests"
+  }
+}

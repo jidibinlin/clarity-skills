@@ -39,7 +39,40 @@ Micro technical proposals and document drafts present concrete definitions with 
 
 Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout` and `review-records`; human communication uses `communication-style`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
 
-Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `wayfinder`, `tdd` and `code-review` unambiguously alongside any upstream skills. This repository does not auto-install or change global instructions.
+Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `wayfinder`, `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
+
+### Optional communication bootstrap
+
+The OMP and OpenCode plugins preload `communication-style` into the system prompt without a separate skill invocation. They do not select or start other Clarity workflows. Codex is not included.
+
+`communication-style/SKILL.md` is the single source. Building removes its frontmatter and embeds its body into two standalone JavaScript files; installed plugins do not read the checkout or need companion assets. Rebuild and reinstall when the skill changes.
+
+From the repository root, with Bun installed:
+
+```sh
+bun plugins/build.mjs
+(cd plugins && bun run test)
+install -Dm644 plugins/dist/omp.js ~/.omp/agent/extensions/clarity.js
+install -Dm644 plugins/dist/opencode.js ~/.config/opencode/plugins/clarity.js
+```
+
+Restart the runners after installation. For custom OMP profiles or OpenCode configuration directories, use their active extension/plugin directories instead. Install only one copy per runner.
+
+#### Home Manager
+
+Pass this repository's non-flake input as `clarity-skills` through `extraSpecialArgs`, then add to your home module:
+
+```nix
+{ clarity-skills, ... }:
+{
+  imports = [ "${clarity-skills}/plugins/home-manager.nix" ];
+  programs.clarityPlugins.enable = true;
+}
+```
+
+The option is disabled by default. Enabling it builds and tests both plugins with Nix, then installs them at the two default paths above. Apply your Home Manager configuration and restart the runners. Update the pinned repository input before rebuilding to pick up newer guidance. The package is also available through `pkgs.callPackage "${clarity-skills}/plugins" { }`.
+
+The plugins preserve existing system blocks. A build-time source fingerprint prevents duplicate insertion when the same guidance is inherited or merged, even if the runner normalizes its whitespace. They check each prepared policy rather than remember a session flag, so rebuilt contexts receive the guidance again. OpenCode's system-transform hook is experimental; recheck compatibility when upgrading the runner.
 
 ## Private artifacts and decisions
 
