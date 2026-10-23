@@ -33,7 +33,7 @@ Inspect the project's integration-test facilities and select a few meaningful cr
 
 Before every specification write, show the exact proposed content or patch and its destination, explain material consequences, and obtain explicit human confirmation. Apply only that confirmed content; if the proposal or basis changes, confirm the revision first. Keep unconfirmed proposals in conversation, not candidate files.
 
-Integrate agreed content into the canonical architecture and root navigation through their assigned writer. Return requirement conflicts to their owner; changes to an already approved target use an authorized `clarify-change` route.
+Integrate agreed content into the canonical architecture and root navigation through their assigned writer. Return requirement conflicts to their owner in `clarify-requirements`; revise affected architectural decisions here and realizations in `clarify-technical-design`.
 
 ## Check, review and approve
 

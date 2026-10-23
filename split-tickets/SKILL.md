@@ -1,6 +1,6 @@
 ---
 name: split-tickets
-description: Use to decompose an approved design or change package into implementation tickets, or revise its global ticket set. Not for production design or execution.
+description: Use to decompose an approved design into implementation tickets, or revise its global ticket set. Not for production design or execution.
 ---
 
 # Split Tickets

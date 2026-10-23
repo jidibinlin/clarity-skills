@@ -26,7 +26,6 @@ Create only what the chosen route needs.
 ├── requirements.md
 ├── architecture.md
 ├── technical.md
-├── change.md
 ├── <object>.review-fix-decisions.log.md
 ├── issues/
 │   ├── <NN>-<ticket>.md
@@ -52,7 +51,7 @@ Standalone modeling uses root models. Heavyweight children use assigned `require
 | `<object>.review-fix-decisions.log.md` | Review reports, finding-linked repair decisions and approval evidence, using `review-records`. |
 | `delivery.md` | Final implementation summary for the authorized scope. |
 
-Log stems are `wayfinder`, `requirements`, `architecture`, `technical`, `change`, `tickets` for the plan, and `implementation` for the overall code result. Ticket code-review logs sit beside their tickets. Records for external canonical specifications remain in the private workspace.
+Log stems are `wayfinder`, `requirements`, `architecture`, `technical`, `tickets` for the plan, and `implementation` for the overall code result. Ticket code-review logs sit beside their tickets. Records for external canonical specifications remain in the private workspace.
 
 Assign one writer per file; other participants return proposals or reports to that writer. Use relative artifact links and repository-relative code paths, naming other checkouts explicitly.
 

@@ -10,7 +10,6 @@ Human-led requirements and technical design, followed by implementation against 
 | [clarify-requirements](clarify-requirements/SKILL.md) | Requirements or a composed shared/child package | [REQUIREMENTS-MODEL.md](clarify-requirements/REQUIREMENTS-MODEL.md) |
 | [clarify-architecture](clarify-architecture/SKILL.md) | Overall heavyweight architecture | [ARCHITECTURE-MODEL.md](clarify-architecture/ARCHITECTURE-MODEL.md) |
 | [clarify-technical-design](clarify-technical-design/SKILL.md) | Concrete files, topology, flows, data and contracts | [TECHNICAL-MODEL.md](clarify-technical-design/TECHNICAL-MODEL.md) |
-| [clarify-change](clarify-change/SKILL.md) | Current baseline and agreed target change | [CHANGE-MODEL.md](clarify-change/CHANGE-MODEL.md) |
 | [split-tickets](split-tickets/SKILL.md) | Context-fit usable increments | [TICKETS.md](split-tickets/TICKETS.md) |
 | [orchestrate-implementation](orchestrate-implementation/SKILL.md) | Whole-work implementation and human acceptance | [ORCHESTRATION.md](orchestrate-implementation/ORCHESTRATION.md) |
 | [implement](implement/SKILL.md) | One ticket or bounded direct change | — |

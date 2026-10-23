@@ -8,7 +8,8 @@ The plan implements an approved source package:
 
 - **Flat:** requirements and the technical design that realizes them.
 - **Heavyweight:** selected shared/child requirements, overall architecture and the applicable technical designs, approved in that order.
-- **Change:** the complete change model and synchronized affected canonical sections. A bounded direct change needs no synthetic ticket set.
+
+A bounded direct change needs no synthetic ticket set.
 
 The root identifies the selected scope and authoritative sources. Approved design governs production decisions; observed legacy behavior is not a substitute. Required unresolved design blocks the affected planning work.
 

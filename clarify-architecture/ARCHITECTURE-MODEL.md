@@ -15,7 +15,7 @@ Resolve the resource through its registered owner and import the content, not it
 
 ## Approved basis and global completeness
 
-The basis is the root-selected shared/child requirements package, independently reviewed together and human-approved, with its dependencies and exclusions. A tentative map or isolated child approvals do not establish that package. A coordinated change may use this content standard within its own approval route.
+The basis is the root-selected shared/child requirements package, independently reviewed together and human-approved, with its dependencies and exclusions. A tentative map or isolated child approvals do not establish that package.
 
 The design is grounded in approved scenarios and inspected runtime/code boundaries. It explains reuse, changed responsibilities and decisive choices. Existing implementation facts do not override the approved target.
 
