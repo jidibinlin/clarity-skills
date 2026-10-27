@@ -7,7 +7,7 @@ description: Use to decompose an approved design into implementation tickets, or
 
 Turn the approved scope into useful increments that a fresh implementer can understand, implement, verify and repair within one working context.
 
-Read [TICKETS.md](TICKETS.md) for generation and review criteria. Use the `artifact-layout` skill for storage. Use the `review-records` skill when recording or recovering review work and the `communication-style` skill for human communication. Resolve references through their registered owners and local files relative to this skill.
+Read [TICKETS.md](TICKETS.md) for generation and review criteria. Use the `artifact-layout` skill for storage and the `communication-style` skill for human communication. Resolve references through their registered owners and local files relative to this skill.
 
 ## 1. Recover the approved basis
 
@@ -31,8 +31,8 @@ Write the confirmed set, resolve its references and inspect the dependency diagr
 
 ## 4. Review, repair and approve
 
-Use [reviewer-prompt.md](reviewer-prompt.md) with the complete set, approved sources and planning evidence. Retain the original author and independent reviewer through repairs. Record findings, repair decisions and review outcomes under `review-records`; the reviewer determines whether findings are resolved.
+Use [reviewer-prompt.md](reviewer-prompt.md) with the complete set, approved sources and planning evidence. Retain the original author and independent reviewer through repairs; the reviewer determines whether findings are resolved. Ask the original reviewer if feedback is unclear.
 
 The original author repairs plan defects through the same confirmation gate, then returns the current set to the same reviewer. Resolve missing inputs or refer source-design defects upstream. Repeat until Pass, then present the reviewed plan for explicit human approval.
 
-Return the approved root index and essential references. Plan approval does not itself authorize implementation, commits or release.
+Return the approved root index, review result, human approval and essential source/evidence references. Plan approval does not itself authorize implementation, commits or release.

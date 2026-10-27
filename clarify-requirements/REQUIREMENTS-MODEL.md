@@ -36,7 +36,7 @@ The selected package links actual root/child source sections and explains how th
 
 ## Authorization and evidence validity
 
-Specification content has human confirmation before it is written; candidate content remains in conversation. The original author and independent original reviewer carry repairs through to Pass. Findings and repair decisions are recorded using `review-records`.
+Specification content has human confirmation before it is written; candidate content remains in conversation. The original author and independent original reviewer carry repairs through to Pass.
 
 Review and final human approval concern the current result. Final approval is distinct from write consent and does not authorize the next stage. `artifact-layout` owns workspace and artifact conventions.
 

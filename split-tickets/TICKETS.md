@@ -1,6 +1,6 @@
 # Implementation Tickets: Content and Review Standard
 
-These criteria guide both ticket generation and review. SKILL.md supplies the planning method; `artifact-layout` and `review-records` define storage and records.
+These criteria guide both ticket generation and review. SKILL.md supplies the planning method; `artifact-layout` defines storage.
 
 ## Approved basis
 
@@ -43,7 +43,7 @@ Each ticket provides:
 
 Specification content, including the initial execution block and later plan changes, is shown and explicitly confirmed before writing. Final plan approval is distinct from permission to write. Candidate specification files are not a substitute for confirmation.
 
-Review and approval apply to the actual current set and sources. Material changes require reassessment of affected conclusions. Records preserve findings and decisions, not a progress diary.
+Review and approval apply to the actual current set and sources. Material changes require reassessment of affected conclusions.
 
 ## Verification criteria
 

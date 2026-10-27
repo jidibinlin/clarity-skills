@@ -139,10 +139,10 @@ Keep unconfirmed proposals in conversation, not candidate files.
 - The original author repairs findings. The same reviewer reassesses.
 - Obtain final human approval after Pass.
 
-Use `review-records` for review and approval evidence.
+Ask the original reviewer if feedback is unclear.
 
 ## Return and stop
 
-- Return approved model/source references and review/approval evidence.
+- Return approved model/source references, the review result, human approval and evidence references.
 - Heavyweight children return to the root. All scoped realizations must be complete and approved before one root ticket set, controller and delivery.
 - Stop before ticketing or coding. Do not automatically start the next stage.

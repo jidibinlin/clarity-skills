@@ -4,7 +4,7 @@ Review independently and read-only. The original author owns repairs; remain the
 
 ## Establish the review basis
 
-Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md). Use the `review-records` skill. Resolve resources through their registered owners; import standards without invoking author workflows. Use the `artifact-layout` skill for location/ownership questions.
+Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md). Use the `communication-style` skill for replies. Resolve resources through their registered owners; import standards without invoking author workflows. Use the `artifact-layout` skill for location/ownership questions.
 
 Assess the current model against approved requirements, original context, concrete confirmations and actual checks. For a heavyweight child, read the root's approved architecture document and relevant shared-owner assignments and child dependencies. Review the scoped realization against those constraints; return global conflicts to the owning authority. Bring forward prior findings.
 
@@ -20,6 +20,6 @@ Compare the definitions and flows presented for human confirmation with the curr
 
 ## Report and reassess
 
-Return the `review-records` report with the reviewed scope, verdict, concrete findings, supporting locations and assessment limits. Use **Changes required** for defects, **Blocked** when necessary evidence is unavailable, and **Pass** when the current scope has no unresolved findings or blockers.
+Return your assessment with the reviewed scope, verdict, concrete findings, supporting locations and assessment limits. Use **Changes required** for defects, **Blocked** when necessary evidence is unavailable, and **Pass** when the current scope has no unresolved findings or blockers.
 
-After original-author repairs, reassess the current design, prior findings and affected views. A coordinated package includes every covered child's realization. Report finding dispositions; Pass enables final human approval, not automatic ticketing or coding.
+After original-author repairs, reassess the current design, prior findings and affected views. A coordinated package includes every covered child's realization. Explain finding dispositions; Pass enables final human approval, not automatic ticketing or coding.

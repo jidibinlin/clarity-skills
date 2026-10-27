@@ -125,7 +125,6 @@ References use file-level links. Identify specific functions or sections by name
 | "Synced main, rebased, resolved conflicts, reran checks" | Keep repository operations out of the design. If an upstream contract changed, describe its current effect on the target instead. |
 | "First inspected X, then ran probe Y, then found Z" | State the relevant baseline capability and its consequence for the chosen design, not the investigation chronology. |
 | Repeated "not real RPC/database/end-to-end verification" disclaimers | Preserve actual guarantee limits or unresolved feasibility beside the affected contract, and substitutions beside the planned flow. Report limits of performed checks with the review evidence. |
-| Moving the entire report into another model appendix or adding a review-log entry after every command | Preserve useful evidence at its existing source; summarize only what supports an actual review submission or finding-linked repair. |
 
 ## Delivery criteria
 

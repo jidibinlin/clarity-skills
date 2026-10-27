@@ -10,7 +10,7 @@ const digest = createHash('sha256').update(body).digest('hex');
 const tag = '<clarity-communication-style source="' + digest + '">';
 const prompt = [
   tag,
-  'The communication-style skill is already loaded below. Apply it when communicating with the human.',
+  'The communication-style skill is already loaded below. Apply it when communicating.',
   'This block does not start any other Clarity workflow.',
   '',
   body,

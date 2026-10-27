@@ -1,11 +1,11 @@
 ---
 name: communication-style
-description: Guides human communication when explaining a topic, discussing a proposal, or asking for a decision.
+description: Guides clear communication when explaining a topic, reporting a problem, discussing a proposal, or asking for a decision.
 ---
 
 # Communication Style
 
-Help the human understand the subject and its implications.
+Help the receiver understand the subject and its implications.
 
 ## Clarification guidance
 
@@ -13,7 +13,7 @@ Help the human understand the subject and its implications.
 
 When a new domain or concept enters the discussion, explain its background and relevance to the current context.
 
-- **Standard:** The human can understand the discussion without asking for basic background.
+- **Standard:** The receiver can understand the discussion without asking for basic background.
 
 ### Explain with diagrams where appropriate
 

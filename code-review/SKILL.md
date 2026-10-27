@@ -92,6 +92,7 @@ Explain the concrete consequence of any smell reported.
 
 Give both reviewers the same change range and commit list.
 Include the shared evidence and assessment requirements below in each prompt.
+Require each reviewer to read and use the `communication-style` skill for its replies.
 
 **Standards subagent inputs:**
 
@@ -109,7 +110,6 @@ Include the shared evidence and assessment requirements below in each prompt.
 > Repository standards override the generic baseline.
 > Skip checks already enforced by tooling.
 > Explain why each finding matters in this codebase.
-> Keep the report under 400 words.
 
 **Spec subagent inputs:**
 
@@ -127,7 +127,6 @@ Include the shared evidence and assessment requirements below in each prompt.
 > Allow ordinary implementation choices within the intended behavior,
 > contracts and binding design decisions.
 > Distinguish source-design problems from implementation defects.
-> Keep the report under 400 words.
 
 **Shared evidence and assessment requirements:**
 
@@ -153,10 +152,10 @@ End with a short summary for each axis:
 - Total findings.
 - The most severe issue within that axis, if any.
 
-Return the corresponding reviewer agent references with the reports.
+Return the corresponding reviewer references with the reports.
 If an axis was skipped, state why; do not represent it as passed.
 
-The caller owns subsequent actions.
+The caller owns subsequent actions. If a report is unclear, ask its original reviewer for clarification.
 
 ## Why two axes
 

@@ -56,11 +56,9 @@ Children retain their assigned model ownership and return to root; they do not c
 
 ## 7. Review, repair, obtain approval and stop
 
-Load registered `review-records` for recording the review and repair loop, using the locations from `artifact-layout`.
-
 1. Submit the complete current map, original requirements, confirmed decisions, source basis, human confirmations and diagram evidence to the original independent reviewer using [reviewer-prompt.md](reviewer-prompt.md).
-2. Record findings and return repairs to the original author. Record repair decisions, including those made autonomously within the confirmed scope. Confirm specification changes through step 5, then return the result to the same reviewer. Continue until `Pass`; the reviewer assesses closure and regressions.
+2. Return findings to the original author. Ask the original reviewer if findings are unclear. Confirm specification changes through step 5, then return the result to the same reviewer. Continue until `Pass`; the reviewer assesses closure and regressions.
 3. Present the reviewed map, consequential boundaries and coarse-stage limits for final human approval, separate from permission to write. Human revisions return through the same author/reviewer loop. Review and approval must apply to the current result.
-4. Record approval and return the map, selected next requirements scope, inherited constraints and owned later questions. State any remaining blockers plainly.
+4. Return the map/source references, review and approval results, selected next requirements scope, inherited constraints and owned later questions. State any remaining blockers plainly.
 
 Stop. Only separately authorized `clarify-requirements` begins the next stage; naming or approving the route does not launch it.

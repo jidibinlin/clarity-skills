@@ -25,10 +25,9 @@ Lightweight: requirements → technical design → tickets → implementation. H
 - **Reviewer prompts:** scope modeling and ticket-planning reviews. Code review uses the shared method below with unit or whole-result criteria.
 - [communication-style](communication-style/SKILL.md): shared context, clear explanations, Mermaid diagrams and consequential questions.
 - [tdd](tdd/SKILL.md): the implementer's behavioral loop, including repair. [writing-good-tests.md](tdd/writing-good-tests.md) provides test-writing guidance, copied unchanged from [Superpowers `bb92a77`](https://github.com/obra/superpowers/blob/bb92a77741419a4ab5f06e711a283343f1ada0c3/skills/test-driven-development/writing-good-tests.md) under its [MIT license](tdd/LICENSE.superpowers). [TESTING.md](tdd/TESTING.md) supplies shared test-quality criteria.
-- [code-review](code-review/SKILL.md): Spec and Standards review criteria and independent subagent dispatch. Returns separate reports and reviewer references; `implement` owns repairs and direct re-review with the same agents.
+- [code-review](code-review/SKILL.md): Spec and Standards review criteria and independent subagent dispatch. Returns separate reports; `implement` owns repairs and re-review with the same reviewers, asking for clarification when needed.
   Adapted from [Matt Pocock v1.3.1](https://github.com/mattpocock/skills/blob/v1.3.1/skills/engineering/code-review/SKILL.md) under its [MIT license](code-review/LICENSE.mattpocock).
 - [artifact-layout](artifact-layout/SKILL.md): private directories and file responsibilities.
-- [review-records](review-records/SKILL.md): review reports and finding-linked decisions; needed when preparing or recovering records.
 
 Keep guidance focused on this workflow's choices, not exhaustive policies or generic engineering instruction. Assess the complete reading path: moving restrictions into referenced files is not simplification.
 
@@ -36,7 +35,7 @@ Micro technical proposals and document drafts present concrete definitions with 
 
 ## Installation
 
-Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout` and `review-records`; human communication uses `communication-style`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
+Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout`; communication uses `communication-style`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
 
 Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `wayfinder`, `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
 
@@ -75,6 +74,6 @@ The plugins preserve existing system blocks. A build-time source fingerprint pre
 
 ## Private artifacts and decisions
 
-Use the locally excluded `.scratch/<work-slug>/` layout. `issue.md` defines and links the work; models hold the current specification; ticket blocks hold execution facts; object-specific logs preserve review and repair decisions.
+Use the locally excluded `.scratch/<work-slug>/` layout. `issue.md` defines and links the work; models hold the current specification; ticket blocks hold execution facts.
 
 Show specification changes and obtain confirmation before writing them. Authorized implementation proceeds autonomously within the approved design. Preserve the original implementer/reviewer pair through repairs and obtain final human approval or acceptance for the stage result. These approvals do not authorize publication of private artifacts.

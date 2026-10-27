@@ -8,7 +8,7 @@ The result covers an explicitly authorized approved ticket set or bounded whole-
 
 ## Readiness and execution facts
 
-Dependent work is ready when its required outputs are physically incorporated and usable, with applicable independent Passes, saved reports and finding dispositions. The controller may then continue authorized dependent work without per-ticket human approval.
+Dependent work is ready when its required outputs are physically incorporated and usable, with applicable independent Passes and finding dispositions. The controller may then continue authorized dependent work without per-ticket human approval.
 
 A status label alone does not establish readiness. Factual blocker updates cannot remove normative dependencies.
 
@@ -22,7 +22,7 @@ The combined code realizes the whole approved scope, including collaboration acr
 
 Required regressions and selected whole-flow tests have actual outcomes on the combined result, with the intended participants and any approved substitutions. Local ticket Passes do not prove these integrated flows.
 
-A ticket set receives independent overall review in addition to unit reviews. A bounded direct change uses its original unit reviewer's full-change assessment instead. Final human acceptance applies to the whole reviewed result, not individual tickets.
+A ticket set receives independent overall review in addition to unit reviews. A bounded direct change uses its original unit reviewers' full-change assessments instead. Final human acceptance applies to the whole reviewed result, not individual tickets.
 
 ## Whole-result coverage
 

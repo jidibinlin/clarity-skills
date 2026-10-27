@@ -4,7 +4,7 @@ Review independently and read-only. The original author owns repairs; remain the
 
 ## Establish the review basis
 
-Read [ARCHITECTURE-MODEL.md](ARCHITECTURE-MODEL.md) and its named technical sections. Use the `review-records` skill. Resolve resources through their registered owners; import standards without invoking author workflows. Use the `artifact-layout` skill for location/ownership questions.
+Read [ARCHITECTURE-MODEL.md](ARCHITECTURE-MODEL.md) and its named technical sections. Use the `communication-style` skill for replies. Resolve resources through their registered owners; import standards without invoking author workflows. Use the `artifact-layout` skill for location/ownership questions.
 
 Assess the current architecture against the root-approved requirements package, original context, concrete confirmations and actual checks. Include prior findings when reviewing repairs.
 
@@ -20,6 +20,6 @@ Check that the written content matches what the human confirmed and that the rev
 
 ## Report and reassess
 
-Return the `review-records` report with the reviewed scope, verdict, concrete findings, supporting locations and assessment limits. Use **Changes required** for defects, **Blocked** when necessary evidence is unavailable, and **Pass** when the current scope has no unresolved findings or blockers.
+Return your assessment with the reviewed scope, verdict, concrete findings, supporting locations and assessment limits. Use **Changes required** for defects, **Blocked** when necessary evidence is unavailable, and **Pass** when the current scope has no unresolved findings or blockers.
 
-After original-author repairs, reassess the current model, prior findings and affected views; report which findings are resolved. Pass enables the author's final human-approval request, not automatic child design or execution.
+After original-author repairs, reassess the current model, prior findings and affected views; explain finding dispositions. Pass enables the author's final human-approval request, not automatic child design or execution.

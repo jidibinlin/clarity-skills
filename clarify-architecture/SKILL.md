@@ -39,8 +39,8 @@ Integrate agreed content into the canonical architecture and root navigation thr
 
 Walk scenarios through the complete global model and child assignments. Render every diagram and visually inspect the result against the intended boundaries, paths and ordering. Resolve contradictions and gather necessary feasibility evidence, distinguishing actual checks from planned integration tests.
 
-Use the `review-records` skill to prepare the submission and preserve review/repair evidence. Give [reviewer-prompt.md](reviewer-prompt.md) the current model, approved sources, confirmations, checks and prior findings. Keep the original author and a separate original independent reviewer through the loop: report, original-author repair with any required write confirmation, then the same reviewer reassesses the current model and findings. Continue until Pass without unresolved findings or blockers.
+Give [reviewer-prompt.md](reviewer-prompt.md) the current model, approved sources, confirmations, checks and prior findings. Keep the original author and a separate original independent reviewer through the loop: original-author repair with any required write confirmation, then the same reviewer reassesses the current model and findings. Ask the original reviewer if feedback is unclear. Continue until Pass without unresolved findings or blockers.
 
 Present the reviewed architecture, consequential choices, assignments and limits for explicit final human approval. Human revisions return through the same loop. This approval is separate from consent to write.
 
-Return the root entry, approved model and source references, review/approval evidence and child assignments. Child realizations must all be complete and approved before one root ticket set, controller and delivery. Stop here; do not automatically launch child design or execution.
+Return the root entry, approved model and source references, review result, human approval, evidence references and child assignments. Child realizations must all be complete and approved before one root ticket set, controller and delivery. Stop here; do not automatically launch child design or execution.

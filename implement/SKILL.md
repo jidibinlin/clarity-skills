@@ -12,7 +12,7 @@ flowchart TD
     Commit --> Delegate["Use code-review in current context<br/>Skill dispatches independent reviewers"]
     Delegate --> Spec["Spec review"]
     Delegate --> Standards["Standards review"]
-    Spec --> Reports["Separate reports and reviewer references"]
+    Spec --> Reports["Separate reports"]
     Standards --> Reports
     Reports --> Pass{"Both axes Pass?"}
     Pass -->|Yes| Return["Return result"]
@@ -42,13 +42,13 @@ Complete implementation and verification.
 Commit only this task's changes before the first review.
 
 Use the code-review skill in the current context.
-Keep the returned Spec and Standards reviewer references.
+If a review report is unclear, ask the original reviewer for clarification.
 
 If issues are found:
 - Fix the implementation.
 - Verify the fixes.
 - Commit only this round's changes.
-- Send the new commit and verification evidence directly to the same reviewers.
+- Send the new commit and verification evidence back to the same reviewers through their supported conversation channels.
 
 Repeat the repair–verification–review loop until both axes Pass.
 Return the completed result to the caller.

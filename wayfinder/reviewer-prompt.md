@@ -4,13 +4,13 @@ Review read-only. Return findings to the original map author rather than rewriti
 
 ## 1. Assemble the current assignment
 
-Read [WAYFINDER-MODEL.md](WAYFINDER-MODEL.md). Use the `review-records` skill. Resolve resources through their installed owners; use the `artifact-layout` skill for artifact conventions.
+Read [WAYFINDER-MODEL.md](WAYFINDER-MODEL.md). Use the `communication-style` skill for replies. Resolve resources through their installed owners; use the `artifact-layout` skill for artifact conventions.
 
-Receive the complete current map, original requirements and confirmed decisions, relevant sources, human confirmations, rendered views and prior findings. Establish the selected scope and intended requirements handoff.
+Receive the complete current map, original requirements and confirmed decisions, relevant sources, human confirmations, rendered views and relevant prior review conversations. Establish the selected scope and intended requirements handoff.
 
 ## 2. Reconstruct authorization and evidence chronology
 
-Check **Authorization and evidence validity** against the supplied confirmations and review record. Establish that the map matches the confirmed content, that review remains independent, and that recorded findings and repairs describe the current work. Report missing evidence that prevents judgment rather than auditing unrelated administrative history.
+Check **Authorization and evidence validity** against the supplied confirmations and review conversations. Establish that the map matches the confirmed content, that review remains independent, and that prior findings and repair responses describe the current work. Report missing evidence that prevents judgment rather than auditing unrelated administrative history.
 
 ## 3. Challenge the decomposition with scenarios
 
@@ -24,4 +24,4 @@ Inspect the rendered views against the narrative and assess the current map agai
 
 Reassess the current map, prior findings and regressions after repairs. Explain which findings are resolved and which remain.
 
-Use the `review-records` report format. Ground findings in a content-standard obligation, the actual location and its consequence. Return `Changes required` for defects, `Blocked` when missing information prevents judgment, or `Pass` when the selected scope is sound with no unresolved findings or blockers. Return the report to the author for recording; final human approval follows separately.
+Ground findings in a content-standard obligation, the actual location and its consequence. Return `Changes required` for defects, `Blocked` when missing information prevents judgment, or `Pass` when the selected scope is sound with no unresolved findings or blockers. Return the assessment to the review initiator; final human approval follows separately.

@@ -5,7 +5,7 @@ description: Reference for Clarity's private artifact directories, filenames, ow
 
 # Artifact Layout
 
-This reference defines storage, not workflow. Stages govern execution; `review-records` defines review and repair records.
+This reference defines storage, not workflow. Stages govern execution.
 
 ## Private workspace
 
@@ -26,16 +26,13 @@ Create only what the chosen route needs.
 ├── requirements.md
 ├── architecture.md
 ├── technical.md
-├── <object>.review-fix-decisions.log.md
 ├── issues/
-│   ├── <NN>-<ticket>.md
-│   └── <NN>-<ticket>.review-fix-decisions.log.md
+│   └── <NN>-<ticket>.md
 ├── requirements/
 │   └── <NN>-<requirement>/
 │       ├── issue.md
 │       ├── requirements.md
-│       ├── technical.md
-│       └── <object>.review-fix-decisions.log.md
+│       └── technical.md
 └── delivery.md
 ```
 
@@ -48,11 +45,8 @@ Standalone modeling uses root models. Heavyweight children use assigned `require
 | `issue.md` | Work definition and navigation: objective, scope, checkout, route and source links. A root ticket-set entry also holds planned coverage, dependencies and integration ownership. |
 | Model files | Current integrated specifications, with rationale beside the decisions it explains. |
 | `issues/<NN>-<ticket>.md` | Ticket specification and a separate compact block of current execution facts. |
-| `<object>.review-fix-decisions.log.md` | Review reports, finding-linked repair decisions and approval evidence, using `review-records`. |
 | `delivery.md` | Final implementation summary for the authorized scope. |
-
-Log stems are `wayfinder`, `requirements`, `architecture`, `technical`, `tickets` for the plan, and `implementation` for the overall code result. Ticket code-review logs sit beside their tickets. Records for external canonical specifications remain in the private workspace.
 
 Assign one writer per file; other participants return proposals or reports to that writer. Use relative artifact links and repository-relative code paths, naming other checkouts explicitly.
 
-Keep models clean and records object-specific. Do not add progress diaries to `issue.md`, separate state files, candidate drafts or duplicate approval registries. Preserve review history when reorganizing private artifacts.
+Keep models clean. Do not add progress diaries to `issue.md`, separate state files, candidate drafts or duplicate approval registries. Preserve existing historical artifacts when reorganizing private workspaces.

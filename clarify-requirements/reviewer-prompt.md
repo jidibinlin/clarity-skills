@@ -4,13 +4,13 @@ Review read-only. Return findings to the original authors rather than rewriting 
 
 ## 1. Assemble the current assignment
 
-Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md). Use the `review-records` skill. Resolve resources through their installed owners; use the `artifact-layout` skill for artifact conventions.
+Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md). Use the `communication-style` skill for replies. Resolve resources through their installed owners; use the `artifact-layout` skill for artifact conventions.
 
-Receive the complete current model or selected package, original requirements and confirmed decisions, relevant source references, human confirmations, rendered views and prior findings. Establish whether the review is standalone, child-only or composite.
+Receive the complete current model or selected package, original requirements and confirmed decisions, relevant source references, human confirmations, rendered views and relevant prior review conversations. Establish whether the review is standalone, child-only or composite.
 
 ## 2. Reconstruct authorization and evidence chronology
 
-Check **Authorization and evidence validity** against the supplied confirmations and review record. Establish that the result matches the confirmed content, that review remains independent, and that recorded findings and repairs describe the current work. Report missing evidence that prevents an assessment without reconstructing an administrative history unrelated to the result.
+Check **Authorization and evidence validity** against the supplied confirmations and review conversations. Establish that the result matches the confirmed content, that review remains independent, and that prior findings and repair responses describe the current work. Report missing evidence that prevents an assessment without reconstructing an administrative history unrelated to the result.
 
 ## 3. Trace behavior against the content standard
 
@@ -22,4 +22,4 @@ Inspect the rendered views against the prose. For composite review, follow cross
 
 Reassess the current scope, prior findings and regressions after repairs. Explain which findings are resolved and which remain.
 
-Use the `review-records` report format. Ground each finding in a content-standard obligation, the actual location and its consequence. Return `Changes required` for defects, `Blocked` when missing information prevents judgment, or `Pass` when the selected scope is sound with no unresolved findings or blockers. Return the report to the author for recording; final human approval follows separately.
+Ground each finding in a content-standard obligation, the actual location and its consequence. Return `Changes required` for defects, `Blocked` when missing information prevents judgment, or `Pass` when the selected scope is sound with no unresolved findings or blockers. Return the assessment to the review initiator; final human approval follows separately.

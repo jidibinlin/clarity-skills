@@ -138,13 +138,11 @@ Keep unconfirmed proposals in conversation, not candidate files.
 ## Final review
 
 - Submit the complete current model or requirements package, its sources and confirmation evidence to an independent review subagent using [reviewer-prompt.md](reviewer-prompt.md).
-- The original author repairs findings. The same reviewer reassesses.
+- The original author repairs findings. Ask the original reviewer if findings are unclear. The same reviewer reassesses.
 - Obtain final human approval after Pass.
-
-Use the `review-records` skill for review and approval evidence.
 
 ## Return and stop
 
-- Return the approved model/source references and review/approval evidence.
+- Return the approved model/source references and the review and approval results.
 - Heavyweight children return to the root. The complete requirements package needs approval before architecture.
 - Stop before architecture, technical design, ticketing or implementation. Do not automatically start the next stage.
