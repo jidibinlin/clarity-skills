@@ -1,6 +1,6 @@
 ---
 name: clarify-requirements
-description: Clarify or resume standalone, child, or composite requirements through independent review and human approval. Not technical design, ticketing, or coding.
+description: Clarify or resume standalone, child, or composite requirements through independent review and human approval. Not technical design or coding.
 ---
 
 # Clarify Requirements
@@ -145,4 +145,4 @@ Keep unconfirmed proposals in conversation, not candidate files.
 
 - Return the approved model/source references and the review and approval results.
 - Heavyweight children return to the root. The complete requirements package needs approval before architecture.
-- Stop before architecture, technical design, ticketing or implementation. Do not automatically start the next stage.
+- Stop before architecture, technical design or implementation. Do not automatically start the next stage.

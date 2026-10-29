@@ -10,11 +10,10 @@ Human-led requirements and technical design, followed by implementation against 
 | [clarify-requirements](clarify-requirements/SKILL.md) | Requirements or a composed shared/child package | [REQUIREMENTS-MODEL.md](clarify-requirements/REQUIREMENTS-MODEL.md) |
 | [clarify-architecture](clarify-architecture/SKILL.md) | Overall heavyweight architecture | [ARCHITECTURE-MODEL.md](clarify-architecture/ARCHITECTURE-MODEL.md) |
 | [clarify-technical-design](clarify-technical-design/SKILL.md) | Concrete files, topology, flows, data and contracts | [TECHNICAL-MODEL.md](clarify-technical-design/TECHNICAL-MODEL.md) |
-| [split-tickets](split-tickets/SKILL.md) | Context-fit usable increments | [TICKETS.md](split-tickets/TICKETS.md) |
 | [orchestrate-implementation](orchestrate-implementation/SKILL.md) | Whole-work implementation and human acceptance | [ORCHESTRATION.md](orchestrate-implementation/ORCHESTRATION.md) |
-| [implement](implement/SKILL.md) | One ticket or bounded direct change | — |
+| [implement](implement/SKILL.md) | One bounded implementation unit | — |
 
-Lightweight: requirements → technical design → tickets → implementation. Heavyweight: Wayfinder → shared/child requirements → overall architecture → child technical designs → one root ticket set → implementation. A bounded approved change can go directly to implementation. Stage approval does not automatically launch the next stage.
+Lightweight: requirements → technical design → implementation. Heavyweight: Wayfinder → shared/child requirements → overall architecture → child technical designs → implementation. Stage approval does not automatically launch the next stage.
 
 `orchestrate-implementation` starts from the approved work and coordinates ready units through `implement`. The original implementer uses `tdd` for initial behavior and behavioral repairs, then uses `code-review` in the current context to dispatch independent Spec and Standards reviewers. Repair rounds return directly to those same reviewers. Existing progress is continued when present, not required to start.
 
@@ -22,7 +21,7 @@ Lightweight: requirements → technical design → tickets → implementation. H
 
 - **SKILL.md:** the working method and key human/agent handoffs.
 - **Content standard:** read before authoring; the same criteria guide generation and independent review. Cross-stage imports name applicable content sections; the consuming stage owns its method, role routing and approval route.
-- **Reviewer prompts:** scope modeling and ticket-planning reviews. Code review uses the shared method below with unit or whole-result criteria.
+- **Reviewer prompts:** scope modeling reviews. Code review uses the shared method below with unit or whole-result criteria.
 - [communication-style](communication-style/SKILL.md): shared context, clear explanations, Mermaid diagrams and consequential questions.
 - [tdd](tdd/SKILL.md): the implementer's behavioral loop, including repair. [writing-good-tests.md](tdd/writing-good-tests.md) provides test-writing guidance, copied unchanged from [Superpowers `bb92a77`](https://github.com/obra/superpowers/blob/bb92a77741419a4ab5f06e711a283343f1ada0c3/skills/test-driven-development/writing-good-tests.md) under its [MIT license](tdd/LICENSE.superpowers). [TESTING.md](tdd/TESTING.md) supplies shared test-quality criteria.
 - [code-review](code-review/SKILL.md): Spec and Standards review criteria and independent subagent dispatch. Returns separate reports; `implement` owns repairs and re-review with the same reviewers, asking for clarification when needed.
@@ -74,6 +73,6 @@ The plugins preserve existing system blocks. A build-time source fingerprint pre
 
 ## Private artifacts and decisions
 
-Use the locally excluded `.scratch/<work-slug>/` layout. `issue.md` defines and links the work; models hold the current specification; ticket blocks hold execution facts.
+Use the locally excluded `.scratch/<work-slug>/` layout. `issue.md` defines and links the work; models hold the current specification.
 
 Show specification changes and obtain confirmation before writing them. Authorized implementation proceeds autonomously within the approved design. Preserve the original implementer/reviewer pair through repairs and obtain final human approval or acceptance for the stage result. These approvals do not authorize publication of private artifacts.

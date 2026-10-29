@@ -1,6 +1,6 @@
 ---
 name: wayfinder
-description: Coarsely split a large requirement into drillable clarification scopes, or resume its map. Tentative topology tests boundaries; this is not formal architecture, ticketing, or coding.
+description: Coarsely split a large requirement into drillable clarification scopes, or resume its map. Tentative topology tests boundaries; this is not formal architecture or coding.
 ---
 
 # Wayfinder
@@ -50,9 +50,9 @@ Use root `issue.md` to identify the selected sources, scope and dependencies. Pr
 1. `clarify-requirements` develops shared and child requirements. Root owns shared meanings and cross-child flows; children own scoped detail. They may co-evolve, but the selected composed package needs review and human approval before architecture.
 2. `clarify-architecture` establishes overall architecture from that approved requirements package.
 3. `clarify-technical-design` develops scoped realizations from applicable approved requirements and architecture.
-4. `split-tickets` builds one root ticket set from the complete approved technical scope, followed by root-controlled implementation and one delivery summary.
+4. `orchestrate-implementation` coordinates root-controlled implementation of the complete approved technical scope and one delivery summary.
 
-Children retain their assigned model ownership and return to root; they do not create separate ticket sets or whole-work summaries. Return conflicts to the owning stage. Map approval establishes a useful requirements handoff, not approval of these later stages.
+Children retain their assigned model ownership and return to root; they do not create separate whole-work summaries. Return conflicts to the owning stage. Map approval establishes a useful requirements handoff, not approval of these later stages.
 
 ## 7. Review, repair, obtain approval and stop
 

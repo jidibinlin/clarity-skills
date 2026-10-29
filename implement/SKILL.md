@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Complete one approved ticket or bounded direct change, including verification and independent review; continue its existing implementation or repair when present.
+description: Complete one approved implementation unit, including verification and independent review; continue its existing implementation or repair when present.
 ---
 
 # Implement

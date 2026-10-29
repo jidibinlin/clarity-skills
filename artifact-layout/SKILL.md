@@ -26,8 +26,6 @@ Create only what the chosen route needs.
 ├── requirements.md
 ├── architecture.md
 ├── technical.md
-├── issues/
-│   └── <NN>-<ticket>.md
 ├── requirements/
 │   └── <NN>-<requirement>/
 │       ├── issue.md
@@ -36,15 +34,14 @@ Create only what the chosen route needs.
 └── delivery.md
 ```
 
-Standalone modeling uses root models. Heavyweight children use assigned `requirements/<NN>-<requirement>/` folders linking their parent; the root owns the effort index, ticket set and final delivery. A later change uses its own work folder and links the affected specifications.
+Standalone modeling uses root models. Heavyweight children use assigned `requirements/<NN>-<requirement>/` folders linking their parent; the root owns the effort index and final delivery. A later change uses its own work folder and links the affected specifications.
 
 ## File responsibilities
 
 | File | Responsibility |
 | --- | --- |
-| `issue.md` | Work definition and navigation: objective, scope, checkout, route and source links. A root ticket-set entry also holds planned coverage, dependencies and integration ownership. |
+| `issue.md` | Work definition and navigation: objective, scope, checkout, route and source links. |
 | Model files | Current integrated specifications, with rationale beside the decisions it explains. |
-| `issues/<NN>-<ticket>.md` | Ticket specification and a separate compact block of current execution facts. |
 | `delivery.md` | Final implementation summary for the authorized scope. |
 
 Assign one writer per file; other participants return proposals or reports to that writer. Use relative artifact links and repository-relative code paths, naming other checkouts explicitly.

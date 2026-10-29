@@ -28,7 +28,7 @@ Required views have current rendered output and visual-inspection evidence. The 
 
 ## Requirements handoff
 
-The handoff identifies the selected scope and sources, confirmed constraints, tentative estimates, real prerequisites and owned later questions. Root shared requirements and complete child detail compose before overall architecture; scoped technical models then support one root ticket set, implementation controller and delivery summary. The map does not approve these later stages.
+The handoff identifies the selected scope and sources, confirmed constraints, tentative estimates, real prerequisites and owned later questions. Root shared requirements and complete child detail compose before overall architecture; scoped technical models then support root-controlled implementation and one delivery summary. The map does not approve these later stages.
 
 ## Authorization and evidence validity
 

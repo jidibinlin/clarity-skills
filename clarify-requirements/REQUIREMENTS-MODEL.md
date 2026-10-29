@@ -30,7 +30,7 @@ Required views have current rendered output and visual-inspection evidence. Read
 
 ## Shared and child requirements
 
-Root requirements own shared meanings, cross-child rules and end-to-end flows. Children own complete scoped detail and reference applicable root definitions. Each decision has a clear owner; a requirements boundary need not match a module or ticket.
+Root requirements own shared meanings, cross-child rules and end-to-end flows. Children own complete scoped detail and reference applicable root definitions. Each decision has a clear owner; a requirements boundary need not match a module.
 
 The selected package links actual root/child source sections and explains how they compose. Its outcomes can be followed across child boundaries without gaps or conflicting rules. Each child meets the applicable content standard. A local child verdict does not establish package consistency.
 

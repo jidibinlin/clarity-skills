@@ -144,5 +144,5 @@ Ask the original reviewer if feedback is unclear.
 ## Return and stop
 
 - Return approved model/source references, the review result, human approval and evidence references.
-- Heavyweight children return to the root. All scoped realizations must be complete and approved before one root ticket set, controller and delivery.
-- Stop before ticketing or coding. Do not automatically start the next stage.
+- Heavyweight children return to the root. All scoped realizations must be complete and approved before root-controlled implementation and one delivery.
+- Stop before coding. Do not automatically start the next stage.

@@ -43,4 +43,4 @@ Give [reviewer-prompt.md](reviewer-prompt.md) the current model, approved source
 
 Present the reviewed architecture, consequential choices, assignments and limits for explicit final human approval. Human revisions return through the same loop. This approval is separate from consent to write.
 
-Return the root entry, approved model and source references, review result, human approval, evidence references and child assignments. Child realizations must all be complete and approved before one root ticket set, controller and delivery. Stop here; do not automatically launch child design or execution.
+Return the root entry, approved model and source references, review result, human approval, evidence references and child assignments. Child realizations must all be complete and approved before root-controlled implementation and one delivery. Stop here; do not automatically launch child design or execution.

@@ -22,4 +22,4 @@ Compare the definitions and flows presented for human confirmation with the curr
 
 Return your assessment with the reviewed scope, verdict, concrete findings, supporting locations and assessment limits. Use **Changes required** for defects, **Blocked** when necessary evidence is unavailable, and **Pass** when the current scope has no unresolved findings or blockers.
 
-After original-author repairs, reassess the current design, prior findings and affected views. A coordinated package includes every covered child's realization. Explain finding dispositions; Pass enables final human approval, not automatic ticketing or coding.
+After original-author repairs, reassess the current design, prior findings and affected views. A coordinated package includes every covered child's realization. Explain finding dispositions; Pass enables final human approval, not automatic coding.
