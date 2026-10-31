@@ -28,6 +28,7 @@ Lightweight: requirements → technical design → implementation. Heavyweight: 
   Adapted from [Matt Pocock v1.3.1](https://github.com/mattpocock/skills/blob/v1.3.1/skills/engineering/code-review/SKILL.md) under its [MIT license](code-review/LICENSE.mattpocock).
 - [artifact-layout](artifact-layout/SKILL.md): private directories and file responsibilities.
 - [technical-clarification-collaboration](technical-clarification-collaboration/SKILL.md): opt-in technical clarification pilot. Main owns macro understanding and coordination; shared survey owners explain existing code/documents; clarification owners retain bounded human-facing decision loops. Cross-topic questions may expand an existing owner's scope. Single-clarifier work remains valid; this does not replace the technical stage's confirmation, writing or review rules, or establish suitability for other clarification stages.
+- [collaboration-guidance](collaboration-guidance/SKILL.md): independent guidance for reusable factual investigation and decision-conflict escalation. Survey collaborators use `communication-style`; the decision model needs no survey role. The consuming task retains its workflow and approval authority. Existing clarification skills and the earlier technical collaboration pilot are unchanged; integration is not enabled by this addition.
 
 Keep guidance focused on this workflow's choices, not exhaustive policies or generic engineering instruction. Assess the complete reading path: moving restrictions into referenced files is not simplification.
 
