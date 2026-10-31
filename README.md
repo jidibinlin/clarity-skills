@@ -27,6 +27,7 @@ Lightweight: requirements → technical design → implementation. Heavyweight: 
 - [code-review](code-review/SKILL.md): Spec and Standards review criteria and independent subagent dispatch. Returns separate reports; `implement` owns repairs and re-review with the same reviewers, asking for clarification when needed.
   Adapted from [Matt Pocock v1.3.1](https://github.com/mattpocock/skills/blob/v1.3.1/skills/engineering/code-review/SKILL.md) under its [MIT license](code-review/LICENSE.mattpocock).
 - [artifact-layout](artifact-layout/SKILL.md): private directories and file responsibilities.
+- [technical-clarification-collaboration](technical-clarification-collaboration/SKILL.md): opt-in technical clarification pilot. Main owns macro understanding and coordination; shared survey owners explain existing code/documents; clarification owners retain bounded human-facing decision loops. Cross-topic questions may expand an existing owner's scope. Single-clarifier work remains valid; this does not replace the technical stage's confirmation, writing or review rules, or establish suitability for other clarification stages.
 
 Keep guidance focused on this workflow's choices, not exhaustive policies or generic engineering instruction. Assess the complete reading path: moving restrictions into referenced files is not simplification.
 
@@ -37,6 +38,8 @@ Micro technical proposals and document drafts present concrete definitions with 
 Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout`; communication uses `communication-style`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
 
 Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `wayfinder`, `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
+
+The collaboration pilot is selected explicitly, not automatically enabled by installation. Register its complete directory alongside `clarify-technical-design` and `communication-style` when trying it; no plugin or global instruction changes are required.
 
 ### Optional communication bootstrap
 
