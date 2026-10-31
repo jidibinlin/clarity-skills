@@ -7,7 +7,7 @@ description: Opt-in pilot for technical clarification with shared existing-mater
 
 Use when the human chooses this collaboration pilot for technical clarification. It does not establish suitability for requirements, architecture or other clarification workflows.
 
-This skill supplies responsibilities and a default collaboration path, not a new stage or approval process. Continue using `clarify-technical-design` for its content standard, macro/group confirmation, document writes and final review/approval; use `communication-style` for human discussion. Resolve these through registered skills. Reading this skill alone does not start a formal clarification workflow.
+This skill supplies responsibilities and a default collaboration path, not a new stage or approval process. Continue using `clarify-technical-design` for stage coordination, its content standard and final review/approval; clarification owners use `technical-design-author` for confirmation, document writes and repairs, and `technical-clarification` for the clarification method. Use `communication-style` for human discussion. Resolve these through registered skills. Reading this skill alone does not start a formal clarification workflow.
 
 ## Two layers of work
 

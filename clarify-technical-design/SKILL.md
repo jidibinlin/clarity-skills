@@ -1,20 +1,17 @@
 ---
 name: clarify-technical-design
-description: Clarify or resume technical realization of approved requirements; heavyweight child design also realizes approved architecture.
+description: Coordinate technical realization of approved requirements through scoped design authors, shared investigation and whole-model review. Heavyweight child design also realizes approved architecture.
 ---
 
 # Clarify Technical Design
 
-Co-design the technical realization with the human, from macro to micro.
-Follow [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as the authoring and review standard.
+Coordinate the complete technical design with the human. Follow [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as the common authoring and review standard.
+
+Use `artifact-layout` for document locations and writing boundaries, `communication-style` for human communication, and `collaboration-guidance` for reusable survey collaborators and decision-conflict escalation. Resolve cross-skill resources through registered owners; reading a standard does not start its owner's workflow.
 
 ## Establish the basis
 
-- Read approved requirements, original context and prior decisions/approvals.
-- Inspect the relevant repository baseline. Recover missing or stale design context only within the affected scope.
-- Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
-- Use the `communication-style` skill for human communication.
-- Resolve cross-skill resources through registered owners. Reading a standard does not start its workflow.
+Read approved requirements, original context, current models and prior decisions/approvals. Continue confirmed work within its still-valid basis rather than restarting it.
 
 For heavyweight children:
 - Read the approved root requirements and architecture.
@@ -22,127 +19,70 @@ For heavyweight children:
 - Return global conflicts to the owning authority.
 - Update assigned realizations. Return root navigation changes to the root owner.
 
-## Clarification methods
+## Roles and assignments
 
-### Draft-based iteration
+- **Coordinator:** leads overall macro alignment, assigns closed-loop scopes, reconciles dependencies and organizes whole-model review and final approval.
+- **Design author:** the decision-maker for an assigned scope; uses `technical-design-author` to clarify with the human, write confirmed canonical content and repair findings. That role uses `technical-clarification` for the mature clarification method.
+- **Survey collaborator:** uses `collaboration-guidance` and `communication-style` to explain existing code and documents. Shared by the coordinator and design authors; does not make task decisions.
 
-Apply this method throughout macro and micro clarification.
+Choose agent contexts that support their roles' communication and writing duties. In particular, shared survey collaborators must be able to receive questions and reply directly to their consumers.
 
-- Revise the proposal already presented in chat. Accumulate changes on that draft.
-- Re-present the complete revised proposal when appropriate, not only the changes.
-- Present the complete final proposal for human confirmation. Write that version into the model after confirmation.
-
-**Example:**
-
-```text
-AI：
-单任务实现流程如下：
-
-1. 使用 tdd 实现，完成验证。
-2. 委派独立子 agent，使用 code-review 评审。
-3. 有问题则修复、验证，交回原评审子 agent；重复直到 Pass。
-4. 返回完成结果。
-
-用户：
-送审前，先把本次改动提交一次 commit。
-
-AI：
-在当前方案的“完成验证”和“委派评审”之间加入 commit，其他内容保留。
-
-用户：
-每轮评审之后的修复也要提交，方便留痕。
-
-AI：
-合并这两次修改，完整方案更新为：
-
-1. 使用 tdd 实现，完成验证。
-2. 提交本任务的改动。
-3. 委派独立子 agent，使用 code-review 评审。
-4. 有问题则修复、验证，提交本轮改动，再交回原评审子 agent；重复直到 Pass。
-5. 返回完成结果。
-
-这份完整方案是否可以写入 implement/SKILL.md？
-
-用户：
-可以。
-
-AI：
-按上面确认的完整版本写入。
-```
+The coordinator also uses `technical-design-author` when authoring the shared macro model or retaining a group's design work. Delegate where scopes can progress independently; multiple authors are not a prerequisite.
 
 ## Workflow
 
 ```mermaid
+%%{init: {"htmlLabels": false}}%%
 flowchart TD
-    A["Approved basis"] --> B["Macro design"]
-    B --> C["Human confirms macro basis"]
-    C --> D["Closed-loop micro-design group"]
-    D --> E["Human confirms group and proposed content"]
-    E --> F["Update the model"]
-    F -->|More groups| D
-    F -->|Scope complete| G["Final independent review"]
-    G -->|Changes required| H["Original-author repair"]
-    H --> E
-    G -->|Pass| I["Final human approval"]
-    I -->|Changes requested| H
-    I -->|Approved| J["Return approved model; stop"]
+    Basis["Approved basis"] --> Macro["Coordinator leads<br/>macro clarification"]
+    Macro --> Confirm["Human confirms<br/>macro basis"]
+    Confirm --> Assign["Assign closed-loop scopes<br/>and author roles"]
+    Assign --> Authors["Authors clarify,<br/>confirm and write"]
+    Authors --> Integrate["Reconcile the<br/>complete model"]
+    Integrate -->|More groups| Assign
+    Integrate -->|Scope complete| Review["Independent<br/>whole-model review"]
+    Review --> Pass{"Pass?"}
+    Pass -->|No| Repair["Original authors repair<br/>and reconfirm changes"]
+    Repair --> Integrate
+    Pass -->|Yes| Approval["Final human approval"]
+    Approval -->|Changes requested| Repair
+    Approval -->|Approved| Done["Return approved model;<br/>stop before coding"]
 ```
 
-Module decomposition may lead to multiple macro-to-micro cycles.
-Integrate confirmed macro and micro groups as the design progresses.
-Reconfirm a changed macro basis before dependent micro design.
+## Macro alignment and survey preparation
 
-## Macro design
+Use survey collaborators during macro alignment to establish relevant repository facts. Once likely investigation scopes are known, start their preparation while continuing macro clarification, following `collaboration-guidance`.
 
-Settle topology, responsibility boundaries and technical direction.
+Keep the current goal's shared survey identities, scopes and contact routes known to the team. Include them when assigning authors and communicate later changes to affected members; a harness roster alone does not establish this role or goal membership.
 
-- When code conflicts with established decision documents, prioritize the documented decisions.
-- Trace required scenarios through owners, state and core interactions.
-- Compare reuse with necessary changes.
-- Confirm the macro basis before dependent micro design.
+Use `technical-clarification` to settle topology, responsibility boundaries and technical direction with the human. Confirm the macro basis before dependent micro design. Reconfirm a changed macro basis before dependent micro design.
 
-### Macro views
+## Assign closed-loop design
 
-- Use Mermaid topology and sequences to present macro collaboration.
-- Add a separate data-flow view when needed for clarity.
+Divide the confirmed macro design into complete bounded behaviors, not merely code modules. Give each delegated group a decision-maker and the `technical-design-author` skill, with:
 
-## Micro design: closed-loop groups
+- Applicable requirements, confirmed macro decisions, scope, dependencies and peer contacts.
+- Existing shared survey collaborators and their investigation scopes/contact routes.
+- Canonical output files and their writers, plus the human contact and review routes.
 
-Turn the confirmed macro design into implementation-ready definitions, contracts and collaboration flows.
+Follow `artifact-layout`'s one-writer-per-file rule. Where authors work in parallel, assign canonical `technical/<group>.md` parts and link them from the coordinating `technical.md`; the model includes those parts, not summaries replacing them. Keep each shared contract authoritative in one place. The writer of a shared file integrates agreed changes proposed by its consumers.
 
-A group covers a complete bounded behavior across collaborating owners, definitions, operations and flows.
+Make the human contact route explicit. Use direct author conversations where available; otherwise relay the author's complete proposal and questions, then the human's reply, without taking over authorship or granting approval yourself.
 
-- Use confirmed macro decisions as the technical direction for the group’s micro proposal.
-- Clarify changes, data structures, interfaces and exception cases with the human.
-- Assess when to present the complete group again. Include topology/sequences, data definitions and interface contracts.
-- Consider data definitions and sequences together. Choose the starting point based on the design problem.
+## Reconcile the design
 
-**Confirmation unit:** The whole group, not individual fields, types, interfaces or files.
-Confirm the group and reconcile affected views before advancing to dependent design.
+Track coverage, dependencies and shared contracts as authors return confirmed canonical content. Reconcile the complete model without re-deriving every local design or routinely asking the human to confirm unchanged local decisions again.
 
-- Present complete data definitions, including internal types, and interface declarations in fenced code blocks.
-- Use Mermaid topology and sequences to explain the group’s collaboration.
+Use the decision-conflict escalation method in `collaboration-guidance` for incompatible peer choices or shared questions outside individual scope. The coordinator is the parent for its authors; it can appoint a peer to lead the shared question or lead directly. Keep unaffected scopes with their authors. Changed premises or confirmed content require renewed human confirmation before affected design or writes.
 
-## Update the model
+## Review, approve and return
 
-Integrate complete confirmed proposals as the design progresses.
+Submit the complete model, including every linked design part, sources, confirmations and evidence to an independent reviewer using [reviewer-prompt.md](reviewer-prompt.md).
 
-- Carry their diagrams, tables, code and essential explanations into the model. Do not replace them with prose summaries.
-- Show the exact content and destination in the main response. Obtain human confirmation before writing.
-- Integrate confirmed content into canonical sections. Reconcile affected decisions and references.
+The original author repairs findings. The same reviewer reassesses. Ask the original reviewer if feedback is unclear. Route scoped repairs to their authors; cross-scope repairs use the same coordination and confirmation rules. The reviewer reassesses the complete affected model, not just isolated repaired fragments.
 
-Keep unconfirmed proposals in conversation, not candidate files.
+Obtain final human approval after Pass. Human changes return to the responsible authors, with confirmation before writes and reassessment by the same reviewer.
 
-## Final review
-
-- Submit the complete model, sources and evidence to an independent reviewer using [reviewer-prompt.md](reviewer-prompt.md).
-- The original author repairs findings. The same reviewer reassesses.
-- Obtain final human approval after Pass.
-
-Ask the original reviewer if feedback is unclear.
-
-## Return and stop
-
-- Return approved model/source references, the review result, human approval and evidence references.
-- Heavyweight children return to the root. All scoped realizations must be complete and approved before root-controlled implementation and one delivery.
-- Stop before coding. Do not automatically start the next stage.
+Return approved model/source references, the review result, human approval and evidence references.
+Heavyweight children return to the root. All scoped realizations must be complete and approved before root-controlled implementation and one delivery.
+Stop before coding. Do not automatically start the next stage.

@@ -1,0 +1,103 @@
+---
+name: technical-clarification
+description: Use to co-design a scoped technical proposal with the human, from macro to micro. Supplies clarification methods, not team orchestration or document-writing workflow.
+---
+
+# Technical Clarification
+
+Co-design the technical realization with the human, from macro to micro.
+Follow `TECHNICAL-MODEL.md` from registered `clarify-technical-design` as the authoring and review standard. The consuming role supplies the scope, document-writing responsibilities and approval route; reading the standard does not start its owner's workflow.
+
+## Establish the basis
+
+- Read approved requirements, original context and prior decisions/approvals.
+- Inspect the relevant repository baseline. Recover missing or stale design context only within the affected scope.
+- Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
+- Use the `communication-style` skill for human communication.
+- Resolve cross-skill resources through registered owners. Reading a standard does not start its workflow.
+
+For heavyweight children:
+- Read the approved root requirements and architecture.
+- Inherit guarantees, boundary contracts, shared-owner assignments and child dependencies.
+
+## Clarification methods
+
+### Draft-based iteration
+
+Apply this method throughout macro and micro clarification.
+
+- Revise the proposal already presented in chat. Accumulate changes on that draft.
+- Re-present the complete revised proposal when appropriate, not only the changes.
+- Present the complete final proposal for human confirmation.
+
+**Example:**
+
+```text
+AI：
+单任务实现流程如下：
+
+1. 使用 tdd 实现，完成验证。
+2. 委派独立子 agent，使用 code-review 评审。
+3. 有问题则修复、验证，交回原评审子 agent；重复直到 Pass。
+4. 返回完成结果。
+
+用户：
+送审前，先把本次改动提交一次 commit。
+
+AI：
+在当前方案的“完成验证”和“委派评审”之间加入 commit，其他内容保留。
+
+用户：
+每轮评审之后的修复也要提交，方便留痕。
+
+AI：
+合并这两次修改，完整方案更新为：
+
+1. 使用 tdd 实现，完成验证。
+2. 提交本任务的改动。
+3. 委派独立子 agent，使用 code-review 评审。
+4. 有问题则修复、验证，提交本轮改动，再交回原评审子 agent；重复直到 Pass。
+5. 返回完成结果。
+
+这份完整方案是否可以写入 implement/SKILL.md？
+
+用户：
+可以。
+
+AI：
+按上面确认的完整版本写入。
+```
+
+Module decomposition may lead to multiple macro-to-micro cycles.
+Reconfirm a changed macro basis before dependent micro design.
+
+## Macro design
+
+Settle topology, responsibility boundaries and technical direction.
+
+- When code conflicts with established decision documents, prioritize the documented decisions.
+- Trace required scenarios through owners, state and core interactions.
+- Compare reuse with necessary changes.
+- Confirm the macro basis before dependent micro design.
+
+### Macro views
+
+- Use Mermaid topology and sequences to present macro collaboration.
+- Add a separate data-flow view when needed for clarity.
+
+## Micro design: closed-loop groups
+
+Turn the confirmed macro design into implementation-ready definitions, contracts and collaboration flows.
+
+A group covers a complete bounded behavior across collaborating owners, definitions, operations and flows.
+
+- Use confirmed macro decisions as the technical direction for the group’s micro proposal.
+- Clarify changes, data structures, interfaces and exception cases with the human.
+- Assess when to present the complete group again. Include topology/sequences, data definitions and interface contracts.
+- Consider data definitions and sequences together. Choose the starting point based on the design problem.
+
+**Confirmation unit:** The whole group, not individual fields, types, interfaces or files.
+Confirm the group and reconcile affected views before advancing to dependent design.
+
+- Present complete data definitions, including internal types, and interface declarations in fenced code blocks.
+- Use Mermaid topology and sequences to explain the group’s collaboration.

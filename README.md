@@ -9,13 +9,15 @@ Human-led requirements and technical design, followed by implementation against 
 | [wayfinder](wayfinder/SKILL.md) | Coarse decomposition guided by tentative topology | [WAYFINDER-MODEL.md](wayfinder/WAYFINDER-MODEL.md) |
 | [clarify-requirements](clarify-requirements/SKILL.md) | Requirements or a composed shared/child package | [REQUIREMENTS-MODEL.md](clarify-requirements/REQUIREMENTS-MODEL.md) |
 | [clarify-architecture](clarify-architecture/SKILL.md) | Overall heavyweight architecture | [ARCHITECTURE-MODEL.md](clarify-architecture/ARCHITECTURE-MODEL.md) |
-| [clarify-technical-design](clarify-technical-design/SKILL.md) | Concrete files, topology, flows, data and contracts | [TECHNICAL-MODEL.md](clarify-technical-design/TECHNICAL-MODEL.md) |
+| [clarify-technical-design](clarify-technical-design/SKILL.md) | Coordinated technical realization: files, topology, flows, data and contracts | [TECHNICAL-MODEL.md](clarify-technical-design/TECHNICAL-MODEL.md) |
 | [orchestrate-implementation](orchestrate-implementation/SKILL.md) | Whole-work implementation and human acceptance | [ORCHESTRATION.md](orchestrate-implementation/ORCHESTRATION.md) |
 | [implement](implement/SKILL.md) | One bounded implementation unit | — |
 
 Lightweight: requirements → technical design → implementation. Heavyweight: Wayfinder → shared/child requirements → overall architecture → child technical designs → implementation. Stage approval does not automatically launch the next stage.
 
 `orchestrate-implementation` starts from the approved work and coordinates ready units through `implement`. The original implementer uses `tdd` for initial behavior and behavioral repairs, then uses `code-review` in the current context to dispatch independent Spec and Standards reviewers. Repair rounds return directly to those same reviewers. Existing progress is continued when present, not required to start.
+
+`clarify-technical-design` coordinates the whole technical scope and assigns `technical-design-author` to scoped decision-makers. Authors use `technical-clarification` for macro-to-micro methods, confirm concrete proposals with the human and write canonical model content themselves. The coordinator shares survey collaborators, reconciles dependencies and arranges independent whole-model review and final approval. One author remains valid; parallel groups can use linked design parts with one writer per file.
 
 ## Responsibilities and reading
 
@@ -27,8 +29,10 @@ Lightweight: requirements → technical design → implementation. Heavyweight: 
 - [code-review](code-review/SKILL.md): Spec and Standards review criteria and independent subagent dispatch. Returns separate reports; `implement` owns repairs and re-review with the same reviewers, asking for clarification when needed.
   Adapted from [Matt Pocock v1.3.1](https://github.com/mattpocock/skills/blob/v1.3.1/skills/engineering/code-review/SKILL.md) under its [MIT license](code-review/LICENSE.mattpocock).
 - [artifact-layout](artifact-layout/SKILL.md): private directories and file responsibilities.
+- [technical-clarification](technical-clarification/SKILL.md): reusable macro-to-micro clarification, draft-based iteration and whole-group confirmation within an assigned technical scope. The consuming role supplies document-writing responsibilities and the approval route.
+- [technical-design-author](technical-design-author/SKILL.md): assigned-scope decision-making, human confirmation, canonical document writes and original-author repairs. Uses the common technical model standard rather than defining a second one.
 - [technical-clarification-collaboration](technical-clarification-collaboration/SKILL.md): opt-in technical clarification pilot. Main owns macro understanding and coordination; shared survey owners explain existing code/documents; clarification owners retain bounded human-facing decision loops. Cross-topic questions may expand an existing owner's scope. Single-clarifier work remains valid; this does not replace the technical stage's confirmation, writing or review rules, or establish suitability for other clarification stages.
-- [collaboration-guidance](collaboration-guidance/SKILL.md): independent guidance for reusable factual investigation and decision-conflict escalation. Survey collaborators use `communication-style`; the decision model needs no survey role. The consuming task retains its workflow and approval authority. Existing clarification skills and the earlier technical collaboration pilot are unchanged; integration is not enabled by this addition.
+- [collaboration-guidance](collaboration-guidance/SKILL.md): reusable factual investigation and decision-conflict escalation. Technical design uses it for early survey preparation, shared survey contacts and peer conflict escalation; the stage and author roles retain their confirmation, writing and approval responsibilities. The two collaboration methods remain independently usable.
 
 Keep guidance focused on this workflow's choices, not exhaustive policies or generic engineering instruction. Assess the complete reading path: moving restrictions into referenced files is not simplification.
 
@@ -38,9 +42,11 @@ Micro technical proposals and document drafts present concrete definitions with 
 
 Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout`; communication uses `communication-style`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
 
+Technical design requires `technical-clarification`, `technical-design-author` and `collaboration-guidance` alongside the stage, artifact and communication skills. Architecture's selective `Macro views` import resolves through `technical-clarification`; its content-standard imports still resolve through `clarify-technical-design`.
+
 Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `wayfinder`, `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
 
-The collaboration pilot is selected explicitly, not automatically enabled by installation. Register its complete directory alongside `clarify-technical-design` and `communication-style` when trying it; no plugin or global instruction changes are required.
+The earlier collaboration pilot is selected explicitly, not automatically enabled by installation. If trying it, register its complete directory alongside the technical-design dependencies above. The technical stage's role-based flow does not require this pilot; no plugin or global instruction changes are required.
 
 ### Optional communication bootstrap
 
