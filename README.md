@@ -17,6 +17,8 @@ Lightweight: requirements → technical design → implementation. Heavyweight: 
 
 `orchestrate-implementation` starts from the approved work and coordinates ready units through `implement`. The original implementer uses `tdd` for initial behavior and behavioral repairs, then uses `code-review` in the current context to dispatch independent Spec and Standards reviewers. Repair rounds return directly to those same reviewers. Existing progress is continued when present, not required to start.
 
+`clarify-technical-design` remains one skill for the leader, closed-loop designers and shared survey collaborators. The leader coordinates the whole scope; designers clarify and write their assigned canonical content using the same mature methods. Shared definitions have one authoritative location, and the complete model may include linked parts with one writer per file. Whole-model review and final human approval remain distinct from local confirmation.
+
 ## Responsibilities and reading
 
 - **SKILL.md:** the working method and key human/agent handoffs.
@@ -28,7 +30,7 @@ Lightweight: requirements → technical design → implementation. Heavyweight: 
   Adapted from [Matt Pocock v1.3.1](https://github.com/mattpocock/skills/blob/v1.3.1/skills/engineering/code-review/SKILL.md) under its [MIT license](code-review/LICENSE.mattpocock).
 - [artifact-layout](artifact-layout/SKILL.md): private directories and file responsibilities.
 - [technical-clarification-collaboration](technical-clarification-collaboration/SKILL.md): opt-in technical clarification pilot. Main owns macro understanding and coordination; shared survey owners explain existing code/documents; clarification owners retain bounded human-facing decision loops. Cross-topic questions may expand an existing owner's scope. Single-clarifier work remains valid; this does not replace the technical stage's confirmation, writing or review rules, or establish suitability for other clarification stages.
-- [collaboration-guidance](collaboration-guidance/SKILL.md): independent guidance for reusable factual investigation and decision-conflict escalation. Survey collaborators use `communication-style`; the decision model needs no survey role. The consuming task retains its workflow and approval authority. Existing clarification skills and the earlier technical collaboration pilot are unchanged; integration is not enabled by this addition.
+- [collaboration-guidance](collaboration-guidance/SKILL.md): reusable factual investigation and decision-conflict escalation. Technical clarification references it for early survey preparation, shared survey contacts and scoped conflict handling; the technical skill retains its role-specific writing, confirmation and whole-model approval flow. The two collaboration methods remain independently usable.
 
 Keep guidance focused on this workflow's choices, not exhaustive policies or generic engineering instruction. Assess the complete reading path: moving restrictions into referenced files is not simplification.
 
@@ -37,6 +39,8 @@ Micro technical proposals and document drafts present concrete definitions with 
 ## Installation
 
 Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout`; communication uses `communication-style`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
+
+Technical clarification also uses `collaboration-guidance`. Its role-specific flow is contained in the existing `clarify-technical-design` skill; no separate author or methodology skill is required.
 
 Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `wayfinder`, `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
 

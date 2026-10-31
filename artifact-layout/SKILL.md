@@ -26,6 +26,8 @@ Create only what the chosen route needs.
 ├── requirements.md
 ├── architecture.md
 ├── technical.md
+├── technical/
+│   └── <group>.md
 ├── requirements/
 │   └── <NN>-<requirement>/
 │       ├── issue.md
@@ -35,6 +37,8 @@ Create only what the chosen route needs.
 ```
 
 Standalone modeling uses root models. Heavyweight children use assigned `requirements/<NN>-<requirement>/` folders linking their parent; the root owns the effort index and final delivery. A later change uses its own work folder and links the affected specifications.
+
+A technical scope may use linked `technical/<group>.md` parts when groups need separate writing responsibility. These and the coordinating `technical.md` form one canonical model; parts are named by design scope, not agent identity. The same layout can be used inside an assigned heavyweight child's workspace.
 
 ## File responsibilities
 
