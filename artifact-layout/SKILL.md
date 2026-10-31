@@ -26,8 +26,6 @@ Create only what the chosen route needs.
 ├── requirements.md
 ├── architecture.md
 ├── technical.md
-├── technical/
-│   └── <group>.md
 ├── requirements/
 │   └── <NN>-<requirement>/
 │       ├── issue.md
@@ -37,8 +35,6 @@ Create only what the chosen route needs.
 ```
 
 Standalone modeling uses root models. Heavyweight children use assigned `requirements/<NN>-<requirement>/` folders linking their parent; the root owns the effort index and final delivery. A later change uses its own work folder and links the affected specifications.
-
-Within a technical scope's workspace, optional `technical/<group>.md` files hold delegated groups' canonical design content. The coordinating `technical.md` links these parts and holds the shared model; each part has one assigned writer. These are model files, not candidate drafts or separate requirement scopes.
 
 ## File responsibilities
 
