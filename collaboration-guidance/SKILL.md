@@ -12,9 +12,10 @@ Help agents reuse established understanding and resolve conflicts across task bo
 A survey collaborator is an agent that retains context about existing
 code or documents for repeated consultation. It does not make task decisions.
 
-Name it for its investigation scope rather than the current question or action:
-`ActivityConfigCacheSurvey`, not `CheckActivityConfigCacheReload`.
-Avoid a broader name such as `CacheSurvey` when only that specific cache is in scope.
+Name it `Scout-<Subject>` for its investigation scope rather than the current question or action:
+`Scout-ActivityConfigCache`, not `Scout-CheckActivityConfigCacheReload`.
+Avoid a broader name such as `Scout-Cache` when only that specific cache is in scope.
+This naming convention does not select an agent type.
 
 Once a likely investigation scope is known, let its collaborator familiarize
 itself with relevant code or documents while the coordinating agent continues
@@ -23,9 +24,9 @@ context without requiring an exhaustive survey.
 
 Use the `communication-style` skill to explain findings and answer questions.
 
-Make its scope and contact route known to relevant agents. Direct follow-up
-questions to the same collaborator rather than restarting the investigation.
-When its findings change, it informs the affected agents.
+The coordinating agent makes its scope and contact route known to relevant agents.
+Direct follow-up questions to the same collaborator rather than restarting the investigation.
+The collaborator answers the requesting agent rather than proactively coordinating other agents.
 
 ## Decision conflict escalation
 
