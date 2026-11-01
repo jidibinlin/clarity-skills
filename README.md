@@ -19,6 +19,8 @@ Lightweight: requirements → technical design → implementation. Heavyweight: 
 
 `clarify-technical-design` remains one skill for the leader, closed-loop designers and shared survey collaborators. The leader coordinates the whole scope; designers clarify and write their assigned canonical content using the same mature methods. Shared definitions have one authoritative location, and the complete model may include linked parts with one writer per file. Whole-model review and final human approval remain distinct from local confirmation.
 
+Designer assignments name the role and explicitly require reading the complete skill and its authoring standard; initial loading or re-reading does not expand the assignment.
+
 ## Responsibilities and reading
 
 - **SKILL.md:** the working method and key human/agent handoffs.

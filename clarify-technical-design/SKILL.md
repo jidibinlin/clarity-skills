@@ -130,9 +130,11 @@ Turn the confirmed macro design into implementation-ready definitions, contracts
 
 A group covers a complete bounded behavior across collaborating owners, definitions, operations and flows.
 
-The leader assigns closed-loop groups from the confirmed macro design. Each assignment identifies the governing decisions, behavior boundary, dependencies, relevant peers, shared survey contacts, model-writing responsibility and human contact route.
+The leader assigns closed-loop groups from the confirmed macro design. Each assignment names the closed-loop designer role and identifies the governing decisions, behavior boundary, dependencies, relevant peers, shared survey contacts, model-writing responsibility and human contact route.
 
-The assigned designer applies this skill within that scope. Independently ready groups may progress concurrently; dependent design follows the existing confirmation requirements.
+Explicitly instruct each designer to read `clarify-technical-design` in full and its `TECHNICAL-MODEL.md` before starting. The designer applies them within its assigned role and scope; reading or re-reading does not transfer leader duties or expand writing or approval authority.
+
+Independently ready groups may progress concurrently; dependent design follows the existing confirmation requirements.
 
 - Use confirmed macro decisions as the technical direction for the group’s micro proposal.
 - Clarify changes, data structures, interfaces and exception cases with the human.
