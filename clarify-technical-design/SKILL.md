@@ -26,7 +26,7 @@ Lead the whole-scope design and coordination.
 Make design decisions for your assigned behavior with the human.
 
 1. Establish the group's basis from the assignment and confirmed upstream decisions.
-2. Apply **Clarification methods** and **Micro design** within that scope.
+2. Apply **Clarification methods** and **Micro design** within that scope. Use **Macro design** within that scope when needed.
 3. Obtain human confirmation. Follow **Update the model** for your assigned files.
 4. Return canonical content, confirmation references and cross-group effects to the leader. Remain available for repair.
 
