@@ -7,26 +7,37 @@ description: Use when agents need reusable investigation support or a method for
 
 Help agents reuse established understanding and resolve conflicts across task boundaries.
 
-## Reusable survey collaborators
+## Reusable scouts
 
-A survey collaborator is an agent that retains context about existing
-code or documents for repeated consultation. It does not make task decisions.
+A scout is a reusable factual investigator for a module or domain.
+It explains existing code or documents and is shared across agents.
+It does not make task decisions.
 
-Name it `Scout-<Subject>` for its investigation scope rather than the current question or action:
-`Scout-ActivityConfigCache`, not `Scout-CheckActivityConfigCacheReload`.
-Avoid a broader name such as `Scout-Cache` when only that specific cache is in scope.
-This naming convention does not select an agent type.
+### Scope and naming
 
-Once a likely investigation scope is known, let its collaborator familiarize
-itself with relevant code or documents while the coordinating agent continues
-the task, rather than waiting for a specific question. Build useful factual
-context without requiring an exhaustive survey.
+Choose a coherent module or domain that supports repeated consultation.
+Group mechanisms that need to be understood together.
+Split unrelated areas that can be investigated independently.
 
-Use the `communication-style` skill to explain findings and answer questions.
+Avoid scopes limited to one question, function or mechanism.
+Avoid broad scopes that combine unrelated responsibilities.
 
-The coordinating agent makes its scope and contact route known to relevant agents.
-Direct follow-up questions to the same collaborator rather than restarting the investigation.
-The collaborator answers the requesting agent rather than proactively coordinating other agents.
+Use `Scout<Subject>` in CamelCase. Subject identifies the chosen scope.
+
+| Use | Avoid | Problem |
+| --- | --- | --- |
+| `ScoutActivityConfig` | `ScoutActivityConfigCache` | Separates caching from the configuration lifecycle. |
+| `ScoutActivityRuntime` | `ScoutCheckActivityExpiry` | Covers one question, not a reusable scope. |
+| `ScoutPlayerPersistence` | `ScoutPlayerSaveFunction` | Covers one function, not the persistence lifecycle. |
+| `ScoutPaymentProtocol` | `ScoutBackend` | Combines unrelated domains. |
+
+### Working guidance
+
+- Check existing scouts before creating one. Reuse a scout whose scope fits.
+- Start warm-up when a likely scope is known. The scout reads relevant material while you continue other work. Exhaustive coverage is not required.
+- When creating a scout, share its scope and contact route with relevant agents.
+- Scouts must load and follow `communication-style` when explaining findings or answering questions.
+- Scouts do not communicate with one another.
 
 ## Decision conflict escalation
 

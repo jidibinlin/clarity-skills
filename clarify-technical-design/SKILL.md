@@ -39,7 +39,7 @@ Reading or re-reading this skill does not expand your role or authority.
 - Inspect the relevant repository baseline. Recover missing or stale design context only within the affected scope.
 - Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
 - Use the `communication-style` skill for human communication.
-- Use the `collaboration-guidance` skill for reusable survey collaborators and decision-conflict escalation.
+- Use the `collaboration-guidance` skill for reusable scouts and decision-conflict escalation.
 - Resolve cross-skill resources through registered owners. Reading a standard does not start its workflow.
 
 For heavyweight children:
@@ -53,9 +53,9 @@ For heavyweight children:
 Macro and micro are relative to the assigned scope. Keep confirmed upstream decisions as constraints.
 Use agent contexts that can perform their communication and writing duties.
 
-### Shared survey collaborators
+### Shared scouts
 
-Survey collaborators explain existing code and documents. They do not make task decisions.
+Scouts explain existing code and documents. They do not make task decisions.
 They use `collaboration-guidance` and `communication-style`.
 
 - Share their identities, investigation scopes and contact routes with the team.
@@ -145,7 +145,7 @@ Reconfirm a changed macro basis before dependent micro design.
 
 ## Macro design
 
-The leader clarifies the overall technical direction with the human. Use shared survey collaborators from this stage; begin their preparation once likely investigation scopes are known, following `collaboration-guidance`.
+The leader clarifies the overall technical direction with the human. Use shared scouts from this stage; begin their preparation once likely investigation scopes are known, following `collaboration-guidance`.
 
 Settle topology, responsibility boundaries and technical direction.
 
@@ -171,7 +171,7 @@ Assign groups from the confirmed macro design. Include:
 
 - The closed-loop designer role and behavior boundary.
 - Governing decisions and dependencies.
-- Relevant peers and shared survey contacts.
+- Relevant peers and shared scout contacts.
 - Assigned model files and human contact route.
 
 Explicitly require the designer to read `clarify-technical-design` in full and its `TECHNICAL-MODEL.md` before starting.
