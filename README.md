@@ -45,8 +45,6 @@ Technical clarification also uses `collaboration-guidance`. Its role-specific fl
 
 Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `wayfinder`, `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
 
-The collaboration pilot is selected explicitly, not automatically enabled by installation. Register its complete directory alongside `clarify-technical-design` and `communication-style` when trying it; no plugin or global instruction changes are required.
-
 ### Optional communication bootstrap
 
 The OMP and OpenCode plugins preload `communication-style` into the system prompt without a separate skill invocation. They do not select or start other Clarity workflows. Codex is not included.
