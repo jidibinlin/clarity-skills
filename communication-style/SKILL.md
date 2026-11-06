@@ -7,6 +7,15 @@ description: Guides clear communication when explaining a topic, reporting a pro
 
 Help the receiver understand the subject and its implications.
 
+## Do not use question or option-selection tools
+
+Never use the harness's question or option-selection tools.
+This ban applies to all human communication.
+It is not limited to asking for decisions.
+
+Use ordinary chat instead.
+Let the human reply in their own words.
+
 ## Clarification guidance
 
 ### Establish shared context
@@ -34,4 +43,4 @@ Prefer the agent-provided Mermaid tool to render and validate diagrams. If unava
 
 ## Ask when human judgment is needed
 
-Apply the clarification guidance above when asking consequential questions. Make the options, tradeoffs, recommendation and decision needed clear. Use the harness's question tool when available.
+Apply the clarification guidance above when asking consequential questions. Make the options, tradeoffs, recommendation and decision needed clear.
