@@ -44,10 +44,10 @@ A technical scope may use linked `technical/<group>.md` parts when groups need s
 
 | File | Responsibility |
 | --- | --- |
-| `issue.md` | Work definition and navigation: objective, scope, checkout, route and source links. |
+| `issue.md` | Work definition and navigation: objective, scope, checkout, route and source links. Holds the Design Alignment Roadmap when present. |
 | Model files | Current integrated specifications, with rationale beside the decisions it explains. |
 | `delivery.md` | Final implementation summary for the authorized scope. |
 
-Assign one writer per file; other participants return proposals or reports to that writer. Use relative artifact links and repository-relative code paths, naming other checkouts explicitly.
+Assign one writer per file at a time; other participants return proposals or reports to that writer. Use relative artifact links and repository-relative code paths, naming other checkouts explicitly.
 
 Keep models clean. Do not add progress diaries to `issue.md`, separate state files, candidate drafts or duplicate approval registries. Preserve existing historical artifacts when reorganizing private workspaces.

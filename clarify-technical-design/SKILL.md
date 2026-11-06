@@ -8,30 +8,83 @@ description: Clarify or resume technical realization of approved requirements; h
 Co-design the technical realization with the human, from macro to micro.
 Follow [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as the authoring and review standard.
 
-## Use by role
+## Roles and collaboration
 
-Resume at the current step for your assigned role.
+Identify your role from the current task or assignment.
+Follow the corresponding workflow and resume at its current step.
+Reading this skill does not expand your role or authority.
+
+Macro and micro are relative to the assigned scope.
+Keep confirmed upstream decisions as constraints.
 
 ### Leader
 
-Lead the whole-scope design and coordination.
+The human initiates cross-group coordination and progression.
 
-1. Establish the basis and confirm the macro direction with the human.
-2. Assign ready closed-loop groups, or design them yourself.
-3. Integrate confirmed groups using **Update the model**.
-4. Run **Final review**, obtain final human approval, then **Return and stop**.
+1. **Plan with the human.**
+   Establish the basis and clarify the macro direction.
+   Divide the scope into closed-loop design groups.
+
+   Create a **Design Alignment Roadmap**: a dependency graph of these groups.
+   Edges point from prerequisite groups to dependent groups.
+   Each dependency identifies the upstream design needed by the downstream group.
+   Mark coordination points and the group designs required at each point.
+
+   Confirm the macro direction and roadmap with the human.
+   Write the confirmed roadmap into the workspace's `issue.md`.
+
+2. **Assign groups along the roadmap.**
+   At the human's request, assign ready groups or design them yourself.
+   Follow the roadmap in `issue.md`.
+   Independent groups may progress concurrently.
+   Start dependent groups from confirmed upstream models, after resolving their blockers.
+
+   Create each closed-loop designer as a separate AI agent with its own human-facing conversation.
+   The human must be able to open that conversation and talk to the agent directly.
+   Disable automatic notifications from designers to the leader.
+
+   Each assignment includes:
+   - The designer role, behavior boundary and assigned files.
+   - Governing decisions, roadmap dependencies and confirmed upstream models.
+
+   Give the designer write access to its assigned files.
+   Require reading `clarify-technical-design` in full and its `TECHNICAL-MODEL.md` before starting.
+
+3. **Coordinate along the roadmap.**
+   At the human's request, check which coordination points are ready.
+   Use the Design Alignment Roadmap to identify the required group designs.
+   Once those designs are complete, confirmed and written, read them together.
+   Clarify their conflicts and coupling directly with the human.
+
+   Take over revisions to the affected model files.
+   Follow **Update the model** without routing changes back through designers.
+
+   Identify which downstream groups are ready for further alignment.
+   If dependencies change, confirm the revised roadmap with the human and update `issue.md`.
+
+4. **Complete the whole-model review.**
+   Run **Final review**, obtain final human approval, then **Return and stop**.
 
 ### Closed-loop designer
 
-Make design decisions for your assigned behavior with the human.
+A closed-loop designer is a human-facing AI agent.
+Make design decisions for your assigned behavior directly with the human.
 
 1. Establish the group's basis from the assignment and confirmed upstream decisions.
 2. Apply **Clarification methods** and **Micro design** within that scope. Use **Macro design** within that scope when needed.
 3. Obtain human confirmation. Follow **Update the model** for your assigned files.
-4. Return canonical content, confirmation references and cross-group effects to the leader. Remain available for repair.
 
-Stop at this scoped handoff. Local completion does not approve the whole model.
-Reading or re-reading this skill does not expand your role or authority.
+Keep tentative design choices within the group's clarification.
+The human initiates coordination with the leader after local completion.
+No completion report to the leader is required.
+Local completion does not approve the whole model.
+
+### Scouts
+
+Scouts explain existing code and documents. They do not make task decisions.
+They use `collaboration-guidance` and `communication-style`.
+
+The leader and each designer create and reuse their own scouts.
 
 ## Establish the basis
 
@@ -39,7 +92,7 @@ Reading or re-reading this skill does not expand your role or authority.
 - Inspect the relevant repository baseline. Recover missing or stale design context only within the affected scope.
 - Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
 - Use the `communication-style` skill for human communication.
-- Use the `collaboration-guidance` skill for reusable scouts and decision-conflict escalation.
+- Use the `collaboration-guidance` skill for reusable scouts.
 - Resolve cross-skill resources through registered owners. Reading a standard does not start its workflow.
 
 For heavyweight children:
@@ -47,28 +100,6 @@ For heavyweight children:
 - Inherit guarantees, boundary contracts, shared-owner assignments and child dependencies.
 - Return global conflicts to the owning authority.
 - Update assigned realizations. Return root navigation changes to the root owner.
-
-## Roles and collaboration
-
-Macro and micro are relative to the assigned scope. Keep confirmed upstream decisions as constraints.
-Use agent contexts that can perform their communication and writing duties.
-
-### Shared scouts
-
-Scouts explain existing code and documents. They do not make task decisions.
-They use `collaboration-guidance` and `communication-style`.
-
-- Share their identities, investigation scopes and contact routes with the team.
-- Designers consult them directly. Reuse existing investigations.
-- Notify affected members when contacts or scopes change.
-
-### Decision conflicts
-
-Use `collaboration-guidance` for incompatible peer choices or shared questions outside individual scope.
-The leader is the parent of its assigned designers.
-
-- Keep unaffected work with its designers.
-- Expanding decision scope does not transfer another file's writing responsibility.
 
 ## Clarification methods
 
@@ -122,17 +153,28 @@ AI：
 
 The diagram shows the leader's whole-stage route.
 
+For multi-designer work, read [Collaboration flow](collaboration-flow.md).
+It shows direct human clarification, human-led progression and dependency-based coordination.
+
 ```mermaid
 %%{init: {"htmlLabels": false}}%%
 flowchart TD
-    A["Approved basis"] --> B["Leader:<br/>macro design"]
-    B --> C["Human confirms macro basis"]
-    C --> D["Assigned designer:<br/>closed-loop micro design"]
+    A["Approved basis"] --> B["Leader:<br/>macro design and roadmap"]
+    B --> C["Human confirms<br/>macro basis and roadmap"]
+    C --> R["Leader writes roadmap<br/>into issue.md"]
+    R -->|Human starts ready groups| D["Assigned designer:<br/>closed-loop micro design"]
     D --> E["Human confirms group<br/>and proposed content"]
     E --> F["Assigned writer:<br/>update the model"]
-    F -->|More groups| D
-    F -->|Scope complete| G["Leader arranges<br/>independent final review"]
-    G -->|Changes required| H["Original-author repair"]
+    F -->|Human continues ready groups| D
+    F --> U["Human resumes<br/>with the leader"]
+    U --> Q{"Roadmap coordination<br/>prerequisites met?"}
+    Q -->|No| V["Human continues<br/>prerequisite groups"]
+    V --> D
+    Q -->|Yes| K["Leader reads required models<br/>and coordinates with the human"]
+    K -->|Changes required| H
+    K -->|Human starts next group| D
+    K -->|Scope complete| G["Leader arranges<br/>independent final review"]
+    G -->|Changes required| H["Leader prepares<br/>coordinated changes or repairs"]
     H --> E
     G -->|Pass| I["Human approves<br/>the whole model"]
     I -->|Changes requested| H
@@ -145,7 +187,9 @@ Reconfirm a changed macro basis before dependent micro design.
 
 ## Macro design
 
-The leader clarifies the overall technical direction with the human. Use shared scouts from this stage; begin their preparation once likely investigation scopes are known, following `collaboration-guidance`.
+Clarify the technical direction within your scope with the human.
+
+Use your own scouts from this stage; begin their preparation once likely investigation scopes are known, following `collaboration-guidance`.
 
 Settle topology, responsibility boundaries and technical direction.
 
@@ -164,20 +208,6 @@ Settle topology, responsibility boundaries and technical direction.
 Turn the confirmed macro design into implementation-ready definitions, contracts and collaboration flows.
 
 A group covers a complete bounded behavior across collaborating owners, definitions, operations and flows.
-
-### Leader: assign the group
-
-Assign groups from the confirmed macro design. Include:
-
-- The closed-loop designer role and behavior boundary.
-- Governing decisions and dependencies.
-- Relevant peers and shared scout contacts.
-- Assigned model files and human contact route.
-
-Explicitly require the designer to read `clarify-technical-design` in full and its `TECHNICAL-MODEL.md` before starting.
-Independent groups may progress concurrently when ready.
-
-### Designer: clarify the group
 
 - Use confirmed macro decisions as the technical direction for the group’s micro proposal.
 - Clarify changes, data structures, interfaces and exception cases with the human.
@@ -200,11 +230,15 @@ Use one `technical.md` for simple scopes.
 Use linked `technical/<group>.md` parts when groups need separate writers. Follow `artifact-layout`.
 These files form one model. Name parts by design scope, not agent identity.
 
-| Content | Writer |
-| --- | --- |
-| Global direction and relationships; navigation; complete file-responsibility tree; integrated test plan | Leader |
-| Scoped definitions, operations, data/state flows, interactions, exceptions and boundaries | Assigned designer |
-| Shared definitions and contracts | Designated file writer |
+For a split model, workspace file responsibilities are:
+
+| File | Responsibility | Writer | References |
+| --- | --- | --- | --- |
+| `issue.md` | Work definition, navigation and the confirmed Design Alignment Roadmap | Leader | Link design groups to their model files. |
+| `technical.md` | Global direction, boundaries and cross-group relationships; navigation; complete file-responsibility tree; integrated test plan | Leader | Reference group contracts to explain whole-model behavior. |
+| `technical/<group>.md` | Complete scoped design: definitions, operations, data/state flows, interactions, exceptions and boundaries | Assigned designer during local clarification; leader during coordination and whole-model repairs | Reference global constraints and contracts owned by other parts. |
+
+Place shared definitions and contracts in the file responsible for that design.
 
 Define shared contracts once. Other parts reference their canonical location.
 Apply `TECHNICAL-MODEL.md` across the complete model.
@@ -212,34 +246,35 @@ Local parts supply concrete detail and canonical references, without repeating g
 
 ### Write confirmed content
 
-- Assign one writer per file.
-- Reconcile changes to other files, then send them to their writers.
-- The leader integrates local content without rewriting it or routinely reconfirming unchanged decisions.
+- Designers write their assigned files during local clarification.
+- When the human starts coordination of completed groups, the leader takes over revisions to their model files. Those designers stop writing them.
+- Keep one active writer per file.
+- Preserve unaffected confirmed content without routinely reconfirming unchanged decisions.
 
 - Carry their diagrams, tables, code and essential explanations into the model. Do not replace them with prose summaries.
-- Show the exact content and destination in the responsible designer's clarification conversation. Obtain human confirmation before writing.
+- Show the exact content and destination in the current writer's conversation with the human. Obtain human confirmation before writing.
 - Integrate confirmed content into canonical sections. Reconcile affected decisions and references.
 
 Keep unconfirmed proposals in conversation, not candidate files.
 
-If direct human contact is unavailable, the leader relays the complete proposal and the human's reply.
-The original designer remains the writer. The relay does not grant approval authority.
+The leader arranges direct human contact for each assigned designer.
 
 ## Final review
 
-The leader organizes this whole-model stage; designers remain responsible for their scoped repairs.
+The leader organizes this whole-model stage and repairs findings across the complete model.
 
 - Submit the complete model, including all linked parts, sources and evidence to an independent reviewer using [reviewer-prompt.md](reviewer-prompt.md).
-- The original author repairs findings. The same reviewer reassesses.
+- The same reviewer reassesses after repairs.
 - Obtain final human approval after Pass.
 
 Ask the original reviewer if feedback is unclear.
 
-The leader coordinates cross-group findings. Changed content still requires human confirmation before writing; the same reviewer reassesses the affected complete model before final approval.
+Changed content still requires human confirmation before writing.
+The same reviewer reassesses the affected complete model before final approval.
 
 ## Return and stop
 
-The leader returns the whole-stage result. Designers return their scoped content and remain available for clarification and repair.
+The leader returns the whole-stage result.
 
 - Return approved model/source references, the review result, human approval and evidence references.
 - Heavyweight children return to the root. All scoped realizations must be complete and approved before root-controlled implementation and one delivery.
