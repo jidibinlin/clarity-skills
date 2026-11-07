@@ -62,12 +62,12 @@ The model includes macro topology and sequence diagrams.
 
 ### Data flow and state authority
 
-- Data origins, transformations, destinations, state changes and authoritative owners are clear.
+- Data ownership and flow are clear.
 - Crossing representations and payload mappings are defined.
 
 ### Concurrency and ordering
 
-- Execution contexts, allowed overlap, coordination mechanisms, mutation authority and completion are explicit.
+- Execution contexts, allowed overlap, coordination mechanisms and ordering are explicit.
 - Resource lifetime, capacity and failure behavior are defined where they affect scoped guarantees.
 
 ### Sequences
@@ -104,9 +104,11 @@ Interfaces are presented as concrete callable signatures or native protocol decl
 - Inputs, results, ownership and lifetime are defined.
 - Completion, concurrency and applicable compatibility or quantitative constraints are explicit.
 
-## Overall workflow integration test plan
+## Test plans
 
-The model includes a clear and complete integration test plan for the scoped design.
+The overall integration test plan covers complete requirement scenarios and interactions across closed-loop groups.
+
+Each group's internal test plan covers its operations, state transitions and failure boundaries.
 
 ## Document integration and readability
 
