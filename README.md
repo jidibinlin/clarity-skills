@@ -6,16 +6,14 @@ Human-led requirements and technical design, followed by implementation against 
 
 | Skill | Outcome | Content standard |
 | --- | --- | --- |
-| [wayfinder](wayfinder/SKILL.md) | Coarse decomposition guided by tentative topology | [WAYFINDER-MODEL.md](wayfinder/WAYFINDER-MODEL.md) |
 | [clarify-requirements](clarify-requirements/SKILL.md) | Requirements or a composed shared/child package | [REQUIREMENTS-MODEL.md](clarify-requirements/REQUIREMENTS-MODEL.md) |
 | [clarify-architecture](clarify-architecture/SKILL.md) | Overall heavyweight architecture | [ARCHITECTURE-MODEL.md](clarify-architecture/ARCHITECTURE-MODEL.md) |
 | [clarify-technical-design](clarify-technical-design/SKILL.md) | Concrete files, topology, flows, data and contracts | [TECHNICAL-MODEL.md](clarify-technical-design/TECHNICAL-MODEL.md) |
-| [orchestrate-implementation](orchestrate-implementation/SKILL.md) | Whole-work implementation and human acceptance | [ORCHESTRATION.md](orchestrate-implementation/ORCHESTRATION.md) |
 | [implement](implement/SKILL.md) | One bounded implementation unit | — |
 
-Lightweight: requirements → technical design → implementation. Heavyweight: Wayfinder → shared/child requirements → overall architecture → child technical designs → implementation. Stage approval does not automatically launch the next stage.
+Lightweight: requirements → technical design → implementation. Heavyweight: shared/child requirements → overall architecture → child technical designs → implementation. Stage approval does not automatically launch the next stage.
 
-`orchestrate-implementation` starts from the approved work and coordinates ready units through `implement`. The original implementer uses `tdd` for initial behavior and behavioral repairs, then uses `code-review` in the current context to dispatch independent Spec and Standards reviewers. Repair rounds return directly to those same reviewers. Existing progress is continued when present, not required to start.
+The original implementer uses `tdd` for initial behavior and behavioral repairs, then uses `code-review` in the current context to dispatch independent Spec and Standards reviewers. Repair rounds return directly to those same reviewers. Existing progress is continued when present, not required to start.
 
 `clarify-technical-design` remains one skill for the leader, closed-loop designers and their scouts. Designers clarify and write their assigned local models with the human. The leader takes over affected model revisions during coordination and whole-model review. Shared definitions have one authoritative location, and the complete model may include linked parts with one active writer per file. Whole-model review and final human approval remain distinct from local confirmation.
 
@@ -43,7 +41,7 @@ Register complete skill directories and their dependencies in the agent harness.
 
 Technical clarification also uses `collaboration-guidance`. Its role-specific flow is contained in the existing `clarify-technical-design` skill; no separate author or methodology skill is required.
 
-Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `wayfinder`, `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
+Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
 
 ### Optional communication bootstrap
 

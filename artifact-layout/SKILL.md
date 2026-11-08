@@ -22,7 +22,6 @@ Create only what the chosen route needs.
 ```text
 .scratch/<work-slug>/
 ├── issue.md
-├── wayfinder.md
 ├── requirements.md
 ├── architecture.md
 ├── technical.md
