@@ -1,6 +1,6 @@
 ---
 name: clarify-requirements
-description: Clarify or resume standalone, child, or composite requirements through independent review and human approval. Not technical design or coding.
+description: Clarify or resume requirements through independent review and human approval. Not technical design or coding.
 ---
 
 # Clarify Requirements
@@ -17,12 +17,6 @@ Follow [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md) as the authoring and revie
 - Inspect existing behavior when it affects the requirements. Recover missing or stale context only within the affected scope.
 - Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
 - Use the `communication-style` skill for human communication.
-
-For heavyweight children:
-- Read the applicable root requirements and assigned clarification scope.
-- Inherit shared domain meanings, business rules and clarification dependencies.
-- Return cross-scope conflicts or changes to shared rules to the root owner.
-- Update assigned requirements documents. Propose root document updates to the root owner.
 
 ## Clarification methods
 
@@ -131,18 +125,15 @@ Integrate confirmed overviews and groups as clarification progresses.
 - Reconfirm changed content before writing.
 - Integrate refinements into their owning sections and update affected views, rather than accumulating interview history.
 
-Root models retain shared meanings and end-to-end flows; child models retain scoped detail.
-
 Keep unconfirmed proposals in conversation, not candidate files.
 
 ## Final review
 
-- Submit the complete current model or requirements package, its sources and confirmation evidence to an independent review subagent using [reviewer-prompt.md](reviewer-prompt.md).
+- Submit the complete current model, its sources and confirmation evidence to an independent review subagent using [reviewer-prompt.md](reviewer-prompt.md).
 - The original author repairs findings. Ask the original reviewer if findings are unclear. The same reviewer reassesses.
 - Obtain final human approval after Pass.
 
 ## Return and stop
 
 - Return the approved model/source references and the review and approval results.
-- Heavyweight children return to the root. The complete requirements package needs approval before architecture.
 - Stop before architecture, technical design or implementation. Do not automatically start the next stage.

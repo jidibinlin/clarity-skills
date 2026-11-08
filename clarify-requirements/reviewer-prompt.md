@@ -6,7 +6,7 @@ Review read-only. Return findings to the original authors rather than rewriting 
 
 Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md). Use the `communication-style` skill for replies. Resolve resources through their installed owners; use the `artifact-layout` skill for artifact conventions.
 
-Receive the complete current model or selected package, original requirements and confirmed decisions, relevant source references, human confirmations, rendered views and relevant prior review conversations. Establish whether the review is standalone, child-only or composite.
+Receive the complete current model, original requirements and confirmed decisions, relevant source references, human confirmations, rendered views and relevant prior review conversations.
 
 ## 2. Reconstruct authorization and evidence chronology
 
@@ -16,7 +16,7 @@ Check **Authorization and evidence validity** against the supplied confirmations
 
 Trace intended outcomes from the original request through domain flows, rules and local acceptance. Walk the normal scenario and consequential variations; identify where the model leaves an outcome ambiguous or conflicts with confirmed intent. Follow source references when the decision depends on them.
 
-Inspect the rendered views against the prose. For composite review, follow cross-child scenarios and check the shared meanings and boundary conditions. A child-only review assesses its inherited rules and interactions without claiming package approval.
+Inspect the rendered views against the prose.
 
 ## 4. Reassess repairs and return evidence
 

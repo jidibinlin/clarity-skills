@@ -1,6 +1,6 @@
 # Requirements and Domain Model: Content Standard
 
-These criteria guide both construction and review of standalone, child and composite requirements. Import this resource through the installed `clarify-requirements` owner without invoking its workflow.
+These criteria guide both construction and review of requirements. Import this resource through the installed `clarify-requirements` owner without invoking its workflow.
 
 ## Scope and domain meaning
 
@@ -28,12 +28,6 @@ Mermaid views explain material flows, relationships and scope. They agree with t
 
 Required views have current rendered output and visual-inspection evidence. Readable, semantically accurate diagrams matter, not merely valid syntax.
 
-## Shared and child requirements
-
-Root requirements own shared meanings, cross-child rules and end-to-end flows. Children own complete scoped detail and reference applicable root definitions. Each decision has a clear owner; a requirements boundary need not match a module.
-
-The selected package links actual root/child source sections and explains how they compose. Its outcomes can be followed across child boundaries without gaps or conflicting rules. Each child meets the applicable content standard. A local child verdict does not establish package consistency.
-
 ## Authorization and evidence validity
 
 Specification content has human confirmation before it is written; candidate content remains in conversation. The original author and independent original reviewer carry repairs through to Pass.
@@ -42,4 +36,4 @@ Review and final human approval concern the current result. Final approval is di
 
 ## Review coverage
 
-The whole selected scope is faithful to confirmed intent, coherent, verifiable through local acceptance, and usable for the next modeling stage. Its diagrams and decision basis support that account. Composite review includes the shared rules and cross-child behavior, not just individual child quality.
+The whole selected scope is faithful to confirmed intent, coherent, verifiable through local acceptance, and usable for the next modeling stage. Its diagrams and decision basis support that account.

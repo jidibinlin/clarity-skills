@@ -6,7 +6,7 @@ Review independently and read-only. The leader owns whole-model repairs; remain 
 
 Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md). Use the `communication-style` skill for replies. Resolve resources through their registered owners; import standards without invoking author workflows. Use the `artifact-layout` skill for location/ownership questions.
 
-Assess the current model against approved requirements, original context, concrete confirmations and actual checks. For a heavyweight child, read the root's approved architecture document and relevant shared-owner assignments and child dependencies. Review the scoped realization against those constraints; return global conflicts to the owning authority. Bring forward prior findings.
+Assess the current model against approved requirements, original context, concrete confirmations and actual checks. Bring forward prior findings.
 
 ## Follow the realization
 
@@ -22,4 +22,4 @@ Compare the definitions and flows presented for human confirmation with the curr
 
 Return your assessment with the reviewed scope, verdict, concrete findings, supporting locations and assessment limits. Use **Changes required** for defects, **Blocked** when necessary evidence is unavailable, and **Pass** when the current scope has no unresolved findings or blockers.
 
-After leader repairs, reassess the current design, prior findings and affected views. A coordinated package includes every covered child's realization. Explain finding dispositions; Pass enables final human approval, not automatic coding.
+After leader repairs, reassess the current design, prior findings and affected views. Explain finding dispositions; Pass enables final human approval, not automatic coding.

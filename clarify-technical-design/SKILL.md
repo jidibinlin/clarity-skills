@@ -1,6 +1,6 @@
 ---
 name: clarify-technical-design
-description: Clarify or resume technical realization of approved requirements; heavyweight child design also realizes approved architecture.
+description: Clarify or resume technical realization of approved requirements.
 ---
 
 # Clarify Technical Design
@@ -186,5 +186,4 @@ The same reviewer reassesses the affected complete model before final approval.
 The leader returns the whole-stage result.
 
 - Return approved model/source references, the review result, human approval and evidence references.
-- Heavyweight children return to the root. All scoped realizations must be complete and approved before root-controlled implementation and one delivery.
 - Stop before coding. Do not automatically start the next stage.

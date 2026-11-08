@@ -6,12 +6,12 @@ Human-led requirements and technical design, followed by implementation against 
 
 | Skill | Outcome | Content standard |
 | --- | --- | --- |
-| [clarify-requirements](clarify-requirements/SKILL.md) | Requirements or a composed shared/child package | [REQUIREMENTS-MODEL.md](clarify-requirements/REQUIREMENTS-MODEL.md) |
-| [clarify-architecture](clarify-architecture/SKILL.md) | Overall heavyweight architecture | [ARCHITECTURE-MODEL.md](clarify-architecture/ARCHITECTURE-MODEL.md) |
+| [clarify-requirements](clarify-requirements/SKILL.md) | Requirements and domain behavior | [REQUIREMENTS-MODEL.md](clarify-requirements/REQUIREMENTS-MODEL.md) |
+| [clarify-architecture](clarify-architecture/SKILL.md) | Global architecture | [ARCHITECTURE-MODEL.md](clarify-architecture/ARCHITECTURE-MODEL.md) |
 | [clarify-technical-design](clarify-technical-design/SKILL.md) | Concrete files, topology, flows, data and contracts | [TECHNICAL-MODEL.md](clarify-technical-design/TECHNICAL-MODEL.md) |
 | [implement](implement/SKILL.md) | One bounded implementation unit | — |
 
-Lightweight: requirements → technical design → implementation. Heavyweight: shared/child requirements → overall architecture → child technical designs → implementation. Stage approval does not automatically launch the next stage.
+Requirements → technical design → implementation. Stage approval does not automatically launch the next stage.
 
 The original implementer uses `tdd` for initial behavior and behavioral repairs, then uses `code-review` in the current context to dispatch independent Spec and Standards reviewers. Repair rounds return directly to those same reviewers. Existing progress is continued when present, not required to start.
 
