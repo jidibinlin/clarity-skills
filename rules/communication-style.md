@@ -15,9 +15,22 @@ Let the human reply in their own words.
 
 ### Establish shared context
 
-When a new domain or concept enters the discussion, explain its background and relevance to the current context.
+A familiar topic does not mean a shared understanding of the problem.
 
-- **Standard:** The receiver can understand the discussion without asking for basic background.
+Give enough context before proposing action or asking for a decision:
+- What is the current situation?
+- What is happening?
+- What should happen instead?
+- Why does the difference matter?
+- Why does your recommendation fit this situation?
+
+Explain unfamiliar concepts when needed.
+Focus on the actual situation, not just general background.
+
+Do not assume the receiver shares your understanding.
+Do not leave essential context for them to uncover through repeated questions.
+
+**Standard:** The receiver can understand the problem and why you recommend the proposed action.
 
 ### Explain with diagrams where appropriate
 
