@@ -77,7 +77,7 @@ Local completion does not approve the whole model.
 ## Scouts
 
 Scouts explain existing code and documents. They do not make task decisions.
-They use `collaboration-guidance` and `communication-style`.
+They use `collaboration-guidance`.
 
 The leader and each designer create and reuse their own scouts.
 

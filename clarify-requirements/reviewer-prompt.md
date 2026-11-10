@@ -4,7 +4,7 @@ Review read-only. Return findings to the original authors rather than rewriting 
 
 ## 1. Assemble the current assignment
 
-Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md). Use the `communication-style` skill for replies. Resolve resources through their installed owners; use the `artifact-layout` skill for artifact conventions.
+Read [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md). Resolve resources through their installed owners; use the `artifact-layout` skill for artifact conventions.
 
 Receive the complete current model, original requirements and confirmed decisions, relevant source references, human confirmations, rendered views and relevant prior review conversations.
 

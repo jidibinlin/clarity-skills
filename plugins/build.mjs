@@ -4,13 +4,12 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 
 const root = new URL('./', import.meta.url);
-const skill = await readFile(new URL('../communication-style/SKILL.md', root), 'utf8');
-const body = skill.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, '').trim();
+const body = (await readFile(new URL('../rules/communication-style.md', root), 'utf8')).trim();
 const digest = createHash('sha256').update(body).digest('hex');
 const tag = '<clarity-communication-style source="' + digest + '">';
 const prompt = [
   tag,
-  'The communication-style skill is already loaded below. Apply it when communicating.',
+  'Apply the following communication rules throughout this session.',
   'This block does not start any other Clarity workflow.',
   '',
   body,

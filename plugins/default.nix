@@ -10,7 +10,7 @@ let
       ./omp
       ./opencode
       ./tests
-      ../communication-style/SKILL.md
+      ../rules/communication-style.md
     ];
   };
 in

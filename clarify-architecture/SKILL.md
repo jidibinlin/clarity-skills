@@ -9,7 +9,7 @@ Co-design the selected effort's global topology, guarantees and shared realizati
 
 ## Establish the basis
 
-Read [ARCHITECTURE-MODEL.md](ARCHITECTURE-MODEL.md) and its selective technical imports before designing. Use the `artifact-layout` skill for locations/ownership and the `communication-style` skill for human communication, including its Ask when human judgment is needed section for consequential questions. Resolve skills through their registered names and resources through their installed owners; importing a standard does not invoke its author's workflow.
+Read [ARCHITECTURE-MODEL.md](ARCHITECTURE-MODEL.md) and its selective technical imports before designing. Use the `artifact-layout` skill for locations/ownership. Resolve skills through their registered names and resources through their installed owners; importing a standard does not invoke its author's workflow.
 
 Read the selected requirements, dependencies and exclusions. The requirements must have independent Pass and human approval. Inspect relevant runtime/code boundaries, state owners, interfaces, callers and repository guidance. Resume from current models and prior decisions, not just status labels.
 

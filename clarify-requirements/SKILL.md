@@ -16,7 +16,6 @@ Follow [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md) as the authoring and revie
 - Read the requirements materials supplied by the human: verbal descriptions, documents, examples and other provided sources.
 - Inspect existing behavior when it affects the requirements. Recover missing or stale context only within the affected scope.
 - Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
-- Use the `communication-style` skill for human communication.
 
 ## Clarification methods
 

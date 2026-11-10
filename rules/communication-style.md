@@ -1,8 +1,3 @@
----
-name: communication-style
-description: Guides clear communication when explaining a topic, reporting a problem, discussing a proposal, or asking for a decision.
----
-
 # Communication Style
 
 Help the receiver understand the subject and its implications.

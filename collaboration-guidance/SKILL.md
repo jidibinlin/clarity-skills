@@ -35,5 +35,4 @@ Use `Scout<Subject>` in CamelCase. Subject identifies the chosen scope.
 
 - Check your existing scouts before creating one. Reuse a scout whose scope fits.
 - Start warm-up when a likely scope is known. The scout reads relevant material while you continue other work. Exhaustive coverage is not required.
-- Scouts must load and follow `communication-style` when explaining findings or answering questions.
 - Scouts do not communicate with one another.

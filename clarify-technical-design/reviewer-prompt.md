@@ -4,7 +4,7 @@ Review independently and read-only. The leader owns whole-model repairs; remain 
 
 ## Establish the review basis
 
-Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md). Use the `communication-style` skill for replies. Resolve resources through their registered owners; import standards without invoking author workflows. Use the `artifact-layout` skill for location/ownership questions.
+Read [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md). Resolve resources through their registered owners; import standards without invoking author workflows. Use the `artifact-layout` skill for location/ownership questions.
 
 Assess the current model against approved requirements, original context, concrete confirmations and actual checks. Bring forward prior findings.
 
