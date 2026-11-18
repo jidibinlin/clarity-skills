@@ -11,7 +11,7 @@ Follow [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as the authoring and review stan
 ## Establish the basis
 
 - Read approved requirements, original context and prior decisions/approvals.
-- Read [roles-and-collaboration.md](roles-and-collaboration.md). Identify your role from the current task or assignment and follow its workflow.
+- Read the registered `progressive-modeling` skill and apply it within the assigned design scope.
 - Inspect the relevant repository baseline. Recover missing or stale design context only within the affected scope.
 - Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
 - Use the `collaboration-guidance` skill for reusable scouts.
@@ -78,7 +78,7 @@ flowchart TD
     A["Approved basis"] --> B["Leader:<br/>macro design and roadmap"]
     B --> C["Human confirms<br/>macro basis and roadmap"]
     C --> R["Leader writes roadmap<br/>into issue.md"]
-    R -->|Human starts ready groups| D["Assigned designer:<br/>closed-loop micro design"]
+    R -->|Human starts ready groups| D["Assigned designer:<br/>progressive modeling within group"]
     D --> E["Human confirms group<br/>and proposed content"]
     E --> F["Assigned writer:<br/>update the model"]
     F -->|Human continues ready groups| D
@@ -97,44 +97,50 @@ flowchart TD
     I -->|Approved| J["Leader returns<br/>approved model; stop"]
 ```
 
-Module decomposition may lead to multiple macro-to-micro cycles.
+Apply progressive modeling within each design scope. Module decomposition may lead to multiple macro-to-micro cycles.
 Integrate confirmed macro and micro groups as the design progresses.
 Reconfirm a changed macro basis before dependent micro design.
 
 ## Macro design
 
-Clarify the technical direction within your scope with the human.
+Apply progressive modeling within this scope. Establish a working macro model before advancing dependent design.
 
 Use your own scouts from this stage; begin their preparation once likely investigation scopes are known, following `collaboration-guidance`.
 
-Settle topology, responsibility boundaries and technical direction.
+Clarify the technical direction within this scope with the human.
 
-- When code conflicts with established decision documents, prioritize the documented decisions.
-- Trace required scenarios through owners, state and core interactions.
-- Compare reuse with necessary changes.
-- Confirm the macro basis before dependent micro design.
+Settle:
 
-### Macro views
+- Topology and responsibility boundaries.
+- State ownership and core data flow.
+- Required scenarios and cross-boundary collaboration.
+- Reuse and necessary changes.
+- Dependencies on other design groups.
 
-- Use Mermaid topology and sequences to present macro collaboration.
-- Add a separate data-flow view when needed for clarity.
+Trace required scenarios through owners, state and core interactions.
 
-## Micro design: closed-loop groups
+Use the applicable sections of
+[TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as clarification prompts, especially
+[Macro runtime and collaboration model](TECHNICAL-MODEL.md#macro-runtime-and-collaboration-model).
 
-Turn the confirmed macro design into implementation-ready definitions, contracts and collaboration flows.
+Confirm the macro basis before dependent design.
 
-A group covers a complete bounded behavior across collaborating owners, definitions, operations and flows.
+## Micro design
 
-- Use confirmed macro decisions as the technical direction for the group’s micro proposal.
+A closed-loop group is the unit of micro clarification and confirmation. It covers a complete bounded behavior across collaborating owners, definitions, operations and flows. Confirm the group as a whole, not individual fields, types, interfaces or files.
+
+Apply progressive modeling within the group. Turn the current macro model into implementation-ready definitions, contracts and collaboration flows.
+
+- Use the current macro model as the technical direction for the group’s micro proposal.
 - Clarify changes, data structures, interfaces and exception cases with the human.
-- Assess when to present the complete group again. Include topology/sequences, data definitions and interface contracts.
 - Consider data definitions and sequences together. Choose the starting point based on the design problem.
 
-**Confirmation unit:** The whole group, not individual fields, types, interfaces or files.
-Confirm the group and reconcile affected views before advancing to dependent design.
+During clarification, use the applicable sections of
+[TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as prompts, especially:
 
-- Present complete data definitions, including internal types, and interface declarations in fenced code blocks.
-- Use Mermaid topology and sequences to explain the group’s collaboration.
+- [Micro object and collaboration model](TECHNICAL-MODEL.md#micro-object-and-collaboration-model)
+- [Complete data-structure definitions](TECHNICAL-MODEL.md#complete-data-structure-definitions)
+- [Complete interface contracts](TECHNICAL-MODEL.md#complete-interface-contracts)
 
 ## Document organization
 

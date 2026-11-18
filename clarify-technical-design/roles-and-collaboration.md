@@ -13,7 +13,7 @@ The human initiates cross-group coordination and progression.
 For a split model, the leader writes `issue.md` and `technical.md`.
 
 1. **Plan with the human.**
-   Establish the basis and clarify the macro direction.
+   Apply progressive modeling within the leader's scope to establish the macro direction.
    Divide the scope into closed-loop design groups.
    Plan integration testing for the overall design.
 
@@ -40,7 +40,7 @@ For a split model, the leader writes `issue.md` and `technical.md`.
    - Governing decisions, roadmap dependencies and confirmed upstream models.
 
    Give the designer write access to its assigned files.
-   Require reading `clarify-technical-design` in full and its `TECHNICAL-MODEL.md` before starting.
+   Require reading `clarify-technical-design` in full, the registered `progressive-modeling` skill and `TECHNICAL-MODEL.md` before starting.
 
 3. **Coordinate along the roadmap.**
    At the human's request, check which coordination points are ready.
@@ -65,8 +65,8 @@ Make design decisions for your assigned behavior directly with the human.
 Write your assigned files during local clarification.
 
 1. Establish the group's basis from the assignment and confirmed upstream decisions.
-2. Apply **[Clarification methods](SKILL.md#clarification-methods)** and **[Micro design](SKILL.md#micro-design-closed-loop-groups)** within that scope. Use **[Macro design](SKILL.md#macro-design)** within that scope when needed.
-   Plan internal tests for the group.
+2. Apply progressive modeling within the group's assigned scope. Establish its working macro model before elaborating dependent micro design; inherit confirmed upstream decisions without reopening them.
+   Apply [Clarification methods](SKILL.md#clarification-methods) and [Micro design](SKILL.md#micro-design-closed-loop-groups) within that scope. Plan internal tests for the group.
 3. Obtain human confirmation. Follow **[Update the model](SKILL.md#update-the-model)** for your assigned files.
 
 Keep tentative design choices within the group's clarification.
