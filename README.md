@@ -7,7 +7,6 @@ Human-led requirements and technical design, followed by implementation against 
 | Skill | Outcome | Content standard |
 | --- | --- | --- |
 | [clarify-requirements](clarify-requirements/SKILL.md) | Requirements and domain behavior | [REQUIREMENTS-MODEL.md](clarify-requirements/REQUIREMENTS-MODEL.md) |
-| [clarify-architecture](clarify-architecture/SKILL.md) | Global architecture | [ARCHITECTURE-MODEL.md](clarify-architecture/ARCHITECTURE-MODEL.md) |
 | [clarify-technical-design](clarify-technical-design/SKILL.md) | Concrete files, topology, flows, data and contracts | [TECHNICAL-MODEL.md](clarify-technical-design/TECHNICAL-MODEL.md) |
 | [implement](implement/SKILL.md) | One bounded implementation unit | — |
 
@@ -39,7 +38,7 @@ Micro technical proposals and document drafts present concrete definitions with 
 
 Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
 
-Technical clarification also uses `collaboration-guidance`. Its role-specific flow is contained in the existing `clarify-technical-design` skill; no separate author or methodology skill is required.
+Technical clarification uses `collaboration-guidance` and `progressive-modeling`. Its role-specific flow is contained in the existing `clarify-technical-design` skill; the shared modeling method is contained in `progressive-modeling`.
 
 Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
 

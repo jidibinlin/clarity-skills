@@ -50,7 +50,7 @@ For a split model, the leader writes `issue.md` and `technical.md`.
 
    Take over revisions to the affected model files.
    Those designers stop writing them.
-   Follow **[Update the model](SKILL.md#update-the-model)** without routing changes back through designers.
+   Follow **[Write confirmed model content](SKILL.md#write-confirmed-model-content)** without routing changes back through designers.
 
    Identify which downstream groups are ready for further alignment.
    If dependencies change, confirm the revised roadmap with the human and update `issue.md`.
@@ -66,8 +66,8 @@ Write your assigned files during local clarification.
 
 1. Establish the group's basis from the assignment and confirmed upstream decisions.
 2. Apply progressive modeling within the group's assigned scope. Establish its working macro model before elaborating dependent micro design; inherit confirmed upstream decisions without reopening them.
-   Apply [Clarification methods](SKILL.md#clarification-methods) and [Micro design](SKILL.md#micro-design-closed-loop-groups) within that scope. Plan internal tests for the group.
-3. Obtain human confirmation. Follow **[Update the model](SKILL.md#update-the-model)** for your assigned files.
+   Apply [Clarification methods](SKILL.md#clarification-methods) and [Micro design](SKILL.md#micro-design) within that scope. Plan internal tests for the group.
+3. Obtain human confirmation. Follow **[Write confirmed model content](SKILL.md#write-confirmed-model-content)** for the assigned files.
 
 Keep tentative design choices within the group's clarification.
 The human initiates coordination with the leader after local completion.

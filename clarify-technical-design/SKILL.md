@@ -162,16 +162,15 @@ Define shared contracts once. Other parts reference their canonical location.
 Apply `TECHNICAL-MODEL.md` across the complete model.
 Local parts supply concrete detail and canonical references, without repeating global sections.
 
-## Update the model
+## Write confirmed model content
 
-Integrate complete confirmed proposals as the design progresses.
+Keep unconfirmed proposals in the conversation, not model files.
 
-- Show the exact content and destination in the current writer's conversation with the human. Obtain human confirmation before writing.
-- Carry their diagrams, tables, code and essential explanations into the model. Do not replace them with prose summaries.
-- Integrate confirmed content into canonical sections. Reconcile affected decisions and references.
-- Preserve unaffected confirmed content without routinely reconfirming unchanged decisions.
+Before writing, show the exact confirmed content and its destination to the human.
 
-Keep unconfirmed proposals in conversation, not candidate files.
+Write only confirmed content into canonical sections. Preserve its concrete diagrams, tables, declarations and essential rationale; do not replace them with summaries.
+
+Reconcile affected decisions and references while preserving unaffected confirmed content.
 
 ## Final review
 
