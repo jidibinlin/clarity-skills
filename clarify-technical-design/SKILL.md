@@ -78,23 +78,35 @@ flowchart TD
     A["Approved basis"] --> B["Leader:<br/>macro design and roadmap"]
     B --> C["Human confirms<br/>macro basis and roadmap"]
     C --> R["Leader writes roadmap<br/>into issue.md"]
-    R -->|Human starts ready groups| D["Assigned designer:<br/>progressive modeling within group"]
-    D --> E["Human confirms group<br/>and proposed content"]
-    E --> F["Assigned writer:<br/>update the model"]
-    F -->|Human continues ready groups| D
-    F --> U["Human resumes<br/>with the leader"]
+
+    R -->|Human starts a ready group| S["Leader assigns the group<br/>and creates a human-facing designer"]
+    S --> D["Assigned designer:<br/>progressive modeling within group"]
+    D --> E["Human confirms<br/>the complete group"]
+    E --> F["Designer writes<br/>assigned model files"]
+
+    F -->|Human starts another ready group| S
+    F -->|Human resumes with the leader| U["Leader coordination"]
+
     U --> Q{"Roadmap coordination<br/>prerequisites met?"}
     Q -->|No| V["Human continues<br/>prerequisite groups"]
-    V --> D
+    V --> S
+
     Q -->|Yes| K["Leader reads required models<br/>and coordinates with the human"]
-    K -->|Changes required| H
-    K -->|Human starts next group| D
+    K -->|Human starts next group| S
+    K -->|Changes required| H["Leader prepares<br/>coordinated changes"]
+    H --> I["Human confirms<br/>coordinated changes"]
+    I --> J["Leader updates<br/>affected model files"]
+    J --> K
     K -->|Scope complete| G["Leader arranges<br/>independent final review"]
-    G -->|Changes required| H["Leader prepares<br/>coordinated changes or repairs"]
-    H --> E
-    G -->|Pass| I["Human approves<br/>the whole model"]
-    I -->|Changes requested| H
-    I -->|Approved| J["Leader returns<br/>approved model; stop"]
+
+    G -->|Changes required| P["Leader prepares<br/>review repairs"]
+    P --> T["Human confirms<br/>repair content"]
+    T --> W["Leader repairs<br/>the affected model"]
+    W --> G
+
+    G -->|Pass| N["Human approves<br/>the complete model"]
+    N -->|Changes requested| P
+    N -->|Approved| Z["Leader returns<br/>approved model; stop"]
 ```
 
 Apply progressive modeling within each design scope. Module decomposition may lead to multiple macro-to-micro cycles.
