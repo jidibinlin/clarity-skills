@@ -1,6 +1,6 @@
 ---
 name: progressive-modeling
-description: Use when analyzing requirements, problems, or designs through macro-to-micro modeling and feedback from micro models.
+description: A general method for progressively modeling requirements, problems, designs, and existing systems.
 ---
 
 # Progressive Modeling
