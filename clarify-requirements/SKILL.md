@@ -15,7 +15,7 @@ Follow [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md) as the authoring and revie
 
 - Read the requirements materials supplied by the human: verbal descriptions, documents, examples and other provided sources.
 - Inspect existing behavior when it affects the requirements. Recover missing or stale context only within the affected scope.
-- Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
+- Read the registered `progressive-modeling` skill and apply it within the assigned requirements scope.
 
 ## Clarification methods
 
@@ -89,9 +89,9 @@ flowchart TD
 
 Adjust clarification depth to the supplied material. A sufficiently specified request needs no separate interview.
 
-## Requirements overview
+## Macro requirements: overview
 
-Establish the overall business understanding within the assigned scope.
+Apply progressive modeling within the assigned scope.
 
 - Clarify the problem, intended outcomes and business boundaries.
 - Identify the main actors, core concepts and end-to-end business flow.
@@ -100,22 +100,22 @@ Establish the overall business understanding within the assigned scope.
 
 Retain imposed technical constraints when they affect requirements. Leave realization choices to subsequent design.
 
-## Detailed requirements: closed-loop groups
+## Micro requirements
 
-Turn the overview into business behaviors with clear rules, observable results and acceptance criteria.
+A closed-loop group is the unit of micro clarification. It covers a bounded business outcome across the relevant actors, concepts, rules and normal or exceptional paths.
 
-A group covers a bounded business outcome across the relevant actors, concepts, rules and normal or exceptional paths.
+Apply progressive modeling within each closed-loop group.
 
 - Clarify triggering conditions, business rules, state changes, outcomes and consequential exceptions with the human.
 - Capture the reasons behind consequential business choices.
 - Add labeled **Acceptance criteria** beside the behavior they verify.
 - Assess when to present the complete group again, including its scenarios, rules, views and acceptance criteria.
 
-**Confirmation unit:** The whole group, not individual fields, rules or exceptions.
+**Confirmation unit:** Confirm the whole group, not individual rules or exceptions.
 
-Revisit the overview when group clarification changes the overall understanding. Reconcile affected groups before advancing to dependent requirements.
+Revisit the macro requirements model when group clarification changes the overall understanding. Reconcile affected groups before advancing to dependent requirements.
 
-## Update the requirements model
+## Write confirmed model content
 
 Integrate confirmed overviews and groups as clarification progresses.
 

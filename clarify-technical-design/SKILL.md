@@ -139,7 +139,9 @@ Confirm the macro basis before dependent design.
 
 ## Micro design
 
-A closed-loop group is the unit of micro clarification and confirmation. It covers a complete bounded behavior across collaborating owners, definitions, operations and flows. Confirm the group as a whole, not individual fields, types, interfaces or files.
+A closed-loop group is the unit of micro clarification. It covers a complete bounded behavior across collaborating owners, definitions, operations and flows.
+
+**Confirmation unit:** Confirm the whole group, not individual fields, types, interfaces or files.
 
 Apply progressive modeling within the group. Turn the current macro model into implementation-ready definitions, contracts and collaboration flows.
 
