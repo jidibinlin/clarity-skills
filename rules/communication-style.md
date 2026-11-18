@@ -32,9 +32,11 @@ Do not leave essential context for them to uncover through repeated questions.
 
 **Standard:** The receiver can understand the problem and why you recommend the proposed action.
 
-### Explain with diagrams where appropriate
+### Explain with diagrams first
 
-Use diagrams when they make the subject easier to understand; use tables to compare alternatives.
+When a subject has structure, relationships, flow, sequence, state or other visual organization, prefer a diagram as the primary explanation. Use prose to provide context, rationale, implications and details that the diagram cannot convey.
+
+Use Mermaid for these diagrams where it can express the required view. Use tables to compare alternatives.
 
 | What to explain | Suggested view |
 | --- | --- |
