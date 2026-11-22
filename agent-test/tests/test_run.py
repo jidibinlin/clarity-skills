@@ -120,9 +120,9 @@ class RunTests(unittest.TestCase):
         self.runs = []
         self.stack.callback(self.stop_leftovers)
 
-    def timers(self, heartbeat=10, total=40, grace=2, poll=0.5):
+    def timers(self, heartbeat=10, total=40, grace=2, poll=0.5, discovery=10):
         (self.config / "settings.toml").write_text(
-            f"[timers]\ndiscovery=10\npoll={poll}\nheartbeat={heartbeat}\ntotal={total}\ngrace={grace}\n"
+            f"[timers]\ndiscovery={discovery}\npoll={poll}\nheartbeat={heartbeat}\ntotal={total}\ngrace={grace}\n"
         )
 
     def git(self, *args):
@@ -189,6 +189,9 @@ exec {self.omp} "$@"
             if case == "helper" and role == "subject":
                 cfg["modelRoles"]["task"] = "alpha/helper"
             ids = ["other"] if role == unavailable else [model]
+            if case == "helper" and role == "coordinator":
+                cfg["modelRoles"]["task"] = "alpha/owner-assistant"
+                ids.append("owner-assistant")
 
             def service(p, ep, models):
                 return {
@@ -471,13 +474,28 @@ exec {self.omp} "$@"
                 }
             ),
         )
+        self.put("scene/.omp/config.yml", 'extensions: ["./audit.ts"]\n')
+        self.put(
+            "scene/audit.ts",
+            """import { appendFileSync } from "node:fs";
+export default function(pi) {
+  pi.on("session_start", (_, ctx) => appendFileSync("opened.jsonl", JSON.stringify({
+    id: ctx.sessionManager.getSessionId(), role: process.env.AGENT_TEST_ROLE ?? null
+  }) + "\\n"));
+}
+""",
+        )
         with (self.config / "credentials.toml").open("a") as stream:
             stream.write(f"\n{provider} = {json.dumps(self.b.key)}\n")
-        self.git("add", "roles/subject")
+        self.git("add", "roles/subject", "scene")
         self.git("commit", "-qm", "Select a native non-catalog inference profile")
         run = self.submit()
         deadline = time.monotonic() + 40
-        while not any(
+        audit = run / "workspace/opened.jsonl"
+        while not (
+            audit.exists()
+            and {r["role"] for r in json_lines(audit)} >= {"coordinator", "subject"}
+        ) or not any(
             e.get("type") == "model_change" and e.get("model") == model
             for p in self.sessions(run, "subject")
             for e in json_lines(p)
@@ -492,6 +510,15 @@ exec {self.omp} "$@"
         os.kill(json_lines(run / "run.log")[0]["pid"], signal.SIGTERM)
         end = self.terminal(run)
         self.assertEqual(end["reason"], "interrupted", end)
+        roots = [
+            entry["id"]
+            for role in ("coordinator", "subject")
+            for path in self.sessions(run, role)
+            for entry in json_lines(path)
+            if entry.get("type") == "session"
+        ]
+        self.assertEqual(len(roots), 2)
+        self.assertCountEqual([event["id"] for event in json_lines(audit)], roots)
 
     def test_host_login_precedes_config_and_missing_credentials_reject_submission(self):
         self.version()
@@ -613,6 +640,9 @@ exec {self.omp} "$@"
         self.assert_no_credentials(run)
 
     def test_missing_model_never_uses_other_available_model(self):
+        # A cold OMP catalog can spend time refreshing before emitting a startup
+        # model fault. This case tests that fault, not the independent peer timer.
+        self.timers(discovery=60, heartbeat=60, total=100)
         for role, expected, endpoint in [
             ("subject", "beta/desk-normal", self.b),
             ("coordinator", "alpha/owner-normal", self.a),
@@ -620,7 +650,7 @@ exec {self.omp} "$@"
             with self.subTest(role=role):
                 self.version(unavailable=role)
                 run = self.submit()
-                end = self.terminal(run)
+                end = self.terminal(run, timeout=110)
                 self.assertIsNone(end["scene"], end)
                 self.assertEqual(
                     (end["detail"].get("role"), end["detail"].get("model")),
@@ -696,6 +726,48 @@ exec {self.omp} "$@"
             any(c["model"] == "helper" and c["authorized"] for c in self.a.calls)
         )
         self.assertFalse(any(c["model"] == "helper" for c in self.b.calls))
+        self.assertTrue(
+            any(
+                c["authorized"] and c["model"] == "owner-assistant"
+                for c in self.a.calls
+            )
+        )
+        main_messages = [
+            e["message"]
+            for path in self.sessions(run, "coordinator")
+            for e in json_lines(path)
+            if "message" in e
+        ]
+        writes = [
+            (call["arguments"]["content"], call["id"])
+            for message in main_messages
+            if message.get("role") == "assistant"
+            for call in message.get("content", [])
+            if call.get("name") == "write"
+        ]
+        results = {
+            m["toolCallId"]: m for m in main_messages if m.get("role") == "toolResult"
+        }
+        for prefix, rejected in [
+            ("foreign-helper-probe-", True),
+            ("local-helper-followup-", False),
+        ]:
+            (match,) = [call_id for text, call_id in writes if text.startswith(prefix)]
+            self.assertEqual(results[match]["isError"], rejected)
+        self.assertTrue(
+            any(
+                "local-helper-followup-" in p.read_text()
+                for p in self.sessions(run, "coordinator")
+                if p.stem == "Clerk"
+            )
+        )
+        self.assertFalse(
+            any(
+                "foreign-helper-probe-" in p.read_text()
+                for p in self.sessions(run, "subject")
+                if p.stem == "Electrician"
+            )
+        )
         sessions = {
             path: e
             for path in self.sessions(run, "subject")

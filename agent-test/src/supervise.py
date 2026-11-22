@@ -294,102 +294,13 @@ class Supervisor:
             self.last_beat = monotonic()
         emit(self.log, event="started", role=role, model=model, pid=proc.pid)
 
-    def preflight_model(self, role, env, overlay):
-        requested = self.models[role]
-        provider, _, model_id = requested.partition("/")
-        # A colon may be part of the literal id, or a trailing thinking
-        # selector. This is only a candidate check: the CLI resolves the
-        # unmodified selector; the main-session guard checks its actual model.
-        candidates = {model_id}
-        if ":" in model_id:
-            candidates.add(model_id.rsplit(":", 1)[0])
-        detail = {"role": role, "model": requested, "step": "resolve_model"}
-        config = sessions(self.run, role).parent / "models.yml"
-        if config.exists():
-            with config.open(encoding="utf-8") as stream:
-                definition = (
-                    yaml.safe_load(stream).get("providers", {}).get(provider, {})
-                )
-            if any(
-                isinstance(row, dict) and row.get("id") in candidates
-                for row in definition.get("models", [])
-            ):
-                return None
-
-        # Let OMP resolve the original selector, not a catalog row: some
-        # exact ids (e.g. an inference-profile ARN) are constructed natively.
-        # Promptless print mode exits after selection, with no inference or
-        # durable session. Only the two real PTY launches own run protocols.
-        args = [
-            "omp",
-            "--profile",
-            role,
-            "--model",
-            requested,
-            "--no-session",
-            "--print",
-            "--config",
-            str(SHARE / "locked.yml"),
-            "--config",
-            str(overlay),
-        ]
-        proc = subprocess.Popen(
-            args,
-            cwd=self.run / "workspace",
-            env=env,
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.PIPE,
-            start_new_session=True,
-        )
-        try:
-            while True:
-                if self.interrupt:
-                    return "interrupted", {"signal": self.interrupt}
-                remaining = self.until - monotonic()
-                if remaining <= 0:
-                    return "run_timeout", detail
-                try:
-                    _, diagnostic = proc.communicate(timeout=min(0.25, remaining))
-                    break
-                except subprocess.TimeoutExpired:
-                    continue
-            if proc.returncode:
-                cause = (
-                    "model_not_found"
-                    if f'Model "{requested}" not found'.encode() in diagnostic
-                    else "model_resolution_failed"
-                )
-                return "startup_failure", detail | {
-                    "cause": cause,
-                    "code": proc.returncode,
-                }
-            return None
-        finally:
-            if proc.poll() is None:
-                try:
-                    os.killpg(proc.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-                # Bounded run cleanup reaps this child and any orphans.
-            proc.stderr.close()
-
     def launch(self, roles):
         role = "subject"
         try:
             base = role_environment(
                 self.run, {key for cfg in roles.values() for key in cfg["env"]}
             )
-            overlays = {}
-            for role in ROLES:
-                overlays[role] = self.model_overlay(role)
-                stop = self.preflight_model(
-                    role, base | roles[role]["env"], overlays[role]
-                )
-                if stop:
-                    return stop
-            role = "subject"
-            self.spawn(role, base | roles[role].pop("env"), overlays[role])
+            self.spawn(role, base | roles[role].pop("env"), self.model_overlay(role))
             if self.interrupt:
                 return "interrupted", {"signal": self.interrupt}
             role = "coordinator"
@@ -397,7 +308,7 @@ class Supervisor:
             try:
                 os.set_blocking(reader, False)
                 self.sel.register(reader, selectors.EVENT_READ, "control")
-                self.spawn(role, base | roles[role].pop("env"), overlays[role], writer)
+                self.spawn(role, base | roles[role].pop("env"), self.model_overlay(role), writer)
             finally:
                 os.close(writer)
         except (OSError, subprocess.SubprocessError, ValueError) as exc:

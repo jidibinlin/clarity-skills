@@ -71,7 +71,11 @@ class Dialogue:
             elif role == "tool" and message.get("tool_call_id") in calls:
                 name, args = calls[message["tool_call_id"]]
                 self.results.append((index, name, args, text))
-                pending_roster = text if name == "read" and args.get("path") == "agent://peers" else None
+                pending_roster = (
+                    text
+                    if name == "read" and args.get("path") == "agent://peers"
+                    else None
+                )
                 if pending_roster is not None:
                     self.verified_peer = None
             elif role in ("user", "developer", "system"):
@@ -117,14 +121,60 @@ class Dialogue:
 
 PROMPT = re.compile(r'(/[^\n`"<>]*?/coordinator-prompt\.md)')
 PEER = re.compile(r"^\s*-\s*agent://(\d+)\s+\(", re.MULTILINE)
-VERIFIED = re.compile(r"^Verified subject main: agent://(\d+)\. Use this address for the scenario\.$", re.MULTILINE)
+VERIFIED = re.compile(r"^Verified subject main: agent://(\d+)\b", re.MULTILINE)
 WAITING = Reply("text", "Waiting for the repair desk.")
 HELPED = "The replacement filament has been fitted."
+REVIEWED = "The dispatch ledger now contains the repair receipt."
 QUESTION = "Which detail is available for "
 SYMPTOM = "The lamp flickers; "
 NO_SERIAL = "No serial number is available; "
 DELIVERY = "The lamp is repaired; receipt "
 BLOCKED = "Dispatch is blocked before booking; "
+
+
+def delegate(d, name, assignment, completion):
+    if not d.results_for("task"):
+        return Reply(
+            "task",
+            {
+                "i": "Delegating repair work",
+                "context": "A lamp repair request is in progress.",
+                "tasks": [
+                    {
+                        "name": name,
+                        "task": assignment,
+                        "solutionSpace": "One prescribed action, no alternatives.",
+                    }
+                ],
+            },
+        )
+    results = d.inputs + d.results_for("task") + d.results_for("wait")
+    if not any(completion in text for text in results):
+        if "wait" in d.tools:
+            return Reply("wait", {"i": "Awaiting helper result"})
+        return WAITING
+    return None
+
+
+def probe_helper_routes(d, peer, receipt):
+    match = re.search(r"\brepair-(\d+)\b", receipt)
+    if not match:
+        return Reply("text", "The receipt has no ticket number.")
+    owner = match[1]
+    foreign = f"{peer}/Electrician?progress"
+    if not d.results_for("write", path=f"agent://{foreign}"):
+        # Attempt this once, even on error. The native result is the evidence;
+        # never retry it with a different spelling that could bypass the rule.
+        return send(foreign, f"foreign-helper-probe-{owner}")
+    pending = delegate(
+        d, "Clerk", "Enter the repair receipt in the dispatch ledger.", REVIEWED
+    )
+    if pending:
+        return pending
+    local = f"{owner}/Clerk"
+    if not d.results_for("write", path=f"agent://{local}"):
+        return send(local, f"local-helper-followup-{owner}")
+    return None
 
 
 def coordinator(d, case):
@@ -172,6 +222,10 @@ def coordinator(d, case):
             "Dispatch stopped before booking: the required device serial number is missing.",
         )
     delivered = last.startswith(DELIVERY)
+    if delivered and case == "helper":
+        pending = probe_helper_routes(d, peer, last)
+        if pending:
+            return pending
     if delivered and case != "after_delivery":
         return finish("completed", last)
 
@@ -216,30 +270,14 @@ def subject(d, case, endpoint):
         return Reply("text", "Awaiting instructions.")
 
     if case == "helper":
-        if not d.results_for("task"):
-            return Reply(
-                "task",
-                {
-                    "i": "Assigning lamp repair",
-                    "context": "A flickering lamp needs a repair.",
-                    "tasks": [
-                        {
-                            "name": "Electrician",
-                            "task": "Replace the faulty lamp filament and report the repair.",
-                            "solutionSpace": "One repair: replace the faulty filament.",
-                        }
-                    ],
-                },
-            )
-        if not any(
-            HELPED in text
-            for text in d.inputs + d.results_for("task") + d.results_for("wait")
-        ):
-            return (
-                Reply("wait", {"i": "Awaiting electrician result"})
-                if "wait" in d.tools
-                else WAITING
-            )
+        pending = delegate(
+            d,
+            "Electrician",
+            "Replace the faulty lamp filament and report the repair.",
+            HELPED,
+        )
+        if pending:
+            return pending
 
     receipts = d.results_for("bash")
     if not receipts:
@@ -311,6 +349,8 @@ class Provider:
             reply = Reply("text", "Lamp repair")  # title or other auxiliary prompt
         elif model == "helper":
             reply = Reply("text", HELPED)
+        elif model == "owner-assistant":
+            reply = Reply("text", REVIEWED)
         elif model.startswith("owner-"):
             reply = coordinator(d, model.removeprefix("owner-"))
         elif model.startswith("desk-"):

@@ -217,9 +217,21 @@ Use finish_run({outcome:"completed",reason}) when the actual delivery meets the 
 	pi.on("tool_call", (event, ctx) => {
 		if (!isOwner(ctx)) return;
 		if (event.toolName === "write" && typeof event.input.path === "string") {
-			const target = /^agent:\/\/(\d+)(?:[/?#]|$)/.exec(event.input.path);
-			if (target && (faultSent || finished || !subjectMain || Number(target[1]) !== subjectMain.pid)) {
-				return { block: true, reason: "Only message the verified subject main session. Re-query agent://peers while awaiting discovery." };
+			// OMP treats numeric hosts as process addresses, but this process's own PID
+			// is just a local address. Leave local helper naming and dispatch to OMP.
+			const address = /^agent:\/\/([^/?#]+)/i.exec(event.input.path);
+			if (address) {
+				let host = address[1];
+				try { host = decodeURIComponent(host); } catch { /* OMP keeps the raw host. */ }
+				if (/^\d+$/.test(host) && Number(host) !== process.pid) {
+					const parts = new URL(event.input.path).pathname.split("/").filter(Boolean);
+					let id = parts[0];
+					try { if (id) id = decodeURIComponent(id); } catch { /* OMP keeps the raw ID. */ }
+					if (faultSent || finished || Number(host) !== subjectMain?.pid ||
+						parts.length > 1 || (id && id !== "Main")) {
+						return { block: true, reason: "Only message the verified remote main session. Re-query agent://peers while awaiting discovery." };
+					}
+				}
 			}
 		}
 		if (faultSent || finished) return;
