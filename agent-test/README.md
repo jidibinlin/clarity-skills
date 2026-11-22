@@ -160,6 +160,8 @@ sequenceDiagram
 | 当时用了什么提示词和角色材料 | `coordinator-prompt.md` 和对应角色的 `agent/` |
 | 工作区发生了什么变化 | `start.tar.gz` 是可选起点；`workspace/` 是最终现场，不另打结束包 |
 
+新运行的 `run.log` 每条事件都有 `timestamp`，是监督进程写入该事件时的 UTC 时间（ISO 8601，带 `+00:00`）。`submitted` 是后台接单，不是你敲下 `run` 的时刻；`terminal` 是收尾记录写入的时刻。两者之差是从接单到收尾的墙钟耗时，不含接单前准备 Nix 环境的时间。`run --watch` 转发原终态时间，不把重看时间当作结束时间；旧日志不补写。
+
 `completed` 是负责人确认场景目标已达；`scenario_error` 是材料或场景无法再推进，原因在 `sceneReason`。`scene: null` 表示没有确认的场景报告，例如负责人失联、所需模型拒绝认证。有效报告和实际停止原因可以同时存在：负责人已报告完成、最后一轮卡住，仍保留 `completed`，另记 `exit_grace_timeout`。没有终态不能推断成功。凭证过期时重新登录宿主 OMP 或更新本机配置，再发起新的测试。
 
 默认首次发现 120 秒、等待巡检 60 秒、负责人心跳 600 秒、运行上限 3600 秒、报告后退出宽限 30 秒。需调整时，在宿主 `agent-test/settings.toml`（和凭证配置同目录）用 `[timers]` 设置 `discovery`、`poll`、`heartbeat`、`total`、`grace`，单位是秒。长任务通常需要调大 `total`；长时间不返回的单个模型请求还要考虑 `heartbeat`。可向本次 `submitted.pid` 发送 `SIGTERM` 请求停止，留给运行器核对已有报告并回收两个角色。

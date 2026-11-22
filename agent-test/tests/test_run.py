@@ -11,6 +11,7 @@ import time
 import unittest
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import ExitStack
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from provider import Provider
@@ -294,6 +295,33 @@ exec {self.omp} "$@"
                         for x in json_lines(run / "run.log")
                     ):
                         time.sleep(0.1)
+
+    def test_log_times_distinguish_acceptance_from_final_check_after_subject_exit(self):
+        self.version(case="endless")
+        before_submit = datetime.now(timezone.utc)
+        run = self.submit()
+        accepted = datetime.now(timezone.utc)
+        deadline = time.monotonic() + 30
+        while not any(c["action"] == "hang" for c in self.b.calls):
+            if time.monotonic() >= deadline:
+                self.fail("subject never received the coordinator's request")
+            time.sleep(0.1)
+        started = next(r for r in json_lines(run / "run.log")
+                       if r.get("role") == "subject" and r["event"] == "started")
+        before_exit = datetime.now(timezone.utc)
+        os.kill(started["pid"], signal.SIGTERM)
+        self.terminal(run)
+        finished = datetime.now(timezone.utc)
+        times = {}
+        for record in json_lines(run / "run.log"):
+            stamp = datetime.fromisoformat(record["timestamp"])
+            self.assertEqual(stamp.utcoffset(), timedelta(0))
+            self.assertLessEqual(before_submit, stamp)
+            self.assertLessEqual(stamp, finished)
+            times[record["event"]] = stamp
+        self.assertLessEqual(times["submitted"], accepted)
+        self.assertLessEqual(before_exit, times["final_check"])
+        self.assertLessEqual(before_exit, times["terminal"])
 
     def test_rejoin_finished_private_run_without_reopening_rooms(self):
         self.version()
@@ -597,6 +625,8 @@ export default function(pi) {
                 self.assertEqual(end["reason"], "provider_fault", end)
                 self.assertEqual(end["detail"]["role"], role)
                 self.assertEqual(end["detail"]["http"], 401)
+                fault = next(r for r in json_lines(run / "run.log") if r["event"] == "fault")
+                self.assertEqual(datetime.fromisoformat(fault["timestamp"]).utcoffset(), timedelta(0))
                 self.assertTrue(end["detail"]["model"].endswith(case))
 
     def test_auth_failure_after_delivery_does_not_revoke_scene(self):

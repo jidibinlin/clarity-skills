@@ -14,6 +14,7 @@ import struct
 import subprocess
 import sys
 import termios
+from datetime import datetime, timezone
 from pathlib import Path
 from time import monotonic
 
@@ -37,6 +38,10 @@ FINAL_CHECK = (
 def emit(stream, **record):
     stream.write(json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n")
     stream.flush()
+
+
+def log_event(log, event, **fields):
+    emit(log, event=event, timestamp=datetime.now(timezone.utc).isoformat(), **fields)
 
 
 def own_descendants():
@@ -299,7 +304,7 @@ class Supervisor:
             env.clear()
         if role == "coordinator":
             self.last_beat = monotonic()
-        emit(self.log, event="started", role=role, model=model, pid=proc.pid)
+        log_event(self.log, "started", role=role, model=model, pid=proc.pid)
 
     def launch(self, roles):
         role = "subject"
@@ -371,7 +376,7 @@ class Supervisor:
             if type(http) is int and 100 <= http <= 599:
                 detail["http"] = http
             self.fault = detail
-            emit(self.log, event="fault", **detail)
+            log_event(self.log, "fault", **detail)
 
     def drain(self, delay):
         for key, _ in self.sel.select(delay):
@@ -462,7 +467,7 @@ class Supervisor:
                 except OSError:
                     return subject_exit
                 review_until = now + grace
-                emit(self.log, event="final_check", **subject_exit[1])
+                log_event(self.log, "final_check", **subject_exit[1])
             if review_until and (now >= review_until or self.evidence.report):
                 return subject_exit
             if report_until and now >= report_until:
@@ -553,9 +558,9 @@ class Supervisor:
             exits = {
                 r: self.procs[r].returncode if r in self.procs else None for r in ROLES
             }
-            emit(
+            log_event(
                 self.log,
-                event="terminal",
+                "terminal",
                 scene=scene,
                 sceneReason=scene_reason,
                 reason=reason,
@@ -583,9 +588,9 @@ def main():
         for sig in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP):
             signal.signal(sig, worker.on_signal)
         worker.until = monotonic() + payload["policy"]["total"]
-        emit(
+        log_event(
             log,
-            event="submitted",
+            "submitted",
             pid=os.getpid(),
             **{k: payload[k] for k in ("source", "commit", "branch", "drv")},
         )
