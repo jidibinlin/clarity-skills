@@ -59,6 +59,8 @@ class Dialogue:
         self.incoming = []
         self.results = []
         self.turn_start = -1
+        self.verified_peer = None
+        pending_roster = None
         calls = {}
         for index, message in enumerate(request["messages"]):
             role, text = message["role"], content(message)
@@ -69,8 +71,24 @@ class Dialogue:
             elif role == "tool" and message.get("tool_call_id") in calls:
                 name, args = calls[message["tool_call_id"]]
                 self.results.append((index, name, args, text))
+                pending_roster = text if name == "read" and args.get("path") == "agent://peers" else None
+                if pending_roster is not None:
+                    self.verified_peer = None
             elif role in ("user", "developer", "system"):
                 self.inputs.append(text)
+                # OMP emits hook additionalContext as a separate developer
+                # message after the tool result (user on compatible endpoints
+                # without developer roles), not as part of the native roster.
+                if pending_roster is not None and role in ("developer", "user"):
+                    verified = VERIFIED.search(text)
+                    if verified and verified[1] in PEER.findall(pending_roster):
+                        self.verified_peer = verified[1]
+                        pending_roster = None
+                        continue
+                    if "No verified subject main yet." in text:
+                        pending_roster = None
+                        continue
+                pending_roster = None
                 if role == "user":
                     self.turn_start = index
                 for match in re.finditer(
@@ -99,6 +117,7 @@ class Dialogue:
 
 PROMPT = re.compile(r'(/[^\n`"<>]*?/coordinator-prompt\.md)')
 PEER = re.compile(r"^\s*-\s*agent://(\d+)\s+\(", re.MULTILINE)
+VERIFIED = re.compile(r"^Verified subject main: agent://(\d+)\. Use this address for the scenario\.$", re.MULTILINE)
 WAITING = Reply("text", "Waiting for the repair desk.")
 HELPED = "The replacement filament has been fitted."
 QUESTION = "Which detail is available for "
@@ -129,13 +148,11 @@ def coordinator(d, case):
         return read_tool(prompt)
     if "lamp" not in brief[-1].lower():
         return Reply("text", "I have not received a lamp repair brief.")
-    peers = d.results_for("read", path="agent://peers")
-    found = PEER.search(peers[-1]) if peers else None
-    if not found:
+    peer = d.verified_peer
+    if not peer:
         if d.results_for("read", path="agent://peers", this_turn=True):
             return WAITING  # let the discovery wake arrive before trying again
         return read_tool("agent://peers")
-    peer = found[1]
     if not d.sent("Repair ticket "):
         return send(
             peer, f"Repair ticket {prompt.split('/')[-2]}: please repair the lamp."

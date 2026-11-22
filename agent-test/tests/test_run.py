@@ -150,6 +150,9 @@ class RunTests(unittest.TestCase):
                 "delay.sh",
                 f"""if [ "$AGENT_TEST_ROLE" = subject ]; then
   until test -f "{self.root}/release-subject"; do sleep 0.1; done
+  {self.omp} "$@"
+  status=$?
+  exit "$status"
 fi
 exec {self.omp} "$@"
 """,
@@ -180,7 +183,7 @@ exec {self.omp} "$@"
                     "default": provider + "/" + model + (":low" if thinking else "")
                 },
                 "task": {"crossInstance": True},
-                "startup": {"setupWizard": False, "checkUpdate": False},
+                "startup": {"checkUpdate": False},
                 "tools": {"approvalMode": "yolo"},
             }
             if case == "helper" and role == "subject":
@@ -200,6 +203,13 @@ exec {self.omp} "$@"
                 providers["alpha"] = service("alpha", self.a, ["helper"])
             self.put(f"roles/{role}/config.yml", json.dumps(cfg))
             self.put(f"roles/{role}/models.yml", json.dumps({"providers": providers}))
+        if case == "helper":
+            # Project defaults may fill omitted roles, never replace explicit
+            # role choices. The alternative model has a valid local credential.
+            self.put(
+                "scene/.omp/config.yml",
+                json.dumps({"modelRoles": {"task": "beta/desk-helper"}}),
+            )
         self.git("add", "--all")
         if not (self.repo / "flake.lock").exists():
             output(["nix", "flake", "lock", "--offline", str(self.repo)], env=self.env)
@@ -245,6 +255,22 @@ exec {self.omp} "$@"
         return list(
             (run / "home/.omp/profiles" / role / "agent/sessions").rglob("*.jsonl")
         )
+
+    def assert_normal_teardown(self, run, end):
+        self.assertEqual(end["reason"], "reported", end)
+        self.assertEqual(end["exits"]["coordinator"], 0, end)
+        self.assertIsInstance(end["exits"]["subject"], int)
+        self.assertEqual(end["evidence"], "complete", end)
+        self.assertTrue((run / "workspace").is_dir())
+        for role in ("coordinator", "subject"):
+            self.assertTrue(
+                any(
+                    entry.get("type") == "session" and not entry.get("parentSession")
+                    for path in self.sessions(run, role)
+                    for entry in json_lines(path)
+                ),
+                role,
+            )
 
     def stop_leftovers(self):
         for run in self.runs:
@@ -418,8 +444,63 @@ exec {self.omp} "$@"
         self.assertEqual(end["scene"], "completed", end)
         self.assertTrue(list((run / "workspace").glob("repair-*.txt")))
 
+    def test_native_model_can_start_without_an_exact_catalog_row(self):
+        # OMP constructs this exact Bedrock model from an inference profile ARN.
+        # The coordinator stays silent, so no AWS credentials or call are needed.
+        self.version(case="owner_hang")
+        self.timers(heartbeat=45, total=60)
+        arn = "arn:aws:bedrock:us-east-1:123456789012:inference-profile/fixture-v1"
+        provider = "amazon-bedrock"
+        model = provider + "/" + arn
+        config_path = "roles/subject/config.yml"
+        config = json.loads((self.repo / config_path).read_text())
+        config["modelRoles"]["default"] = model
+        self.put(config_path, json.dumps(config))
+        self.put(
+            "roles/subject/models.yml",
+            json.dumps(
+                {
+                    "providers": {
+                        provider: {
+                            "apiKey": "BEDROCK_FIXTURE_TOKEN",
+                            "baseUrl": self.b.url,
+                            "api": "bedrock-converse-stream",
+                            "models": [{"id": "template", "name": "Template"}],
+                        }
+                    }
+                }
+            ),
+        )
+        with (self.config / "credentials.toml").open("a") as stream:
+            stream.write(f"\n{provider} = {json.dumps(self.b.key)}\n")
+        self.git("add", "roles/subject")
+        self.git("commit", "-qm", "Select a native non-catalog inference profile")
+        run = self.submit()
+        deadline = time.monotonic() + 40
+        while not any(
+            e.get("type") == "model_change" and e.get("model") == model
+            for p in self.sessions(run, "subject")
+            for e in json_lines(p)
+        ):
+            records = json_lines(run / "run.log")
+            if (
+                any(r["event"] == "terminal" for r in records)
+                or time.monotonic() >= deadline
+            ):
+                self.fail(f"Native non-catalog model did not start: {records}")
+            time.sleep(0.1)
+        os.kill(json_lines(run / "run.log")[0]["pid"], signal.SIGTERM)
+        end = self.terminal(run)
+        self.assertEqual(end["reason"], "interrupted", end)
+
     def test_host_login_precedes_config_and_missing_credentials_reject_submission(self):
         self.version()
+        path = "roles/coordinator/models.yml"
+        models = json.loads((self.repo / path).read_text())
+        models["providers"]["alpha"]["apiKey"] = "gatewayToken"
+        self.put(path, json.dumps(models))
+        self.git("add", path)
+        self.git("commit", "-qm", "Use a mixed-case gateway credential reference")
         entry = {
             "provider": "alpha",
             "credential": {"type": "api_key", "key": self.a.key, "source": "login"},
@@ -434,7 +515,9 @@ exec {self.omp} "$@"
             f'[providers]\nalpha="wrong-account"\nbeta={json.dumps(self.b.key)}\n'
         )
         run = self.submit()
-        self.assertEqual(self.terminal(run)["scene"], "completed")
+        end = self.terminal(run)
+        self.assertEqual(end["scene"], "completed", end)
+        self.assert_normal_teardown(run, end)
         self.assertTrue(
             any(c["authorized"] and c["model"] == "owner-normal" for c in self.a.calls)
         )
@@ -449,6 +532,7 @@ exec {self.omp} "$@"
         run = self.submit()
         end = self.terminal(run)
         self.assertEqual(end["scene"], "scenario_error", end)
+        self.assert_normal_teardown(run, end)
         self.assertTrue(end["sceneReason"])
         self.assertFalse((run / "start.tar.gz").exists())
         self.assertFalse((run / "workspace/material.txt").exists())

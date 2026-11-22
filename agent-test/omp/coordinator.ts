@@ -5,13 +5,15 @@ import { createInterface } from "node:readline";
 import type { ExtensionAPI, ExtensionContext } from "@oh-my-pi/pi-coding-agent";
 import { IDENTITY, NEW_TURN, TERMINAL_FAULT, pinnedModel, providerFailure, withoutThinking, type Fault } from "./main-session.ts";
 
-type Peer = { run: string; pid: number; model: string };
+type Subject = { run: string; model: string };
+type MainIdentity = { session: string; sessionId: string; pid: number };
 
 // Consume the native journal, not text from chat, directory mtimes, or a path chosen by the model.
 // OMP stores child sessions under the workspace's session directory too. Only the main's own
 // identity, the root header, and a settled error from its most recent turn can establish a fault.
-async function inspectFile(session: string, peer: Peer): Promise<{ fault?: Fault } | undefined> {
+async function inspectFile(session: string, peer: Subject): Promise<{ main: MainIdentity; fault?: Fault } | undefined> {
 	let sessionId: string | undefined;
+	let main: MainIdentity | undefined;
 	let providerModel: string | undefined;
 	let assistant: { id: string; failure?: Pick<Fault, "cause" | "http"> } | undefined;
 	let fault: Fault | undefined;
@@ -21,18 +23,19 @@ async function inspectFile(session: string, peer: Peer): Promise<{ fault?: Fault
 			if (!line) continue;
 			let r;
 			try { r = JSON.parse(line); }
-			catch { throw new Error("Subject journal is incomplete; inspect again before citing it."); }
+			catch { return; } // A concurrent writer may not have finished this record; never cite a partial journal.
 			if (r.type === "session") {
-				if (sessionId || r.parentSession || r.cwd !== join(peer.run, "workspace")) return;
+				if (sessionId || typeof r.id !== "string" || !r.id || r.parentSession || r.cwd !== join(peer.run, "workspace")) return;
 				sessionId = r.id;
 			} else if (r.type === "custom" && r.customType === IDENTITY) {
 				const d = r.data;
 				if (!sessionId || d?.sessionId !== sessionId || d.role !== "subject" || d.run !== peer.run ||
-					d.pid !== peer.pid || d.model !== peer.model ||
+					!Number.isSafeInteger(d.pid) || d.pid <= 0 || d.pid === process.pid || d.model !== peer.model ||
 					(d.providerModel !== peer.model && d.providerModel !== withoutThinking(peer.model))) return;
 				// Only the subject profile has the catalog that disambiguates a literal
 				// ID ending in :low/:max/etc. The main-session guard binds it at startup.
 				providerModel = d.providerModel;
+				main = { pid: d.pid, sessionId, session };
 			} else if (r.type === "custom" && r.customType === NEW_TURN) {
 				assistant = undefined;
 				fault = undefined;
@@ -47,10 +50,13 @@ async function inspectFile(session: string, peer: Peer): Promise<{ fault?: Fault
 				fault = { role: "subject", model: peer.model, cause: d.cause, http: d.http, session, entry: r.id };
 			}
 		}
+	} catch (error) {
+		if ((error as NodeJS.ErrnoException).code === "ENOENT") return;
+		throw error;
 	} finally {
 		stream.destroy();
 	}
-	if (providerModel) return { fault };
+	if (main) return { main, fault };
 }
 
 function result<T>(details: T) {
@@ -63,12 +69,11 @@ export default function coordinator(pi: ExtensionAPI) {
 	let owner: ExtensionContext | undefined;
 	let ownerId: string;
 	let fd: number;
-	let peer: Peer;
+	let peer: Subject;
 	let ownModel: string;
 	let ownProviderModel: string;
 	let peerDir: string;
-	let peerSession: string | undefined;
-	let discovered = false;
+	let subjectMain: MainIdentity | undefined;
 	let discoveryStarted = false;
 	let discovery: Timer | undefined;
 	let wake: Timer | undefined;
@@ -107,37 +112,47 @@ export default function coordinator(pi: ExtensionAPI) {
 			wake = undefined;
 			if (finished || faultSent || !owner!.isIdle() || owner!.hasPendingMessages()) return;
 			pi.sendMessage({ customType: "agent-test/inspection", display: true, content:
-				"Agent-test inspection due. " + (discovered
-					? `Handle any delivered peer message first; otherwise read agent://${peer.pid} and inspect_subject if needed. Do not send a nudge.`
-					: "Read agent://peers again; send the scenario as soon as the subject is visible.")
+				"Agent-test inspection due. " + (subjectMain
+					? `Handle any delivered peer message first; otherwise read agent://${subjectMain.pid} and inspect_subject if needed. Do not send a nudge.`
+					: "Read agent://peers again; send the scenario as soon as the subject is identified.")
 			}, { triggerTurn: true });
 		}, pollMs);
 	}
 
 	async function evidence() {
-		if (peerSession) return (await inspectFile(peerSession, peer))?.fault;
+		if (!subjectMain) throw new Error("No discovered subject main session.");
+		const snapshot = await inspectFile(subjectMain.session, peer);
+		if (snapshot?.main.sessionId !== subjectMain.sessionId || snapshot.main.pid !== subjectMain.pid) {
+			throw new Error("Subject identity or journal unavailable; no fault verified.");
+		}
+		return snapshot.fault;
+	}
+
+	async function matchPeer(visible: Set<number>) {
 		// Sibling profiles use the same OMP-encoded cwd directory name, chosen by OMP itself.
-		const files = await readdir(peerDir, { withFileTypes: true });
-		let bound: string | undefined;
-		let found: Fault | undefined;
+		let files;
+		try { files = await readdir(peerDir, { withFileTypes: true }); }
+		catch (error) {
+			if ((error as NodeJS.ErrnoException).code === "ENOENT") return;
+			throw error;
+		}
+		let bound: MainIdentity | undefined;
 		for (const file of files) {
 			if (!file.isFile() || !file.name.endsWith(".jsonl")) continue;
 			const path = join(peerDir, file.name);
 			const candidate = await inspectFile(path, peer);
-			if (!candidate) continue;
-			if (bound) throw new Error("Ambiguous subject main session; no fault reported.");
-			bound = path;
-			found = candidate.fault;
+			if (!candidate || !visible.has(candidate.main.pid)) continue;
+			if (bound) return; // Ambiguous: wait for a unique corroborated native identity.
+			bound = candidate.main;
 		}
-		peerSession = bound;
-		return found;
+		return bound;
 	}
 
 	pi.on("session_start", async (_, ctx) => {
 		if (ctx.agent.kind !== "main" || owner) return;
 		owner = ctx;
 		ownerId = ctx.sessionManager.getSessionId();
-		peer = { pid: Number(process.env.AGENT_TEST_SUBJECT_PID), model: process.env.AGENT_TEST_SUBJECT_MODEL!, run: process.env.AGENT_TEST_RUN! };
+		peer = { model: process.env.AGENT_TEST_SUBJECT_MODEL!, run: process.env.AGENT_TEST_RUN! };
 		ownModel = process.env.AGENT_TEST_MODEL!;
 		ownProviderModel = pinnedModel(ctx, ownModel);
 		pollMs = Number(process.env.AGENT_TEST_POLL) * 1000;
@@ -147,7 +162,7 @@ export default function coordinator(pi: ExtensionAPI) {
 		delete process.env.AGENT_TEST_FD;
 		try {
 			if (!session || !Number.isSafeInteger(inherited) || inherited < 3 || !peer.run || !peer.model ||
-				!Number.isSafeInteger(peer.pid) || peer.pid <= 0 || !(pollMs > 0) || !(discoveryMs > 0)) throw Error();
+				!(pollMs > 0) || !(discoveryMs > 0)) throw Error();
 			// Reopen the anonymous pipe CLOEXEC and remove its inherited handle before business tools run.
 			fd = openSync(`/dev/fd/${inherited}`, constants.O_WRONLY | constants.O_NONBLOCK);
 			closeSync(inherited);
@@ -185,7 +200,7 @@ export default function coordinator(pi: ExtensionAPI) {
 			parameters: z.object({ outcome: z.enum(["completed", "scenario_error"]), reason: z.string() }),
 			async execute(_id, { outcome, reason }, _signal, _update, caller) {
 				active(caller);
-				if (!discovered) throw new Error("The scenario has not started: first discover the subject main session.");
+				if (!subjectMain) throw new Error("The scenario has not started: first discover the subject main session.");
 				if (outcome === "scenario_error" && !reason.trim()) throw new Error("Explain the blocked step and its cause.");
 				finished = true;
 				cancelTimers();
@@ -195,28 +210,44 @@ export default function coordinator(pi: ExtensionAPI) {
 
 	pi.on("before_agent_start", (event, ctx) => {
 		if (!isOwner(ctx)) return;
-		return { systemPrompt: [...event.systemPrompt, `You are the scenario coordinator (agent://${process.pid}). Read the submitter's coordinator-prompt.md at the supplied path; play the user, do not do the subject's work. First read agent://peers until you see the subject agent://${peer.pid}; no peers yet is not a failure. Use native write to agent://${peer.pid} to send the first task immediately upon discovery and to answer actual questions. The subject receives your return address in native IRC. Decide the next message from actual replies and the submitter's instructions, never a fixed script.
-When awaiting an answer, END your turn; do not call wait, sleep or create polling jobs. Peer messages wake you directly. On “Agent-test inspection due.” process messages already delivered first; if there is none, read agent://${peer.pid}, then inspect_subject({}) if its summary is insufficient. Do not send reminders or ask the subject for heartbeats. If still waiting, end your turn. A current terminal fault from inspect_subject can be cited via report_run_fault({session,entry}) ONLY if it blocks a still-required delivery. Silence, progress or an empty peer list is not a terminal fault. A fault after delivery does not undo the delivery.
+		return { systemPrompt: [...event.systemPrompt, `You are the scenario coordinator (agent://${process.pid}). Read the submitter's coordinator-prompt.md at the supplied path; play the user, do not do the subject's work. First read agent://peers. Only use the peer explicitly confirmed as the verified subject by the framework after cross-checking the native peer list with the subject main session. An empty list or a visible but unconfirmed PID is not a failure: end your turn and re-query on the discovery wake. Use native write to the verified subject address to send the first task immediately upon discovery and to answer actual questions. The subject receives your return address in native IRC. Decide the next message from actual replies and the submitter's instructions, never a fixed script.
+When awaiting an answer, END your turn; do not call wait, sleep or create polling jobs. Peer messages wake you directly. On “Agent-test inspection due.” process messages already delivered first; if there is none, read the verified subject's agent:// address, then inspect_subject({}) if its summary is insufficient. Do not send reminders or ask the subject for heartbeats. If still waiting, end your turn. A current terminal fault from inspect_subject can be cited via report_run_fault({session,entry}) ONLY if it blocks a still-required delivery. Silence, progress or an empty peer list is not a terminal fault. A fault after delivery does not undo the delivery.
 Use finish_run({outcome:"completed",reason}) when the actual delivery meets the goal. If the materials/scenario make it impossible to continue, use finish_run({outcome:"scenario_error",reason}) giving the blocked step and why. After a successful report finish your final reply without starting new work.`] };
 	});
 	pi.on("tool_call", (event, ctx) => {
-		if (!isOwner(ctx) || faultSent || finished) return;
-		if (!discovered && event.toolName === "write" && event.input.path === `agent://${peer.pid}`) {
-			return { block: true, reason: "Discover the target via agent://peers before starting the scenario." };
+		if (!isOwner(ctx)) return;
+		if (event.toolName === "write" && typeof event.input.path === "string") {
+			const target = /^agent:\/\/(\d+)(?:[/?#]|$)/.exec(event.input.path);
+			if (target && (faultSent || finished || !subjectMain || Number(target[1]) !== subjectMain.pid)) {
+				return { block: true, reason: "Only message the verified subject main session. Re-query agent://peers while awaiting discovery." };
+			}
 		}
+		if (faultSent || finished) return;
 		if (event.toolName === "read" && event.input.path === "agent://peers" && !discoveryStarted) {
 			discoveryStarted = true;
-			discovery = ctx.setTimeout(() => { if (!discovered) report({ role: "coordinator", model: ownModel, cause: "discovery_timeout" }); }, discoveryMs);
+			discovery = ctx.setTimeout(() => { if (!subjectMain) report({ role: "coordinator", model: ownModel, cause: "discovery_timeout" }); }, discoveryMs);
 		}
 	});
-	pi.on("tool_result", (event, ctx) => {
-		if (!isOwner(ctx) || discovered || event.isError || event.toolName !== "read" || event.input.path !== "agent://peers") return;
-		const target = new RegExp(`^\\s*- agent://${peer.pid}(?=\\s|$)`, "m");
-		if (event.content.some(c => c.type === "text" && target.test(c.text))) {
-			discovered = true;
-			if (discovery) ctx.clearTimer(discovery);
-			discovery = undefined;
+	pi.on("tool_result", async (event, ctx) => {
+		if (!isOwner(ctx) || event.isError || event.toolName !== "read" || event.input.path !== "agent://peers") return;
+		if (!subjectMain && !faultSent && !finished) {
+			const visible = new Set<number>();
+			for (const part of event.content) {
+				if (part.type !== "text") continue;
+				for (const match of part.text.matchAll(/^\s*-\s+agent:\/\/(\d+)(?=\s|$)/gm)) visible.add(Number(match[1]));
+			}
+			const found = visible.size ? await matchPeer(visible) : undefined;
+			if (found && !faultSent && !finished) {
+				subjectMain = found;
+				if (discovery) ctx.clearTimer(discovery);
+				discovery = undefined;
+			}
 		}
+		// Preserve OMP's unmodified native roster. The model receives only a corroborated
+		// address in the extension-authored instruction, never an inferred launcher PID.
+		return { additionalContext: subjectMain
+			? `Verified subject main: agent://${subjectMain.pid}. Use this address for the scenario.`
+			: "No verified subject main yet. End your turn and read agent://peers on the next inspection wake." };
 	});
 	pi.on("message_end", ({ message }, ctx) => {
 		if (!isOwner(ctx) || faultSent || message.role !== "assistant" || `${message.provider}/${message.model}` !== ownProviderModel) return;

@@ -6,3 +6,6 @@ contextPromotion:
   enabled: false
 task:
   crossInstance: true
+# Fresh interactive profiles have no operator to answer onboarding questions.
+startup:
+  setupWizard: false

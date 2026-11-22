@@ -172,7 +172,7 @@ def credential_variable(value):
     # host credential reference. Don't let one replace process control state.
     return (
         isinstance(value, str)
-        and re.fullmatch(r"[A-Z][A-Z0-9_]*", value)
+        and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", value)
         and not value.startswith(
             (
                 "AGENT_TEST_",
@@ -194,6 +194,15 @@ def credential_variable(value):
         )
         and value
         not in {
+            "_",
+            "http_proxy",
+            "https_proxy",
+            "no_proxy",
+            "all_proxy",
+            "HTTP_PROXY",
+            "HTTPS_PROXY",
+            "NO_PROXY",
+            "ALL_PROXY",
             "HOME",
             "PATH",
             "PWD",

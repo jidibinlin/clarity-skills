@@ -216,7 +216,19 @@ class Supervisor:
         if self.interrupt is None:
             self.interrupt = signal.Signals(signum).name
 
-    def spawn(self, role, env, fd=None):
+    def model_overlay(self, role):
+        # Preserve the content of the submitted profile, but pin its declared
+        # model roles above workspace settings, as --model does for default.
+        # OMP deep-merges --config: an omitted role remains project/native.
+        profile = sessions(self.run, role).parent
+        with (profile / "config.yml").open(encoding="utf-8") as stream:
+            models = yaml.safe_load(stream)["modelRoles"]
+        overlay = profile.parent / "run-model-roles.yml"
+        with overlay.open("x", encoding="utf-8") as stream:
+            yaml.safe_dump({"modelRoles": models}, stream)
+        return overlay
+
+    def spawn(self, role, env, overlay, fd=None):
         model = self.models[role]
         work = self.run / "workspace"
         env.update(AGENT_TEST_ROLE=role, AGENT_TEST_MODEL=model)
@@ -230,12 +242,13 @@ class Supervisor:
             model,
             "--config",
             str(SHARE / "locked.yml"),
+            "--config",
+            str(overlay),
             "--no-title",
         ]
         if role == "coordinator":
             env.update(
                 AGENT_TEST_FD=str(fd),
-                AGENT_TEST_SUBJECT_PID=str(self.procs["subject"].pid),
                 AGENT_TEST_SUBJECT_MODEL=self.models["subject"],
                 AGENT_TEST_POLL=str(self.policy["poll"]),
                 AGENT_TEST_DISCOVERY=str(self.policy["discovery"]),
@@ -246,8 +259,10 @@ class Supervisor:
             args.extend(
                 [
                     "--",
-                    (f"Read {self.run / 'coordinator-prompt.md'} for your scenario. "
-                     "Follow your coordinator instructions to find and converse with the subject."),
+                    (
+                        f"Read {self.run / 'coordinator-prompt.md'} for your scenario. "
+                        "Follow your coordinator instructions to find and converse with the subject."
+                    ),
                 ]
             )
         master, slave = os.openpty()
@@ -279,7 +294,7 @@ class Supervisor:
             self.last_beat = monotonic()
         emit(self.log, event="started", role=role, model=model, pid=proc.pid)
 
-    def preflight_model(self, role, env):
+    def preflight_model(self, role, env, overlay):
         requested = self.models[role]
         provider, _, model_id = requested.partition("/")
         # A colon may be part of the literal id, or a trailing thinking
@@ -301,26 +316,29 @@ class Supervisor:
             ):
                 return None
 
-        # Absence from models.yml is NOT absence from OMP: built-ins, dynamic
-        # discovery and project extensions can supply the requested model.
-        # Resolve that ambiguity before starting either peer's discovery clock.
+        # Let OMP resolve the original selector, not a catalog row: some
+        # exact ids (e.g. an inference-profile ARN) are constructed natively.
+        # Promptless print mode exits after selection, with no inference or
+        # durable session. Only the two real PTY launches own run protocols.
         args = [
             "omp",
             "--profile",
             role,
-            "models",
-            "ls",
-            provider,
-            "--json",
+            "--model",
+            requested,
+            "--no-session",
+            "--print",
             "--config",
             str(SHARE / "locked.yml"),
+            "--config",
+            str(overlay),
         ]
         proc = subprocess.Popen(
             args,
             cwd=self.run / "workspace",
             env=env,
             stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE,
+            stdout=subprocess.DEVNULL,
             stderr=subprocess.PIPE,
             start_new_session=True,
         )
@@ -332,32 +350,20 @@ class Supervisor:
                 if remaining <= 0:
                     return "run_timeout", detail
                 try:
-                    output, diagnostic = proc.communicate(timeout=min(0.25, remaining))
+                    _, diagnostic = proc.communicate(timeout=min(0.25, remaining))
                     break
                 except subprocess.TimeoutExpired:
                     continue
             if proc.returncode:
+                cause = (
+                    "model_not_found"
+                    if f'Model "{requested}" not found'.encode() in diagnostic
+                    else "model_resolution_failed"
+                )
                 return "startup_failure", detail | {
-                    "cause": "catalog_command_failed",
+                    "cause": cause,
                     "code": proc.returncode,
                 }
-            try:
-                rows = json.loads(output)["models"]
-                if not isinstance(rows, list):
-                    raise TypeError
-                found = any(
-                    row["provider"] == provider and row["id"] in candidates
-                    for row in rows
-                )
-            except (KeyError, TypeError, ValueError):
-                return "startup_failure", detail | {"cause": "invalid_catalog_response"}
-            if not found:
-                # OMP reports discovery/config warnings on stderr even on a
-                # zero exit. Do not label an incomplete catalog a missing id.
-                cause = (
-                    "catalog_incomplete" if diagnostic.strip() else "model_not_listed"
-                )
-                return "startup_failure", detail | {"cause": cause}
             return None
         finally:
             if proc.poll() is None:
@@ -366,7 +372,6 @@ class Supervisor:
                 except ProcessLookupError:
                     pass
                 # Bounded run cleanup reaps this child and any orphans.
-            proc.stdout.close()
             proc.stderr.close()
 
     def launch(self, roles):
@@ -375,12 +380,16 @@ class Supervisor:
             base = role_environment(
                 self.run, {key for cfg in roles.values() for key in cfg["env"]}
             )
+            overlays = {}
             for role in ROLES:
-                stop = self.preflight_model(role, base | roles[role]["env"])
+                overlays[role] = self.model_overlay(role)
+                stop = self.preflight_model(
+                    role, base | roles[role]["env"], overlays[role]
+                )
                 if stop:
                     return stop
             role = "subject"
-            self.spawn(role, base | roles[role].pop("env"))
+            self.spawn(role, base | roles[role].pop("env"), overlays[role])
             if self.interrupt:
                 return "interrupted", {"signal": self.interrupt}
             role = "coordinator"
@@ -388,7 +397,7 @@ class Supervisor:
             try:
                 os.set_blocking(reader, False)
                 self.sel.register(reader, selectors.EVENT_READ, "control")
-                self.spawn(role, base | roles[role].pop("env"), writer)
+                self.spawn(role, base | roles[role].pop("env"), overlays[role], writer)
             finally:
                 os.close(writer)
         except (OSError, subprocess.SubprocessError, ValueError) as exc:
