@@ -750,6 +750,7 @@ export default function(pi) {
         }
         for prefix, rejected in [
             ("foreign-helper-probe-", True),
+            ("wrapped-helper-probe-", True),
             ("local-helper-followup-", False),
         ]:
             (match,) = [call_id for text, call_id in writes if text.startswith(prefix)]
@@ -763,7 +764,10 @@ export default function(pi) {
         )
         self.assertFalse(
             any(
-                "foreign-helper-probe-" in p.read_text()
+                any(
+                    marker in p.read_text()
+                    for marker in ("foreign-helper-probe-", "wrapped-helper-probe-")
+                )
                 for p in self.sessions(run, "subject")
                 if p.stem == "Electrician"
             )

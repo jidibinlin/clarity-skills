@@ -163,9 +163,18 @@ def probe_helper_routes(d, peer, receipt):
     owner = match[1]
     foreign = f"{peer}/Electrician?progress"
     if not d.results_for("write", path=f"agent://{foreign}"):
-        # Attempt this once, even on error. The native result is the evidence;
-        # never retry it with a different spelling that could bypass the rule.
+        # OMP accepts both raw addresses and pasted read headers for write.
         return send(foreign, f"foreign-helper-probe-{owner}")
+    wrapped = f"[agent://{foreign}#BEEF]"
+    if not d.results_for("write", path=wrapped):
+        return Reply(
+            "write",
+            {
+                "i": "Checking pasted peer address",
+                "path": wrapped,
+                "content": f"wrapped-helper-probe-{owner}",
+            },
+        )
     pending = delegate(
         d, "Clerk", "Enter the repair receipt in the dispatch ledger.", REVIEWED
     )

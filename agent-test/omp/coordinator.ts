@@ -217,18 +217,20 @@ Use finish_run({outcome:"completed",reason}) when the actual delivery meets the 
 	pi.on("tool_call", (event, ctx) => {
 		if (!isOwner(ctx)) return;
 		if (event.toolName === "write" && typeof event.input.path === "string") {
-			// OMP treats numeric hosts as process addresses, but this process's own PID
-			// is just a local address. Leave local helper naming and dispatch to OMP.
-			const address = /^agent:\/\/([^/?#]+)/i.exec(event.input.path);
+			// write accepts a pasted [path#TAG] as well as a raw path. Recognize the
+			// remote PID before any display selector; only authorize a plain main
+			// recipient, not a path that could normalize to a different recipient.
+			const raw = event.input.path.trim();
+			const target = raw.startsWith("[") && raw.endsWith("]")
+				? raw.slice(1, -1).replace(/#[\da-f]{4}$/i, "") : raw;
+			const address = /^agent:\/\/([^/:?#]+)/i.exec(target);
 			if (address) {
 				let host = address[1];
 				try { host = decodeURIComponent(host); } catch { /* OMP keeps the raw host. */ }
 				if (/^\d+$/.test(host) && Number(host) !== process.pid) {
-					const parts = new URL(event.input.path).pathname.split("/").filter(Boolean);
-					let id = parts[0];
-					try { if (id) id = decodeURIComponent(id); } catch { /* OMP keeps the raw ID. */ }
-					if (faultSent || finished || Number(host) !== subjectMain?.pid ||
-						parts.length > 1 || (id && id !== "Main")) {
+					const recipient = target.slice(address[0].length).split(/[?#]/, 1)[0];
+					const main = recipient === "" || recipient === "/" || recipient === "/Main" || recipient === "/Main/";
+					if (faultSent || finished || Number(host) !== subjectMain?.pid || !main) {
 						return { block: true, reason: "Only message the verified remote main session. Re-query agent://peers while awaiting discovery." };
 					}
 				}
