@@ -112,24 +112,46 @@ run /path/to/test-project --branch main --commit abc123  # 该分支历史中的
 
 收到 `{"runId":"…","status":"submitted"}` 就可以做别的事。它表示后台已经接单，不表示模型已回复、认证已通过或 SKILL 有效。提交前的材料、凭证或环境错误直接写 stderr，退出码非零。
 
+### 旁听和结束通知
+
+默认开启测试负责人和被测方的 **OMP 只读旁听**，不需要改角色配置，也不替你打开浏览器。旁听使用 OMP 配置的中继；能拿到链接的人能看到该会话。材料不宜经中继传输时，提交用 `run /path/to/test-project --no-observe`。不要把链接贴到共享日志、工单或公共频道。
+
+从**发起提交的目录**运行：
+
+```sh
+run --watch "$runId"   # 用提交返回的编号，不是 harness 的后台任务编号
+```
+
+这是一个只读监听命令。它逐行输出 JSON：每个房间就绪时发 `event: "view"`，带 `role`（`coordinator` 或 `subject`）和可直接打开的 `url`。结束时发 `event: "terminal"`，带停止原因和绝对路径 `runDir`。**运行目录就是产物**；框架不提取终稿，不判断 SKILL 效果。没有旁听链接不等于测试失败。
+
+`terminal` 表示**读到了运行终态**，不是测试成功；看 `scene` 和 `reason` 区分正常完成、场景异常和运行故障。`unavailableViews` 只列这次监听没拿到链接的角色，不表示整场测试从未开过旁听。
+
+**委派给 harness subagent 时**，可以直接这样交代：
+
+> 提交这个测试，把运行编号告诉我。从同一个目录异步调用 `run --watch <编号>`，Bash 设 `timeout: 0`，`notify` 匹配 `"event":"view"`。每收到一个角色的只读链接，**立即发回父会话，不结束委派**。收到终态后，再回复结束原因和运行目录。不用反复调用命令查状态。
+
+实时监听需要 Linux 的 `pidfd_open`（5.3+）和当前用户读取监督进程 `/proc/<pid>/fdinfo` 的权限；重看已经写入的终态不依赖活进程。
+
+关掉监听不会停测。回来后用相同编号再次监听：还在跑就继续旁听，已经结束就返回终态，不重开房间。harness 重启不会自动恢复订阅。若没有终态、又不能确认监督进程仍在，监听命令报错，不把它当成正常完成。
+
 ```mermaid
 sequenceDiagram
     actor U as 提测方
+    participant S as harness subagent
     participant R as run
-    participant C as 负责人
-    participant A as 被测 agent
-    U->>R: 提交工程及版本
-    R-->>U: 环境接单，返回 runId
-    R->>A: 启动被测主会话
-    R->>C: 启动负责人，交付提示词路径
-    C->>A: 同目录发现，发出任务
-    A-->>C: 追问、进度、交付或障碍
-    C->>A: 按实际回复推进；等待时只读巡检
-    C->>C: 在主会话中报告场景结果
-    R->>R: 核对原生记录、回收进程、写终态
+    participant W as run --watch
+    U->>S: 发起测试
+    S->>R: 提交工程及版本
+    R-->>S: 后台接单，返回 runId
+    S->>W: 按 runId 异步监听
+    W-->>S: 房间就绪，按角色通知只读链接
+    S-->>U: 立即转交链接，继续监听
+    Note over W: 监听退出不影响两个 OMP 会话
+    W-->>S: 后台写入终态，返回结果及运行目录
+    S-->>U: 告知结束原因和产物位置
 ```
 
-按编号看**发起命令所在目录**的 `runs/<runId>/`，没有另外的查询服务：
+不使用监听也可以直接查看**发起命令所在目录**的 `runs/<runId>/`，无需另起服务：
 
 | 想知道什么 | 看哪里 |
 | --- | --- |
@@ -148,4 +170,4 @@ sequenceDiagram
 
 ## 验证框架自身
 
-从仓库根目录运行 `python3 -B agent-test/tests/test_run.py -v`。需要本机 PATH 上有 Nix store 安装的 OMP。验收从正式 `run` 提交真实 Git 工程，使用 Nix、两个真实 OMP 进程和原生会话；只用本地模型服务控制交付、401、挂起等分支。不使用真实账户，也不以这些脚本回复评判某个 SKILL 的效果。
+从仓库根目录运行 `python3 -B -m unittest discover -s agent-test/tests -v`。需要本机 PATH 上有 Nix store 安装的 OMP。端到端验收从正式 `run` 提交真实 Git 工程，使用 Nix、两个真实 OMP 进程和原生会话；只用本地模型服务控制交付、401、挂起等分支。常规回归不使用真实账户或公共旁听中继，也不以这些脚本回复评判某个 SKILL 的效果。

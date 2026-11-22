@@ -1,3 +1,5 @@
+import { writeFileSync } from "node:fs";
+import { join } from "node:path";
 import type { ExtensionAPI, ExtensionContext } from "@oh-my-pi/pi-coding-agent";
 
 export const IDENTITY = "agent-test/main";
@@ -85,7 +87,18 @@ export default function mainSession(pi: ExtensionAPI) {
 		if (ctx.agent.kind !== "main") return;
 		owner = ctx;
 		providerModel = pinnedModel(ctx, model);
-		pi.appendEntry(IDENTITY, { role, model, providerModel, run, pid: process.pid, sessionId: ctx.sessionManager.getSessionId() });
+		const sessionId = ctx.sessionManager.getSessionId();
+		if (process.env.AGENT_TEST_OBSERVE === "1") {
+			// Launcher PIDs can belong to shell wrappers. Only the native main can
+			// identify its own OMP process and the session its room must mirror.
+			try {
+				const cli = Bun.which("omp");
+				if (cli) writeFileSync(join(run, `${role}-view.json`),
+					JSON.stringify({ pid: process.pid, sessionId, cli, path: process.env.PATH }),
+					{ flag: "wx", mode: 0o600 });
+			} catch { /* Observation is optional and never affects the model run. */ }
+		}
+		pi.appendEntry(IDENTITY, { role, model, providerModel, run, pid: process.pid, sessionId });
 		await guard(ctx);
 		await ctx.sessionManager.ensureOnDisk();
 	});

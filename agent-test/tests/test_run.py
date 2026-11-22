@@ -220,9 +220,10 @@ exec {self.omp} "$@"
         self.git("commit", "-qm", case + " " + tag)
         return self.git("rev-parse", "HEAD")
 
-    def call(self, *args):
+    def call(self, *args, observe=False):
         return subprocess.run(
-            [self.exe, str(self.repo), *args],
+            # The offline suite must not publish its scripted dialogues to a live relay.
+            [self.exe, str(self.repo), *([] if observe else ["--no-observe"]), *args],
             env=self.env,
             cwd=self.launch,
             text=True,
@@ -231,8 +232,8 @@ exec {self.omp} "$@"
             timeout=90,
         )
 
-    def submit(self, *args):
-        r = self.call(*args)
+    def submit(self, *args, observe=False):
+        r = self.call(*args, observe=observe)
         self.assertEqual(r.returncode, 0, (r.stdout, r.stderr))
         reply = json.loads(r.stdout)
         self.assertEqual(reply["status"], "submitted")
@@ -293,6 +294,20 @@ exec {self.omp} "$@"
                         for x in json_lines(run / "run.log")
                     ):
                         time.sleep(0.1)
+
+    def test_rejoin_finished_private_run_without_reopening_rooms(self):
+        self.version()
+        run = self.submit()
+        end = self.terminal(run)
+        observed = output(
+            [self.exe, "--watch", run.name], env=self.env, cwd=self.launch, timeout=5
+        )
+        events = [json.loads(line) for line in observed.splitlines()]
+        self.assertNotIn("view", [event["event"] for event in events])
+        final = events[-1]
+        self.assertEqual(final["runId"], run.name)
+        self.assertEqual(Path(final["runDir"]), run)
+        self.assertEqual({key: final[key] for key in end}, end)
 
     def test_external_commit_selects_matching_environment_and_material(self):
         first = self.version(tag="v1")

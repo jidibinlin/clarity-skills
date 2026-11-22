@@ -322,6 +322,7 @@ def submit(args):
                     "drv": drv,
                     "roles": role_payload(roles),
                     "policy": policy,
+                    "observe": not args.no_observe,
                 },
             )
         except BaseException:
@@ -331,12 +332,21 @@ def submit(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        prog="run", description="Submit a committed agent test project."
+        prog="run", description="Submit a committed agent test project or watch an accepted run."
     )
-    parser.add_argument("project")
+    action = parser.add_mutually_exclusive_group(required=True)
+    action.add_argument("project", nargs="?", help="committed test project")
+    action.add_argument("--watch", metavar="RUN_ID", help="stream view links and the final result")
     parser.add_argument("--branch")
     parser.add_argument("--commit")
+    parser.add_argument("--no-observe", action="store_true", help="do not open OMP viewing rooms")
     args = parser.parse_args()
+    if args.watch is not None:
+        if args.branch is not None or args.commit is not None or args.no_observe:
+            parser.error("--watch cannot be combined with submission options")
+        from watch import watch
+
+        return watch(args.watch)
 
     def interrupt(signum, frame):
         raise KeyboardInterrupt()

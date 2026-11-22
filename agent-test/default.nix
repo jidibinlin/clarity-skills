@@ -14,6 +14,8 @@ runCommand "clarity-agent-test" { } ''
   install_program ${./src/submit.py} "$private/submit.py"
   install_program ${./src/supervise.py} "$private/supervise"
   cp ${./src/materials.py} "$private/materials.py"
+  cp ${./src/watch.py} "$private/watch.py"
+  cp ${./src/rooms.py} "$private/rooms.py"
   cp ${./omp/main-session.ts} "$extensions/main-session.ts"
   cp ${./omp/coordinator.ts} "$extensions/coordinator.ts"
   cp ${./omp/locked.yml} "$extensions/locked.yml"

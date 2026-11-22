@@ -200,6 +200,7 @@ class Supervisor:
         self.log = log
         self.children_file = children_file
         self.policy = payload["policy"]
+        self.observe = payload.get("observe", True)
         self.models = {r: payload["roles"][r]["model"] for r in ROLES}
         self.procs = {}
         self.ptys = {}
@@ -216,22 +217,28 @@ class Supervisor:
         if self.interrupt is None:
             self.interrupt = signal.Signals(signum).name
 
-    def model_overlay(self, role):
+    def role_overlay(self, role):
         # Preserve the content of the submitted profile, but pin its declared
         # model roles above workspace settings, as --model does for default.
         # OMP deep-merges --config: an omitted role remains project/native.
         profile = sessions(self.run, role).parent
         with (profile / "config.yml").open(encoding="utf-8") as stream:
             models = yaml.safe_load(stream)["modelRoles"]
-        overlay = profile.parent / "run-model-roles.yml"
+        overlay = profile.parent / "run-role.yml"
         with overlay.open("x", encoding="utf-8") as stream:
-            yaml.safe_dump({"modelRoles": models}, stream)
+            # --config also takes precedence over workspace/profile auto-control.
+            # Keep the project's relay, browser URL and other collab settings.
+            yaml.safe_dump({
+                "modelRoles": models,
+                "collab": {"autoStart": "view" if self.observe else "off"},
+            }, stream)
         return overlay
 
     def spawn(self, role, env, overlay, fd=None):
         model = self.models[role]
         work = self.run / "workspace"
-        env.update(AGENT_TEST_ROLE=role, AGENT_TEST_MODEL=model)
+        env.update(AGENT_TEST_ROLE=role, AGENT_TEST_MODEL=model,
+                   AGENT_TEST_OBSERVE="1" if self.observe else "0")
         args = [
             "omp",
             "--profile",
@@ -300,7 +307,7 @@ class Supervisor:
             base = role_environment(
                 self.run, {key for cfg in roles.values() for key in cfg["env"]}
             )
-            self.spawn(role, base | roles[role].pop("env"), self.model_overlay(role))
+            self.spawn(role, base | roles[role].pop("env"), self.role_overlay(role))
             if self.interrupt:
                 return "interrupted", {"signal": self.interrupt}
             role = "coordinator"
@@ -308,7 +315,7 @@ class Supervisor:
             try:
                 os.set_blocking(reader, False)
                 self.sel.register(reader, selectors.EVENT_READ, "control")
-                self.spawn(role, base | roles[role].pop("env"), self.model_overlay(role), writer)
+                self.spawn(role, base | roles[role].pop("env"), self.role_overlay(role), writer)
             finally:
                 os.close(writer)
         except (OSError, subprocess.SubprocessError, ValueError) as exc:
