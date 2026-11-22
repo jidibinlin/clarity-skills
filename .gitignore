@@ -1,2 +1,4 @@
 /.scratch/
 /plugins/dist/
+/runs/
+/agent-test/**/__pycache__/

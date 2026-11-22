@@ -1,0 +1,8 @@
+# These recovery switches are process-wide in OMP 19.0.1. Do not override
+# modelRoles: selection of task, advisor and other models remains native.
+retry:
+  modelFallback: false
+contextPromotion:
+  enabled: false
+task:
+  crossInstance: true

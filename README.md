@@ -2,6 +2,8 @@
 
 Human-led requirements and technical design, followed by implementation against approved models. Skills provide goals, useful methods and key decision boundaries; the model chooses ordinary investigation and implementation details.
 
+To exercise a skill with two independent OMP sessions, see the [isolated agent test runner](agent-test/README.md). It keeps the conversations and workspace for human analysis; it does not grade the skill.
+
 ## Workflows
 
 | Skill | Outcome | Content standard |
