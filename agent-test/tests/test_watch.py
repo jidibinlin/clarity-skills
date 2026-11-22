@@ -182,7 +182,13 @@ class WatchTests(unittest.TestCase):
     def test_termination_while_output_is_full_reaps_inflight_lookup(self):
         (self.run_dir / "home").mkdir()
         cli = self.run_dir / "cli"
-        cli.write_text("#!/bin/sh\necho $$ > ../lookup.pid\nexec sleep 10\n")
+        # The watcher test treats lookup.pid's existence as the readiness signal.
+        cli.write_text(
+            "#!/bin/sh\nset -e\n"
+            "echo $$ > ../lookup.pid.tmp\n"
+            "mv ../lookup.pid.tmp ../lookup.pid\n"
+            "exec sleep 10\n"
+        )
         cli.chmod(0o700)
         binding = self.run_dir / "coordinator-view.json"
         binding.write_text(json.dumps({"pid": os.getpid(), "sessionId": "main",
