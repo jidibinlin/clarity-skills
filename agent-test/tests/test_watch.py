@@ -1,5 +1,6 @@
 """Read-only watch consumers, using actual on-disk supervisor log records."""
 
+import fcntl
 import json
 import os
 import select
@@ -7,6 +8,7 @@ import signal
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -31,6 +33,16 @@ def watch_fixture(mode, library):
     sys.path.insert(0, library)
     import watch
     from unittest.mock import patch
+
+    if mode == "busy":
+        class BusyRooms(watch.ViewRooms):
+            # The subject is available immediately while the coordinator's
+            # real query launcher is still waiting for the fixture command.
+            def ready(self, wanted):
+                return super().ready(wanted) | {"subject": "first"}
+
+        with patch.object(watch, "ViewRooms", BusyRooms):
+            return watch.watch(RUN_ID)
 
     class ScriptedRooms:
         def __init__(self, run):
@@ -166,6 +178,51 @@ class WatchTests(unittest.TestCase):
                 finally:
                     proc.kill()
                     proc.communicate()
+
+    def test_termination_while_output_is_full_reaps_inflight_lookup(self):
+        (self.run_dir / "home").mkdir()
+        cli = self.run_dir / "cli"
+        cli.write_text("#!/bin/sh\necho $$ > ../lookup.pid\nexec sleep 10\n")
+        cli.chmod(0o700)
+        binding = self.run_dir / "coordinator-view.json"
+        binding.write_text(json.dumps({"pid": os.getpid(), "sessionId": "main",
+                                       "cli": str(cli), "path": os.environ["PATH"]}))
+        binding.chmod(0o600)
+        lookup = self.run_dir / "lookup.pid"
+        with self.log.open("w", buffering=1) as log:
+            print(json.dumps(SUBMITTED | {"pid": os.getpid()}), file=log)
+            for fd in (1, 2):
+                with self.subTest(fd=fd):
+                    lookup.unlink(missing_ok=True)
+                    reader, writer = os.pipe()
+                    try:
+                        os.write(writer, b"x" * fcntl.fcntl(writer, fcntl.F_GETPIPE_SZ))
+                        proc = subprocess.Popen(
+                            self.fixture_command("busy"), cwd=self.root,
+                            stdout=writer if fd == 1 else subprocess.DEVNULL,
+                            stderr=writer if fd == 2 else subprocess.DEVNULL,
+                        )
+                        try:
+                            # Observe the blocked write, rather than guessing a
+                            # delay. Leave the full pipe open and never drain it.
+                            deadline = time.monotonic() + 5
+                            while time.monotonic() < deadline:
+                                call = Path(f"/proc/{proc.pid}/syscall").read_text().split()
+                                if lookup.exists() and call[1:2] == [hex(fd)]:
+                                    break
+                                time.sleep(0.01)
+                            else:
+                                self.fail("watch never blocked while a lookup was in flight")
+                            lookup_pid = int(lookup.read_text())
+                            proc.terminate()
+                            proc.wait(timeout=2)
+                            self.assertFalse(Path(f"/proc/{lookup_pid}").exists())
+                        finally:
+                            proc.kill()
+                            proc.wait()
+                    finally:
+                        os.close(writer)
+                        os.close(reader)
 
     def test_run_id_is_not_a_path_or_alternate_spelling(self):
         self.log.write_text(json.dumps(SUBMITTED | {"pid": os.getpid()}) + "\n" +

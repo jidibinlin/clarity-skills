@@ -4,7 +4,6 @@ import json
 import os
 import select
 import signal
-import sys
 import uuid
 from contextlib import ExitStack
 from pathlib import Path
@@ -19,8 +18,16 @@ class ObservationError(Exception):
     """Safe diagnostic: never include the contents of logs or room records."""
 
 
+def _line(fd, text):
+    # A blocked write is interruptible; no Python buffer will retry it when
+    # the interpreter shuts down. Large terminal records may need more writes.
+    data = memoryview((text + "\n").encode("utf-8"))
+    while data:
+        data = data[os.write(fd, data):]
+
+
 def _emit(record):
-    print(json.dumps(record, ensure_ascii=False, separators=(",", ":")), flush=True)
+    _line(1, json.dumps(record, ensure_ascii=False, separators=(",", ":")))
 
 
 def _record(log):
@@ -104,40 +111,45 @@ def _follow(run, log, pid, latest):
             raise
         if not owns_log or exited.poll(0):
             return _final_read(log)
-        stopping = False
+        closing = False
 
         def disconnect(signum, frame):
-            # Unwind at the next poll, not midway through starting or closing
-            # a lookup. The supervisor is independent of this command.
-            nonlocal stopping
-            stopping = True
+            nonlocal closing
+            if not closing:
+                closing = True
+                raise KeyboardInterrupt  # Interrupt even a full output pipe.
 
         for sig in (signal.SIGTERM, signal.SIGHUP, signal.SIGINT):
             previous = signal.signal(sig, disconnect)
             resources.callback(signal.signal, sig, previous)
         rooms = ViewRooms(run)
         resources.callback(rooms.close)
-        first_poll = True
-        while not stopping:
-            views = rooms.ready(ROLES)
-            terminal = _terminal(log)
-            if terminal is not None:
-                return terminal
-            if exited.poll(0):
-                return _final_read(log)
-            for role, url in views.items():
-                if role in ROLES and url != latest.get(role):
-                    _emit({"event": "view", "runId": run.name, "role": role, "url": url})
-                    latest[role] = url
-            if first_poll:
-                pending = ROLES.difference(latest)
-                if pending:
-                    print("run: watch: no view available yet for " + ", ".join(sorted(pending)),
-                          file=sys.stderr, flush=True)
-                first_poll = False
-            if exited.poll(250):
-                return _final_read(log)
-        raise KeyboardInterrupt
+        try:
+            return _stream(run, log, exited, rooms, latest)
+        finally:
+            closing = True  # Further signals must not interrupt resource cleanup.
+
+
+def _stream(run, log, exited, rooms, latest):
+    first_poll = True
+    while True:
+        views = rooms.ready(ROLES)
+        terminal = _terminal(log)
+        if terminal is not None:
+            return terminal
+        if exited.poll(0):
+            return _final_read(log)
+        for role, url in views.items():
+            if role in ROLES and url != latest.get(role):
+                _emit({"event": "view", "runId": run.name, "role": role, "url": url})
+                latest[role] = url
+        if first_poll:
+            pending = ROLES.difference(latest)
+            if pending:
+                _line(2, "run: watch: no view available yet for " + ", ".join(sorted(pending)))
+            first_poll = False
+        if exited.poll(250):
+            return _final_read(log)
 
 
 def watch(run_id: str) -> int:
@@ -164,13 +176,10 @@ def watch(run_id: str) -> int:
                           "unavailableViews": sorted(ROLES.difference(latest))})
         return 0
     except BrokenPipeError:
-        # The consumer went away. Suppress interpreter shutdown's second flush.
-        with open(os.devnull, "wb") as sink:
-            os.dup2(sink.fileno(), sys.stdout.fileno())
         return 1
     except KeyboardInterrupt:
         return 130
     except (ObservationError, OSError) as error:
         detail = error.strerror if isinstance(error, OSError) else str(error)
-        print(f"run: watch failed: {detail}", file=sys.stderr)
+        _line(2, f"run: watch failed: {detail}")
         return 1

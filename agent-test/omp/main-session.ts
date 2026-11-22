@@ -1,4 +1,4 @@
-import { writeFileSync } from "node:fs";
+import { renameSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { ExtensionAPI, ExtensionContext } from "@oh-my-pi/pi-coding-agent";
 
@@ -50,6 +50,39 @@ export function providerFailure(message: Assistant | undefined, expected: string
 	return { cause, ...(Number.isInteger(http) && http! >= 100 && http! <= 599 ? { http } : {}) } as const;
 }
 
+// OMP 19.0.1 passes its live SessionManager here. Only the concrete manager
+// (not the extension-facing ReadonlySessionManager type) exposes move notices.
+// Without the optional hook the original identity is still safe to observe.
+type MoveNotice = { from: string; to: string };
+function bindView(ctx: ExtensionContext, file: string) {
+	const manager = ctx.sessionManager as ExtensionContext["sessionManager"] & {
+		onPersistenceNotice?(listener: (move: MoveNotice) => void): () => void;
+	};
+	const cli = Bun.which("omp");
+	let journal = manager.getSessionFile();
+	if (!cli || !journal) return;
+	const record = { pid: process.pid, sessionId: manager.getSessionId(), cli, path: process.env.PATH };
+	try {
+		// Exclusive creation: a later session_start (fork, switch, helper) can
+		// never claim the persisted identity, even if it uses the same process.
+		writeFileSync(file, JSON.stringify(record), { flag: "wx", mode: 0o600 });
+		return manager.onPersistenceNotice?.(({ from, to }) => {
+			const header = manager.getHeader();
+			if (from !== journal || to !== manager.getSessionFile() || header?.continuationOf !== record.sessionId ||
+				header.id !== manager.getSessionId()) return;
+			journal = to;
+			record.sessionId = header.id;
+			// Replace, don't truncate: a joining watcher sees the complete old or
+			// new record. The same listener also follows successive continuations.
+			try {
+				const tmp = `${file}.${process.pid}.tmp`;
+				writeFileSync(tmp, JSON.stringify(record), { flag: "wx", mode: 0o600 });
+				renameSync(tmp, file);
+			} catch { /* Observation must never interrupt native persistence. */ }
+		});
+	} catch { /* Observation is optional and never affects the model run. */ }
+}
+
 export default function mainSession(pi: ExtensionAPI) {
 	const role = process.env.AGENT_TEST_ROLE;
 	const model = process.env.AGENT_TEST_MODEL;
@@ -57,6 +90,7 @@ export default function mainSession(pi: ExtensionAPI) {
 	if ((role !== "subject" && role !== "coordinator") || !model || !run) return;
 	let owner: ExtensionContext | undefined;
 	let providerModel: string;
+	let stopObserving: (() => void) | undefined;
 
 	function marker(ctx: ExtensionContext, facts: Pick<Fault, "cause" | "http"> & { source?: string }) {
 		const session = ctx.sessionManager.getSessionFile();
@@ -89,19 +123,13 @@ export default function mainSession(pi: ExtensionAPI) {
 		providerModel = pinnedModel(ctx, model);
 		const sessionId = ctx.sessionManager.getSessionId();
 		if (process.env.AGENT_TEST_OBSERVE === "1") {
-			// Launcher PIDs can belong to shell wrappers. Only the native main can
-			// identify its own OMP process and the session its room must mirror.
-			try {
-				const cli = Bun.which("omp");
-				if (cli) writeFileSync(join(run, `${role}-view.json`),
-					JSON.stringify({ pid: process.pid, sessionId, cli, path: process.env.PATH }),
-					{ flag: "wx", mode: 0o600 });
-			} catch { /* Observation is optional and never affects the model run. */ }
+			stopObserving ??= bindView(ctx, join(run, `${role}-view.json`));
 		}
 		pi.appendEntry(IDENTITY, { role, model, providerModel, run, pid: process.pid, sessionId });
 		await guard(ctx);
 		await ctx.sessionManager.ensureOnDisk();
 	});
+	pi.on("session_shutdown", (_, ctx) => { if (ctx.agent.kind === "main") stopObserving?.(); });
 	pi.on("before_agent_start", (_, ctx) => guard(ctx));
 	pi.on("before_provider_request", (_, ctx) => guard(ctx));
 	pi.on("agent_start", (_, ctx) => {
