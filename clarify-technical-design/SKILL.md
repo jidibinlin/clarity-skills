@@ -79,8 +79,8 @@ flowchart TD
     B --> C["Human confirms<br/>macro basis and roadmap"]
     C --> R["Leader writes roadmap<br/>into issue.md"]
 
-    R -->|Human starts a ready group| S["Leader assigns the group<br/>and creates a human-facing designer"]
-    S --> D["Assigned designer:<br/>progressive modeling within group"]
+    R -->|Human starts a ready group| S["Leader acts as designer<br/>or assigns the group to a designer"]
+    S --> D["Progressive modeling within the group"]
     D --> E["Human confirms<br/>the complete group"]
     E --> F["Designer writes<br/>assigned model files"]
 

@@ -26,13 +26,13 @@ For a split model, the leader writes `issue.md` and `technical.md`.
    Write the confirmed roadmap into the workspace's `issue.md`.
 
 2. **Assign groups along the roadmap.**
-   At the human's request, assign ready groups or design them yourself.
+   At the human's request, design a ready group in the current session or assign it to a designer.
    Follow the roadmap in `issue.md`.
    Independent groups may progress concurrently.
    Start dependent groups from confirmed upstream models, after resolving their blockers.
 
-   Create each closed-loop designer as a separate AI agent with its own human-facing conversation.
-   The human must be able to open that conversation and talk to the agent directly.
+   Each assigned group has its own session.
+   The human must be able to open that session and work directly with the designer.
    Disable automatic notifications from designers to the leader.
 
    Each assignment includes:
@@ -60,7 +60,6 @@ For a split model, the leader writes `issue.md` and `technical.md`.
 
 ## Closed-loop designer
 
-A closed-loop designer is a human-facing AI agent.
 Make design decisions for your assigned behavior directly with the human.
 Write your assigned files during local clarification.
 
@@ -88,7 +87,7 @@ Group C depends on their confirmed designs.
 The roadmap marks a coordination point requiring both A and B before group C starts.
 
 The leader develops the Design Alignment Roadmap with the human and records it in `issue.md`.
-Each designer is a separate AI agent with its own human-facing conversation.
+Each assigned group has its own human-facing session.
 Each designer clarifies directly with the human and writes confirmed content.
 The human chooses the alignment order and initiates coordination.
 The leader then reads and revises the affected models directly with the human.
@@ -110,8 +109,8 @@ sequenceDiagram
     Note over H,B: A and B may prepare independently<br/>The human chooses the alignment order
 
     H->>L: Start groups A and B
-    L->>A: Create human-facing agent and assign group A
-    L->>B: Create human-facing agent and assign group B
+    L->>A: Assign group A in its own session
+    L->>B: Assign group B in its own session
 
     loop Until group A's design is complete
         A->>H: Present the proposal and open questions
@@ -154,7 +153,7 @@ sequenceDiagram
     Note over L,C: C's prerequisites are confirmed and written<br/>Blocking issues are resolved
 
     H->>L: Start group C
-    L->>C: Create human-facing agent with upstream models
+    L->>C: Assign group C in its own session with confirmed upstream models
 
     loop Until group C's design is complete
         C->>H: Present the proposal and open questions
