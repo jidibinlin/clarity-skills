@@ -2,12 +2,61 @@
 
 import json
 import os
+import signal
 import stat
 import subprocess
+from contextlib import contextmanager
+from dataclasses import dataclass
 from pathlib import Path
-from queue import Empty, SimpleQueue
-from threading import Thread
 from time import monotonic
+
+
+@contextmanager
+def _defer_cancellation():
+    # Never interrupt a spawn before we own the process, or interrupt teardown
+    # after removing it from pending. The commands are killed with SIGKILL.
+    old = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM, signal.SIGHUP})
+    try:
+        yield
+    finally:
+        signal.pthread_sigmask(signal.SIG_SETMASK, old)
+
+
+@dataclass
+class _Query:
+    proc: subprocess.Popen
+    output: int
+    deadline: float
+    main: dict
+    host: dict | None
+
+    def close(self):
+        # poll()/wait() would reap the leader and allow its PID to be reused.
+        # Leave it waitable until its dedicated group (including wrappers'
+        # children) has been signalled. Never touch either OMP session group.
+        try:
+            os.killpg(self.proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        finally:
+            os.close(self.output)
+        try:
+            self.proc.wait(timeout=0.5)
+        except subprocess.TimeoutExpired:
+            pass  # SIGKILL is already pending, including for a stuck syscall.
+
+    def receive(self, now):
+        state = os.waitid(os.P_PID, self.proc.pid, os.WEXITED | os.WNOHANG | os.WNOWAIT)
+        if not state:
+            return None if now < self.deadline else {}
+        if state.si_code == os.CLD_EXITED and state.si_status == 0:
+            try:
+                value = json.loads(os.pread(self.output, 1024 * 1024, 0))
+                if isinstance(value, dict) and value.get("version") == 1:
+                    return value
+            except (OSError, ValueError, RecursionError):
+                pass
+        return {}
 
 
 class ViewRooms:
@@ -35,72 +84,80 @@ class ViewRooms:
             pass  # Includes startup races; don't remember an unavailable identity.
         return None
 
-    def _cli(self, main, *args):
-        # Never discover omp on the watcher's PATH or inherit its HOME, OMP_*,
-        # XDG_*, provider keys, etc. `collab` is a CLI query, not a new session.
-        proc = subprocess.run(
-            [main["cli"], "collab", *args, "--json"], cwd=self.run / "home",
-            env={"HOME": str(self.run / "home"), "PATH": main["path"], "TMPDIR": str(self.run),
-                 "LANG": "C.UTF-8", "PI_SKIP_VERSION_CHECK": "1"},
-            stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-            timeout=4, check=False,
-        )
-        if proc.returncode == 0:
-            result = json.loads(proc.stdout)
-            if isinstance(result, dict) and result.get("version") == 1:
-                return result
-        return {}
+    def _start(self, role, main, host=None):
+        args = ["list"] if host is None else ["link", str(main["pid"]), "--view"]
+        # A private memory file avoids both pipe backpressure while the watcher
+        # sleeps and writing the CLI's bearer URL to a named file or common log.
+        fd = os.memfd_create("omp-collab")
+        try:
+            proc = subprocess.Popen(
+                [main["cli"], "collab", *args, "--json"], cwd=self.run / "home",
+                env={"HOME": str(self.run / "home"), "PATH": main["path"], "TMPDIR": str(self.run),
+                     "LANG": "C.UTF-8", "PI_SKIP_VERSION_CHECK": "1"},
+                stdin=subprocess.DEVNULL, stdout=fd, stderr=subprocess.DEVNULL, start_new_session=True,
+            )
+        except BaseException:
+            os.close(fd)
+            raise
+        self.pending[role] = _Query(proc, fd, monotonic() + 4, main, host)
 
-    def _link(self, main):
-        hosts = self._cli(main, "list").get("hosts")
+    @staticmethod
+    def _match(main, hosts):
         if not isinstance(hosts, list):
             return None
         matches = [h for h in hosts if isinstance(h, dict) and h.get("pid") == main["pid"]]
         if len(matches) != 1:
             return None
         host = matches[0]
-        if (host.get("sessionId") != main["sessionId"] or host.get("cwd") != str(self.run / "workspace")
+        if (host.get("sessionId") != main["sessionId"]
                 or host.get("access") != "view" or host.get("relayConnected") is not True
                 or not isinstance(host.get("instanceId"), str) or not host["instanceId"]
                 or type(host.get("generation")) is not int or host["generation"] < 1):
             return None
-        # The official command re-lists internally. Discard a room that rotated
-        # between commands even if it belongs to the very same live OMP PID.
-        link = self._cli(main, "link", str(main["pid"]), "--view")
-        if (link.get("access") == "view" and link.get("instanceId") == host["instanceId"]
-                and link.get("generation") == host["generation"] and isinstance(link.get("url"), str)
-                and link["url"].startswith(("https://", "http://"))):
-            return link["url"]
+        return host
+
+    def _advance(self, role, now):
+        query = self.pending.get(role)
+        if query is None:
+            if now >= self.retry_at.get(role, 0):
+                self.retry_at[role] = now + 0.5
+                if (main := self._main(role)) is not None:
+                    self._start(role, main)
+            return None
+
+        result = query.receive(now)
+        if result is None:
+            return None  # still running; never block the other role or terminal
+        del self.pending[role]
+        query.close()
+        self.retry_at[role] = now + 0.5
+        if query.host is None:
+            host = self._match(query.main, result.get("hosts"))
+            if host is not None:
+                self._start(role, query.main, host)
+        # The official link command re-lists internally. A rotated generation
+        # must be re-identified before any of its new capabilities are returned.
+        elif (result.get("access") == "view" and result.get("instanceId") == query.host["instanceId"]
+              and result.get("generation") == query.host["generation"] and isinstance(result.get("url"), str)
+              and result["url"].startswith(("https://", "http://"))):
+            self.retry_at[role] = now + 5
+            return result["url"]
         return None
 
-    def _lookup(self, main, result):
-        try:
-            url = self._link(main)
-        except (OSError, ValueError, RecursionError, subprocess.SubprocessError):
-            url = None
-        result.put(url)
-
     def ready(self, wanted: set[str]) -> dict[str, str]:
-        # Each role has at most one bounded lookup. Neither an unresponsive
-        # registry nor a delayed subject blocks the other role or terminal.
+        now = monotonic()
         ready = {}
-        for role in wanted & {"subject", "coordinator"}:
-            if role in self.pending:
+        with _defer_cancellation():
+            for role in wanted & {"subject", "coordinator"}:
                 try:
-                    url = self.pending[role].get_nowait()
-                except Empty:
-                    continue
-                del self.pending[role]
-                if url:
-                    ready[role] = url
-                    continue
-                self.retry_at[role] = monotonic() + 0.5
-            if monotonic() < self.retry_at.get(role, 0):
-                continue
-            if (main := self._main(role)) is not None:
-                result = SimpleQueue()
-                self.pending[role] = result
-                # Short-lived watcher-owned work; must never hold open a watch
-                # that already found terminal, or become a supervisor input.
-                Thread(target=self._lookup, args=(main, result), daemon=True).start()
+                    if url := self._advance(role, now):
+                        ready[role] = url
+                except (OSError, ValueError, subprocess.SubprocessError):
+                    self.retry_at[role] = now + 0.5
         return ready
+
+    def close(self):
+        with _defer_cancellation():
+            while self.pending:
+                _, query = self.pending.popitem()
+                query.close()

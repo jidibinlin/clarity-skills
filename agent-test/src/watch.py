@@ -3,11 +3,16 @@
 import json
 import os
 import select
+import signal
 import sys
 import uuid
+from contextlib import ExitStack
 from pathlib import Path
 
 from rooms import ViewRooms
+
+
+ROLES = {"subject", "coordinator"}
 
 
 class ObservationError(Exception):
@@ -73,12 +78,13 @@ def _owns_log(pid, log):
     return False
 
 
-def _follow(run, log, pid, wanted):
+def _follow(run, log, pid, latest):
     try:
         pidfd = os.pidfd_open(pid)
     except ProcessLookupError:
         return _final_read(log)
-    try:
+    with ExitStack() as resources:
+        resources.callback(os.close, pidfd)
         # Pin the PID before identifying its log. pidfd becomes readable on
         # exit (including zombies), and cannot be retargeted through PID reuse.
         exited = select.poll()
@@ -98,27 +104,40 @@ def _follow(run, log, pid, wanted):
             raise
         if not owns_log or exited.poll(0):
             return _final_read(log)
+        stopping = False
+
+        def disconnect(signum, frame):
+            # Unwind at the next poll, not midway through starting or closing
+            # a lookup. The supervisor is independent of this command.
+            nonlocal stopping
+            stopping = True
+
+        for sig in (signal.SIGTERM, signal.SIGHUP, signal.SIGINT):
+            previous = signal.signal(sig, disconnect)
+            resources.callback(signal.signal, sig, previous)
         rooms = ViewRooms(run)
-        announced_pending = False
-        while True:
-            views = rooms.ready(wanted) if wanted else {}
+        resources.callback(rooms.close)
+        first_poll = True
+        while not stopping:
+            views = rooms.ready(ROLES)
             terminal = _terminal(log)
             if terminal is not None:
                 return terminal
             if exited.poll(0):
                 return _final_read(log)
             for role, url in views.items():
-                if role in wanted:
+                if role in ROLES and url != latest.get(role):
                     _emit({"event": "view", "runId": run.name, "role": role, "url": url})
-                    wanted.remove(role)
-            if wanted and not announced_pending:
-                print("run: watch: no view available yet for " + ", ".join(sorted(wanted)),
-                      file=sys.stderr, flush=True)
-                announced_pending = True
+                    latest[role] = url
+            if first_poll:
+                pending = ROLES.difference(latest)
+                if pending:
+                    print("run: watch: no view available yet for " + ", ".join(sorted(pending)),
+                          file=sys.stderr, flush=True)
+                first_poll = False
             if exited.poll(250):
                 return _final_read(log)
-    finally:
-        os.close(pidfd)
+        raise KeyboardInterrupt
 
 
 def watch(run_id: str) -> int:
@@ -130,7 +149,7 @@ def watch(run_id: str) -> int:
         if canonical != run_id:
             raise ObservationError("runId must be a canonical UUID")
         run = Path.cwd() / "runs" / run_id
-        wanted = {"subject", "coordinator"}
+        latest = {}
         with (run / "run.log").open("rb") as log:
             accepted = _record(log)
             if accepted is None or accepted.get("event") != "submitted":
@@ -140,8 +159,9 @@ def watch(run_id: str) -> int:
                 pid = accepted.get("pid")
                 if type(pid) is not int or not 0 < pid < 2**31:
                     raise ObservationError("invalid supervisor PID in run.log")
-                terminal = _follow(run, log, pid, wanted)
-        _emit(terminal | {"runId": run_id, "runDir": str(run), "unavailableViews": sorted(wanted)})
+                terminal = _follow(run, log, pid, latest)
+        _emit(terminal | {"runId": run_id, "runDir": str(run),
+                          "unavailableViews": sorted(ROLES.difference(latest))})
         return 0
     except BrokenPipeError:
         # The consumer went away. Suppress interpreter shutdown's second flush.

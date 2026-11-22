@@ -3,6 +3,7 @@
 import json
 import os
 import select
+import signal
 import subprocess
 import sys
 import tempfile
@@ -22,6 +23,35 @@ TERMINAL = {
     "exits": {"subject": -15, "coordinator": -15},
     "cleanup": "complete", "evidence": "complete",
 }
+
+
+def watch_fixture(mode, library):
+    # The native provider owns rotation/timing, not the watcher. Drive just
+    # that boundary deterministically while exercising the real log and PID.
+    sys.path.insert(0, library)
+    import watch
+    from unittest.mock import patch
+
+    class ScriptedRooms:
+        def __init__(self, run):
+            self.run = run
+            self.lease = run / "active-lookup"
+            self.lease.touch()
+            self.urls = iter(["first", "first", None, "first", "replacement"])
+
+        def ready(self, wanted):
+            url = "first" if mode == "steady" else next(self.urls, "stale")
+            if url == "stale":
+                # Supervisor finishes while the lookup is returning a stale URL.
+                with (self.run / "run.log").open("a") as log:
+                    print(json.dumps(TERMINAL), file=log)
+            return {"subject": url} if url and "subject" in wanted else {}
+
+        def close(self):
+            self.lease.unlink()
+
+    with patch.object(watch, "ViewRooms", ScriptedRooms):
+        return watch.watch(RUN_ID)
 
 
 class WatchTests(unittest.TestCase):
@@ -98,6 +128,45 @@ class WatchTests(unittest.TestCase):
         self.assertIn("supervisor", result.stderr.lower())
         self.assertIn("terminal", result.stderr.lower())
 
+    def fixture_command(self, mode):
+        exe = os.environ.get("AGENT_TEST_BIN")
+        library = Path(exe).resolve().parent if exe else Path(__file__).resolve().parents[1] / "src"
+        return [sys.executable, "-B", str(Path(__file__).resolve()), "--fixture", mode, str(library)]
+
+    def test_changed_view_replaces_only_that_roles_link_before_terminal(self):
+        with self.log.open("w", buffering=1) as log:
+            print(json.dumps(SUBMITTED | {"pid": os.getpid()}), file=log)
+            result = subprocess.run(self.fixture_command("rotate"), cwd=self.root,
+                                    timeout=5, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual([json.loads(line) for line in result.stdout.splitlines()], [
+            {"event": "view", "role": "subject", "runId": RUN_ID, "url": "first"},
+            {"event": "view", "role": "subject", "runId": RUN_ID, "url": "replacement"},
+            TERMINAL | {"runDir": str(self.run_dir), "runId": RUN_ID,
+                        "unavailableViews": ["coordinator"]},
+        ])
+        self.assertFalse((self.run_dir / "active-lookup").exists())
+
+    def test_disconnect_signals_release_room_lookup_without_a_terminal(self):
+        for sig in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP):
+            with self.subTest(sig=sig), self.log.open("w", buffering=1) as log:
+                submitted = json.dumps(SUBMITTED | {"pid": os.getpid()})
+                print(submitted, file=log)
+                proc = subprocess.Popen(self.fixture_command("steady"), cwd=self.root,
+                                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                try:
+                    ready, _, _ = select.select([proc.stdout], [], [], 5)
+                    self.assertTrue(ready, "watch did not announce the live room")
+                    self.assertEqual(json.loads(proc.stdout.readline())["url"], "first")
+                    proc.send_signal(sig)
+                    stdout, _ = proc.communicate(timeout=5)
+                    self.assertEqual(stdout, b"")
+                    self.assertFalse((self.run_dir / "active-lookup").exists())
+                    self.assertEqual(self.log.read_text(), submitted + "\n")
+                finally:
+                    proc.kill()
+                    proc.communicate()
+
     def test_run_id_is_not_a_path_or_alternate_spelling(self):
         self.log.write_text(json.dumps(SUBMITTED | {"pid": os.getpid()}) + "\n" +
                             json.dumps(TERMINAL) + "\n")
@@ -111,4 +180,6 @@ class WatchTests(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    if sys.argv[1:2] == ["--fixture"]:
+        sys.exit(watch_fixture(*sys.argv[2:]))
     unittest.main()

@@ -3,14 +3,12 @@
 import base64
 import hashlib
 import json
+import select
 import subprocess
-import sys
 import threading
-import time
 import unittest
 from contextlib import contextmanager
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from pathlib import Path
 
 import test_run  # Reuse the real package, PTY, Git, Nix and local-provider fixture.
 
@@ -81,27 +79,31 @@ class NativeRoomsTests(unittest.TestCase):
     def test_default_discovers_only_view_rooms_attributed_to_native_main_roles(self):
         self.project("owner_hang", delay_subject=True)
         self.h.timers(heartbeat=30, total=80, discovery=60)
+        volume = self.h.root / "artifact-volume"
+        volume.mkdir()
+        (self.h.launch / "runs").symlink_to(volume, target_is_directory=True)
         run = self.h.submit(observe=True)
-        private = Path(self.h.exe).resolve().parent
-        sys.path.insert(0, str(private))
-        try:
-            from rooms import ViewRooms
-        finally:
-            sys.path.remove(str(private))
-        rooms = ViewRooms(run)
-        roles = {"subject", "coordinator"}
         found = {}
-        deadline = time.monotonic() + 30
-        while found.keys() != roles and time.monotonic() < deadline:
-            for role, url in rooms.ready(roles - found.keys()).items():
-                self.assertTrue(url.startswith(f"http://127.0.0.1:{self.port}/{role}/#"), role)
-                if role == "subject":
-                    self.assertIn("coordinator", found)  # blocked PTY wrapper had no room
-                found[role] = url
-                if role == "coordinator":
-                    (self.h.root / "release-subject").touch()
-            time.sleep(0.1)
-        self.assertEqual(set(found), roles)  # no bearer URLs in failure diagnostics
+        with subprocess.Popen(
+            [self.h.exe, "--watch", run.name], cwd=self.h.launch, env=self.h.env,
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, bufsize=0,
+        ) as watcher:
+            try:
+                for role in ("coordinator", "subject"):
+                    self.assertTrue(select.select([watcher.stdout], [], [], 25)[0], role)
+                    line = watcher.stdout.readline()
+                    self.assertTrue(line, f"watch ended before {role}'s link")
+                    event = json.loads(line)
+                    self.assertEqual((event["event"], event["role"], event["runId"]),
+                                     ("view", role, run.name))
+                    url = event["url"]
+                    self.assertTrue(url.startswith(f"http://127.0.0.1:{self.port}/{role}/#"), role)
+                    found[role] = url
+                    if role == "coordinator":
+                        (self.h.root / "release-subject").touch()
+            finally:
+                watcher.terminate()
+                watcher.wait(timeout=5)
         self.assertTrue(all(url not in (run / 'run.log').read_text() for url in found.values()))
         cli = subprocess.run(
             [self.h.omp, "collab", "list", "--json"], capture_output=True, check=True,

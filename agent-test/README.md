@@ -122,13 +122,13 @@ run /path/to/test-project --branch main --commit abc123  # 该分支历史中的
 run --watch "$runId"   # 用提交返回的编号，不是 harness 的后台任务编号
 ```
 
-这是一个只读监听命令。它逐行输出 JSON：每个房间就绪时发 `event: "view"`，带 `role`（`coordinator` 或 `subject`）和可直接打开的 `url`。结束时发 `event: "terminal"`，带停止原因和绝对路径 `runDir`。**运行目录就是产物**；框架不提取终稿，不判断 SKILL 效果。没有旁听链接不等于测试失败。
+这是一个只读监听命令。它逐行输出 JSON：每个房间就绪时发 `event: "view"`，带 `role`（`coordinator` 或 `subject`）和可直接打开的 `url`。如果 OMP 重建了房间，会再发该角色的新链接。结束时发 `event: "terminal"`，带停止原因和绝对路径 `runDir`。**运行目录就是产物**；框架不提取终稿，不判断 SKILL 效果。没有旁听链接不等于测试失败。
 
-`terminal` 表示**读到了运行终态**，不是测试成功；看 `scene` 和 `reason` 区分正常完成、场景异常和运行故障。`unavailableViews` 只列这次监听没拿到链接的角色，不表示整场测试从未开过旁听。
+`terminal` 表示**读到了运行终态**，不是测试成功。`scene` 是负责人报告的场景结果，`reason` 是实际停止原因。`evidence` 或 `cleanup` 为 `incomplete` 时，即使 `scene` 是 `completed`，也应明确说明记录不完整或进程未完全回收。`unavailableViews` 只列这次监听没拿到链接的角色，不表示整场测试从未开过旁听。
 
 **委派给 harness subagent 时**，可以直接这样交代：
 
-> 提交这个测试，把运行编号告诉我。从同一个目录异步调用 `run --watch <编号>`，Bash 设 `timeout: 0`，`notify` 匹配 `"event":"view"`。每收到一个角色的只读链接，**立即发回父会话，不结束委派**。收到终态后，再回复结束原因和运行目录。不用反复调用命令查状态。
+> 提交这个测试，把运行编号告诉我。从同一个目录异步调用 `run --watch <编号>`，Bash 设 `timeout: 0`，`notify` 匹配 `"event":"view"`。每收到一个角色的只读链接，**立即发回父会话，不结束委派**。收到终态后，回复场景结果、停止原因和运行目录；如果证据或清理不完整，也明确告诉我。不用反复调用命令查状态。
 
 实时监听需要 Linux 的 `pidfd_open`（5.3+）和当前用户读取监督进程 `/proc/<pid>/fdinfo` 的权限；重看已经写入的终态不依赖活进程。
 
