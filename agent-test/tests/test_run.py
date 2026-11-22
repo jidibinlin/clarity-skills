@@ -17,6 +17,8 @@ from pathlib import Path
 from provider import Provider
 
 PACKAGE = Path(__file__).resolve().parents[1]
+# The fixtures' only flake input is nixpkgs. Share its lock bytes, not a checkout.
+_LOCK_BY_STORE_PATH: dict[Path, bytes] = {}
 
 
 def output(argv, **kwargs):
@@ -215,8 +217,15 @@ exec {self.omp} "$@"
                 json.dumps({"modelRoles": {"task": "beta/desk-helper"}}),
             )
         self.git("add", "--all")
-        if not (self.repo / "flake.lock").exists():
-            output(["nix", "flake", "lock", "--offline", str(self.repo)], env=self.env)
+        lock = self.repo / "flake.lock"
+        if not lock.exists():
+            cached = _LOCK_BY_STORE_PATH.get(self.pkgs)
+            if cached is None:
+                output(["nix", "flake", "lock", "--offline", str(self.repo)], env=self.env)
+                if self.pkgs.is_relative_to("/nix/store"):
+                    _LOCK_BY_STORE_PATH[self.pkgs] = lock.read_bytes()
+            else:
+                lock.write_bytes(cached)
             self.git("add", "flake.lock")
         self.git("commit", "-qm", case + " " + tag)
         return self.git("rev-parse", "HEAD")

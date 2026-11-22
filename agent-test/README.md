@@ -173,3 +173,5 @@ sequenceDiagram
 ## 验证框架自身
 
 从仓库根目录运行 `python3 -B -m unittest discover -s agent-test/tests -v`。需要本机 PATH 上有 Nix store 安装的 OMP。端到端验收从正式 `run` 提交真实 Git 工程，使用 Nix、两个真实 OMP 进程和原生会话；只用本地模型服务控制交付、401、挂起等分支。常规回归不使用真实账户或公共旁听中继，也不以这些脚本回复评判某个 SKILL 的效果。
+
+框架回归在每个测试进程内为同一个 Nix store 中的 `nixpkgs` 只生成一次 `flake.lock`，各测试工程分别写入并提交自己的副本。可变的本地 `nixpkgs` 目录不复用锁。此优化不改变 `run` 对提测工程的处理。
