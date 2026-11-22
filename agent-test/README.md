@@ -175,3 +175,11 @@ sequenceDiagram
 从仓库根目录运行 `python3 -B -m unittest discover -s agent-test/tests -v`。需要本机 PATH 上有 Nix store 安装的 OMP。端到端验收从正式 `run` 提交真实 Git 工程，使用 Nix、两个真实 OMP 进程和原生会话；只用本地模型服务控制交付、401、挂起等分支。常规回归不使用真实账户或公共旁听中继，也不以这些脚本回复评判某个 SKILL 的效果。
 
 框架回归在每个测试进程内为同一个 Nix store 中的 `nixpkgs` 只生成一次 `flake.lock`，各测试工程分别写入并提交自己的副本。可变的本地 `nixpkgs` 目录不复用锁。此优化不改变 `run` 对提测工程的处理。
+
+要在同一台开发机上同时跑多条用例，从仓库根目录执行：
+
+```sh
+./agent-test/tests/parallel.sh 8
+```
+
+`8` 指最多同时跑 8 条独立用例。端到端用例仍各用自己的测试工程和 HOME，同一场测试的两个 OMP 会话不会被拆开。省略参数用 4 路；机器繁忙时可降低并行度，排查问题时仍可用上面的串行命令。脚本用 Nix 准备 `pytest-xdist`，提交 SKILL 测试不需要它。
