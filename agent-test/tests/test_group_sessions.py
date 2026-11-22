@@ -8,7 +8,7 @@ import signal
 import subprocess
 import threading
 import unittest
-from contextlib import contextmanager
+from contextlib import ExitStack, contextmanager
 
 import test_run
 from provider import Dialogue, PEER, Reply, finish, read_tool, send
@@ -21,35 +21,37 @@ def designer(h, run, name):
     agent.mkdir(parents=True)
     for file in ('config.yml', 'models.yml'):
         shutil.copy(profiles / 'subject/agent' / file, agent / file)
-    master, slave = pty.openpty()
-    try:
-        proc = subprocess.Popen(
-            [h.omp, '--profile', name, '--model', 'beta/desk-groups', '--no-title',
-             '--config', test_run.PACKAGE / 'omp/locked.yml'],
-            cwd=run / 'workspace', start_new_session=True,
-            env={**h.env, 'HOME': str(run / 'home'), 'TMPDIR': str(run), 'BETA_KEY': h.b.key},
-            stdin=slave, stdout=slave, stderr=slave,
-        )
-    finally:
-        os.close(slave)
+    def stop(proc):
+        try:
+            if proc.poll() is None:
+                os.killpg(proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        proc.wait(timeout=5)
 
-    def drain():
+    def drain(master):
         try:
             while os.read(master, 65536):
                 pass
         except OSError:  # Linux PTY hangs up when the last slave closes.
             pass
 
-    reader = threading.Thread(target=drain, daemon=True)
-    reader.start()
-    try:
+    with ExitStack() as resources:
+        master, slave = pty.openpty()
+        resources.callback(os.close, master)
+        with os.fdopen(slave, 'rb', buffering=0) as tty:
+            reader = threading.Thread(target=drain, args=(master,), daemon=True)
+            reader.start()
+            resources.callback(reader.join, 5)
+            proc = subprocess.Popen(
+                [h.omp, '--profile', name, '--model', 'beta/desk-groups', '--no-title',
+                 '--config', test_run.PACKAGE / 'omp/locked.yml'],
+                cwd=run / 'workspace', start_new_session=True,
+                env={**h.env, 'HOME': str(run / 'home'), 'TMPDIR': str(run), 'BETA_KEY': h.b.key},
+                stdin=tty, stdout=tty, stderr=tty,
+            )
+            resources.callback(stop, proc)
         yield proc.pid
-    finally:
-        if proc.poll() is None:
-            os.killpg(proc.pid, signal.SIGKILL)
-        proc.wait(timeout=5)
-        os.close(master)
-        reader.join(timeout=5)
 
 
 def roster(d):
@@ -67,6 +69,9 @@ def owner(d):
         return read_tool('agent://peers')
     lead = d.verified_peer
     if not d.sent('Open the design'):
+        # An attempted opening isn't a delivery: OMP refuses empty peer messages.
+        if not d.results_for('write', path=f'agent://{lead}'):
+            return send(lead, '')
         other = next(pid for pid in others if pid != lead)
         if not d.results_for('write', path=f'agent://{other}'):
             return send(other, 'Premature opening')
