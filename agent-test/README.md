@@ -100,7 +100,7 @@ providers:
 
 ## 4. 提交并查看结果
 
-先将需要参测的文件和锁文件提交到提测工程。新工程可在 `test-project/` 执行 `git init -b main`、`git add .`、`nix flake lock`、`git add flake.lock`、`git commit -m 'Prepare skill scenario'`。**未提交的改动、仅暂存的文件和未跟踪附件都不参测。** 不要求推送或切换分支。
+先将需要参测的文件和锁文件提交到提测工程。新工程可在 `test-project/` 执行 `git init -b main`、`git add .`、`nix flake lock`、`git add flake.lock`、`git commit -m 'Prepare skill scenario'`。不要求推送或切换分支。运行器不从你的当前工作区补拷改动、暂存文件或未跟踪附件。若工程原有的检出步骤在选定提交的独立副本中生成了材料，生成物会随实际起点一起归档。
 
 在希望保存结果的目录执行以下**一种**：
 

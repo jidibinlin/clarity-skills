@@ -149,8 +149,7 @@ class RunTests(unittest.TestCase):
             self.put(
                 "delay.sh",
                 f"""if [ "$AGENT_TEST_ROLE" = subject ]; then
-  sessions="$HOME/.omp/profiles/coordinator/agent/sessions"
-  until grep -Rq 'No other omp instances in this project' "$sessions" 2>/dev/null; do sleep 0.1; done
+  until test -f "{self.root}/release-subject"; do sleep 0.1; done
 fi
 exec {self.omp} "$@"
 """,
@@ -308,15 +307,21 @@ exec {self.omp} "$@"
         outer = "host-only-instruction-a0cb"
         inner = "submitted-workspace-instruction-ca03"
         subject_skill = "subject-only-lamp-guide"
+        outer_skill = "host-only-skill-b226"
         output(["git", "init", "-q", str(self.launch)], env=self.env)
         (self.launch / "AGENTS.md").write_text(outer)
+        skill = self.launch / ".agents/skills" / outer_skill / "SKILL.md"
+        skill.parent.mkdir(parents=True)
+        skill.write_text(
+            f"---\nname: {outer_skill}\ndescription: Host-only skill.\n---\nDo not load.\n"
+        )
         self.put("scene/AGENTS.md", inner)
         self.put(
             f"roles/subject/skills/{subject_skill}/SKILL.md",
             f"---\nname: {subject_skill}\ndescription: A role-specific repair method.\n---\nCheck the filament.\n",
         )
         for endpoint in (self.a, self.b):
-            endpoint.context_markers = {outer, inner, subject_skill}
+            endpoint.context_markers = {outer, outer_skill, inner, subject_skill}
         self.version()
         end = self.terminal(self.submit())
         self.assertEqual(end["scene"], "completed", end)
@@ -363,20 +368,54 @@ exec {self.omp} "$@"
         self.git("add", "test.nix")
         self.git("commit", "-qm", "missing")
         self.put("local.md", "local only")
-        for args in [(), ("--commit", "HEAD"), ("--branch", "no-such-branch")]:
+        failed = self.call()
+        self.assertNotEqual(failed.returncode, 0)
+        self.assertIn("local.md", failed.stderr)
+        self.assertNotIn("submitted", failed.stdout)
+
+    def test_invalid_version_is_not_silently_replaced_by_head(self):
+        tip = self.version()
+        self.git("branch", "old", tip)
+        newer = self.version(tag="newer")
+        for args, diagnostic in [
+            (("--commit", tip), "--commit requires --branch"),
+            (("--branch", "no-such-branch"), "branch"),
+            (("--branch", "old", "--commit", newer), "not on requested branch"),
+        ]:
             with self.subTest(args=args):
                 r = self.call(*args)
                 self.assertNotEqual(r.returncode, 0)
                 self.assertNotIn("submitted", r.stdout)
-                self.assertTrue(r.stderr.strip())
+                self.assertIn(diagnostic, r.stderr)
+
+    def test_material_generated_by_project_checkout_is_part_of_start(self):
+        commit = self.version()
+        hook = self.repo / ".git/hooks/post-checkout"
+        hook.write_text('#!/bin/sh\nprintf "%s\\n" "$2" > scene/generated.private\n')
+        hook.chmod(0o700)
+        self.put("scene/generated.private", "dirty source, not the selected checkout")
+        run = self.submit()
+        self.assertEqual(self.terminal(run)["scene"], "completed")
+        with tarfile.open(run / "start.tar.gz") as archive:
+            self.assertEqual(
+                archive.extractfile("./generated.private").read().decode().strip(),
+                commit,
+            )
+        self.assertEqual(
+            (run / "workspace/generated.private").read_text().strip(), commit
+        )
 
     def test_delayed_peer_is_discovered_before_work_begins(self):
         self.version(delay_subject=True)
         run = self.submit()
+        deadline = time.monotonic() + 15
+        while not self.a.observed_peer_list:
+            if time.monotonic() >= deadline:
+                self.fail("Coordinator never received its native peers read result")
+            time.sleep(0.05)
+        (self.root / "release-subject").touch()
         end = self.terminal(run)
         self.assertEqual(end["scene"], "completed", end)
-        text = "\n".join(f.read_text() for f in self.sessions(run, "coordinator"))
-        self.assertIn("No other omp instances in this project", text)
         self.assertTrue(list((run / "workspace").glob("repair-*.txt")))
 
     def test_host_login_precedes_config_and_missing_credentials_reject_submission(self):

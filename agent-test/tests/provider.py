@@ -251,6 +251,10 @@ class Provider:
         self._first_writer = None
         self.closed = threading.Event()
 
+    @property
+    def observed_peer_list(self):
+        return any(c.get("readPeers") for c in self.calls)
+
     def __enter__(self):
         self.server = ThreadingHTTPServer(("127.0.0.1", 0), _Handler)
         self.server.fixture = self
@@ -302,6 +306,8 @@ class Provider:
             "kind": "agent" if agent else "auxiliary",
             "action": reply.action,
         }
+        if agent and model.startswith("owner-"):
+            record["readPeers"] = bool(d.results_for("read", path="agent://peers"))
         if self.context_markers and agent:
             prompt = json.dumps(request["messages"])
             record["markers"] = {
