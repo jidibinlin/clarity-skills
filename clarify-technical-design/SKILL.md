@@ -131,6 +131,8 @@ Settle:
 
 Trace required scenarios through owners, state and core interactions.
 
+Determine which technologies to use based on the requirements and technical direction.
+
 Use the applicable sections of
 [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as clarification prompts, especially
 [Macro runtime and collaboration model](TECHNICAL-MODEL.md#macro-runtime-and-collaboration-model).
