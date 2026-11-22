@@ -74,6 +74,7 @@ export default function coordinator(pi: ExtensionAPI) {
 	let ownProviderModel: string;
 	let peerDir: string;
 	let subjectMain: MainIdentity | undefined;
+	let openingDelivered = false;
 	let discoveryStarted = false;
 	let discovery: Timer | undefined;
 	let wake: Timer | undefined;
@@ -210,16 +211,15 @@ export default function coordinator(pi: ExtensionAPI) {
 
 	pi.on("before_agent_start", (event, ctx) => {
 		if (!isOwner(ctx)) return;
-		return { systemPrompt: [...event.systemPrompt, `You are the scenario coordinator (agent://${process.pid}). Read the submitter's coordinator-prompt.md at the supplied path; play the user, do not do the subject's work. First read agent://peers. Only use the peer explicitly confirmed as the verified subject by the framework after cross-checking the native peer list with the subject main session. An empty list or a visible but unconfirmed PID is not a failure: end your turn and re-query on the discovery wake. Use native write to the verified subject address to send the first task immediately upon discovery and to answer actual questions. The subject receives your return address in native IRC. Decide the next message from actual replies and the submitter's instructions, never a fixed script.
+		return { systemPrompt: [...event.systemPrompt, `You are the scenario coordinator (agent://${process.pid}). Read the submitter's coordinator-prompt.md and play the user, not the subject. First read agent://peers. Send the opening task by native write to the verified subject main as soon as it is identified. An empty list or an unconfirmed PID is not a failure: end your turn and re-query on the discovery wake. After opening delivery, follow the scenario's actual assignments. You may talk directly to each designated independent main session at agent://<its pid> in this workspace; visibility alone is not an assignment. Do not route their conversations through the original subject. Native IRC supplies the return address. Decide the next message from actual replies and the submitter's instructions, never a fixed script.
 When awaiting an answer, END your turn; do not call wait, sleep or create polling jobs. Peer messages wake you directly. On “Agent-test inspection due.” process messages already delivered first; if there is none, read the verified subject's agent:// address, then inspect_subject({}) if its summary is insufficient. Do not send reminders or ask the subject for heartbeats. If still waiting, end your turn. A current terminal fault from inspect_subject can be cited via report_run_fault({session,entry}) ONLY if it blocks a still-required delivery. Silence, progress or an empty peer list is not a terminal fault. A fault after delivery does not undo the delivery.
 Use finish_run({outcome:"completed",reason}) when the actual delivery meets the goal. If the materials/scenario make it impossible to continue, use finish_run({outcome:"scenario_error",reason}) giving the blocked step and why. After a successful report finish your final reply without starting new work.`] };
 	});
 	pi.on("tool_call", (event, ctx) => {
 		if (!isOwner(ctx)) return;
 		if (event.toolName === "write" && typeof event.input.path === "string") {
-			// write accepts a pasted [path#TAG] as well as a raw path. Recognize the
-			// remote PID before any display selector; only authorize a plain main
-			// recipient, not a path that could normalize to a different recipient.
+			// Match write's raw and pasted address forms. Remote participants are
+			// independent mains, not agents nested under another instance's PID.
 			const raw = event.input.path.trim();
 			const target = raw.startsWith("[") && raw.endsWith("]")
 				? raw.slice(1, -1).replace(/#[\da-f]{4}$/i, "") : raw;
@@ -230,8 +230,10 @@ Use finish_run({outcome:"completed",reason}) when the actual delivery meets the 
 				if (/^\d+$/.test(host) && Number(host) !== process.pid) {
 					const recipient = target.slice(address[0].length).split(/[?#]/, 1)[0];
 					const main = recipient === "" || recipient === "/" || recipient === "/Main" || recipient === "/Main/";
-					if (faultSent || finished || Number(host) !== subjectMain?.pid || !main) {
-						return { block: true, reason: "Only message the verified remote main session. Re-query agent://peers while awaiting discovery." };
+					if (faultSent || finished) return { block: true, reason: "The run has ended." };
+					if (!main) return { block: true, reason: "Address the participant's independent main session." };
+					if (!openingDelivered && (Number(host) !== subjectMain?.pid || target.includes("?"))) {
+						return { block: true, reason: "Send the opening task to the verified subject main before contacting other participants." };
 					}
 				}
 			}
@@ -243,7 +245,17 @@ Use finish_run({outcome:"completed",reason}) when the actual delivery meets the 
 		}
 	});
 	pi.on("tool_result", async (event, ctx) => {
-		if (!isOwner(ctx) || event.isError || event.toolName !== "read" || event.input.path !== "agent://peers") return;
+		if (!isOwner(ctx) || event.isError || faultSent || finished) return;
+		if (event.toolName === "write" && subjectMain && !openingDelivered) {
+			// OMP's delivery receipt, not roster discovery or an attempted send,
+			// establishes that the first remote participant received the opening.
+			const message = (event.details as { message?: { to?: string; receipts?: { outcome: string }[] } } | undefined)?.message;
+			const pid = String(subjectMain.pid);
+			if ((message?.to === pid || message?.to === `${pid}/Main`) &&
+				message.receipts?.some(r => r.outcome !== "failed")) openingDelivered = true;
+			return;
+		}
+		if (event.toolName !== "read" || event.input.path !== "agent://peers") return;
 		if (!subjectMain && !faultSent && !finished) {
 			const visible = new Set<number>();
 			for (const part of event.content) {
@@ -260,7 +272,7 @@ Use finish_run({outcome:"completed",reason}) when the actual delivery meets the 
 		// Preserve OMP's unmodified native roster. The model receives only a corroborated
 		// address in the extension-authored instruction, never an inferred launcher PID.
 		return { additionalContext: subjectMain
-			? `Verified subject main: agent://${subjectMain.pid}. Use this address for the scenario.`
+			? `Verified subject main: agent://${subjectMain.pid}. ${openingDelivered ? "Follow the scenario's participant assignments." : "Send the opening task here."}`
 			: "No verified subject main yet. End your turn and read agent://peers on the next inspection wake." };
 	});
 	pi.on("message_end", ({ message }, ctx) => {
