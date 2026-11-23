@@ -44,6 +44,21 @@ Requirements and technical clarification use `progressive-modeling`; technical c
 
 Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
 
+### Choosing a designer session host
+
+If the technical design leader assigns groups to other designers, register your own
+`start-designer-session` skill in the leader's harness. Its [handoff contract](clarify-technical-design/roles-and-collaboration.md#designer-session-contract)
+defines the assignment and what counts as a live, human-accessible session. Clarity
+does not register a default launcher. No launcher is needed when the leader designs the group.
+
+For OMP, install your implementation as `~/.omp/agent/skills/start-designer-session/SKILL.md`
+on the leader's host (use the active profile's agent directory for a named profile).
+Use `name: start-designer-session` and a `description` in the skill's frontmatter.
+Alternatively, list the **parent of the skill directory** under `skills.customDirectories`
+in the active agent directory's `config.yml`. Other harnesses can register the same skill
+name through their native discovery. To change hosts, replace the selected implementation;
+neither the design skill nor the project needs to change.
+
 ### Communication rules
 
 Install [rules/communication-style.md](rules/communication-style.md) as session-wide instructions, not a skill. The OMP and OpenCode plugins add these rules to the existing system prompt. Codex uses its global `AGENTS.md`. These rules do not select or start other Clarity workflows.

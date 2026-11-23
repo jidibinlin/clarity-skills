@@ -11,6 +11,7 @@ Follow [TECHNICAL-MODEL.md](TECHNICAL-MODEL.md) as the authoring and review stan
 ## Establish the basis
 
 - Read approved requirements, original context and prior decisions/approvals.
+- Follow the [workflow for your role](roles-and-collaboration.md). When assigning a group, use the leader's session handoff before reporting it ready.
 - Read the registered `progressive-modeling` skill and apply it within the assigned design scope.
 - Inspect the relevant repository baseline. Recover missing or stale design context only within the affected scope.
 - Use the `artifact-layout` skill for documents produced by this skill: file locations, directory layout and writing boundaries.
