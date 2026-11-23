@@ -47,9 +47,9 @@ Ordinary directory copying is sufficient; no source symlinks or installation-man
 ### Choosing a designer session host
 
 If the technical design leader assigns groups to other designers, register your own
-`start-designer-session` skill in the leader's harness. Its [handoff contract](clarify-technical-design/roles-and-collaboration.md#designer-session-contract)
-defines the assignment and what counts as a live, human-accessible session. Clarity
-does not register a default launcher. No launcher is needed when the leader designs the group.
+`start-designer-session` skill in the leader's harness. Use [designer-session-integration](designer-session-integration/SKILL.md)
+when writing or testing that implementation, not when assigning a group. Clarity does not
+register a default launcher. No launcher is needed when the leader designs the group.
 
 For OMP, install your implementation as `~/.omp/agent/skills/start-designer-session/SKILL.md`
 on the leader's host (use the active profile's agent directory for a named profile).

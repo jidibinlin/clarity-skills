@@ -31,9 +31,9 @@ For a split model, the leader writes `issue.md` and `technical.md`.
    Independent groups may progress concurrently.
    Start dependent groups from confirmed upstream models, after resolving their blockers.
 
-   When assigning a group to a designer, load and follow the registered `start-designer-session`
-   skill in the leader's session. Use the [designer session contract](#designer-session-contract)
-   to hand over the assignment and tell the human where to enter the live session.
+   When assigning a group, load and follow the registered `start-designer-session` skill in
+   the leader's session with the group name, workspace and assignment. Give the human the
+   verified entry to the live session, or report what blocked the handoff.
    Disable automatic notifications from designers to the leader.
 
    Each assignment includes:
@@ -58,23 +58,6 @@ For a split model, the leader writes `issue.md` and `technical.md`.
 
 4. **Complete the whole-model review.**
    Run **[Final review](SKILL.md#final-review)**, obtain final human approval, then **[Return and stop](SKILL.md#return-and-stop)**.
-
-## Designer session contract
-
-`start-designer-session` is the user's implementation of this handoff for their harness.
-The leader supplies the group name, workspace and assignment described above. The skill
-starts the designer with that assignment; it does not choose groups or make design decisions.
-
-Before reporting a group ready, verify that its designer received the assignment in the
-intended workspace and that the human's configured client offers a writable entry to that
-same live session. The designer stays online after the launch returns, while waiting for
-the human, and while the human works with another group. The human can return and reply
-without relaunching the designer or going through the leader.
-
-Return the group name and where to enter it from the human's client. If the skill is
-unavailable or the handoff fails, report the blocker for that group: distinguish a session
-that never started from one that started but cannot be reached or verified. Do not present
-a saved conversation, a read-only view or messages relayed by the leader as a live handoff.
 
 ## Closed-loop designer
 
