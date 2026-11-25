@@ -19,9 +19,16 @@ Follow [REQUIREMENTS-MODEL.md](REQUIREMENTS-MODEL.md) as the authoring and revie
 
 ## Clarification methods
 
+### Brainstorming
+
+When the direction is unclear, use the `brainstorming` skill to explore
+it with the human. If the human asks to brainstorm, acknowledge what
+you are exploring and begin. If you suggest it, explain why and wait
+for agreement before switching.
+
 ### Draft-based iteration
 
-Apply this method throughout requirements clarification.
+Once there is a working draft, refine it with the human.
 
 - Revise the requirements already presented in chat. Accumulate changes on that draft.
 - Re-present the complete revised draft when appropriate, not only the changes.

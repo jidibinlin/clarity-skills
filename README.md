@@ -40,7 +40,7 @@ Micro technical proposals and document drafts present concrete definitions with 
 
 Register complete skill directories and their dependencies in the agent harness. Stages use `artifact-layout`; implementation uses `tdd` and `code-review`. Code reviewers read `tdd`'s TESTING.md directly. Resolve cross-skill resources through their registered owner and companion files relative to the installed skill. Reading a reference does not start its owner's workflow.
 
-Requirements and technical clarification use `progressive-modeling`; technical clarification also uses `collaboration-guidance`. Their stage-specific flows remain in their respective skills, while the shared modeling method is contained in `progressive-modeling`.
+Requirements and technical clarification use `progressive-modeling`. Register [brainstorming](brainstorming/SKILL.md) alongside it for optional exploration when a direction is unclear. Technical clarification also uses `collaboration-guidance`.
 
 Ordinary directory copying is sufficient; no source symlinks or installation-manager-specific packaging is required. Installed skills need not be siblings. OMP supports `skill://<name>` and `skill://<name>/<resource>`; other harnesses use native discovery. Register `tdd` and `code-review` unambiguously alongside any upstream skills. Installing skill directories alone does not change global instructions.
 
